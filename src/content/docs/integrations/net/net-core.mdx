@@ -1,0 +1,76 @@
+---
+title: Treblle with .net Core
+description: How to add Treblle to a .net core API.
+---
+
+## Requirements
+
+- .NET Core 3.0
+
+## Installation
+
+You can install Treblle .NET Core via NuGet Package Manager or by running the following command:
+
+```bash
+dotnet add package Treblle.Net.Core
+```
+
+## Configuring Treblle
+
+You will need to add the required service by calling `AddTreblle` and providing your [API key](https://docs.treblle.com/en/dashboard#accessing-your-api-key) and [Project ID](https://docs.treblle.com/en/dashboard/projects#project-id).
+
+Here's an example of configuring the Treblle services and fetching the configuration values from the application settings:
+
+```csharp
+builder.Services.AddTreblle(
+    builder.Configuration["Treblle:ApiKey"],
+    builder.Configuration["Treblle:ProjectId"]);
+```
+
+Next you'll need to add the `TreblleMiddleware` by calling `UseTreblle` on the `WebApplication` instance.
+You can optionally configure the use of the exception handler middleware.
+
+```csharp
+app.UseTreblle(useExceptionHandler: true);
+```
+
+## Using Treblle with Controllers
+
+Now you can specify which endpoints you want Treblle to track by adding this simple attribute to any API controller or method:
+
+```csharp
+[Treblle]
+```
+
+## Using Treblle with Minimal APIs
+
+To tell Treblle to track your Minimal API endpoints, you have to apply `UseTreblle` to your endpoint definition:
+
+```csharp
+app.MapGet("/", () => "Treblle is awesome")
+    .UseTreblle();
+```
+
+That's it. Your API requests and responses are now being sent to your Treblle project.
+
+## Masking Additional Fields
+
+If you want to expand the list of fields you want to hide, you can pass property names you want to hide as a CSV string to the `AddTreblle` call:
+
+```csharp
+builder.Services.AddTreblle(
+    builder.Configuration["Treblle:ApiKey"],
+    builder.Configuration["Treblle:ProjectId"],
+    "secretField,highlySensitiveField");
+```
+
+## Running Treblle only in production
+
+If you want to run Treblle only in production, you can rely on the environment variables, or use a similar approach via your application config.
+
+```csharp
+if (app.Environment.IsProduction())
+{
+    app.UseTreblle();
+}
+```
