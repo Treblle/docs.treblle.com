@@ -3,9 +3,9 @@ title: Endpoints
 description: Endpoints are used to represent a part of your API that can be accessed
 ---
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Iu9FNsDC-vY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe class="w-full aspect-[16/9]" src="https://www.youtube.com/embed/Iu9FNsDC-vY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Your API endpoints are the URIs that exposes a particular part of your API for communications via [requests](/en/dashboard/requests).
+Your API endpoints are the URIs that exposes a particular part of your API for communications via [requests](/treblle/requests).
 
 Once you have integrated your API with Treblle and your API start receiving requests, Treblle will automatically identify the endpoints in your API and aggregate them for you in the **Endpoints** tab of your project dashboard.
 
@@ -17,7 +17,7 @@ For each endpoint in the **Endpoints** tab of a project dashboard, you see at a 
 - The average load time of the endpoint
 - The number of problems the endpoint has
 - The number of requests the endpoint is receiving per minute
-- The [endpoint group](/en/dasboard/endpoints#endpoint-groups) the endpoint belongs to
+- The [endpoint group](/treblle/endpoints#endpoint-groups) the endpoint belongs to
 - A graph showing the requests the endpoint has received for the day
 
 ## View requests
@@ -56,7 +56,7 @@ You can give a particular endpoint an alias - which is another name you can use 
 
 ## Endpoint groups
 
-Treblle automatically groups your endpoints. For example if you have two endpoints `/users/:id` and `/users/verify`, Treblle will group then under the `users` endpoint group. This makes it easy to [filter](/en/dashboard/endpoints#filters) for endpoints by groups.
+Treblle automatically groups your endpoints. For example if you have two endpoints `/users/:id` and `/users/verify`, Treblle will group then under the `users` endpoint group. This makes it easy to [filter](/treblle/endpoints#filters) for endpoints by groups.
 
 ## Edit endpoint group
 
@@ -78,8 +78,8 @@ In the filters drawer, you filter endpoints by:
 
 - Has problems? - for endpoints having problems or not
 - HTTP method
-- [Endpoint group](/en/dashboard/endpoints#endpoint-groups)
-- [Muted](/en/dashboard/endpoints#mute-an-endpoint) - for endpoints muted or not
+- [Endpoint group](/treblle/endpoints#endpoint-groups)
+- [Muted](/treblle/endpoints#mute-an-endpoint) - for endpoints muted or not
 - Included in docs - for endpoints included in the API documentation or not
 - Sort by - You can also sort endpoints by Name, number or requests, load time, or RPM(Requests per minute)
 

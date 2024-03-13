@@ -1,0 +1,179 @@
+---
+title: JSON Schema
+description: The following JSON schema is what you need to build your own SDK for Treblle.
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+export const schema = `{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "api_key": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": ["number", "string"]
+    },
+    "sdk": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "server": {
+          "type": "object",
+          "properties": {
+            "ip": {
+              "type": "string"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "os": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "release": {
+                  "type": "string"
+                },
+                "architecture": {
+                  "type": "string"
+                }
+              },
+              "required": ["name", "release", "architecture"]
+            },
+            "software": {
+              "type": ["string", "null"]
+            },
+            "signature": {
+              "type": ["string", "null"]
+            },
+            "protocol": {
+              "type": "string"
+            },
+            "encoding": {
+              "type": "string"
+            }
+          },
+          "required": ["ip", "timezone", "os", "software", "signature", "protocol"]
+        },
+        "language": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "expose_php": {
+              "type": "string"
+            },
+            "display_errors": {
+              "type": "string"
+            }
+          },
+          "required": ["name", "version"]
+        },
+        "request": {
+          "type": "object",
+          "properties": {
+            "timestamp": {
+              "type": "string"
+            },
+            "ip": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "user_agent": {
+              "type": "string"
+            },
+            "method": {
+              "type": "string"
+            },
+            "headers": {
+              "type": "object",
+              "properties": {
+                "content-type": {
+                  "type": "string"
+                },
+                "content-length": {
+                  "type": ["string", "number"]
+                },
+                "host": {
+                  "type": "string"
+                },
+                "user-agent": {
+                  "type": "string"
+                }
+              },
+              "required": ["host", "user-agent"]
+            },
+            "body": {
+              "type": "object"
+            }
+          },
+          "required": ["timestamp", "ip", "url", "user_agent", "method", "headers", "body"]
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "headers": {
+              "type": "object"
+            },
+            "code": {
+              "type": "integer"
+            },
+            "size": {
+              "type": ["integer", "string"]
+            },
+            "load_time": {
+              "type": "number"
+            },
+            "body": {
+              "type": ["string", "object", "null"]
+            }
+          },
+          "required": ["headers", "code", "size", "load_time", "body"]
+        },
+        "errors": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "file": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "required": ["server", "language", "request", "response", "errors"]
+    }
+  },
+  "required": ["api_key", "project_id", "version", "sdk", "data"]
+}`
+
+<Code code={schema} lang="json" />
