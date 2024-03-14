@@ -23,7 +23,9 @@ export default defineConfig({
       youtube: 'https://youtube.com/@treblle'
     },
 		customCss: [
-			'./src/tailwind.css'
+			'./src/tailwind.css',
+      '@fontsource/poppins/600.css',
+      '@fontsource-variable/inter/standard.css',
 		],
     lastUpdated: true,
     sidebar: [{
