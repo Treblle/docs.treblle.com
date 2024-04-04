@@ -20,7 +20,8 @@ export default defineConfig({
     social: {
       github: 'https://github.com/treblle',
       twitter: 'https://twitter.com/treblleapi',
-      youtube: 'https://youtube.com/@treblle'
+      youtube: 'https://youtube.com/@treblle',
+      discord: 'https://treblle.com/chat',
     },
 		customCss: [
 			'./src/tailwind.css',
