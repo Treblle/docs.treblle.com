@@ -6,6 +6,7 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://docs.treblle.com',
+  trailingSlash: 'always',
   integrations: [starlight({
     title: 'Treblle',
     description: 'Treblle is your End to End API Ops platform, helping engineering and product teams build, ship and understand their REST APis in one single place.',
@@ -88,5 +89,7 @@ export default defineConfig({
     '/en/who-is-treblle-for': '/who-is-treblle-for',
     '/en/how-treblle-works': '/how',
     '/en/introduction': '/guides',
+    '/en/sdk-development': '/integrations/custom',
+    '/en/integrations/community-sdks': '/integrations#community-sdks'
   }
 });
