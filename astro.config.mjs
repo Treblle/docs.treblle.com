@@ -47,9 +47,134 @@ export default defineConfig({
     }, {
       label: 'Integrations',
       collapsed: false,
-      autogenerate: {
-        directory: 'integrations'
-      }
+      items: [
+        {
+          label: 'Treblle Integrations',
+          link: '/integrations/'
+        },
+        {
+          label: 'Custom Integrations',
+          link: '/integrations/custom/'
+        },
+        {
+          label: 'Go',
+          collapsed: true,
+          items: [
+            {
+              label: 'Treblle with Go standard library',
+              link: '/integrations/go/core/'
+            }
+          ]
+        },
+        {
+          label: 'Java',
+          collapsed: true,
+          items: [
+            {
+              label: 'Treblle with Spring',
+              link: '/integrations/java/spring/'
+            }
+          ],
+        },
+        {
+          label: 'JavaScript',
+          collapsed: true,
+          items: [
+            {
+              label: 'Treblle with AdonisJS',
+              link: '/integrations/javascript/adonis/'
+            },
+            {
+              label: 'Treblle with Directus',
+              link: '/integrations/javascript/directus/'
+            },
+            {
+              label: 'Treblle with Express',
+              link: '/integrations/javascript/express/'
+            },
+            {
+              label: 'Treblle with Fastify',
+              link: '/integrations/javascript/fastify/'
+            },
+            {
+              label: 'Treblle with Koa',
+              link: '/integrations/javascript/koa/'
+            },
+            {
+              label: 'Treblle with NestJS',
+              link: '/integrations/javascript/nest/'
+            },
+            {
+              label: 'Treblle with NodeJS',
+              link: '/integrations/javascript/node/'
+            },
+            {
+              label: 'Treblle with SailsJS',
+              link: '/integrations/javascript/sails/'
+            },
+            {
+              label: 'Treblle with Strapi',
+              link: '/integrations/javascript/strapi/'
+            }
+          ]
+        },
+        {
+          label: '.NET',
+          collapsed: true,
+          items: [
+            {
+              label: 'Treblle with .NET Core',
+              link: '/integrations/net/net-core/'
+            },
+            {
+              label: 'Treblle with .NET',
+              link: '/integrations/net/net/'
+            }
+          ]
+        },
+        {
+          label: 'PHP',
+          collapsed: true,
+          items: [
+            {
+              label: 'Treblle with Laravel',
+              link: '/integrations/php/laravel/'
+            },
+            {
+              label: 'Treblle with Lumen',
+              link: '/integrations/php/lumen/'
+            },
+            {
+              label: 'Treblle with no-framework',
+              link: '/integrations/php/no-framework/'
+            },
+            {
+              label: 'Treblle with Symfony',
+              link: '/integrations/php/symfony/'
+            }
+          ]
+        },
+        {
+          label: 'Python',
+          collapsed: true,
+          items: [
+            {
+              label: 'Treblle with Django',
+              link: '/integrations/python/django/'
+            }
+          ]
+        },
+        {
+          label: 'Ruby',
+          collapsed: true,
+          items: [
+            {
+              label: 'Treblle with Ruby on Rails',
+              link: '/integrations/ruby/rails/'
+            }
+          ]
+        }
+      ]
     }]
   }), tailwind({
 		applyBaseStyles: false
