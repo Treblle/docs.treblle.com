@@ -32,10 +32,7 @@ export default defineConfig({
     lastUpdated: true,
     sidebar: [{
       label: 'Who is Treblle for?',
-      collapsed: false,
-      autogenerate: {
-        directory: 'who-is-treblle-for'
-      }
+      link: '/who-is-treblle-for/'
     }, {
       label: 'How Treblle works',
       link: '/how'
