@@ -13,6 +13,9 @@ export default defineConfig({
     editLink: {
       baseUrl: 'https://github.com/treblle/docs.treblle.com/edit/main/',
     },
+    components: {
+      Head: './src/components/Head.astro'
+    },
     logo: {
       dark: './src/assets/logo-white.svg',
       light: './src/assets/logo-black.svg',
