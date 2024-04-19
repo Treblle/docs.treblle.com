@@ -55,43 +55,151 @@ export default defineConfig({
 		applyBaseStyles: false
 	})],
   redirects: {
-    '/en/integrations': '/integrations/',
-    '/en/integrations/ruby': '/integrations/ruby/rails/',
-    '/en/integrations/sails': '/integrations/javascript/sails/',
-    '/en/integrations/go': '/integrations/go/core/',
-    '/en/integrations/lumen': '/integrations/php/lumen/',
-    '/en/integrations/django': '/integrations/python/django/',
-    '/en/integrations/spring': '/integrations/java/spring/',
-    '/en/integrations/adonisjs': '/integrations/javascript/adonis/',
-    '/en/integrations/net-core': '/integrations/net/net-core/',
-    '/en/integrations/strapi': '/integrations/javascript/strapi/',
-    '/en/integrations/koa': '/integrations/javascript/koa/',
-    '/en/integrations/net': '/integrations/net/net/',
-    '/en/integrations/node': '/integrations/javascript/node/',
-    '/en/integrations/php': '/integrations/php/no-framework/',
-    '/en/integrations/express': '/integrations/javascript/express/',
-    '/en/integrations/fastify': '/integrations/javascript/fastify/',
-    '/en/integrations/symfony': '/integrations/php/symfony/',
-    '/en/integrations/directus': '/integrations/javascript/directus/',
-    '/en/integrations/laravel': '/integrations/php/laravel/',
+    '/en/integrations': {
+      status: 301,
+      destination: '/integrations/',
+    },
+    '/en/integrations/ruby': {
+      status: 301,
+      destination: '/integrations/ruby/rails/',
+    },
+    '/en/integrations/sails': {
+      status: 301,
+      destination: '/integrations/javascript/sails/',
+    },
+    '/en/integrations/go': {
+      status: 301,
+      destination: '/integrations/go/core/',
+    },
+    '/en/integrations/lumen': {
+      status: 301,
+      destination: '/integrations/php/lumen/',
+    },
+    '/en/integrations/django': {
+      status: 301,
+      destination: '/integrations/python/django/',
+    },
+    '/en/integrations/spring': {
+      status: 301,
+      destination: '/integrations/java/spring/',
+    },
+    '/en/integrations/adonisjs': {
+      status: 301,
+      destination: '/integrations/javascript/adonis/',
+    },
+    '/en/integrations/net-core': {
+      status: 301,
+      destination: '/integrations/net/net-core/',
+    },
+    '/en/integrations/strapi': {
+      status: 301,
+      destination: '/integrations/javascript/strapi/',
+    },
+    '/en/integrations/koa': {
+      status: 301,
+      destination: '/integrations/javascript/koa/',
+    },
+    '/en/integrations/net': {
+      status: 301,
+      destination: '/integrations/net/net/',
+    },
+    '/en/integrations/node': {
+      status: 301,
+      destination: '/integrations/javascript/node/',
+    },
+    '/en/integrations/php': {
+      status: 301,
+      destination: '/integrations/php/no-framework/',
+    },
+    '/en/integrations/express': {
+      status: 301,
+      destination: '/integrations/javascript/express/',
+    },
+    '/en/integrations/fastify': {
+      status: 301,
+      destination: '/integrations/javascript/fastify/',
+    },
+    '/en/integrations/symfony': {
+      status: 301,
+      destination: '/integrations/php/symfony/',
+    },
+    '/en/integrations/directus': {
+      status: 301,
+      destination: '/integrations/javascript/directus/',
+    },
+    '/en/integrations/laravel': {
+      status: 301,
+      destination: '/integrations/php/laravel/',
+    },
 
-    '/en/dashboard/api-score': '/treblle/api-governance/',
-    '/en/security/masked-fields': '/security/masking/',
-    '/en/dashboard': '/treblle/dashboard/',
-    '/en/dashboard/customize-dashboard': '/treblle/dashboard/',
-    '/en/dashboard/api-documentation': '/treblle/api-documentation/',
-    '/en/dashboard/requests': '/treblle/requests/',
-    '/en/dashboard/flows': '/treblle/flows/',
-    '/en/dashboard/problems': '/treblle/problems/',
-    '/en/dashboard/api-security': '/treblle/api-security/',
-    '/en/dashboard/endpoints': '/treblle/endpoints/',
-    '/en/dashboard/api-analytics': '/treblle/api-analytics/',
-    '/en/dashboard/projects': '/treblle/projects/',
+    '/en/dashboard/api-score': {
+      status: 301,
+      destination: '/treblle/api-governance/',
+    },
+    '/en/security/masked-fields': {
+      status: 301,
+      destination: '/security/masking/',
+    },
+    '/en/dashboard': {
+      status: 301,
+      destination: '/treblle/dashboard/',
+    },
+    '/en/dashboard/customize-dashboard': {
+      status: 301,
+      destination: '/treblle/dashboard/',
+    },
+    '/en/dashboard/api-documentation': {
+      status: 301,
+      destination: '/treblle/api-documentation/',
+    },
+    '/en/dashboard/requests': {
+      status: 301,
+      destination: '/treblle/requests/',
+    },
+    '/en/dashboard/flows': {
+      status: 301,
+      destination: '/treblle/flows/',
+    },
+    '/en/dashboard/problems': {
+      status: 301,
+      destination: '/treblle/problems/',
+    },
+    '/en/dashboard/api-security': {
+      status: 301,
+      destination: '/treblle/api-security/',
+    },
+    '/en/dashboard/endpoints': {
+      status: 301,
+      destination: '/treblle/endpoints/',
+    },
+    '/en/dashboard/api-analytics': {
+      status: 301,
+      destination: '/treblle/api-analytics/',
+    },
+    '/en/dashboard/projects': {
+      status: 301,
+      destination: '/treblle/projects/',
+    },
 
-    '/en/who-is-treblle-for': '/who-is-treblle-for/',
-    '/en/how-treblle-works': '/how/',
-    '/en/introduction': '/guides/',
-    '/en/sdk-development': '/integrations/custom/',
-    '/en/integrations/community-sdks': '/integrations#community-sdks/'
+    '/en/who-is-treblle-for': {
+      status: 301,
+      destination: '/who-is-treblle-for/',
+    },
+    '/en/how-treblle-works': {
+      status: 301,
+      destination: '/how/',
+    },
+    '/en/introduction': {
+      status: 301,
+      destination: '/guides/',
+    },
+    '/en/sdk-development': {
+      status: 301,
+      destination: '/integrations/custom/',
+    },
+    '/en/integrations/community-sdks': {
+      status: 301,
+      destination: '/integrations#community-sdks/',
+    }
   }
 });
