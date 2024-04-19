@@ -46,7 +46,7 @@ export default defineConfig({
       }
     }, {
       label: 'Integrations',
-      collapsed: true,
+      collapsed: false,
       autogenerate: {
         directory: 'integrations'
       }
