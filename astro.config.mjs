@@ -32,7 +32,10 @@ export default defineConfig({
     lastUpdated: true,
     sidebar: [{
       label: 'Who is Treblle for?',
-      link: '/who-is-treblle-for'
+      collapsed: false,
+      autogenerate: {
+        directory: 'who-is-treblle-for'
+      }
     }, {
       label: 'How Treblle works',
       link: '/how'
@@ -52,44 +55,43 @@ export default defineConfig({
 		applyBaseStyles: false
 	})],
   redirects: {
-    '/en/integrations': '/integrations',
-    '/en/integrations/ruby': '/integrations/ruby/rails',
-    '/en/integrations/sails': '/integrations/javascript/sails',
-    '/en/integrations/go': '/integrations/go/core',
-    '/en/integrations/lumen': '/integrations/php/lumen',
-    '/en/integrations/django': '/integrations/python/django',
-    '/en/integrations/sping': '/integrations/java/spring',
-    '/en/integrations/adonisjs': '/integrations/javascript/adonis',
-    '/en/integrations/net-core': '/integrations/net/net-core',
-    '/en/integrations/strapi': '/integrations/javascript/strapi',
-    '/en/integrations/koa': '/integrations/javascript/koa',
-    '/en/integrations/net': '/integrations/net/net',
-    '/en/integrations/node': '/integrations/javascripts/node',
-    '/en/integrations/php': '/integrations/php/no-framework',
-    '/en/integrations/express': '/integrations/javascript/express',
-    '/en/integrations/fastify': '/integrations/javascript/fastify',
-    '/en/integrations/symfony': '/integrations/php/symfony',
-    '/en/integrations/directus': '/integrations/javascript/directus',
-    '/en/integrations/laravel': '/integrations/php/laravel',
+    '/en/integrations': '/integrations/',
+    '/en/integrations/ruby': '/integrations/ruby/rails/',
+    '/en/integrations/sails': '/integrations/javascript/sails/',
+    '/en/integrations/go': '/integrations/go/core/',
+    '/en/integrations/lumen': '/integrations/php/lumen/',
+    '/en/integrations/django': '/integrations/python/django/',
+    '/en/integrations/sping': '/integrations/java/spring/',
+    '/en/integrations/adonisjs': '/integrations/javascript/adonis/',
+    '/en/integrations/net-core': '/integrations/net/net-core/',
+    '/en/integrations/strapi': '/integrations/javascript/strapi/',
+    '/en/integrations/koa': '/integrations/javascript/koa/',
+    '/en/integrations/net': '/integrations/net/net/',
+    '/en/integrations/node': '/integrations/javascripts/node/',
+    '/en/integrations/php': '/integrations/php/no-framework/',
+    '/en/integrations/express': '/integrations/javascript/express/',
+    '/en/integrations/fastify': '/integrations/javascript/fastify/',
+    '/en/integrations/symfony': '/integrations/php/symfony/',
+    '/en/integrations/directus': '/integrations/javascript/directus/',
+    '/en/integrations/laravel': '/integrations/php/laravel/',
 
-    '/en/dashboard/api-score': '/treblle/api-governance',
-    '/en/security/masked-fields': '/security/masking',
-    '/en/dashboard': '/treblle/dashboard',
-    '/en/dashboard/customize-dashboard': '/treblle/dashboard',
-    '/en/dashboard/api-documentation': '/treblle/api-documentation',
-    '/en/dashboard/requests': '/treblle/requests',
-    '/en/dashboard/flows': '/treblle/flows',
-    '/en/dashboard/problems': '/treblle/problems',
-    '/en/dashboard/api-security': '/treblle/api-security',
-    '/en/dashboard/endpoints': '/treblle/endpoints',
-    '/en/dashboard/api-analytics': '/treblle/api-analytics',
-    '/en/dashboard/projects': '/treblle/projects',
+    '/en/dashboard/api-score': '/treblle/api-governance/',
+    '/en/security/masked-fields': '/security/masking/',
+    '/en/dashboard': '/treblle/dashboard/',
+    '/en/dashboard/customize-dashboard': '/treblle/dashboard/',
+    '/en/dashboard/api-documentation': '/treblle/api-documentation/',
+    '/en/dashboard/requests': '/treblle/requests/',
+    '/en/dashboard/flows': '/treblle/flows/',
+    '/en/dashboard/problems': '/treblle/problems/',
+    '/en/dashboard/api-security': '/treblle/api-security/',
+    '/en/dashboard/endpoints': '/treblle/endpoints/',
+    '/en/dashboard/api-analytics': '/treblle/api-analytics/',
+    '/en/dashboard/projects': '/treblle/projects/',
 
-
-    '/en/who-is-treblle-for': '/who-is-treblle-for',
-    '/en/how-treblle-works': '/how',
-    '/en/introduction': '/guides',
-    '/en/sdk-development': '/integrations/custom',
-    '/en/integrations/community-sdks': '/integrations#community-sdks'
+    '/en/who-is-treblle-for': '/who-is-treblle-for/',
+    '/en/how-treblle-works': '/how/',
+    '/en/introduction': '/guides/',
+    '/en/sdk-development': '/integrations/custom/',
+    '/en/integrations/community-sdks': '/integrations#community-sdks/'
   }
 });
