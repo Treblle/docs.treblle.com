@@ -135,6 +135,19 @@ export default defineConfig({
           link: '/integrations/ruby/rails/'
         }]
       }]
+    }, {
+      label: 'Security',
+      collapsed: true,
+      items: [
+        {
+          label: 'Certification',
+          link: '/security/certification/'
+        },
+        {
+          label: 'Masking Fields',
+          link: '/security/masking/',
+        }
+      ]
     }]
   }), tailwind({
     applyBaseStyles: false
