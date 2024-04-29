@@ -1,6 +1,6 @@
 ---
-title: AI Assistant
-description: Meet Alfred, our AI-powered assistant. He generates integrations, tests, or SDKs in any language by understanding and continuously learning about your API docs.
+title: Alfred - AI Assistant
+description: Alfred is an AI Assistant that helps API consumers adopt and integrate APIs 10x faster.
 image: /AI-assistant.png
 ---
 import { Schema } from "astro-seo-schema"
@@ -22,6 +22,73 @@ import { Schema } from "astro-seo-schema"
 <iframe class="w-full aspect-[16/9]" src="https://www.youtube.com/embed/ifXv_Zrxi9o?si=dEI82ErbsO5x18TD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
-Meet Alfred, our AI assistant for your API. You can find Alfred at the bottom right of the screen when you are viewing your projects auto-generated documentation.
+### What is Alfred?
 
-Alfred knows about your API, it's his superpower. You can ask anything about your API, generate code, and more simply by asking - and alfred will give you exactly what you need within the context of your project.
+Alfred is an AI Assistant that helps API consumers adopt and integrate APIs 10x faster. Key functionalitaies and capatilites include: 
+
+- **Code generation**: Alfred can generate endpoint specific integration code and/or data models in any language in the world
+- **Onboarding support**: Alfred offers shortcuts to help consumers understand the basics like: base URLs, Authenetication methods and endpoints
+- **API Key Discovery**: Alfred can recongize the end consumer on the portal and can instantly generate or show their personal API Key
+- **Quality assesment**: Afred integrates with API Insights to provide detailed API quality insights across design patters, perfomrance and security 
+- **API Discoverability**: Alfred knows all the API endpoints and can provide detailed explaination and guided tours for any of them
+- **Debugging Support**: Alfred automaticlly integrates with Treblles observability captabiltes and allows consumers to see recent requests they’re making
+- **Live support**: Alfred can offer agent like support to consumer about API related topics
+
+### What does Alfred do?
+
+Alfred helps organizations drive the following outcomes: 
+
+- up to **10x API Adoption Rate**: Customers using Alfred on their developer portals report a 10 times greather adopoption rate than before using Alfred
+- up to **10x Faster Integration Time:** Customers using Alfred see a reduction in the time to first request by 500%
+- up to **5x decrease in Integration Support**: Alfred customers have reported a 5x decrease in the amount of integration support needed before the first request
+- up to **5x Developer Experience Improvement**: Developers loves Alfred because it speaks their language and helps them onboard faster and generate a lot of boilterplate code faster
+- up to **5x Revenue Growth**:  Alfred streamlines the entire process of API integration, adoption and support that results in a significant increase in API revenue
+
+### How to get started?
+
+To get started with Alfred you need to:
+
+1. Create an account on Treblle
+2. Create your API project on Treblle
+3. Upload your OpenAPI Specific or integrate the Treblle SDK
+4. Integrate the Alfred embed code to your developer portal or use an automaticlly generated developer portal on Treblle
+
+> Keep in mind that Alfred is avaiable only on paid plans that start for
+> as low as $99 per month. For our Enteprise plans please contact our
+> enterprise support team and let them guide you through the entire
+> process.
+
+### How to use Alfred without integrating the Treblle SDK?
+
+You can use Alfred without integrating the Treblle SDK simply by creating a project and then under project settings uploading your OpenAPI specification. Alfred will then use that specification to generate the needed data for Alfred and all of its services. Keep in mind by manually uploading the specification you need to update it whenever your documentation changes so Alfred can keep track of the recent updates. The OpenAPI Specfication must be version 3 or above. 
+
+### How to integrate Alfred into your developer portal?
+
+1. Include the Alfred JS Embed code into your developer portal
+
+```html
+<script src="https://assets.treblle.com/alfred-embed-v3.min.js"></script>
+```
+> Tip: You can place the snippept right above the end </body> tag of
+> your developer portal to avoid page rendering blocking.
+
+2. Add the following HTML code snippet to your developer portal
+
+```html 
+<div class="getalfred-io" data-api="_YOUR_TREBLLE_PROJECT_ID_" data-auth="_YOUR_CUSTOMER_API_KEY_"></div>
+```
+
+Make sure you replace the following values with your specific ones:
+
+* *_YOUR_TREBLLE_PROJECT_ID_* => The project ID for your API on Treblle
+* *_YOUR_CUSTOMER_API_KEY_* => This are the authenication details for your end customer. This helps Alfred automaticlly append the customers auth details into things like: integration support, getting started guides and similar. This value can be dynamiclly changed every time the key changes and Alfred will always use the most up to date key. For most customers this will simply be the value of the Bearer token or a username and password.
+
+### How to use Alfred with automaticlly generated developer portal on Treblle?
+
+To get started with automaticlly generated developer portals you first need to integrate the Treblle SDK. You can find the integration guides for more than 25 different language and gateways right here. Once you’ve integrated the SDK Treblle will automaticlly generate documentation for your API and a developer portal with Alfred.
+
+### Does Alfred train AI models with your API data?
+
+No. Treblle does not use your OpenAPI Specficatin nor data collected from the Treblle SDK to train large language models. That is done by using customized and publicly sourced data that helps Alfred better understand APIs. 
+
+
