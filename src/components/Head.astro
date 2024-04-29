@@ -7,3 +7,5 @@ import Default from "@astrojs/starlight/components/Head.astro"
 
 
 {Astro.props.entry.data.image ? <meta property="og:image" content={new URL(Astro.props.entry.data.image, Astro.site)} /> : <meta property="og:image" content={new URL("default-og-image.png", Astro.site)} /> }
+
+<link rel="sitemap" href="/sitemap-index.xml" />
