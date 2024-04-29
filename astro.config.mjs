@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from "@astrojs/tailwind";
 
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -138,20 +139,17 @@ export default defineConfig({
     }, {
       label: 'Security',
       collapsed: true,
-      items: [
-        {
-          label: 'Certification',
-          link: '/security/certification/'
-        },
-        {
-          label: 'Masking Fields',
-          link: '/security/masking/',
-        }
-      ]
+      items: [{
+        label: 'Certification',
+        link: '/security/certification/'
+      }, {
+        label: 'Masking Fields',
+        link: '/security/masking/'
+      }]
     }]
   }), tailwind({
     applyBaseStyles: false
-  })],
+  }), sitemap()],
   redirects: {
     '/en/integrations': {
       status: 301,
@@ -297,5 +295,5 @@ export default defineConfig({
       status: 301,
       destination: '/integrations#community-sdks/'
     }
-  },
+  }
 });
