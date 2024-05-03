@@ -38,9 +38,54 @@ export default defineConfig({
       link: '/how'
     }, {
       label: 'Treblle',
-      autogenerate: {
-        directory: 'treblle'
-      }
+      collapsed: false,
+      items: [
+        {
+          label: 'Alfred - AI Assistant',
+          link: '/treblle/ai-assistant/',
+          badge: 'Beta'
+        },
+        {
+          label: 'API Analytics',
+          link: '/treblle/api-analytics/'
+        },
+        {
+          label: 'API Documentation',
+          link: '/treblle/api-documentation/'
+        },
+        {
+          label: 'API Governance',
+          link: '/treblle/api-governance/'
+        },
+        {
+          label: 'API Security',
+          link: '/treblle/api-security/'
+        },
+        {
+          label: 'Treblle Dashboard',
+          link: '/treblle/dashboard/'
+        },
+        {
+          label: 'Endpoints',
+          link: '/treblle/endpoints/'
+        },
+        {
+          label: 'Flows',
+          link: '/treblle/flows/'
+        },
+        {
+          label: 'Problems',
+          link: '/treblle/problems/'
+        },
+        {
+          label: 'Projects',
+          link: '/treblle/projects/'
+        },
+        {
+          label: 'Requests',
+          link: '/treblle/requests/'
+        }
+      ]
     }, {
       label: 'Integrations',
       collapsed: false,
