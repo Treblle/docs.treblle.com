@@ -172,6 +172,9 @@ export default defineConfig({
         items: [{
           label: 'Treblle with Django',
           link: '/integrations/python/django/'
+        }, {
+          label: 'Treblle with Flask',
+          link: '/integrations/python/flask/'
         }]
       }, {
         label: 'Ruby',

@@ -1,0 +1,47 @@
+---
+title: Treblle with Flask
+description: How to add Treblle to a Flask API.
+---
+
+## Requirements
+
+- requests
+
+## Examples
+
+### Basic Usage
+
+You can use Treblle with Flask by importing the Treblle class and passing your Flask app to the constructor.
+
+```python
+from treblle_flask import Treblle
+
+app = Flask(__name__)
+Treblle(app)
+
+@app.route('/hello')
+def hello():
+    return 'Hello, World!'
+```
+
+### Advanced Usage
+
+You can also pass your Treblle API key and project ID to the Treblle constructor.
+
+```python
+from treblle_flask import Treblle
+
+app = Flask(__name__)
+Treblle(app, TREBLLE_API_KEY="YOUR_API_KEY", TREBLLE_PROJECT_ID="YOUR_PROJECT_ID")
+
+@app.route('/hello')
+def hello():
+    return 'Hello, World!'
+```
+
+### Environment Variables
+
+You can set the following environment variables to configure Treblle without passing any arguments to the Treblle constructor:
+
+- `TREBLLE_API_KEY`: Your Treblle API key
+- `TREBLLE_PROJECT_ID`: Your Treblle project ID
