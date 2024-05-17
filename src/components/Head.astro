@@ -9,3 +9,26 @@ import Default from "@astrojs/starlight/components/Head.astro"
 {Astro.props.entry.data.image ? <meta property="og:image" content={new URL(Astro.props.entry.data.image, Astro.site)} /> : <meta property="og:image" content={new URL("default-og-image.png", Astro.site)} /> }
 
 <link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QF2CWF97TK"></script>
+
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QF2CWF97TK');
+</script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0"
+    width="0"
+    style="display:none;visibility:hidden"
+  >
+  </iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
