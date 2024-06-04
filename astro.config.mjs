@@ -43,7 +43,6 @@ export default defineConfig({
         {
           label: 'Alfred - AI Assistant',
           link: '/treblle/ai-assistant/',
-          badge: 'Beta'
         },
         {
           label: 'API Analytics',
