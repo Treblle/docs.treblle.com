@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from "@astrojs/tailwind";
-
 import sitemap from "@astrojs/sitemap";
+
+import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
@@ -39,52 +40,40 @@ export default defineConfig({
     }, {
       label: 'Treblle',
       collapsed: false,
-      items: [
-        {
-          label: 'Alfred - AI Assistant',
-          link: '/treblle/ai-assistant/',
-        },
-        {
-          label: 'API Analytics',
-          link: '/treblle/api-analytics/'
-        },
-        {
-          label: 'API Documentation',
-          link: '/treblle/api-documentation/'
-        },
-        {
-          label: 'API Governance',
-          link: '/treblle/api-governance/'
-        },
-        {
-          label: 'API Security',
-          link: '/treblle/api-security/'
-        },
-        {
-          label: 'Treblle Dashboard',
-          link: '/treblle/dashboard/'
-        },
-        {
-          label: 'Endpoints',
-          link: '/treblle/endpoints/'
-        },
-        {
-          label: 'Flows',
-          link: '/treblle/flows/'
-        },
-        {
-          label: 'Problems',
-          link: '/treblle/problems/'
-        },
-        {
-          label: 'Projects',
-          link: '/treblle/projects/'
-        },
-        {
-          label: 'Requests',
-          link: '/treblle/requests/'
-        }
-      ]
+      items: [{
+        label: 'Alfred - AI Assistant',
+        link: '/treblle/ai-assistant/'
+      }, {
+        label: 'API Analytics',
+        link: '/treblle/api-analytics/'
+      }, {
+        label: 'API Documentation',
+        link: '/treblle/api-documentation/'
+      }, {
+        label: 'API Governance',
+        link: '/treblle/api-governance/'
+      }, {
+        label: 'API Security',
+        link: '/treblle/api-security/'
+      }, {
+        label: 'Treblle Dashboard',
+        link: '/treblle/dashboard/'
+      }, {
+        label: 'Endpoints',
+        link: '/treblle/endpoints/'
+      }, {
+        label: 'Flows',
+        link: '/treblle/flows/'
+      }, {
+        label: 'Problems',
+        link: '/treblle/problems/'
+      }, {
+        label: 'Projects',
+        link: '/treblle/projects/'
+      }, {
+        label: 'Requests',
+        link: '/treblle/requests/'
+      }]
     }, {
       label: 'Integrations',
       collapsed: false,
@@ -196,7 +185,7 @@ export default defineConfig({
     }]
   }), tailwind({
     applyBaseStyles: false
-  }), sitemap()],
+  }), sitemap(), svelte()],
   redirects: {
     '/en/integrations': {
       status: 301,
