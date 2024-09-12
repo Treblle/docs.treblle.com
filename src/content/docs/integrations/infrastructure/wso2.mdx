@@ -5,7 +5,7 @@ description: Treblle publisher for WSO2 API Manager
 
 ## Overview
 
-The extension retrieves data from Global Synapse Handler (https://ei.docs.wso2.com/en/latest/micro-integrator/develop/customizations/creating-synapse-handlers/) in the API Gateway  and creates a payload to send to Treblle. The data is added onto a queue once received and is processed by a worker thread. The worker thread sends the data asynchronously to Treblle, if the data is successfully sent, the data is removed from the queue. If the data is not successfully sent, the worker thread will attempt to send the data again, after 1 retry attempt, the event will be dropped.
+The extension retrieves data from [Global Synapse Handler](https://ei.docs.wso2.com/en/latest/micro-integrator/develop/customizations/creating-synapse-handlers/) in the API Gateway  and creates a payload to send to Treblle. The data is added onto a queue once received and is processed by a worker thread. The worker thread sends the data asynchronously to Treblle, if the data is successfully sent, the data is removed from the queue. If the data is not successfully sent, the worker thread will attempt to send the data again, after 1 retry attempt, the event will be dropped.
 
 
 ## Build the source code
