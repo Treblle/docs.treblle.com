@@ -84,6 +84,16 @@ export default defineConfig({
         label: 'Custom Integrations',
         link: '/integrations/custom/'
       }, {
+        label: 'Infrastructure',
+        collapsed: true,
+        items: [{
+          label: 'Traefik',
+          link: '/integrations/infrastructure/traefik/'
+        }, {
+          label: 'WSO2',
+          link: '/integrations/infrastructure/wso2/'
+        }]
+      }, {
         label: 'Go',
         collapsed: true,
         items: [{
