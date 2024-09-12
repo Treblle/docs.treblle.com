@@ -88,10 +88,10 @@ export default defineConfig({
         collapsed: true,
         items: [{
           label: 'Traefik',
-          link: '/gateways/infrastructure/traefik/'
+          link: '/integrations/gateways/traefik/'
         }, {
           label: 'WSO2',
-          link: '/gateways/infrastructure/wso2/'
+          link: '/integrations/gateways/wso2/'
         }]
       }, {
         label: 'Go',
