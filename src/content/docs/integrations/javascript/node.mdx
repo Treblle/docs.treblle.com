@@ -63,6 +63,8 @@ useTreblle(app, {
 
 That's it. Your API requests and responses are now being sent to your Treblle project. Just by adding that line of code you get features like: auto-documentation, real-time request/response monitoring, error tracking and so much more.
 
+One thing that you need to bear in mind is that express will use first in first out when it comes to middleware. So if you want Treblle to capture unfiltered/altered request and response data, then it needs to be the first middleware in your middleware pipeline.
+
 ## Koa integration
 
 If you're using koa, then you can enable Treblle like this:
