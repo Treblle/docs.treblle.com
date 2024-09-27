@@ -73,6 +73,10 @@ export default defineConfig({
       }, {
         label: 'Requests',
         link: '/treblle/requests/'
+      }, {
+        label: 'Singal Sign-On',
+        link: '/treblle/sso/',
+        badge: 'beta'
       }]
     }, {
       label: 'Integrations',
