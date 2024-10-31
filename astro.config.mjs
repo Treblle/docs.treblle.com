@@ -43,10 +43,6 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
-              label: "Who is Treblle for?",
-              link: "/who-is-treblle-for/",
-            },
-            {
               label: "How Treblle works",
               link: "/how",
             },
