@@ -1,0 +1,80 @@
+---
+title: Getting Started with Treblle
+description: Learn how to integrate Treblle into your API in minutes.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Treblle helps you build, improve and observe your APIs with ease. Let's get you set up in just a few minutes.
+
+<Steps>
+
+1. **Create a Treblle Account**
+   
+   First, [sign up for a free Treblle account](https://app.treblle.com/register). This gives you access to the Treblle dashboard where you'll be able to observe your APIs.
+
+2. **Create Your First Project**
+   
+   After logging in:
+   - Go to your [Treblle dashboard](https://app.treblle.com)
+   - Click "Create new project"
+   - Fill in your project details:
+     - Project name
+     - Base URL (e.g., `https://api.example.com`)
+     - Select your platform
+     - Choose your environment (Production, Staging, Development, or Local)
+     - Optionally add team members' emails
+
+3. **Install the SDK**
+   
+   Choose the SDK for your platform from our wide range of supported languages and frameworks:
+
+   ### Popular SDKs
+   - [Laravel](/integrations/php/laravel/)
+   - [Express](/integrations/javascript/express/)
+   - [Spring](/integrations/java/spring/)
+   - [.NET Core](/integrations/net/net-core/)
+   - [Ruby on Rails](/integrations/ruby/rails/)
+
+   Can't find your platform? Check our complete [integrations list](/integrations/) or suggest it on our [Discord channel](https://treblle.com/chat).
+
+4. **Configure Your API**
+
+   Add your Treblle credentials to your project:
+   ```env
+   TREBLLE_API_KEY=your_api_key
+   TREBLLE_PROJECT_ID=your_project_id
+   ```
+
+5. **Enable Treblle**
+
+   Add the Treblle middleware to your API routes. The exact implementation varies by platform, but here's a general example:
+
+   ```php
+   Route::middleware(['treblle'])->group(function () {
+       // Your API routes go here
+   });
+   ```
+
+</Steps>
+
+## What's Next?
+
+Once integrated, Treblle automatically provides you with:
+
+- Real-time API monitoring and logging
+- Auto-generated [API documentation](/treblle/api-documentation/) with OpenAPI support
+- [API analytics](/treblle/api-analytics/)
+- [API governance scoring](/treblle/api-governance/)
+- [API security](/treblle/api-security/)
+- One-click testing
+- API management on the go
+- [Error reporting](/treblle/problems/)
+
+## Need Help?
+
+- Check our detailed [documentation](/guides/)
+- Join our [Discord community](https://treblle.com/chat)
+- Found a missing integration? Suggest it or contribute on [GitHub](https://github.com/Treblle)
+
+The Treblle documentation is open source, and we welcome contributions from developers like you!
