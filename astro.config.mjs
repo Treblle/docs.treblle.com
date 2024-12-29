@@ -38,6 +38,13 @@ export default defineConfig({
       label: 'How Treblle works',
       link: '/how'
     }, {
+      label: 'Guides',
+      collapsed: false,
+      items: [{
+        label: 'Getting Started',
+        link: '/guides/getting-started/'
+      }]
+    }, {
       label: 'Treblle',
       collapsed: false,
       items: [{
