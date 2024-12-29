@@ -88,17 +88,17 @@ app.use(
 
 ## Strapi integration
 
-> This integration is for Strapi v3, for Strapi v4 check out [this](/integrations/javascript/strapi/) integraion guide instead
+> This integration is for Strapi v3. For Strapi v4, check out [this](/integrations/javascript/strapi/) integration guide instead.
 
-Treblle has support for Strapi as well, to start using it you need to define the middleware first and then enable the middleware.
+Treblle has support for Strapi as well. To start using it, you need to define the middleware first and then enable the middleware.
 
-This guide is based on the strapi quickstart project, you can create it and follow by running the following command:
+This guide is based on the Strapi quickstart project, which you can create and follow by running the following command:
 
 ```sh
 npx create-strapi-app my-project --quickstart
 ```
 
-First define the middleware in `middlewares/treblle/index.js` like this:
+First, define the middleware in `middlewares/treblle/index.js` like this:
 
 ```js
 const { strapiTreblle } = require('treblle')
@@ -117,7 +117,7 @@ module.exports = (strapi) => {
 }
 ```
 
-Then enable the Treblle middleware in `config/middleware.js` like this:
+Then, enable the Treblle middleware in `config/middleware.js` like this:
 
 ```js
 module.exports = {
@@ -133,7 +133,7 @@ module.exports = {
 
 ### Service workers
 
-To use external packages (like Treblle) inside your workers you need a bundler (eg. Webpack or Rollup) to gather all dependencies into a single file which can be then deployed to Cloudflare. Read more about it in Cloudflare [webpack](https://developers.cloudflare.com/workers/cli-wrangler/webpack/) & [configuration](https://developers.cloudflare.com/workers/cli-wrangler/configuration/#service-workers) official documentation, and in an [official example](https://github.com/cloudflare/service-worker-custom-build).
+To use external packages (like Treblle) inside your workers, you need a bundler (e.g., Webpack or Rollup) to gather all dependencies into a single file that can be deployed to Cloudflare. Read more about it in Cloudflare's [webpack](https://developers.cloudflare.com/workers/cli-wrangler/webpack/) & [configuration](https://developers.cloudflare.com/workers/cli-wrangler/configuration/#service-workers) official documentation, and in an [official example](https://github.com/cloudflare/service-worker-custom-build).
 
 Example - Wrangler's webpack
 
@@ -189,7 +189,7 @@ addEventListener(
 
 ### Module workers
 
-Similar as with Service workers above, you need a bundler to package Treblle SDK together with your application code. Be sure to check out official Cloudflare documentation about [webpack]() & [modules configuration](https://developers.cloudflare.com/workers/cli-wrangler/configuration/#modules) if you are stuck.
+Similar to Service workers above, you need a bundler to package Treblle SDK together with your application code. Be sure to check out official Cloudflare documentation about [webpack]() & [modules configuration](https://developers.cloudflare.com/workers/cli-wrangler/configuration/#modules) if you are stuck.
 
 Here is also an official example of a setup with both Modules and CommonJS, using Webpack: [link](https://github.com/cloudflare/modules-webpack-commonjs).
 
@@ -284,7 +284,7 @@ useTreblle(app, {
 
 ## Logging errors
 
-For easier debugging when sending the data to Treblle errors are visible by default, you can control it via the `showErrors` flag, you can disable the errors with `showErrors` set to `false`:
+For easier debugging when sending the data to Treblle, errors are visible by default. You can control it via the `showErrors` flag. You can disable the errors with `showErrors` set to `false`:
 
 ```js
 useTreblle(app, {
@@ -292,4 +292,3 @@ useTreblle(app, {
   projectId: '_YOUR_PROJECT_ID_',
   showErrors: false,
 })
-```
