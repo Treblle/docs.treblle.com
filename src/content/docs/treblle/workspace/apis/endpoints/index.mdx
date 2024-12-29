@@ -1,0 +1,96 @@
+---
+title: Endpoints
+description: Endpoints in Treblle.
+---
+
+
+API endpoints are the URIs that expose a particular part of your API for communication via Requests (the core transaction of your API).
+
+## Auto-Generated Endpoints
+
+Once you have integrated your API with an SDK and your API starts receiving requests, Treblle will automatically identify the endpoints in your API and aggregate them for you on the Endpoints screen.
+
+![](https://firebasestorage.googleapis.com/v0/b/treblle-docs.appspot.com/o/1416s_image.png?alt=media&token=42b9aabb-f26e-4e6f-8b8e-6b3adb0054ae)## ## Endpoint Data
+
+For each Endpoints, you will see at a glance the following information:
+
+1. The HTTP verb or method of the endpoint (e.g GET, POST, PUT, DELETE).
+2. The last time a request was made to the endpoint
+3. The total number of requests the endpoint has received
+4. The average load time of the requests using the endpoint
+5. The number of problems the endpoint has
+6. The number of requests the endpoint is receiving per minute
+7. The endpoint group the endpoint belongs to
+8. A graph showing the requests the endpoint has received for the day
+
+## View requests
+
+![](https://firebasestorage.googleapis.com/v0/b/treblle-docs.appspot.com/o/x94mf_image.png?alt=media&token=2c7d83c0-854c-4b8e-8fc1-4755e99e107d)You can view the requests made to a particular endpoint in the Endpoints tab by clicking on the View requests link on the endpoint. Alternatively you can click on the dropdown menu on the top-right corner of an endpoint and click on View requests
+
+## Add to docs
+
+You can choose to add an endpoint to the auto-generated API docs by clicking on the dropdown menu on the top-right corner of an endpoint and then clicking Add to docs. A confirmation modal will appear for you to click on Confirm if you want to proceed.
+
+- When you add an endpoint to your docs, the endpoint and its documentation will become visible to anyone reading the API documentation for a project.
+
+## Remove from docs
+
+Once an endpoint is already in your project’s API documentations, you can remove it from the API documentation by clicking on the dropdown menu on the top-right corner of the endpoint and click on Remove from docs. A confirmation modal will appear for you to click on Confirm if you want to proceed.
+
+- Once you remove an endpoint from the API documentation of your project, it will no longer be visible to anyone reading the API documentation for that project
+
+## Mute an endpoint
+
+- In Treblle, when you mute an endpoint, requests made to that endpoint will no longer be visible anywhere on your Treblle project. Also, you will not get alerts when something goes wrong with the muted endpoint.
+
+To mute an endpoint, click on the dropdown menu on the top-right corner of the endpoint and click on the Mute button. A confirmation modal will appear for you to click on Confirm if you want to proceed.
+
+## Unmute an endpoint
+
+- In Treblle, when you unmute a muted endpoint, you will be able to see all the requests from that endpoint again and get alerts when something goes wrong on any of them.
+
+To unmute a muted endpoint, click on the dropdown menu on the top-right corner of the endpoint and click on the Unmute button. A confirmation modal will appear for you to click on Confirm if you want to proceed.
+
+## Add alias to an endpoint
+
+You can give a particular endpoint an alias - which is another name you can use when filtering for that endpoint
+
+## Endpoint groups
+
+Treblle automatically groups your endpoints. For example if you have two endpoints /users/:id and /users/verify, Treblle will group then under the users endpoint group. This makes it easy to filter for endpoints by groups.
+
+## Edit endpoint group
+
+If you want to change the group an endpoint was automatically placed in by Treblle, you can click on the endpoint dropdown on the top-right corner of the endpoint and click on Edit group. You will be presented with a modal with a box to select a new group to place the endpoint. Click on Save changes when you are done.
+
+Alternatively in the same modal you can create a new endpoint group by clicking on the Create new group button, you will then be presented with a text box to enter the new group name. Click on Save changes when you are done.
+
+## Delete endpoint
+
+- When you delete an endpoint in your Treblle project dashboard, Treblle will dissasociate any requests that belongs to that endpoint and the endpoint will also be removed from the API documentation of your project
+
+To delete an endpoint, click on the endpoint dropdown on the top-right corner of the endpoint and click on Delete. A confirmation modal will appear for you to click on Confirm if you want to proceed.
+
+## Filters
+
+You can filter the endpoints in the Endpoints tab of a project by clicking on the Filter button to access the filters drawer for endpoints.
+
+In the filters drawer, you filter endpoints by:
+
+- Has problems? - for endpoints having problems or not
+
+- HTTP method
+
+  Endpoint group
+
+- Muted - for endpoints muted or not
+
+- Included in docs - for endpoints included in the API documentation or not
+
+- Sort by - You can also sort endpoints by Name, number or requests, load time, or RPM(Requests per minute)
+
+Click on the Filter button to apply the filters you selected.
+
+## Export filtered endpoints
+
+Once you’ve filtered your endpoints, you can export the filtered endpoints to CSV by clicking on the Export results to CSV button on the bottom of the filters drawer.
