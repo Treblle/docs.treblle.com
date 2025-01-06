@@ -447,6 +447,17 @@ export default defineConfig({
             },
           ],
         },
+        {
+          label: "Features",
+          collapsed: true,
+          items: [
+            {
+              label: "Authentication",
+              link: "/features/authentication/"
+            },
+          ],
+        }
+        
       ],
     }),
     tailwind({
@@ -599,6 +610,10 @@ export default defineConfig({
     "/en/integrations/community-sdks": {
       status: 301,
       destination: "/integrations#community-sdks/",
+    },
+    "/": {
+      status: 301,
+      destination: "/features/authentication/",
     },
   },
 });
