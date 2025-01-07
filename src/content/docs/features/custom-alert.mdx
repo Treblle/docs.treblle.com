@@ -1,0 +1,176 @@
+---
+title: Custom Alerts in Treblle
+---
+
+Custom Alerts in Treblle 3.0 allow you to stay informed about critical API events without sifting through endless logs. This feature lets you configure specific triggers, ensuring timely notifications for error spikes, performance issues, or unusual activities.
+
+In this docs, we’ll cover:
+
+- Setting up Custom Alerts.
+- Configuring saved searches.
+- Choosing notification channels.
+- Examples of Custom Alerts.
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- A Treblle <a href="https://identity.treblle.com/login" target="_blank" rel="noopener noreferrer">account</a>.
+- Access to your project in the Treblle dashboard.
+- Permissions to create and manage alerts.
+
+---
+
+## Setting Up Custom Alerts
+
+### Create a Saved Search
+
+Saved searches allow you to define filters for specific API events.
+
+##### 1. **Navigate to the Requests tab:**
+
+- Go to the Treblle dashboard and open the Requests tab.
+
+<img
+  src="/public/platform/custom-alert/request-tab.png"
+  alt="Request tab inside Treblle dashboard"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+##### 2. **Apply filters:**
+
+- Define the conditions you want to monitor.
+
+For example, filter all `POST` requests to `/auth/register`.
+
+<img
+  src="/public/platform/custom-alert/post-request.png"
+  alt="Filtering POST requests"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+##### 3. **Save the search:**
+
+- Click the **Save** button.
+
+<img
+  src="/public/platform/custom-alert/save-filter.png"
+  alt="Saving your filter"
+  width="600"
+  style={{ borderRadius: "8px" }}
+/>
+
+- Provide a meaningful name, such as `Auth Error Alerts`.
+
+<img
+  src="/public/platform/custom-alert/name-filter.png"
+  alt="Naming your filter for future reference"
+  width="500"
+  style={{ borderRadius: "8px" }}
+/>
+
+### Configure a New Alert
+
+##### 1. **Go to My Alerts:**
+
+- Open the My Alerts section in the Treblle dashboard.
+
+<img
+  src="/public/platform/custom-alert/my-alert.png"
+  alt="My Alerts section"
+  width="200"
+  style={{ borderRadius: "8px" }}
+/>
+
+##### 2. **Create a new alert:**
+
+- Click **New Alert** and fill in the details:
+
+  <img
+    src="/public/platform/custom-alert/create-custom-alert.png"
+    alt="Creating a Custom Alert"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
+
+  - **Alert Name:** Choose a descriptive name.
+  - **Saved Search:** Select the saved search you created earlier.
+  - **Frequency:** Set how often notifications should be sent.
+
+<img
+  src="/public/platform/custom-alert/custom-alert-details.png"
+  alt="Setting up a Custom Alert details"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+##### 3. **Choose notification channels:**
+
+- Options include Email, Slack, or In-app notifications.
+
+- For Slack, add a webhook URL under API settings.
+
+<img
+  src="/public/platform/custom-alert/slack-integration.png"
+  alt="Setting up Slack integration"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+- For In-app notifications, you can see the alerts in the notifications section; view alerts within the Treblle app for a clutter-free option.
+
+<img
+  src="/public/platform/custom-alert/in-app-notifications.png"
+  alt="View alerts in the Notifications section"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+##### 4. **Assign recipients:**
+
+- Add up to five team members who should receive the alerts.
+
+---
+
+## Examples of Custom Alerts
+
+##### 1. Error Monitoring for Developers
+
+- **Scenario:** Track error spikes during testing or after deployment.
+- **Filters:**
+  - Method: `POST`
+  - Status Code: `5xx`
+  - Endpoint: `/auth/register`
+- **Alert Rule:** Notify if errors exceed 5% of total requests in 30 minutes.
+
+##### 2. Performance Tracking for Product Teams
+
+- **Scenario:** Ensure response times meet user expectations.
+- **Filters:**
+  - Response Time: `> 200ms`
+  - Status Code: `200`
+  - Endpoint: `/search`
+- **Alert Rule:** Notify if more than 10% of requests exceed the threshold in an hour.
+
+##### 3. Security Alerts for Security Teams
+
+- **Scenario:** Detect unusual login activity or brute-force attempts.
+- **Filters:**
+  - Method: `POST`
+  - Endpoint: `/login`
+  - Status Code: `401`
+- **Alert Rule:** Notify if failed login attempts exceed 100 in 10 minutes.
+
+##### 4. SLA Monitoring for Operations Teams
+
+- **Scenario:** Monitor uptime and response times to meet SLA commitments.
+- **Filters:**
+  - Status Code: `5xx`
+  - Response Time: `> 1s`
+- **Alert Rule:** Notify if more than 2% of requests fail or are too slow within 5 minutes.
+
+---

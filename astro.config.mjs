@@ -455,6 +455,10 @@ export default defineConfig({
               label: "Authentication",
               link: "/features/authentication/"
             },
+            {
+              label: "Custom Alert",
+              link: "/features/custom-alert/"
+            },
           ],
         }
         
@@ -614,6 +618,10 @@ export default defineConfig({
     "/": {
       status: 301,
       destination: "/features/authentication/",
+    },
+    "/": {
+      status: 301,
+      destination: "/features/custom-alert/",
     },
   },
 });
