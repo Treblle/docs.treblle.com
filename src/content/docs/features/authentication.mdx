@@ -2,7 +2,7 @@
 title: "Authentication in Treblle"
 ---
 
-With Treblle, we offer authentication features like Single Sign-On (SSO), Multi-Factor Authentication (MFA), and Social Sign-On to secure your workspace effectively.
+With Treblle 3.0, we offer authentication features like Single Sign-On (SSO), Multi-Factor Authentication (MFA), and Social Sign-On to secure your workspace effectively.
 
 ---
 
@@ -10,26 +10,24 @@ With Treblle, we offer authentication features like Single Sign-On (SSO), Multi-
 
 Single Sign-On (SSO) allows users to log in once and gain access to multiple applications or systems without needing to authenticate repeatedly.
 
-### Setting Up SSO
+### Steps to setup SSO
 
 1. **Navigate to Authentication Settings**
 
    - As a workspace owner, go to your workspace settings and locate the **Authentication** section.
 
    <img
-     src="/public/platform/authentication/sso-empty.png"
-     alt="SSO Configuration Example"
+     src="/platform/authentication/sso-empty.png"
      width="800"
      style={{ borderRadius: "8px" }}
    />
 
 2. **Choose Your Authentication Type**
 
-   - Select between SAML or OpenID Connect based on your identity provider. Consult your IT admin or provider documentation if needed.
+   - Select between <a href="https://auth0.com/blog/how-saml-authentication-works/" target="_blank" rel="noopener noreferrer"> SAML </a> or <a href="https://openid.net/developers/how-connect-works/" target="_blank" rel="noopener noreferrer"> OpenID Connect</a> based on your identity provider.
 
      <img
-       src="/public/platform/authentication/sso-config-type.png"
-       alt="SSO Configuration Example"
+       src="/platform/authentication/sso-config-type.png"
        width="800"
        style={{ borderRadius: "8px" }}
      />
@@ -37,13 +35,33 @@ Single Sign-On (SSO) allows users to log in once and gain access to multiple app
 3. **Input Required Fields**
 
    - Fill in details like:
-     - Assertion Consumer Service (ACS) URL
-     - Identity Provider Issuer
-     - Identity Provider Certificate (IdP)
+     - <a
+         href="https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language"
+         target="_blank"
+         rel="noopener noreferrer"
+       >
+         {" "}
+         Assertion Consumer Service (ACS) URL{" "}
+       </a>
+     - <a
+         href="https://en.wikipedia.org/wiki/Identity_provider"
+         target="_blank"
+         rel="noopener noreferrer"
+       >
+         {" "}
+         Identity Provider Issuer{" "}
+       </a>
+     - <a
+         href="https://en.wikipedia.org/wiki/Identity_provider_(SAML)"
+         target="_blank"
+         rel="noopener noreferrer"
+       >
+         {" "}
+         Identity Provider Certificate (IdP){" "}
+       </a>
 
    <img
-     src="/public/platform/authentication/sso-config.png"
-     alt="SSO Configuration Example"
+     src="/platform/authentication/sso-config.png"
      width="800"
      style={{ borderRadius: "8px" }}
    />
@@ -53,31 +71,31 @@ Single Sign-On (SSO) allows users to log in once and gain access to multiple app
    - Test the setup to ensure successful authentication.
 
    <img
-     src="/public/platform/authentication/sso.png"
-     alt="SSO Configuration Example"
+     src="/platform/authentication/sso.png"
      width="800"
      style={{ borderRadius: "8px" }}
    />
 
 5. **Log In with SSO**
 
-   - Go to the Treblle <a href="https://identity.treblle.com/login" target="_blank" rel="noopener noreferrer">Treblle Sign-In</a> page.
+   - Go to the Treblle <a href="https://identity.treblle.com/login" target="_blank" rel="noopener noreferrer"> Sign-In</a> page.
    - Click **Sign in with SSO**, enter your organization’s identifier, and log in.
 
    <img
-     src="/public/platform/authentication/sso-sign-in.png"
-     alt="SSO Configuration Example"
+     src="/platform/authentication/sso-sign-in.png"
      width="300"
      style={{ borderRadius: "8px" }}
    />
 
-### SSO Flow Across Workspaces
-
 Once SSO is enabled, users can log in using their organization’s identity provider. If a user switches between an SSO-protected workspace and a standard workspace, Treblle will prompt for extra authentication to maintain security.
 
-### Social Sign-On for Flexibility
+Example: treblle.com
 
-For teams or contractors, Social Sign-On offers a fast and convenient way to access workspaces by linking Google or GitHub accounts.
+<img
+  src="/platform/authentication/single-sign-on.png"
+  width="300"
+  style={{ borderRadius: "8px" }}
+/>
 
 ---
 
@@ -92,8 +110,7 @@ MFA adds an additional layer of security by requiring two or more verification s
    - Locate the **Multi-Factor Authentication** option.
 
    <img
-     src="/public/platform/authentication/mfa.png"
-     alt="SSO Configuration Example"
+     src="/platform/authentication/mfa.png"
      width="800"
      style={{ borderRadius: "8px" }}
    />
@@ -103,8 +120,7 @@ MFA adds an additional layer of security by requiring two or more verification s
    - Click **Enable MFA** to generate a QR code.
 
    <img
-     src="/public/platform/authentication/mfa-enable.png"
-     alt="SSO Configuration Example"
+     src="/platform/authentication/mfa-enable.png"
      width="800"
      style={{ borderRadius: "8px" }}
    />
@@ -118,15 +134,12 @@ MFA adds an additional layer of security by requiring two or more verification s
 
 Social Sign-On lets users log in with existing accounts such as Google or GitHub.
 
-This feature is particularly useful for teams that prefer using familiar credentials instead of creating new ones.
+For teams or contractors, Social Sign-On offers a fast and convenient way to access workspaces by linking Google or GitHub accounts.
 
 <img
-  src="/public/platform/authentication/social-sign-on.png"
-  alt="SSO Configuration Example"
-  width="500"
+  src="/platform/authentication/social-sign-on.png"
+  width="300"
   style={{ borderRadius: "8px" }}
 />
 
 ---
-
-Treblle’s authentication features are designed to balance security and usability.
