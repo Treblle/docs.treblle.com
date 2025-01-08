@@ -267,6 +267,16 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: "Features",
+              collapsed: true,
+              items: [
+                {
+                  label: "Custom Alert",
+                  link: "/features/custom-alert/",
+                },
+              ],
+            },
   
       
           ],
