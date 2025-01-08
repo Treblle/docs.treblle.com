@@ -275,6 +275,11 @@ export default defineConfig({
                   label: "Custom Alert",
                   link: "/features/custom-alert/",
                 },
+                {
+                  label: "Authentication",
+                  link: "/features/authentication/"
+                  
+                },
               ],
             },
   
