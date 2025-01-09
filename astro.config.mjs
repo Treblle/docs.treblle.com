@@ -38,6 +38,16 @@ export default defineConfig({
       label: 'How Treblle works',
       link: '/how'
     }, {
+      label: 'Features',
+      collapsed: false,
+      items: [{
+        label: 'API Catalog',
+        link: '/features/api-catalog/'
+      }]
+    }, {
+      label: 'Aspen',
+      link: '/aspen/'
+    }, {
       label: 'Guides',
       collapsed: false,
       items: [{
