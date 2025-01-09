@@ -38,6 +38,13 @@ export default defineConfig({
       label: 'How Treblle works',
       link: '/how'
     }, {
+      label: 'Features',
+      collapsed: false,
+      items: [{
+        label: 'API Catalog',
+        link: '/features/api-catalog/'
+      }]
+    }, {
       label: 'Guides',
       collapsed: false,
       items: [{
@@ -203,7 +210,10 @@ export default defineConfig({
         label: 'Masking Fields',
         link: '/security/masking/'
       }]
-    }]
+    }, {
+      label: 'Aspen',
+      link: '/aspen/'
+    },]
   }), tailwind({
     applyBaseStyles: false
   }), sitemap(), svelte()],
@@ -352,5 +362,10 @@ export default defineConfig({
       status: 301,
       destination: '/integrations#community-sdks/'
     }
+  },
+  themeConfig: {
+    nav: [
+      { text: 'Aspen', link: '/aspen/' },
+    ],
   }
 });
