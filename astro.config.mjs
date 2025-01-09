@@ -1,5 +1,5 @@
-import { defineConfig } from "astro/config";
-import starlight from "@astrojs/starlight";
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 
@@ -38,6 +38,18 @@ export default defineConfig({
       ],
       lastUpdated: true,
       sidebar: [
+        // Retaining "Getting Started" structure from main branch
+        {
+          label: "Guides",
+          collapsed: false,
+          items: [
+            {
+              label: "Getting Started",
+              link: "/guides/getting-started/",
+            },
+          ],
+        },
+        // Everything else from v3_update branch
         {
           label: "Treblle Platform",
           collapsed: false,
@@ -66,7 +78,6 @@ export default defineConfig({
                   label: "PAT",
                   link: "/treblle/account/tokens/",
                 },
-                
               ],
             },
             {
@@ -85,7 +96,6 @@ export default defineConfig({
                   label: "APIs",
                   collapsed: true,
                   items: [
-        
                     {
                       label: "API Dashboard",
                       collapsed: true,
@@ -97,7 +107,7 @@ export default defineConfig({
                         {
                           label: "Widgets",
                           link: "/treblle/workspace/apis/dashboard/widgets/",
-                        }
+                        },
                       ],
                     },
                     {
@@ -121,7 +131,7 @@ export default defineConfig({
                           link: "/treblle/workspace/apis/requests/security/",
                         },
                         {
-                          label: "Tracability",
+                          label: "Traceability",
                           link: "/treblle/workspace/apis/requests/traceability/",
                         },
                       ],
@@ -194,13 +204,12 @@ export default defineConfig({
                       label: "Managing People",
                       link: "/treblle/workspace/settings/people/",
                     },
-
                     {
                       label: "People",
                       collapsed: true,
                       items: [
                         {
-                          label: "Managing People ",
+                          label: "Managing People",
                           link: "/treblle/workspace/settings/people/",
                         },
                         {
@@ -211,10 +220,8 @@ export default defineConfig({
                           label: "Roles",
                           link: "/treblle/workspace/settings/people/roles/",
                         },
-                      
                       ],
                     },
-
                     {
                       label: "Plans",
                       link: "/treblle/workspace/settings/plans/",
@@ -223,12 +230,10 @@ export default defineConfig({
                       label: "SSO",
                       link: "/treblle/workspace/settings/sso/",
                     },
-                    
                   ],
                 },
               ],
             },
-
             {
               label: "Who is Treblle for?",
               collapsed: true,
@@ -277,13 +282,10 @@ export default defineConfig({
                 },
                 {
                   label: "Authentication",
-                  link: "/features/authentication/"
-                  
+                  link: "/features/authentication/",
                 },
               ],
             },
-  
-      
           ],
         },
         {
@@ -471,149 +473,149 @@ export default defineConfig({
     svelte(),
   ],
   redirects: {
-    "/en/integrations": {
+    '/en/integrations': {
       status: 301,
-      destination: "/integrations/",
+      destination: '/integrations/'
     },
-    "/en/integrations/ruby": {
+    '/en/integrations/ruby': {
       status: 301,
-      destination: "/integrations/ruby/rails/",
+      destination: '/integrations/ruby/rails/'
     },
-    "/en/integrations/sails": {
+    '/en/integrations/sails': {
       status: 301,
-      destination: "/integrations/javascript/sails/",
+      destination: '/integrations/javascript/sails/'
     },
-    "/en/integrations/go": {
+    '/en/integrations/go': {
       status: 301,
-      destination: "/integrations/go/core/",
+      destination: '/integrations/go/core/'
     },
-    "/en/integrations/lumen": {
+    '/en/integrations/lumen': {
       status: 301,
-      destination: "/integrations/php/lumen/",
+      destination: '/integrations/php/lumen/'
     },
-    "/en/integrations/django": {
+    '/en/integrations/django': {
       status: 301,
-      destination: "/integrations/python/django/",
+      destination: '/integrations/python/django/'
     },
-    "/en/integrations/spring": {
+    '/en/integrations/spring': {
       status: 301,
-      destination: "/integrations/java/spring/",
+      destination: '/integrations/java/spring/'
     },
-    "/en/integrations/adonisjs": {
+    '/en/integrations/adonisjs': {
       status: 301,
-      destination: "/integrations/javascript/adonis/",
+      destination: '/integrations/javascript/adonis/'
     },
-    "/en/integrations/net-core": {
+    '/en/integrations/net-core': {
       status: 301,
-      destination: "/integrations/net/net-core/",
+      destination: '/integrations/net/net-core/'
     },
-    "/en/integrations/strapi": {
+    '/en/integrations/strapi': {
       status: 301,
-      destination: "/integrations/javascript/strapi/",
+      destination: '/integrations/javascript/strapi/'
     },
-    "/en/integrations/koa": {
+    '/en/integrations/koa': {
       status: 301,
-      destination: "/integrations/javascript/koa/",
+      destination: '/integrations/javascript/koa/'
     },
-    "/en/integrations/net": {
+    '/en/integrations/net': {
       status: 301,
-      destination: "/integrations/net/net/",
+      destination: '/integrations/net/net/'
     },
-    "/en/integrations/node": {
+    '/en/integrations/node': {
       status: 301,
-      destination: "/integrations/javascript/node/",
+      destination: '/integrations/javascript/node/'
     },
-    "/en/integrations/php": {
+    '/en/integrations/php': {
       status: 301,
-      destination: "/integrations/php/no-framework/",
+      destination: '/integrations/php/no-framework/'
     },
-    "/en/integrations/express": {
+    '/en/integrations/express': {
       status: 301,
-      destination: "/integrations/javascript/express/",
+      destination: '/integrations/javascript/express/'
     },
-    "/en/integrations/fastify": {
+    '/en/integrations/fastify': {
       status: 301,
-      destination: "/integrations/javascript/fastify/",
+      destination: '/integrations/javascript/fastify/'
     },
-    "/en/integrations/symfony": {
+    '/en/integrations/symfony': {
       status: 301,
-      destination: "/integrations/php/symfony/",
+      destination: '/integrations/php/symfony/'
     },
-    "/en/integrations/directus": {
+    '/en/integrations/directus': {
       status: 301,
-      destination: "/integrations/javascript/directus/",
+      destination: '/integrations/javascript/directus/'
     },
-    "/en/integrations/laravel": {
+    '/en/integrations/laravel': {
       status: 301,
-      destination: "/integrations/php/laravel/",
+      destination: '/integrations/php/laravel/'
     },
-    "/en/dashboard/api-score": {
+    '/en/dashboard/api-score': {
       status: 301,
-      destination: "/treblle/api-governance/",
+      destination: '/treblle/api-governance/'
     },
-    "/en/security/masked-fields": {
+    '/en/security/masked-fields': {
       status: 301,
-      destination: "/security/masking/",
+      destination: '/security/masking/'
     },
-    "/en/dashboard": {
+    '/en/dashboard': {
       status: 301,
-      destination: "/treblle/dashboard/",
+      destination: '/treblle/dashboard/'
     },
-    "/en/dashboard/customize-dashboard": {
+    '/en/dashboard/customize-dashboard': {
       status: 301,
-      destination: "/treblle/dashboard/",
+      destination: '/treblle/dashboard/'
     },
-    "/en/dashboard/api-documentation": {
+    '/en/dashboard/api-documentation': {
       status: 301,
-      destination: "/treblle/api-documentation/",
+      destination: '/treblle/api-documentation/'
     },
-    "/en/dashboard/requests": {
+    '/en/dashboard/requests': {
       status: 301,
-      destination: "/treblle/requests/",
+      destination: '/treblle/requests/'
     },
-    "/en/dashboard/flows": {
+    '/en/dashboard/flows': {
       status: 301,
-      destination: "/treblle/flows/",
+      destination: '/treblle/flows/'
     },
-    "/en/dashboard/problems": {
+    '/en/dashboard/problems': {
       status: 301,
-      destination: "/treblle/problems/",
+      destination: '/treblle/problems/'
     },
-    "/en/dashboard/api-security": {
+    '/en/dashboard/api-security': {
       status: 301,
-      destination: "/treblle/api-security/",
+      destination: '/treblle/api-security/'
     },
-    "/en/dashboard/endpoints": {
+    '/en/dashboard/endpoints': {
       status: 301,
-      destination: "/treblle/endpoints/",
+      destination: '/treblle/endpoints/'
     },
-    "/en/dashboard/api-analytics": {
+    '/en/dashboard/api-analytics': {
       status: 301,
-      destination: "/treblle/api-analytics/",
+      destination: '/treblle/api-analytics/'
     },
-    "/en/dashboard/projects": {
+    '/en/dashboard/projects': {
       status: 301,
-      destination: "/treblle/projects/",
+      destination: '/treblle/projects/'
     },
-    "/en/who-is-treblle-for": {
+    '/en/who-is-treblle-for': {
       status: 301,
-      destination: "/who-is-treblle-for/",
+      destination: '/who-is-treblle-for/'
     },
-    "/en/how-treblle-works": {
+    '/en/how-treblle-works': {
       status: 301,
-      destination: "/how/",
+      destination: '/how/'
     },
-    "/en/introduction": {
+    '/en/introduction': {
       status: 301,
-      destination: "/guides/",
+      destination: '/guides/'
     },
-    "/en/sdk-development": {
+    '/en/sdk-development': {
       status: 301,
-      destination: "/integrations/custom/",
+      destination: '/integrations/custom/'
     },
-    "/en/integrations/community-sdks": {
+    '/en/integrations/community-sdks': {
       status: 301,
-      destination: "/integrations#community-sdks/",
-    },
-  },
+      destination: '/integrations#community-sdks/'
+    }
+  }
 });

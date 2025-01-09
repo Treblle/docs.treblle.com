@@ -1,0 +1,49 @@
+---
+title: Single Sign On with Treblle
+description: Learn how to set up SSO for your Treblle account.
+---
+
+import { Image } from "astro:assets";
+
+Treblle allows Enterprise teams to require users to log in with Single-Sign on via their Identity Provider.
+
+To configure this, a Workspace Owner will need to go into the Authentication Settings page and configure your SSO provider.
+
+<Image
+  src={"/platform/sso-empty.png"}
+  alt={"The default Single Sign on view in your workspace settings"}
+  format="webp"
+  width={2880}
+  height={2160}
+/>
+
+Once you have enabled this, you will need to go ahead and select the Authentication Type, either SAML or OpenID Connect, speak to your Identity provider if you are unsure which one you need.
+
+<Image
+  src={"/platform/sso-config-type.png"}
+  alt={"Selecting the type for Single Sign in your workspace settings"}
+  format="webp"
+  width={2880}
+  height={2160}
+/>
+
+Once the type has been selected, you can input the required fields - not forgetting to add the Identity Provider Certificate (IdP), this part is important.
+
+
+<Image
+  src={"/platform/sso-config.png"}
+  alt={"Configuring the Single Sign On."}
+  format="webp"
+  width={2880}
+  height={2160}
+/>
+
+Once all of this has been configured, you will see a list of available providers available in your workspace settings.
+
+<Image
+  src={"/platform/sso.png"}
+  alt={"Listing available connections for Single Sign in your workspace settings"}
+  format="webp"
+  width={2880}
+  height={2160}
+/>
