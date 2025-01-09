@@ -45,9 +45,6 @@ export default defineConfig({
         link: '/features/api-catalog/'
       }]
     }, {
-      label: 'Aspen',
-      link: '/aspen/'
-    }, {
       label: 'Guides',
       collapsed: false,
       items: [{
@@ -213,7 +210,10 @@ export default defineConfig({
         label: 'Masking Fields',
         link: '/security/masking/'
       }]
-    }]
+    }, {
+      label: 'Aspen',
+      link: '/aspen/'
+    },]
   }), tailwind({
     applyBaseStyles: false
   }), sitemap(), svelte()],
