@@ -617,5 +617,10 @@ export default defineConfig({
       status: 301,
       destination: '/integrations#community-sdks/'
     }
+  },
+  themeConfig: {
+    nav: [
+      { text: 'Aspen', link: '/aspen/' },
+    ],
   }
 });
