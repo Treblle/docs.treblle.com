@@ -43,6 +43,9 @@ export default defineConfig({
       items: [{
         label: 'API Catalog',
         link: '/features/api-catalog/'
+      }, {
+        label: 'Authentication',
+        link: '/features/authentication/'
       }]
     }, {
       label: 'Guides',
