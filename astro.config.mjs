@@ -49,6 +49,9 @@ export default defineConfig({
       }, {
         label: 'API Compliance',
         link: '/features/api-compliance/'
+      }, {
+        label: "Custom Alert",
+        link: "/features/custom-alert/",
       }]
     }, {
       label: 'Guides',
