@@ -46,6 +46,9 @@ export default defineConfig({
       }, {
         label: 'Authentication',
         link: '/features/authentication/'
+      }, {
+        label: 'API Compliance',
+        link: '/features/api-compliance/'
       }]
     }, {
       label: 'Guides',
