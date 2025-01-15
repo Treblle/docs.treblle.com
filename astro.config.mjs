@@ -38,6 +38,9 @@ export default defineConfig({
       label: 'How Treblle works',
       link: '/how'
     }, {
+      label: 'Aspen',
+      link: '/aspen/'
+    }, {
       label: 'Features',
       collapsed: false,
       items: [{
@@ -219,10 +222,7 @@ export default defineConfig({
         label: 'Masking Fields',
         link: '/security/masking/'
       }]
-    }, {
-      label: 'Aspen',
-      link: '/aspen/'
-    },]
+    }]
   }), tailwind({
     applyBaseStyles: false
   }), sitemap(), svelte()],
@@ -374,7 +374,7 @@ export default defineConfig({
   },
   themeConfig: {
     nav: [
-      { text: 'Aspen', link: '/aspen/' },
+      { text: 'Aspen', link: 'aspen/' },
     ],
   }
 });
