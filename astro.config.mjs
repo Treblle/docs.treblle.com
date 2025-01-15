@@ -100,6 +100,9 @@ export default defineConfig({
         label: 'Single Sign-On',
         link: '/treblle/sso/',
         badge: 'beta'
+      }, {
+        label: 'API Insights',
+        link: '/treblle/api-insights/',
       }]
     }, {
       label: 'Integrations',
