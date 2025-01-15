@@ -65,7 +65,7 @@ export default defineConfig({
       collapsed: false,
       items: [{
         label: 'Alfred - AI Assistant',
-        link: '/treblle/ai-assistant/'
+        link: '/treblle/alfred/'
       }, {
         label: 'API Analytics',
         link: '/treblle/api-analytics/'
