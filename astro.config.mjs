@@ -67,6 +67,9 @@ export default defineConfig({
         label: 'Alfred - AI Assistant',
         link: '/treblle/ai-assistant/'
       }, {
+        label: 'API Insights',
+        link: '/treblle/api-insights/',
+      }, {
         label: 'API Analytics',
         link: '/treblle/api-analytics/'
       }, {
@@ -100,9 +103,6 @@ export default defineConfig({
         label: 'Single Sign-On',
         link: '/treblle/sso/',
         badge: 'beta'
-      }, {
-        label: 'API Insights',
-        link: '/treblle/api-insights/',
       }]
     }, {
       label: 'Integrations',
