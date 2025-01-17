@@ -45,7 +45,7 @@ The extension retrieves data from [Global Synapse Handler](https://ei.docs.wso2.
 
 ## Prerequisites
 
-Ensure the following are installed and configured:
+Before you begin, make sure you have:
 
 - **Java**: Version 8 or later (`java -version`)
 - **Maven**: Version 3.6.0 or later (`mvn -version`)
@@ -232,7 +232,7 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
 
 These credentials are essential for integrating Treblle with your WSO2 API Manager.
 
-## Step 5: Install Treblle Data Publisher Extension
+## Step 6: Install Treblle Data Publisher Extension
 
 1. Clone the Treblle Data Publisher repository:
    ```bash
@@ -249,7 +249,7 @@ These credentials are essential for integrating Treblle with your WSO2 API Manag
    cp target/treblle-data-publisher-*.jar /path/wso2am-4.3.0/repository/components/lib
    ```
 
-## Step 4: Configure WSO2 API Manager for Treblle
+## Step 7: Configure WSO2 API Manager for Treblle
 
 1. Update the `deployment.toml` file (Add at the **beginning the file**):
 
@@ -281,43 +281,35 @@ logger.treblle_publisher.appenderRef.CARBON_LOGFILE.ref = CARBON_LOGFILE
 
 - Open a terminal and add the following environment variables. Alternatively, set these variables in your .bash_profile or .bashrc to make them persistent across sessions.
 
-- `MacOS`:
+**For MacOS/Linux:**
+```bash
+# Required variables
+export TREBLLE_API_KEY="your-api-key"           # Your Treblle API key
+export TREBLLE_PROJECT_ID="your-project-id"      # Your Treblle project ID
+export TREBLLE_GATEWAY_URL="your-gateway-url"    # Your WSO2 gateway URL
 
-  ```bash
-  export TREBLLE_API_KEY=<your-api-key>
-  export TREBLLE_PROJECT_ID=<your-project-id>
-  export TREBLLE_GATEWAY_URL="https://your-wso2-gateway-url"
-  export TREBLLE_QUEUE_SIZE=20000
-  export TREBLLE_WORKER_THREADS=1
-  export ADDITIONAL_MASK_KEYWORDS="Authorization,token"
-  export TREBLLE_ENABLED_TENANT_DOMAINS="carbon.super"
-  ```
+# Optional variables with defaults
+export TREBLLE_QUEUE_SIZE=20000                  # Max size of the request queue
+export TREBLLE_WORKER_THREADS=1                  # Number of worker threads
+export ADDITIONAL_MASK_KEYWORDS="Authorization,token"  # Fields to mask
+export TREBLLE_ENABLED_TENANT_DOMAINS="carbon.super"  # Enabled tenant domains
+```
 
-- `Windows`:
+**For Windows:**
+```batch
+:: Required variables
+set TREBLLE_API_KEY=your-api-key
+set TREBLLE_PROJECT_ID=your-project-id
+set TREBLLE_GATEWAY_URL=https://your-wso2-gateway-url
 
-  ```bash
-  set TREBLLE_API_KEY=API-KEY
-  set TREBLLE_PROJECT_ID=Project-id
-  set TREBLLE_GATEWAY_URL="https://test.com"
-  set ADDITIONAL_MASK_KEYWORDS=testkey,Authorization,token
-  set TREBLLE_QUEUE_SIZE=20000
-  set TREBLLE_WORKER_THREADS=1
-  set TREBLLE_ENABLED_TENANT_DOMAINS=carbon.super,abc.com
-  ```
+:: Optional variables
+set TREBLLE_QUEUE_SIZE=20000                     :: Default queue size
+set TREBLLE_WORKER_THREADS=1                     :: Default worker threads
+set ADDITIONAL_MASK_KEYWORDS=Authorization,token  :: Default masked fields
+set TREBLLE_ENABLED_TENANT_DOMAINS=carbon.super  :: Default tenant domain
+```
 
-- `Definations`:
-  ````bash
-  TREBLLE_API_KEY=<API Key of the Treblle Project>
-  TREBLLE_PROJECT_ID=<Project Id of the Treblle Project>
-  TREBLLE_GATEWAY_URL=<WSO2 API Manager Gateway URL>
-  TREBLLE_QUEUE_SIZE=<Messages queue size>
-  TREBLLE_WORKER_THREADS=<Number of worker threads for publishing data>
-  ADDITIONAL_MASK_KEYWORDS=<Masking keywords such as header names and body parameters>
-  TREBLLE_ENABLED_TENANT_DOMAINS<Treblle Publishing enabled tenant domains>
-  ```bash
-  ````
-
-## Step 5: Configure OAuth2 Authentication
+## Step 8: Configure OAuth2 Authentication
 
 - To generate an OAuth2 Token, log in to the Developer Portal at `https://localhost:9443/devportal`.
 - Under the **Subscription** section, click on your created application.
@@ -348,13 +340,13 @@ cd /path/wso2am-4.3.0/bin
 ./api-manager.sh restart
 ```
 
-## Step 6: Test API Observability with Treblle
+## Step 9: Test API Observability with Treblle
 
 1. Use cURL to send a request:
 
 - Replace "access_token" with a valid OAuth2 token.
 
-  ```bash
+```bash
   curl -k -X GET "https://localhost:8243/<api-context>/<version>" -H "Authorization: Bearer <access_token>"
   ```
 
