@@ -1,0 +1,246 @@
+---
+title: API Insights
+description: Advanced API Governance Tool
+---
+
+### What is API Insights?
+
+[API Insights](https://apiinsights.io/) is an advanced API governance tool that evaluates your APIs against industry best practices.
+
+You just need to upload your [OpenAPI spec](https://swagger.io/specification/) (JSON or YAML) to get a score (1-100) and grade (A-F) in design, security, and performance.
+
+### Step to Setup API Insights
+
+You can use API Insights in several ways, depending on your preference. You can access it via:
+
+1. **[Web Browser](https://apiinsights.io/)**
+2. **[VS Code Extension](https://marketplace.visualstudio.com/items?itemName=treblle.apiinsights-vscode)**
+3. **[CLI Tool](https://github.com/Treblle/treblle-cli)**
+4. **Using the [MacOS app](https://apps.apple.com/hr/app/api-insights-by-treblle/id6468354004)**
+
+### Option 1: **Web Browser (Dashboard)**
+
+API Insights can be accessed through [apiinsights.io/](https://apiinsights.io/).
+
+<img
+  src="/platform/api-insights/dashboard.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+#### Example: **Analysing a demo API**
+
+This report is based on the [Demo API](https://apiinsights.io/reports/demo-report) which has 33 endpoints.
+
+<img
+  src="/platform/api-insights/demo.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+The dashboard is organized into different categories to help you quickly analyze key metrics:
+
+1. **Design Insights**
+2. **Performance Insights**
+3. **Security Insights**
+
+#### How Do We Calculate This?
+
+We combine your OpenAPI Spec and the data we get from a single request to your server. We run a series of checks and compare them to industry standards and best practices.
+
+For example:
+
+- **Design Issues** are identified based on predefined API design best practices.
+- **Performance metrics** are calculated based on each request's response times and server performance.
+- **Security checks** are based on common security vulnerabilities and attack patterns, such as IDOR and missing security headers.
+
+### Option 2: VS Code Extension
+
+The API Insights VS Code Extension allows you to observe your API performance directly from your development environment.
+
+#### Installation
+
+To install the API Insights VS Code Extension:
+
+    1. Open **VS Code** and go to the **Extensions** view (`Ctrl+Shift+X`).
+    2. Search for **Treblle API Insights**.
+    3. Click **Install**.
+
+<img
+  src="/platform/api-insights/vs-code.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+#### Getting Started
+
+Select a File from Your Workspace
+
+    1. You can begin the process once you have your **OpenAPI spec** file (usually in JSON or YAML format) in your workspace.
+    2. Open the file in VS Code.
+    3. The extension will automatically check the file and provide insights based on the API's design, performance, and security.
+
+:::note
+The extension works with OpenAPI specifications, so ensure your file is correctly formatted.
+:::
+
+<img
+  src="/platform/api-insights/demo-1.gif"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+#### Re-check the Score on File Changes
+
+The extension tracks any changes made to the file. If you modify the OpenAPI spec file, it will automatically re-check and update the score.
+
+Whenever a file change is detected, a prompt will appear in your editor, reminding you to re-check the score.
+
+<img
+  src="/platform/api-insights/demo-3.gif"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### Option 3: CLI Tool
+
+You can use the API Insights CLI tool if you prefer working in the terminal.
+
+:::note
+To use API Insights GitHub action with your project. Please visit [marketplace](https://github.com/treblle/treblle-cli).
+:::
+
+#### Installing Treblle CLI
+
+You can install the Treblle CLI using `Homebrew` on Mac or Linux:
+
+```bash
+brew tap treblle/treblle
+brew install treblle
+```
+
+#### Using API Insights with CLI
+
+     Once installed, use the insights command to generate a report for your API by uploading your OpenAPI specification:
+
+     ```bash
+     treblle-cli insights path/to/openapi-spec.json
+     ```
+
+     By default, this will give you an overview of your API’s performance, design, and security scores. You can also pass additional flags for detailed analysis.
+
+#### Available Options
+
+    1. Technology Profile: To see the technology profile discovered on your API, use the `--technology` flag:
+
+        ```bash
+        treblle-cli insights path/to/openapi-spec.json --Technology
+        ```
+
+    2. Details: For a deep dive into specific categories, use the `--details` flag with one of the following options:
+
+        ```bash
+        --details=performance to show performance test results.
+        --details=security to display security test results.
+        --details=quality for quality checks.
+         ```
+
+         **Example:**
+
+         ```bash
+         treblle-cli insights path/to/openapi-spec.json --details=All
+         ```
+
+3. Minimum Score Limit
+
+- Set a minimum score threshold for automated testing in CI/CD environments using the `--minimum` flag. For example, to require a minimum score of `90`:
+
+  ```bash
+   treblle-cli insights path/to/openapi-spec.json --minimum 90
+  ```
+
+### Option 4: **Using the MacOS App**
+
+<img
+  src="/platform/api-insights/macos-app.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+Visit the [App Store](https://apps.apple.com/hr/app/api-insights-by-treblle/id6468354004) and download the macOS app.
+
+The app works like the browser version with the same insights and features in a more convenient desktop interface.
+
+### AI Readiness for your API
+
+As part of Treblle's commitment to making API integration with AI and LLMs smoother, we’ve introduced the AI-Ready badge.
+
+This badge is awarded when your API meets key criteria for AI integration.
+
+<img
+  src="/platform/api-insights/api-score.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+#### What Makes an API AI-Ready?
+
+The AI-Ready badge is granted when your API adheres to the following specifications:
+
+1. **Endpoints Descriptions:** Each endpoint has a detailed and user-friendly description.
+
+   Example: GET `/users`
+
+   Description: Fetches a list of all users in the system. Useful for retrieving user information for management or reporting
+
+2. **Operation IDs:** Each endpoint must have a distinct OperationID.
+
+   Example: `createUser`, `deleteOrder`, or `getOrderDetails`.
+
+3. **Parameters Descriptions:** Every parameter should clearly describe usage, expected data type, and input format.
+
+   Example: Query Parameters for `GET /users`.
+
+   - `page` _(integer)_: Page number for paginated results. Default: `1`.
+   - `limit` _(integer)_: Number of users per page. Default: `10`.
+
+   Path Parameters for `GET /users/{id}`.
+
+   - `id` _(string)_: Unique identifier of the user.
+
+4. **Response Descriptions:** All responses must have HTTP status codes and descriptions.
+
+   Example Responses for GET /users:
+
+   - 200 OK: Successfully retrieved the list of users.
+   - 400 Bad Request: Invalid query parameter(s) provided.
+   - 500 Internal Server Error: Unexpected server error occurred.
+
+   Example 200 Response:
+
+   ```bash
+   {
+    {
+       "users": [
+        { "id": "123", "name": "John Doe", "email": "john@example.com" },
+        { "id": "124", "name": "Jane Doe", "email": "jane@example.com" }
+        ]
+        }
+   ```
+
+5. **Schemas:** A schema must have a defined type and description if a schema exists.
+
+   Example:
+
+   ```bash
+   {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "Unique identifier for the user" },
+      "name": { "type": "string", "description": "Full name of the user" },
+      "email": { "type": "string", "description": "Email address of the user" }
+      }
+      }
+   ```
+
+So when you meet these requirements, your API will automatically receive an AI-Ready badge.
