@@ -67,6 +67,9 @@ export default defineConfig({
         label: 'Alfred - AI Assistant',
         link: '/treblle/alfred/'
       }, {
+        label: 'API Insights',
+        link: '/treblle/api-insights/',
+      }, {
         label: 'API Analytics',
         link: '/treblle/api-analytics/'
       }, {
