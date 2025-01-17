@@ -88,9 +88,6 @@ export default defineConfig({
         label: 'Endpoints',
         link: '/treblle/endpoints/'
       }, {
-        label: 'Flows',
-        link: '/treblle/flows/'
-      }, {
         label: 'Problems',
         link: '/treblle/problems/'
       }, {
@@ -99,10 +96,6 @@ export default defineConfig({
       }, {
         label: 'Requests',
         link: '/treblle/requests/'
-      }, {
-        label: 'Single Sign-On',
-        link: '/treblle/sso/',
-        badge: 'beta'
       }]
     }, {
       label: 'Integrations',
@@ -329,10 +322,6 @@ export default defineConfig({
     '/en/dashboard/requests': {
       status: 301,
       destination: '/treblle/requests/'
-    },
-    '/en/dashboard/flows': {
-      status: 301,
-      destination: '/treblle/flows/'
     },
     '/en/dashboard/problems': {
       status: 301,
