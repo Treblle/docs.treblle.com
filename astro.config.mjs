@@ -38,6 +38,9 @@ export default defineConfig({
       label: 'How Treblle works',
       link: '/how'
     }, {
+      label: 'Getting Started',
+      link: '/guides/getting-started/'
+    }, {
       label: 'Workspace',
       collapsed: false,
       items: [{
@@ -91,7 +94,7 @@ export default defineConfig({
         label: 'Aspen',
         link: '/aspen/'
       }, {
-        label: 'Alfred - AI Assistant',
+        label: 'Alfred AI',
         link: '/treblle/alfred/'
       }, {
         label: 'API Insights',
