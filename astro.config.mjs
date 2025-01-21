@@ -38,52 +38,27 @@ export default defineConfig({
       label: 'How Treblle works',
       link: '/how'
     }, {
-      label: 'Features',
+      label: 'Workspace',
       collapsed: false,
       items: [{
+        label: 'Workspace',
+        link: '/treblle/workspace/'
+      }, {
         label: 'API Catalog',
         link: '/features/api-catalog/'
       }, {
         label: 'Authentication',
         link: '/features/authentication/'
-      }, {
-        label: 'API Compliance',
-        link: '/features/api-compliance/'
-      }, {
-        label: "Custom Alert",
-        link: "/features/custom-alert/",
-      }]
+      },]
     }, {
-      label: 'Guides',
+      label: 'Treblle Platform',
       collapsed: false,
       items: [{
-        label: 'Getting Started',
-        link: '/guides/getting-started/'
-      }]
-    }, {
-      label: 'Treblle',
-      collapsed: false,
-      items: [{
-        label: 'Alfred - AI Assistant',
-        link: '/treblle/alfred/'
-      }, {
-        label: 'API Insights',
-        link: '/treblle/api-insights/',
-      }, {
-        label: 'API Analytics',
-        link: '/treblle/api-analytics/'
-      }, {
-        label: 'API Documentation',
-        link: '/treblle/api-documentation/'
-      }, {
-        label: 'API Governance',
-        link: '/treblle/api-governance/'
-      }, {
-        label: 'API Security',
-        link: '/treblle/api-security/'
-      }, {
         label: 'Treblle Dashboard',
         link: '/treblle/dashboard/'
+      }, {
+        label: 'Requests',
+        link: '/treblle/requests/'
       }, {
         label: 'Endpoints',
         link: '/treblle/endpoints/'
@@ -91,11 +66,36 @@ export default defineConfig({
         label: 'Problems',
         link: '/treblle/problems/'
       }, {
-        label: 'Projects',
-        link: '/treblle/projects/'
+        label: 'API Governance',
+        link: '/treblle/api-governance/'
       }, {
-        label: 'Requests',
-        link: '/treblle/requests/'
+        label: 'API Compliance',
+        link: '/features/api-compliance/'
+      }, {
+        label: "Custom Alert",
+        link: "/features/custom-alert/",
+      }, {
+        label: 'API Documentation',
+        link: '/treblle/api-documentation/'
+      }, {
+        label: 'API Analytics',
+        link: '/treblle/api-analytics/'
+      }, {
+        label: 'API Security',
+        link: '/treblle/api-security/'
+      }]
+    }, {
+      label: 'Native Apps',
+      collapsed: false,
+      items: [{
+        label: 'Aspen',
+        link: '/aspen/'
+      }, {
+        label: 'Alfred - AI Assistant',
+        link: '/treblle/alfred/'
+      }, {
+        label: 'API Insights',
+        link: '/treblle/api-insights/',
       }]
     }, {
       label: 'Integrations',
@@ -215,9 +215,6 @@ export default defineConfig({
         label: 'Masking Fields',
         link: '/security/masking/'
       }]
-    }, {
-      label: 'Aspen',
-      link: '/aspen/'
     },]
   }), tailwind({
     applyBaseStyles: false
