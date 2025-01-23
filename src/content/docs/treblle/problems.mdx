@@ -6,7 +6,7 @@
 Treblle identifies both codebase and non-codebase errors captured by the Treblle SDK. For instance, it can detect misspellings that might affect your API documentation. 
 
 
-## Steps to see Problems:
+## Steps to view the Problems Tab
 
 1. Click on **Problems** in the left navigation bar.
 
@@ -24,31 +24,28 @@ Treblle identifies both codebase and non-codebase errors captured by the Treblle
       style={{ borderRadius: "8px" }}
     />
 
-
-## Information Displayed
-
 The Problems tab provides the following details for each issue:
+
+  <img
+    src="/platform/problems/dashboard.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
 - **HTTP Method:** Associated with the problem (if applicable).
 - **Severity Level:** Categorized as Low, Medium, or High.
 - **Occurrences:** Number of times this problem has occurred in the project.
-- **Total Problems Count**
-- **Error Description**
+- **Total Problems Count:** Number of problems across all endpoints.
+- **Error Description:** Description of the problem.
 - **Graph:** Displays "Requests with Problems" for a selected period.
 
-<img
-  src="/platform/problems/dashboard.png"
-  width="800"
-  style={{ borderRadius: "8px" }}
-/>
+  <img
+    src="/platform/problems/problems-graph.gif"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-## Problem Severity
-
-Treblle performs 15 security checks on every API request and assigns one of three threat levels:
-
-- **Low**
-- **Medium**
-- **High**
+Treblle performs 15 security checks on every API request and assigns them under **Low**, **Medium**, and **High** threat levels.
 
 ## Viewing Problems in Requests
 
