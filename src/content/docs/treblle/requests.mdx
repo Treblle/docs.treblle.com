@@ -1,96 +1,107 @@
 ---
 title: Requests
-description: Requests are calls to your API endpoints. In Treblle you can find requests made to your API in the Requests tab of your project's dashboard
+description: Observe and study API requests in real-time with detailed insights about performance, security threats, and response data.
 image: /observability.png
 ---
 
-import { Schema } from "astro-seo-schema"
+The Requests tab in your API Dashboard provides real-time visibility into your API's activity. It visualizes the important metrics around your API requests, such as performance and security, and helps you debug issues faster.
 
-<Schema
-  item={{
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: "The Requests tab",
-    description: "Requests are calls to your API endpoints.  In your project’s dashboard, you can see all requests in the Requests tab   📞 CONNECT: 🌍 Website - https://treblle.com 😺 GitHub - https://github.com/Treblle 🐦 Twitter - https://twitter.com/treblleapi 👍🏽 Facebook - https://facebook.com/treblle 📪 Email - info@treblle.com  #treblle #projects #API #development",
-    thumbnailUrl: "https://i.ytimg.com/vi/3Q2EmCE0iqo/default.jpg",
-    uploadDate: "2022-11-29T11:51:10Z",
-    duration: "PT3M16S",
-    embedUrl: "https://www.youtube.com/embed/3Q2EmCE0iqo",
-    interactionCount: "462"
-  }}
-/>
+## Overview of the Requests Dashboard
 
-<iframe class="w-full aspect-[16/9]" src="https://www.youtube.com/embed/3Q2EmCE0iqo" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+The Requests dashboard allows you to view and analyze API requests with two display options:
 
-Requests are calls to your API [endpoints](/treblle/endpoints/).
+- **List View**: Displays each request with detailed metrics.
+  
+  <img
+    src="/platform/requests/listview.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-In your [project's](/treblle/projects/) dashboard, you can see all requests in the **Requests** tab
+- **Table View**: Offers a compact, tabular format for easier comparisons.
+  
+  <img
+    src="/platform/requests/tableview.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-At a glance, each requests on your Treblle dashboard shows the following information:
+### Key Metrics
 
-- The HTTP method of the request
-- The status code returned for the request
-- The [endpoint](/treblle/endpoints/) that was requested
-- When the request was made
-- The device the request was made from
-- The location the request was made from
-- If the request was authenticated
-- Whether the request returned JSON or not
-- If the response to the request was fast or not
-- The response size
-- The load time of the request
-- If the request had problems or not
+Each request entry includes:
 
-> You can click on the request endpoint to see more detailed information about a request
+- **HTTP Method**: The type of request (GET, POST, PUT, DELETE) shown in distinct colors for easy identification
+- **Response Code**: The status code returned by the API (e.g., 200 for success, 404 for not found)
+- **Threat Level**: Security assessment indicator (Low, Medium, High) based on request analysis
+- **Load Time**: Request processing duration in milliseconds with visual performance indicators
+- **Response Size**: Size of the response payload returned by the API
+- **Device Type**: The type of device making the request (desktop, mobile, etc.)
+- **Location**: Geographic location where the request originated
+- **Customer ID**: Unique identifier for the client making the request
+- **Timestamp**: When the request was made
 
-## Share request
+<img
+    src="/platform/requests/requestdetails.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-You can share a request by clicking on the dropdown menu on the top-right corner of a request and then click on **Share**. You will get a modal with a share URL for the request you can copy. Click on the **Copy share URL** on modal to copy the URL.
+## Request Details
 
-### Expiration date
+When you want to know more about a specific request, click on a request to access its detailed view, organized into tabs:
 
-When sharing a request you can chose an expiration date for the URL you shared. You can chose for the URL to expire in:
+- **General**: Shows request body, headers, and response data.
 
-- 1 hour from now
-- 1 day from now
-- I week from now
-- 1 month from now
+- **Info**: Displays metadata such as user agent and IP address.
 
-> The default expiration date for shared request URLs is 1 hour from now
+- **Security**: Highlights potential vulnerabilities.
 
-## More like this
+- **API Compliance**: Validates adherence to compliance standards.
 
-If you want to see more requests like a request, you can click on the dropdown on the top-right corner and click on **More like this**
+- **Metadata**: Provides debugging details for advanced troubleshooting.
 
-## Comments
+<img
+    src="/platform/requests/general-info-security.gif"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-On a request detail page, click on the floating plus button at the bottom right of the page and click on comment, a comment drawer will appear with a text box for you to comment on a
 
-## Download request
+## Filtering and Sorting
 
-You can download a JSON file of a request by clicking on the dropdown menu on the top-right corner of a request and then click on **Download**.
+You're asked to give a performance report. And you only need to show successful requests. Instead of going through the logs, you can filter the requests in the Requests tab. 
+You also have the option to **sort by** by the timestamp, threat level, path, or load time or a **save a filter** if you use it often.
+ <img  
+    src="/platform/requests/filter.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-## Filters
+## Commenting and Sharing
 
-You can filter the endpoints in the **Requests** tab of a project by clicking on the **Filter** button to access the filters drawer for endpoints.
+Need to share a request with someone? Treblle allows you to share a request with your team members with an expiration date. 
 
-In the filters drawer, you filter endpoints by:
+<img
+    src="/platform/requests/share-request.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-- Status: either, with problems, or without problems
-- HTTP method
-- Response code
-- [Endpoint](/treblle/endpoints/)
-- Device
-- Location
-- Request parameters
-- [Comments](#comments)
-- App version
-- Timeframe
+Need to bring a team member's attention to a particular request? You can tag them and comment on the request. Later, you can also delete the request.
 
-Click on the **Filter** button to apply the filters you selected.
+<img
+    src="/platform/requests/comment.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-## Delete request
+## Deleting Requests
 
-> When you delete a request we'll remove any references to it right away but we'll also show a list of all deleted requests including who deleted it and when just to be 100% transparent.
+If a request log is no longer needed, you can delete it by clicking on the three dots and selecting **Delete**:
+<img
+    src="/platform/requests/delete_request.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-You can delete a request by clicking on the dropdown menu on the top-right corner of a request and then click on **Delete**. A confirmation modal will appear for you to click on **Confirm** if you want to proceed.
+The Request tab is the place to go when you want to see, inspect, or get a snapshot of anything and everything related to your API requests with minimal effort.
