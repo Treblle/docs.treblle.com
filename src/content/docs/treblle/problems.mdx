@@ -1,61 +1,65 @@
 ---
-title: Problems
-description: Problems are code base errors captured by the Treblle SDK. When Treblle captures an error we will show it in the problems tab of a project
+  title: Problems
+  description: Understand and manage errors captured by the Treblle SDK within the Problems tab of a project.
 ---
 
-import { Schema } from "astro-seo-schema"
+Treblle identifies both codebase and non-codebase errors captured by the Treblle SDK. For instance, it can detect misspellings that might affect your API documentation. 
 
-<Schema
-  item={{
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: "The Problems tab",
-    description: "Problems are code base errors captured by the Treblle SDK. When Treblle captures an error we will show it in the problems tab of a project.  Treblle captures both codebase errors and non-codebase errors for example, Treblle can check misspelling that might cause problems in your API documentations.  📞 CONNECT: 🌍 Website - https://treblle.com 😺 GitHub - https://github.com/Treblle 🐦 Twitter - https://twitter.com/treblleapi 👍🏽 Facebook - https://facebook.com/treblle 📪 Email - info@treblle.com  #treblle #projects #API #development",
-    thumbnailUrl: "https://i.ytimg.com/vi/tqjh7a_CsSI/default.jpg",
-    uploadDate: "2022-11-29T11:50:58Z",
-    duration: "PT1M47S",
-    embedUrl: "https://www.youtube.com/embed/tqjh7a_CsSI",
-    interactionCount: "177"
-  }}
+
+## Steps to see Problems:
+
+1. Click on **Problems** in the left navigation bar.
+
+    <img
+      src="/platform/problems/problems.png"
+      width="200"
+      style={{ borderRadius: "8px" }}
+    />
+
+2. The Problem dashboard will display all the problems.
+
+    <img
+      src="/platform/problems/overview.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
+
+
+## Information Displayed
+
+The Problems tab provides the following details for each issue:
+
+- **HTTP Method:** Associated with the problem (if applicable).
+- **Severity Level:** Categorized as Low, Medium, or High.
+- **Occurrences:** Number of times this problem has occurred in the project.
+- **Total Problems Count**
+- **Error Description**
+- **Graph:** Displays "Requests with Problems" for a selected period.
+
+<img
+  src="/platform/problems/dashboard.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
 />
 
-<iframe class="w-full aspect-[16/9]" src="https://www.youtube.com/embed/tqjh7a_CsSI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+## Problem Severity
 
-Problems are code base errors captured by the Treblle SDK. When Treblle captures an error we will show it in the problems tab of a project
+Treblle performs 15 security checks on every API request and assigns one of three threat levels:
 
-Treblle captures both codebase errors and non-codebase errors for example, Treblle can check misspelling that might cause problems in your API [documentations](/treblle/api-documentation/).
+- **Low**
+- **Medium**
+- **High**
 
-When Treblle notice something that is not normal for like you were having an average load time of **50ms** and after a while you start getting a load time of **500ms**, Treblle will create a new problem in the problems tab to let you know of this change.
+## Viewing Problems in Requests
 
-You can see at a glance the following information about a problem:
+To inspect specific requests with problems, you can:
 
-- The HTTP method of the problem (if applicable)
-- The problem [severity](#problem-severity) level
-- The number of occurrences of that problem in your project
-- The status of the problem - closed or open
+- **Filter** requests using the **Filter** option ( Requests, User Information, Security & Compliance, Metadata ).
+- **Sort** requests using the **SORT BY** option ( Created at, Path, Threat level, Load time ).
+- Toggle between table or list views for convenience.
 
-## Problem severity
-
-A problem in Treblle can have one of the following severity:
-
-- Low
-- Medium
-- High
-
-## Close a problem
-
-If you want to close a problem in the **Problems** tab, click on the dropdown menu in the top-right corner of the problem and click on **Mark as closed**. A confirmation modal will appear for you to click on **Confirm** if you want to proceed.
-
-## Filters
-
-You can filter the endpoints in the **Problems** tab of a project by clicking on the **Filter** button to access the filters drawer for endpoints.
-
-In the filters drawer, you filter endpoints by:
-
-- Is resolved: either, yes or no
-- HTTP method
-- Group
-- [Endpoint](/treblle/endpoints/)
-- Severity
-
-Click on the **Filter** button to apply the filters you selected.
+  <img
+    src="/platform/problems/filter.png"
+    width="500"
+    style={{ borderRadius: "8px" }}
+  />
