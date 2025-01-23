@@ -1,106 +1,106 @@
 ---
-title: Endpoints
-description: Endpoints are used to represent a part of your API that can be accessed
+title: "Endpoints"
 ---
 
-import { Schema } from "astro-seo-schema"
+Endpoints in Treblle represent the URIs that expose specific parts of your API, facilitating communication via requests. 
 
-<Schema
-  item={{
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: "Treblle - Autodection and grouping of API Endpoints",
-    description: "A quick walkthrough where Vedran shows how you can benefit from Treblle's feature, where we autodetect and group your API's endpoints, and give observability and analytics data about them.  📞 CONNECT: 🌍 Website - https://treblle.com 😺 GitHub - https://github.com/Treblle 🐦 Twitter - https://twitter.com/treblleapi 👍🏽 Facebook - https://facebook.com/treblle 📪 Email - info@treblle.com  #treblle #APIObservability #API",
-    thumbnailUrl: "https://i.ytimg.com/vi/4SdepMNHOl8/default.jpg",
-    uploadDate: "2024-01-22T12:02:55Z",
-    duration: "PT2M49S",
-    embedUrl: "https://www.youtube.com/embed/4SdepMNHOl8",
-    interactionCount: "50"
-  }}
+Once you integrate your API with Treblle automatically identifies and organizes these endpoints in the **Endpoints** tab.
+
+## Steps to See Endpoints:
+
+1. Click on **Endpoints** in the left navigation bar.
+
+    <img
+      src="/platform/endpoints/endpoint.png"
+      width="200"
+      style={{ borderRadius: "8px" }}
+    />
+
+2. The endpoint dashboard will display all the available endpoints.
+
+    <img
+      src="/platform/endpoints/overview.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
+
+## Check Endpoints
+
+For each endpoint, you can access:
+
+- **HTTP Verb**: The type of request, e.g., GET, POST.
+- **Last Request**: Timestamp of the most recent request.
+- **Total Requests**: Total number of requests received.
+- **Description**: Brief details about the endpoint.
+- **Average Load Time**: The endpoint's average response time.
+- **Requests Graph**: A daily visualization of requests made to the endpoint.
+
+<img
+  src="/platform/endpoints/dashboard.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
 />
 
-<iframe class="w-full aspect-[16/9]" src="https://www.youtube.com/embed/4SdepMNHOl8?si=oKsK-IgjZdtQx-FL" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+### Viewing Requests
 
-Your API endpoints are the URIs that exposes a particular part of your API for communications via [requests](/treblle/requests/).
+To view requests made to a specific endpoint, You can:
 
-Once you have integrated your API with Treblle and your API start receiving requests, Treblle will automatically identify the endpoints in your API and aggregate them for you in the **Endpoints** tab of your project dashboard.
+- **Filter** requests using the **Filter** option ( Requests, User Information, Security & Compliance, Metadata ).
+- **Sort** requests using the **SORT BY** option ( Created at, Path, Threat level, Load time ).
+- Toggle between table or list views for convenience.
 
-For each endpoint in the **Endpoints** tab of a project dashboard, you see at a glance the follwoing information:
+<img
+  src="/platform/endpoints/filter.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
 
-- The HTTP verb of the endpoint e.g GET, POST, etc
-- The last time a request was made to the endpoint
-- The total number of requests the endpoint has received
-- The average load time of the endpoint
-- The number of problems the endpoint has
-- The number of requests the endpoint is receiving per minute
-- The [endpoint group](#endpoint-groups) the endpoint belongs to
-- A graph showing the requests the endpoint has received for the day
+## Endpoint Options
 
-## View requests
+Each endpoint has additional options accessible from the dropdown menu in the top-right corner:
 
-You can view the requests made to a particular endpoint in the **Endpoints** tab by clicking on the **View requests** link on the endpoint. Alternatively you can click on the dropdown menu on the top-right corner of an endpoint and click on **View requests**
+<img
+  src="/platform/endpoints/actions.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
 
-> You can view the API documentation for your project by clicking on the **Docs** link in a project's dashboard
+#### Add or Remove an Endpoint from API Docs
 
-## Add to docs
+ - **Add to Docs**: Select **INCLUDE IN DOCS** from the dropdown menu. This makes the endpoint and its details visible in the project's auto-generated API documentation.
 
-You can choose to add an endpoint to the auto-generated API docs by clicking on the dropdown menu on the top-right corner of an endpoint and then clicking **Add to docs**. A confirmation modal will appear for you to click on **Confirm** if you want to proceed.
+ - **Remove from Docs**: Select **REMOVE FROM DOCS** to hide the endpoint from the API documentation.
 
-> When you add an endpoint to your docs, the endpoint and its documentation will become visible to anyone reading the API documentation for a project.
+#### Mute or Unmute an Endpoint
 
-## Remove from docs
+ - **Mute**: Requests to the endpoint will no longer appear in your project, and alerts for that endpoint will stop. Click Mute in the dropdown menu to enable this.
 
-Once an endpoint is already in your project's API documentations, you can remove it from the API documentation by clicking on the dropdown menu on the top-right corner of the endpoint and click on **Remove from docs**. A confirmation modal will appear for you to click on **Confirm** if you want to proceed.
+ - **Unmute**: To re-enable the visibility of requests and alerts for a muted endpoint, click Unmute in the dropdown menu.
 
-> Once you remove an endpoint from the API documentation of your project, it will no longer be visible to anyone reading the API documentation for that project
+#### Add an Alias to an Endpoint
 
-## Mute an endpoint
+ - Click on **EDIT** to assign the endpoint an alias (an alternative name) to make it easier to find during filtering.
 
-> In Treblle, when you mute an endpoint, requests made to that endpoint will no longer be visible anywhere on your Treblle project. Also, you will not get alerts when something goes wrong with the muted endpoint.
+ - Example:
+     For the endpoint `articles/{articleUuid}/favorite`:
+       - **Alias Name**: Article Favoriting
+       - **Short Description**: Marks an article as a favorite for the user.
 
-To mute an endpoint, click on the dropdown menu on the top-right corner of the endpoint and click on the **Mute** button. A confirmation modal will appear for you to click on **Confirm** if you want to proceed.
+     <img
+       src="/platform/endpoints/allias.png"
+       width="500"
+       style={{ borderRadius: "8px" }}
+     />
 
-## Unmute an endpoint
 
-> In Treblle, when you unmute a muted endpoint, you will be able to see all the requests from that endpoint again and get alerts when something goes wrong on any of them.
+#### Delete an Endpoint
 
-To unmute a muted endpoint, click on the dropdown menu on the top-right corner of the endpoint and click on the **Unmute** button. A confirmation modal will appear for you to click on **Confirm** if you want to proceed.
+ - Remove the endpoint from the project by selecting **Delete** in the dropdown menu. 
 
-## Add alias to an endpoint
+ - Deleting an endpoint also removes it from the API documentation and disassociates all related requests.
 
-You can give a particular endpoint an alias - which is another name you can use when filtering for that endpoint
+## Endpoint Groups
 
-## Endpoint groups
+ - Treblle automatically organizes endpoints into groups based on their paths. 
 
-Treblle automatically groups your endpoints. For example if you have two endpoints `/users/:id` and `/users/verify`, Treblle will group then under the `users` endpoint group. This makes it easy to [filter](#filters) for endpoints by groups.
-
-## Edit endpoint group
-
-If you want to change the group an endpoint was automatically placed in by Treblle, you can click on the endpoint dropdown on the top-right corner of the endpoint and click on **Edit group**. You will be presented with a modal with a box to select a new group to place the endpoint. Click on **Save changes** when you are done.
-
-Alternatively in the same modal you can create a new endpoint group by clicking on the **Create new group** button, you will then be presented with a text box to enter the new group name. Click on **Save changes** when you are done.
-
-## Delete endpoint
-
-> When you delete an endpoint in your Treblle project dashboard, Treblle will dissasociate any requests that belongs to that endpoint and the endpoint will also be removed from the API documentation of your project
-
-To delete an endpoint, click on the endpoint dropdown on the top-right corner of the endpoint and click on **Delete**. A confirmation modal will appear for you to click on **Confirm** if you want to proceed.
-
-## Filters
-
-You can filter the endpoints in the **Endpoints** tab of a project by clicking on the **Filter** button to access the filters drawer for endpoints.
-
-In the filters drawer, you filter endpoints by:
-
-- Has problems? - for endpoints having problems or not
-- HTTP method
-- [Endpoint group](#endpoint-groups)
-- [Muted](#mute-an-endpoint) - for endpoints muted or not
-- Included in docs - for endpoints included in the API documentation or not
-- Sort by - You can also sort endpoints by Name, number or requests, load time, or RPM(Requests per minute)
-
-Click on the **Filter** button to apply the filters you selected.
-
-## Export filtered endpoints
-
-Once you've filtered your endpoints, you can export the filtered endpoints to CSV by clicking on the **Export results to CSV** button on the bottom of the filters drawer.
+ - For example, `/users/:id` and `/users/verify` are grouped under the **users** group to facilitate filtering and management.
