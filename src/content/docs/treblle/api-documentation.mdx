@@ -4,36 +4,132 @@ description: Keep your focus on building and delivering amazing API experiences,
 image: /docs.png
 ---
 
-import { Schema } from "astro-seo-schema"
+Treblle auto-generates API documentation in real-time, ensuring accuracy and up-to-date information for every release. 
 
-<Schema
-  item={{
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: "Treblle API Documentation Autogenerating API docs",
-    description: "A quick walkthrough where Vedran shows how you can make use of Treblle's autogenerating API Docs product.  📞 CONNECT: 🌍 Website - https://treblle.com 😺 GitHub - https://github.com/Treblle 🐦 Twitter - https://twitter.com/treblleapi 👍🏽 Facebook - https://facebook.com/treblle 📪 Email - info@treblle.com  #treblle #apidocumentation #API",
-    thumbnailUrl: "https://i.ytimg.com/vi/P3oBAtBtRkQ/default.jpg",
-    uploadDate: "2024-01-22T12:30:58Z",
-    duration: "PT3M24S",
-    embedUrl: "https://www.youtube.com/embed/P3oBAtBtRkQ",
-    interactionCount: "905"
-  }}
+It includes details such as available endpoints, authentication methods, request and response formats, and other essential technical specifications required to successfully integrate and use the API.
+
+## How to View API Docs
+
+1. Click on **API Docs** in the left navigation bar.
+
+   <img
+     src="/platform/api-documentation/api-documentation.png"
+     width="200"
+     style={{ borderRadius: "8px" }}
+   />
+
+2. The API Docs Overview will display the following:
+
+    <img
+      src="/platform/api-documentation/docs-dashboard.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+   />
+
+ - **Load time**: Time it takes to load the API data.
+ - **Response size**: Size of the API responses.
+ - **Base URL**: The base URL for your API.
+ - **[API score](https://docs.treblle.com/treblle/api-governance/)**: A score that represents the health and quality of your API.
+
+    <img
+      src="/platform/api-documentation/api-score.png"
+      width="400"
+      style={{ borderRadius: "8px" }}
+   />
+
+ - **Format**: The format of the API (e.g., JSON).
+ - **Total number of endpoints**: Total count of API endpoints.
+ - **API settings**: Includes API details, invite members, API ID, and SDK token.
+ - **[API catalog](https://docs.treblle.com/features/api-catalog/)**: A repository to publish and manage API documentation for collaboration without granting full API access.
+
+    <img
+      src="/platform/api-documentation/api-catalog.png"
+      width="400"
+      style={{ borderRadius: "8px" }}
+    />
+
+## Authentication
+
+Treblle uses standardized authentication to integrate with client libraries. 
+
+To authenticate your requests, provide the following details:
+
+- **Type:** Specify the authentication method (e.g., Bearer Token, API Key).
+- **Value:** Provide the authentication value.
+- **Location:** Indicate where the authentication should be applied (e.g., Header, Query Parameter).
+
+   <img
+     src="/platform/api-documentation/authentication.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+## OpenAPI Specification
+
+Treblle auto-generates API documentation with OpenAPI Specification (OAS) support for every project. Supported formats include JSON and YAML.
+
+To open the documentation in Swagger, click the **Open in Swagger** button on the OpenAPI Specification page.
+
+<img
+  src="/platform/api-documentation/openapi.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
 />
 
-<iframe class="w-full aspect-[16/9]" src="https://www.youtube.com/embed/P3oBAtBtRkQ?si=o7AVaqhKbGGeOPt0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-For every project you have on Treblle, an auto-generated API documentation is made with <a href="https://swagger.io/specification/" target="_blank">Open API Specification</a> support.
+:::note
+A new OpenAPI Specification URL is generated each time you visit the documentation page. This URL is valid for one hour and expires afterward.
+:::
 
-To access the API documentation of a project, on the project dashboard, click on **Docs** of the top-right hand corner of the dashboard tabs.
+## Endpoints
 
-## Open in Swagger
+Access all your API endpoints in the left section of the documentation.
 
-You can open your API documentation in Swagger by clicking on the **Open in Swagger** button on your API documentation page.
+To add or remove an endpoint, please refer to the [Endpoint Documentation](https://docs.treblle.com/treblle/endpoints/).
 
-## Add endpoints
 
-See [Add to docs](/treblle/endpoints/#add-to-docs) section of the [Endpoints](/treblle/endpoints/) documentation.
+<img
+  src="/platform/api-documentation/endpoints.png"
+  width="200"
+  style={{ borderRadius: "8px" }}
+/>
 
-## Remove endpoints
+## Alfred AI 
 
-See [Remove from docs](/treblle/endpoints/#remove-from-docs) section of the [Endpoints](/treblle/endpoints/) documentation.
+**Alfred** is Treblle's assistant that helps with your API workflows by using your API documentation to provide real-time answers.
+
+:::note
+Alfred only accesses your API documentation and does not store or analyze your data. It helps improve your documentation and integration process based on your current API setup.
+:::
+
+### Steps to Use Alfred
+
+1. Click on **Alfred** to open the interface.
+
+    <img
+      src="/platform/api-documentation/alfred.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
+
+2. Use predefined prompts or ask questions to:
+
+   Example: **Help me get started with this API**.
+
+   <img
+    src="/platform/api-documentation/alfred-example.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+   />
+
+## Resources
+
+You can upload PDFs and other information in the Resources section for additional context.
+
+   <img
+    src="/platform/api-documentation/resources.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+   />
+
+---
