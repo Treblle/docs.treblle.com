@@ -48,23 +48,23 @@ Treblle auto-generates API documentation in real-time. It includes details such 
 
 ## Authentication
 
-Treblle uses standardized authentication to integrate with client libraries. 
+Authentication is vital for verifying the identity of clients accessing the API. With the correct authentication method, you can ensure that only authorized users can interact with the API endpoints.
+When making API requests, you'll need to provide the following authentication details:
 
-To authenticate your requests, provide the following details:
+- **Type:** Specifies the authentication method (e.g., Bearer Token, API Key)
+- **Value:** The actual authentication credentials
+- **Location:** Where to include the authentication (e.g., Headers, Query Parameters)
 
-- **Type:** Specify the authentication method (e.g., Bearer Token, API Key).
-- **Value:** Provide the authentication value.
-- **Location:** Indicate where the authentication should be applied (e.g., Header, Query Parameter).
-
-   <img
-     src="/platform/api-documentation/authentication.png"
-     width="800"
-     style={{ borderRadius: "8px" }}
-   />
+<img
+  src="/platform/api-documentation/authentication.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
 
 ## OpenAPI Specification
 
-Treblle auto-generates API documentation with OpenAPI Specification (OAS) support for every project. Supported formats include JSON and YAML.
+OpenAPI Specification (OAS) is a standard for describing APIs. When it comes to API documentation, OpenAPI spec is a must for every API. 
+Under API documentation, Treblle auto-generates API documentation. We support JSON and YAML formats.
 
 To open the documentation in Swagger, click the **Open in Swagger** button on the OpenAPI Specification page.
 
@@ -81,7 +81,7 @@ A new OpenAPI Specification URL is generated each time you visit the documentati
 
 ## Endpoints
 
-Access all your API endpoints in the left section of the documentation.
+Under API documentation, you can also access all your API endpoints. This lets you quickly navigate to the endpoint you want to work with.
 
 To add or remove an endpoint, please refer to the [Endpoint Documentation](https://docs.treblle.com/treblle/endpoints/).
 
@@ -94,7 +94,8 @@ To add or remove an endpoint, please refer to the [Endpoint Documentation](https
 
 ## Alfred AI 
 
-**Alfred** is Treblle's assistant who helps with your API workflows by using your API documentation to provide real-time answers.
+You will find a cute AI assistant jumping around on the API Documentation page. That's **Alfred**.
+**Alfred** is Treblle's assistant who helps with your API workflows by using your API documentation to provide real-time answers. It makes your integrations faster.
 
 :::note
 Alfred only accesses your API documentation and does not store or analyze your data. Based on your current API setup it helps improve your documentation and integration process.
@@ -130,4 +131,5 @@ For additional context, you can upload PDFs and other information in the Resourc
     style={{ borderRadius: "8px" }}
    />
 
+The next time you work with an API, ask for its Treblle generated API documentation and the AI assistant Alfred.
 ---
