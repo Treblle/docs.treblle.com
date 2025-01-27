@@ -1,50 +1,79 @@
 ---
 title: Masking Fields
-description: Treblle allows you to mask senstive data before it even leaves your server
+description: Treblle allows you to mask sensitive data before it even leaves your server
 ---
 
-Masking fields ensure certain sensitive data are removed before being sent to Treblle.
+Masking fields ensures that sensitive data is masked before being sent to Treblle. 
 
-To make sure masking is done before **any data** leaves your server we built it into all our SDKs.
+This feature is integrated into all [Treblle SDKs](https://docs.treblle.com/integrations/) to ensure data masking happens at the programming level before any API request leaves your server.
 
-This means data masking is super fast and happens on a programming level before the API request is sent to Treblle. You can customize exactly which fields are masked when you're integrating the SDK.
+### How It Works
+- **Customizable Masking**: You can define which fields should be masked when integrating the SDK.
+   
+   Example: To mask a field named `email`, you must include it in your masking configuration. 
+   
+   Any instance of the `email` field in your API request or response will be replaced with `*****` or the equivalent number of stars.
 
-Once you define a field you want to mask, our SDKs will try to find all instances of that field and replace the content with a bunch stars (\*\*\*\*).
+- **Replacement Mechanism**: Once a field is defined for masking, all instances of that field's value are replaced with star characters (*). The number of stars corresponds to the length of the original value.
 
-We'll look for the field name inside request and response headers as well as request and response data. Masking works across arrays of any depth, objects and keys.
+  Example: If the `username` field contains the value `john_doe`, it will be replaced with `********` (8 stars).
 
-When we're masking data we'll always replace the value of field with the exact number of star characters.
 
-For example, if you're masking the `password` field and the user types in the password of `"12345678"`, we'll replace that with exactly 8 **star(\*) characters**. This way you'll know exactly how many characters the user has entered.
+- **Scope of Masking**: Masking is applied across:
 
-## Masking Authorization header
+  - Request and response headers
 
-One more special scenario is masking a field with the name of Authorization. In the API world, the Authorization parameter is usually found in request headers.
+    Example: Masking the `Authorization` header will ensure sensitive tokens or keys are replaced with stars.
 
-It contains information about the type of authorization you're using as well as the API key issued to your user.
+  - Request and response data
 
-An example would be: `"Bearer lsGPLl4k6Vc4J0VhnFaMBqetNtn1ofsB"` . When you specify you want to mask the authorization field we will only mask the API key value so in this case it would look something like this: `"Bearer ********************************"`. This way you'll still know what type of authentication the user has specified as well as how long the key was.
+    Example: A `credit_card` field in the request payload with the value `4111111111111111` will be replaced with `****************`.
 
-## Fields masked by default
+  - Arrays of any depth
+    
+    Example: An array like `["123", "456"]` with masked fields will become `["***", "***"]`.
 
-To get you started with some super sensitive data, by default all Treblle SDKs will mask the following fields:
+  - Object keys and values
+    
+    Example: An object `{ "api_key": "abc123" }` will become `{ "api_key": "******" }`.
 
-- password
-- pwd
-- secret
-- password_confirmation
-- passwordConfirmation
-- cc
-- card_number
-- cardNumber
-- ccv
-- ssn
-- credit_score
-- creditScore
-- api_key
+### Special Case: Authorization Header
 
-## Custom masked fields
+Only the API key value is masked when masking the `Authorization` field. 
 
-On top of the fields that get masked by default, all Treblle SDKs gives you the ability to define your own custom list of fields to be masked when integrating them in your programming language or framework.
+For example:
 
-For more information on how to do that for your programming language or framework specifically, please take a look at the documentation for that SDK in the **integrations** section of the docs.
+```
+Bearer lsGPLl4k6Vc4J0VhnFaMBqetNtn1ofsB
+```
+
+Will be masked as:
+
+```
+Bearer ********************************
+```
+
+This ensures you retain the authentication type and key length without exposing the actual API key.
+
+### Default Masked Fields
+
+By default, the following sensitive fields are masked in all Treblle SDKs:
+
+- `password`
+- `pwd`
+- `secret`
+- `password_confirmation`
+- `passwordConfirmation`
+- `cc`
+- `card_number`
+- `cardNumber`
+- `ccv`
+- `ssn`
+- `credit_score`
+- `creditScore`
+- `api_key`
+
+### Custom Masked Fields
+You can define additional fields to be masked according to your application's specific requirements. 
+
+For instructions on customizing masked fields for your programming language or framework, refer to the [SDK documentation](https://docs.treblle.com/integrations/) in the integrations section.
