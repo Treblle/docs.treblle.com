@@ -1,66 +1,62 @@
 ---
 title: API Security
-description: 'Keep your APIs safe with automated API Security. Treblle makes 15 security checks on every API request and gives it one of three threat levels: Low, Medium, or High.'
+description: 'Keep your APIs safe with automated API Security. Treblle makes 13 security checks on every API request and gives it one of three threat levels: Low, Medium, or High.'
 image: /security.png
 ---
 
-Treblle performs 15 automated security checks on every API request and assigns a **Threat Level** based on detected vulnerabilities. 
+Treblle performs 13 automated security checks on every API request and assigns a **Threat Level** based on detected vulnerabilities. 
 
-Each request is analyzed and categorized into three threat levels: **Low**, **Medium**, or **High**. By default, requests without detected threats are marked as **Low Threat Level**.
+The system analyzes each request into three threat levels: Low, Medium, or High. By default, it marks requests without detected threats as Low Threat Level.
 
 ## Steps to view API Security
 
-Go to the **Request** tab in the left navigation bar.
+1. You can go to the **Request** tab in the left navigation bar.
 
-  <img
-    src="/platform/api-security/request.png"
-    width="200"
-    style={{ borderRadius: "8px" }}
-  />
+    <img
+      src="/platform/api-security/request.png"
+      width="200"
+      style={{ borderRadius: "8px" }}
+    />
 
-You can select a specific request or use filters to narrow down requests by **Security Threat Level** (Low, Medium, High).
+2. You can select a specific request or use filters to narrow down requests by **Security Threat Level** (Low, Medium, High).
 
-  <img
-    src="/platform/api-security/filter.png"
-    width="800"
-    style={{ borderRadius: "8px" }}
-  />
+    <img
+      src="/platform/api-security/filter.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
 
-### Viewing Security Details
+3. Click on any request to open its detailed view on the right side of the dashboard. Go to the **Security** tab.
 
-Click on any request to open its detailed view on the right side of the dashboard.
+    <img
+      src="/platform/api-security/security.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
 
-  <img
-    src="/platform/api-security/security.png"
-    width="800"
-    style={{ borderRadius: "8px" }}
-  />
+4. This security audit graph shows the percentage of passed and failed checks and the total number of requests categorized by threat level (Low, Medium, High).
 
-Go to the **Security** tab to see:
+    <img
+      src="/platform/api-security/overall.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
 
-This is a security audit graph showing the percentage of passed and failed checks, along with the total number of requests categorized by threat level (Low, Medium, High).
+5. The overall security status of the API shows the 13 security checks with threat level.
 
-  <img
-    src="/platform/api-security/overall.png"
-    width="800"
-    style={{ borderRadius: "8px" }}
-  />
+    <img
+      src="/platform/api-security/status.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
 
-The overall security status of the API shows the 15 security checks with threat level.
+ 6. When you click on any threat level, you will see details about it, helping you understand how to improve it.
 
-  <img
-    src="/platform/api-security/status.png"
-    width="800"
-    style={{ borderRadius: "8px" }}
-  />
-
- When you click on any threat level, you will see details about it, helping you understand how to improve it.
-
-  <img
-    src="/platform/api-security/description.png"
-    width="800"
-    style={{ borderRadius: "8px" }}
-  />
+    <img
+      src="/platform/api-security/description.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
 
 ## How Threat Levels Are Calculated
 
@@ -81,7 +77,7 @@ Detected issues include:
 
 - **Rate Limiting:** Verifies the presence of `x-ratelimit-*` headers to prevent abusive behavior.
 
-- **Content Labeling:** Ensures the `Content-Type` header is set to `application/json`.
+- **Content Labeling:** Ensures the `Content-Type` header uses `application/json.`
 
 - **MIME Sniffing Protection:** Confirms the `X-Content-Type-Options` header is set to `nosniff`.
 
@@ -91,7 +87,7 @@ Detected issues include:
 
 - **Security Policies:** Checks for a `Content-Security-Policy` header. CSP helps prevent various attacks, including cross-site scripting (XSS) and data injection attacks.
 
-- **Content-Type Specification:** Confirms that the `Accept` header is set to `application/json`.
+- **Content-Type Specification:** Confirms that the `Accept` header specifies `application/json.`
 
 - **Method Limiting:** Verifies the presence of the `Allow` header to specify allowed HTTP methods.
 
@@ -110,6 +106,6 @@ Detected issues include:
 
 - **IP Reputation:** Evaluate the reputation of the request's IP address for potential malicious activity.
 
-- **Secure Connection:** Confirms if requests are made using HTTPS instead of HTTP.
+- **Secure Connection:**  Confirms that requests use HTTPS instead of HTTP.
 
 Treblle helps you monitor and secure your API traffic in real time, ensuring a safer API ecosystem.

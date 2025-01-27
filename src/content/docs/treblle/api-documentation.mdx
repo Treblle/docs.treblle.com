@@ -1,39 +1,134 @@
 ---
 title: API Documentation
-description: Keep your focus on building and delivering amazing API experiences, instead of manuall writing API docs with every new release.
+description: Keep your focus on building and delivering amazing API experiences instead of manually writing API docs for every new release.
 image: /docs.png
 ---
 
-import { Schema } from "astro-seo-schema"
+Treblle auto-generates API documentation in real-time. It includes details such as available endpoints, authentication methods, request and response formats, and other essential technical specifications required to integrate and use the API successfully.
 
-<Schema
-  item={{
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: "Treblle API Documentation Autogenerating API docs",
-    description: "A quick walkthrough where Vedran shows how you can make use of Treblle's autogenerating API Docs product.  📞 CONNECT: 🌍 Website - https://treblle.com 😺 GitHub - https://github.com/Treblle 🐦 Twitter - https://twitter.com/treblleapi 👍🏽 Facebook - https://facebook.com/treblle 📪 Email - info@treblle.com  #treblle #apidocumentation #API",
-    thumbnailUrl: "https://i.ytimg.com/vi/P3oBAtBtRkQ/default.jpg",
-    uploadDate: "2024-01-22T12:30:58Z",
-    duration: "PT3M24S",
-    embedUrl: "https://www.youtube.com/embed/P3oBAtBtRkQ",
-    interactionCount: "905"
-  }}
+## How to View API Docs
+
+1. Click on **API Docs** in the left navigation bar.
+
+   <img
+     src="/platform/api-documentation/api-documentation.png"
+     width="200"
+     style={{ borderRadius: "8px" }}
+   />
+
+2. The API Docs Overview will display the following:
+
+    <img
+      src="/platform/api-documentation/docs-dashboard.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+   />
+
+ - **Load time**: Time it takes to load the API data.
+ - **Response size**: Size of the API responses.
+ - **Base URL**: The base URL for your API.
+ - **[API score](https://docs.treblle.com/treblle/api-governance/)**: A score that represents the health and quality of your API.
+
+    <img
+      src="/platform/api-documentation/api-score.png"
+      width="400"
+      style={{ borderRadius: "8px" }}
+   />
+
+ - **Format**: The format of the API (e.g., JSON).
+ - **Total number of endpoints**: Total count of API endpoints.
+ - **API settings**: Includes API details, invite members, API ID, and SDK token.
+ - **[API catalog](https://docs.treblle.com/features/api-catalog/)**: A repository to publish and manage API documentation for collaboration without granting full API access.
+
+    <img
+      src="/platform/api-documentation/api-catalog.png"
+      width="400"
+      style={{ borderRadius: "8px" }}
+    />
+
+## Authentication
+
+Authentication is vital for verifying the identity of clients accessing the API. With the correct authentication method, you can ensure that only authorized users can interact with the API endpoints.
+When making API requests, you'll need to provide the following authentication details:
+
+- **Type:** Specifies the authentication method (e.g., Bearer Token, API Key)
+- **Value:** The actual authentication credentials
+- **Location:** Where to include the authentication (e.g., Headers, Query Parameters)
+
+<img
+  src="/platform/api-documentation/authentication.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
 />
 
-<iframe class="w-full aspect-[16/9]" src="https://www.youtube.com/embed/P3oBAtBtRkQ?si=o7AVaqhKbGGeOPt0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+## OpenAPI Specification
 
-For every project you have on Treblle, an auto-generated API documentation is made with <a href="https://swagger.io/specification/" target="_blank">Open API Specification</a> support.
+OpenAPI Specification (OAS) is a standard for describing APIs. When it comes to API documentation, OpenAPI spec is a must for every API. 
+Under API documentation, Treblle auto-generates API documentation. We support JSON and YAML formats.
 
-To access the API documentation of a project, on the project dashboard, click on **Docs** of the top-right hand corner of the dashboard tabs.
+To open the documentation in Swagger, click the **Open in Swagger** button on the OpenAPI Specification page.
 
-## Open in Swagger
+<img
+  src="/platform/api-documentation/openapi.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
 
-You can open your API documentation in Swagger by clicking on the **Open in Swagger** button on your API documentation page.
 
-## Add endpoints
+:::note
+A new OpenAPI Specification URL is generated each time you visit the documentation page. This URL is valid for one hour and expires afterward.
+:::
 
-See [Add to docs](/treblle/endpoints/#add-to-docs) section of the [Endpoints](/treblle/endpoints/) documentation.
+## Endpoints
 
-## Remove endpoints
+Under API documentation, you can also access all your API endpoints. This lets you quickly navigate to the endpoint you want to work with.
 
-See [Remove from docs](/treblle/endpoints/#remove-from-docs) section of the [Endpoints](/treblle/endpoints/) documentation.
+To add or remove an endpoint, please refer to the [Endpoint Documentation](https://docs.treblle.com/treblle/endpoints/).
+
+
+<img
+  src="/platform/api-documentation/endpoints.png"
+  width="200"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Alfred AI 
+
+You will find a cute AI assistant jumping around on the API Documentation page. That's **Alfred**.
+**Alfred** is Treblle's assistant who helps with your API workflows by using your API documentation to provide real-time answers. It makes your integrations faster.
+
+:::note
+Alfred only accesses your API documentation and does not store or analyze your data. Based on your current API setup it helps improve your documentation and integration process.
+:::
+
+### Steps to Use Alfred
+
+1. Click on **Alfred** to open the interface.
+
+    <img
+      src="/platform/api-documentation/alfred.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
+
+2. Use predefined prompts or ask questions to:
+
+   Example: **Help me get started with this API**.
+
+   <img
+    src="/platform/api-documentation/alfred-example.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+   />
+
+## Resources
+
+For additional context, you can upload PDFs and other information in the Resources section.
+
+   <img
+    src="/platform/api-documentation/resources.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+   />
+
+The next time you work with an API, ask for its Treblle generated API documentation and the AI assistant Alfred.
