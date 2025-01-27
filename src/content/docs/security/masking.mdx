@@ -1,16 +1,16 @@
 ---
 title: Masking Fields
-description: Treblle allows you to mask senstive data before it even leaves your server
+description: Treblle allows you to mask sensitive data before it even leaves your server
 ---
 
-Masking fields ensure that sensitive data is masked before being sent to Treblle. 
+Masking fields ensures that sensitive data is masked before being sent to Treblle. 
 
-This feature is integrated into all [Treblle SDKs](https://docs.treblle.com/integrations/) to ensure data masking happens at the programming level, before any API request leaves your server.
+This feature is integrated into all [Treblle SDKs](https://docs.treblle.com/integrations/) to ensure data masking happens at the programming level before any API request leaves your server.
 
 ### How It Works
 - **Customizable Masking**: You can define which fields should be masked when integrating the SDK.
    
-   Example: To mask a field named `email`, you have to include it in your masking configuration. 
+   Example: To mask a field named `email`, you must include it in your masking configuration. 
    
    Any instance of the `email` field in your API request or response will be replaced with `*****` or the equivalent number of stars.
 
@@ -39,7 +39,7 @@ This feature is integrated into all [Treblle SDKs](https://docs.treblle.com/inte
 
 ### Special Case: Authorization Header
 
-When masking the `Authorization` field, only the API key value is masked. 
+Only the API key value is masked when masking the `Authorization` field. 
 
 For example:
 
