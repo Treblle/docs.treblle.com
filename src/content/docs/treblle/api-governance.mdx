@@ -1,115 +1,118 @@
 ---
 title: API Governance
-description: Treblle measures the quality of APIs to try to make sure that the API follows a standard set of best practices.
+description: Treblle measures the quality of APIs to ensure that the API follows a standard set of best practices.
 image: /governance.png
 ---
 
-import { Schema } from "astro-seo-schema"
+API governance in Treblle ensures your APIs follow industry standards and best practices. 
 
-<Schema
-  item={{
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: "Treblle API Governance",
-    description: "A quick walkthrough where Vedran shows how you can make use of the Treblle's API Score feature to up your API Governance game.  See more: https://treblle.com/product/api-governance  📞 CONNECT: 🌍 Website - https://treblle.com 😺 GitHub - https://github.com/Treblle 🐦 Twitter - https://twitter.com/treblleapi 👍🏽 Facebook - https://facebook.com/treblle 📪 Email - info@treblle.com  #treblle #apigovernance #API",
-    thumbnailUrl: "https://i.ytimg.com/vi/hBNNa8Gv_fs/default.jpg",
-    uploadDate: "2024-01-22T12:27:08Z",
-    duration: "PT3M14S",
-    embedUrl: "https://www.youtube.com/embed/hBNNa8Gv_fs",
-    interactionCount: "66"
-  }}
-/>
+It evaluates APIs across key areas, such as performance, security, design, and AI Readiness, and helps maintain compliance with GDPR, CCPA, and PCI regulations.
 
-<iframe class="w-full aspect-[16/9]" src="https://www.youtube.com/embed/hBNNa8Gv_fs?si=MOJ6QpxREJZl58o7" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+## Steps to view API Governance
 
-Treblle measures the quality of APIs to make sure that the API follows a standard set of best practices.
+1. Click on API Governance in the left navigation bar.
 
-Treblle measures your API Governance across 3 categories
+  <img
+    src="/platform/api-governance/governance.png"
+    width="250"
+    style={{ borderRadius: "8px" }}
+  />
 
-- [Performance](#performance)
-- [Security](#security)
-- [Quality](#quality)
+2. Overview of the API Governance dashboard.
 
-> To access the API Governance for a project, click on the **API Governance** tab of that project.
+  <img
+    src="/platform/api-governance/dashboard.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-## Performance
+## Governance Categories
 
-### Content encoding
+Treblle’s API governance measures your APIs across four main categories:
 
-Using content encoding on your API can reduce the payload size of your responses by 70 to 95 percent.
+  <img
+    src="/platform/api-governance/api-score.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-That means you save money on bandwidth and given you're returning a much more compressed and optimized payload it also means things load much faster for your end use.
+### AI Ready
 
-The implementation is dead simple. Return a [Content-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding) header with the value of gzip (the most common and widespread compression algorithm) and you’re done!
+AI Ready ensures your API is structured to allow easier integration with AI systems.
 
-### HTTP2/3 support
+The AI Ready category helps your API adhere to the following specifications:
 
-HTTP/2 comes with many performance originated features that enable your server to serve faster API responses.
+    - **Parameter Descriptions:** Checks if each parameter has descriptions 
+    - **Schema Types or Descriptions:** Checks if each schema has descriptions or types 
+    - **Operation ID:** Checks if each operation has an id
+    - **Response Descriptions:** Checks if each response has descriptions 
 
-Things like Multiplexing, Server push, Header compression and others.
+  <img
+    src="/platform/api-governance/ai-ready.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-HTTP/3 is even faster and more powerful mainly because it’s using a new networking protocol called QUIC versus the good old TCP.
+### Design
 
-You should upgrade your HTTP version to the latest one available or use cloud providers like Cloudflare or many of the API gateway that support the newest version of HTTP out of the box.
+The Design category checks your API's basic structure and usability, ensuring it follows common conventions for clear, easy-to-understand interactions. 
 
-### Average response size
+Here’s how Treblle evaluates your API design:
+ 
+    - **Contact Information**: Verifies the presence of contact details (name, email, URL).  
+    - **Operation Descriptions or Summaries**: Ensures that all operations have descriptions or summaries. 
+    - **Robust Responses**: This check ensures that the API returns more than just the standard `200 OK` response code and provides accurate status codes to reflect different operations' outcomes.
+    - **Examples Exist**: Ensures that endpoints include examples for parameters and responses to improve usability.  
+    - **Consistent Pluralization**: Ensures that the base endpoint uses plural nouns to represent groups of resources (e.g., `/users` vs `/user`).  
+    - **Consistent Noun Usage**: Ensures endpoints are described as nouns instead of verbs. For example, the POST method for endpoint `/user/{id}` vs. `/postUser/{id}`).
+    - **JSON Support**: Ensures the content-type header is set to `application/json` for consistent data format.  
+    - **Information Descriptions**: Verifies that each endpoint includes a description.
+    - **Rate Limiting**: This checks for rate-limiting headers (`rate limit`, `x-rate-limit`) to protect against abuse and ensure fair usage. 
+    - **Versioning**: To manage API changes without breaking existing integrations, we recommend URL-based versioning (`/v1`, `/v2`).  
 
-Average response size represents the amount of data you return on your API endpoints. As you might imagine the less data you return the faster your API is.
+  <img
+    src="/platform/api-governance/design.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-You should aim to keep your response below 100KB if possible.
+### Performance
 
-The fastest way to optimize your response sizes is to use pagination when returning large quantities of data, to optimize your response objects so they contain only the data that is need, and to use compression whenever possible.
+The Performance category ensures that your APIs are fast, reliable, and optimized for speed.
 
-### Average load time
+    - **Load Time**: Ensures responses are returned within an acceptable time frame (preferably under 500ms).  
+    - **Compression Support**: This checker determines whether compression `content-encoding` headers exist, speeding up data transmission and reducing packet loss.   
+    - **CDN Usage**: Checks for using Content Delivery Networks (CDN) to improve response time and distribution.  
+    - **HTTP2 Usage**: This function checks the base URL of the first entry in the servers section for the version of the HTTP server.
+    - **Cache Support**: Ensures the `cache-control` header is set to specify browser caching policies, including how resources are cached, where they are cached, and when they expire.
 
-The load time of your API is the most important performance metric on your API.
+  <img
+    src="/platform/api-governance/performace.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-It directly impacts the end user and the slower your API is the poorer the experience for the end user. In most cases the number one cause of longer load times are database related problems and optimizations.
+### Security
 
-So make sure you are optimizing your queries and returning only the data you need. You should aim to have an average load time below **150ms** for a good experience and even lower for an amazing experience.
+Security checks ensure your API is protected from common threats and follow industry-standard practices to secure data and access.  
 
-## Security
+Treblle assesses these critical aspects:
 
-### HTTPs support
+    - **Insecure Direct Object Reference (IDOR) Risks**: Ensures path parameters are correctly defined as strings with valid UUIDs, ULIDs, or Mongo ObjectIDs. 
+     - **Content Type Options**: The `X-Content-Type-Options` header is set to `nosniff` to prevent MIME sniffing attacks.
+    - **iFrame Embedding**: Verifies the presence of `X-Frame-Options` to protect against clickjacking attacks.  
+    - **Strict Transport Security (HSTS)**: Ensures the `Strict-Transport-Security` header is set to enforce HTTPS usage.    
+    - **Content Security Policy**: Ensures `Content-Security-Policy` headers are set to restrict resource loading from unauthorized sources.  
+    - **Operation Enforces Security Scheme**: Ensures that security schemes are defined for all operations to prevent unauthorized access.  
+    - **Authorization**: Ensures that the API implements proper authorization mechanisms to control access, including the presence of a `securitySchemes` object.
+    - **Secure URLs (HTTPs)**: Ensures requests require HTTPS for encrypted communication.  
+    - **Security Field Contains a Scheme**: Ensures the security field is not empty and includes proper definitions.
+    - **Global Security Field is Defined**: This checks whether the global security field is defined for the API.
 
-HTTPs uses an encryption protocol called TLS to encrypt communication between your end-users and your API.
+  <img
+    src="/platform/api-governance/security.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
-This means that simply by using HTTPs you are adding an additional layer of security to your API that protects your users and their data. HTTPs is the de-facto standard and you should definitely be using HTTPs.
-
-You can get an SSL certificate for free by using any of the major cloud providers or services like Cloudflare and Let’s encrypt.
-
-### Authentication
-
-Authentication is the simplest and most important thing you should do on your API.
-
-It allows you to secure your API, know who is accessing it and when and more importantly easily revoke access to anyone who is behaving as a bad actor.
-
-There are many different types of authentication on your API but the simplest and most common one is called: Bearer Authentication.
-
-To use Bearer authentication you should send a header of `Authorization` with the value of Bearer followed by a unique key that is used to identify a user.
-
-## Quality
-
-### JSON response
-
-Properly labeling your API is quite important because it instructs clients who are reading data from your API how to behave.
-
-When using JSON based REST APIs you should always return the proper headers to make sure that your content is always returned and requested in JSON format.
-
-To do that simply return a header of `Content-Type` with the value of `application/json`.
-
-### Version support
-
-Versioning your API allows you to make changes to your endpoints, responses, objects and structure without impacting current clients and users.
-
-The sooner you start using versioning on your API the less problems you’ll have in the future.
-
-The simplest way of versioning is to use URL based versioning which implies you will have URLs like `domain/api/v1/auth/login` or `domain/api/v2/auth/login`. You can easily differentiate between different versions of your API and use any of them at the same time.
-
-### Error ratio
-
-One of the most important things on your API is to not have errors and problems on your API.
-
-Not only does it degrade the user experience but also requires entire teams of developers to try to understand what is going on, who needs to fix the problem and deploy the changes to your API.
-
-Treblle tracks code-based errors and alerts your team when they happen - so the only thing you need to do is make sure you fix them.
+After evaluating these categories, Treblle assigns an API score out of 100, along with a grade ranging from **A** to **F**, to help you track the quality of your API governance.
