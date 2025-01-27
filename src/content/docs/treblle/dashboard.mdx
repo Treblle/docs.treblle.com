@@ -2,12 +2,12 @@
 title: Treblle Dashboard
 description: Get deeper visibility and control of your APIs. Build and maintain your APIs confidently as Treblle analyzes 40+ API-specific data points across every request.
 ---
-As soon as you have successfully integrated Treblle into your API, your API dashboard will start visualizing your API data, and you can stop worrying about getting into your logs. 
-The Treblle API Dashboard provides a comprehensive interface for monitoring and observing your API. 
+As soon as you have successfully integrated Treblle into your API, your dashboard will start visualizing your API data, and you can stop worrying about getting into your logs. 
+The Treblle Dashboard provides a comprehensive interface for monitoring and observing your API. 
 
 ## Dashboard Overview
 
-The main dashboard is a single access point to all of your API data. It offers a collection of visualizations that you can configure based on your monitoring needs. 
+The main dashboard is a single access point to your API data. It offers a collection of visualizations that you can configure based on your monitoring needs. 
 <img
     src="/platform/dashboard/api-dashboard.png"
     width="800"
@@ -30,8 +30,8 @@ Click the **Customize** button in the top right corner to select which widgets y
   />
 
 ### Key Metrics
-At the top of the dashboard are the fundamental metrics that give you an immediate snapshot of your API's maturity usage and help you answer 
-questions around the growth and usage numbers of your API.
+At the top of the dashboard are the fundamental metrics that give you an immediate snapshot of your API's maturity and usage and help you answer 
+questions about the growth and usage numbers of your API.
 
 <img
     src="/platform/dashboard/api-landscape.png"
@@ -40,14 +40,19 @@ questions around the growth and usage numbers of your API.
   />
 
 - **Total Requests**: Shows the total number of API requests with percentage change
-- **Requests per minute**: Real-time requests per minute monitoring to identify traffic spikes and usage patterns
-- **Total Endpoints**: Number of unique API endpoints being tracked, giving you visibility into your API's scope
-- **API Compliance**: Overall API compliance status to ensure your API follows best practices and standards
+- **Requests per minute**: Observing requests per minute to identify traffic spikes and usage patterns
+- **Total Endpoints**: Number of unique API endpoints. It will help you understand your API's scope
+- **API Compliance**: Overall API compliance status to constantly monitor if your API follows best practices and standards
 
 ### API score
-Along with the key metrics, Treblle also provides an API score that acts as a standard metric to compare all your APIs and have a baseline understanding of how well your API is built, maintained, and is performing.
+Along with the key metrics, Treblle also provides an API score that acts as a standard metric to compare all your APIs and have a baseline understanding of how well your API is built, maintained, and performing.
 When you're ready to investigate your API score and the metrics that make it up, you can head over to the [**Governance**](/content/docs/treblle/api-governance.mdx) section from the sidebar.
 
+<img
+    src="/platform/dashboard/api-score.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
 
 ### Recent Requests
 The **Recent Requests** section is a live feed of the most recent API requests showing the HTTP Method, Response Status, Endpoint Name, Load Time, Threat Level, and Timestamp.
@@ -63,7 +68,7 @@ Clicking on any request in the recent requests list opens a detailed view of tha
 ### Advanced Data Points
 As applications scale, the complexity of managing and debugging your API grows exponentially. You're not just dealing with more requests - you're handling users from different locations, multiple client versions, and various devices. 
 
-Imagine your API customer reports that users in Los Angeles can't access a specific endpoint. Finding the root cause could take hours of log searching without proper monitoring. With Treblle's location tracking, you can quickly filter requests by location and identify if there's a pattern of failures in that region.
+Imagine your API customer reports that users in Los Angeles can't access a specific endpoint. Finding the root cause could take hours of log searching without proper monitoring. With Treblle you can quickly filter requests by location and identify if there's a pattern of failures in that region.
 
 Similarly, when rolling out new API versions or deprecating old ones, knowing which app versions your clients are actively using is crucial. For instance, if you plan to remove support for an older API version, you can check if any clients are still dependent on it and proactively notify them before making the change.
 
@@ -74,14 +79,14 @@ Similarly, when rolling out new API versions or deprecating old ones, knowing wh
   />
 
 Here's what you can track:
-- **Top Countries & Cities**: See where your API requests are coming from across the globe. Perfect for debugging region-specific issues or planning infrastructure scaling
+- **Top Countries & Cities**: See where your API requests come from. Perfect for debugging region-specific issues or planning infrastructure scaling
 - **Average Response Size**: Monitor payload sizes. Useful for optimizing performance and managing bandwidth costs
 - **Client App Versions**: Track which versions of your client applications are using your API. Essential for managing version deprecation and ensuring smooth client updates
-- **Top Devices**: Understand what types of devices are accessing your API. Helpful when optimizing response formats for different platforms
+- **Top Devices**: Understand what devices are accessing your API. It is helpful when optimizing response formats for different platforms
 - **Top Customers**: Identify your power users and their usage patterns to provide better support and plan for scaling
 
 ### Time Windows and Comparisons
-Whether you're investigating a recent incident or preparing a monthly performance report, having the right time context is essential.
+Whether investigating a recent incident or preparing a monthly performance report, having the correct time context is essential.
 
 <img
     src="/platform/dashboard/time-window.png"
@@ -96,17 +101,11 @@ For example, if you notice a sudden spike in response times, you can quickly com
 - Preparing reports for stakeholders
 - Monitoring the impact of recent API changes
 
-<img
-    src="/platform/dashboard/compare.png"
-    width="800"
-    style={{ borderRadius: "8px" }}
-  />
-
 Choose from three time windows to view your API data:
 - **Last 24 hours**: Perfect for spotting immediate issues and monitoring day-to-day operations
 - **Last 7 days**: Ideal for identifying weekly patterns and recent trends
 - **Last 30 days**: Great for monthly reporting and long-term trend analysis
 
-Want to know if your API performance is improving? Toggle the **Compare** option on any graph to see how your current metrics stack up against the previous time period. This makes it easy to spot improvements or potential issues in your API's performance over time.
+Want to know if your API performance is improving? Toggle the **Compare** option on any graph to see how your current metrics stack up against the previous time period. This makes it easy to spot improvements or potential API performance issues over time.
 
 Remember, you can customize your dashboard to focus on the metrics that matter most to your team. Whether you're a developer debugging an issue, a product manager planning features, or a team lead preparing reports, Treblle provides the insights you need to maintain and improve your API.
