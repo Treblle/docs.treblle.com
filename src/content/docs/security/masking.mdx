@@ -37,6 +37,28 @@ This feature is integrated into all [Treblle SDKs](https://docs.treblle.com/inte
     
     Example: An object `{ "api_key": "abc123" }` will become `{ "api_key": "******" }`.
 
+#### Example: Basic Express API
+
+This is an example of a basic Express API where masking is applied to sensitive fields like `email` and `phone number` before sending the response.
+
+Masking these fields ensures that their values remain hidden but retain the original length in the API response.
+
+<img
+  src="/platform/masking-fields/code.png"
+  width="600"
+  style={{ borderRadius: "8px" }}
+/>
+
+##### Masked Data View in Treblle Platform
+
+Here is an image showing how the masked data appears on Treblle’s platform. Notice that the masked fields `email` and `phone_number` are displayed with stars, matching the length of the original data.
+
+<img
+  src="/platform/masking-fields/platform.png"
+  width="600"
+  style={{ borderRadius: "8px" }}
+/>
+
 ### Special Case: Authorization Header
 
 Only the API key value is masked when masking the `Authorization` field. 
@@ -53,7 +75,7 @@ Will be masked as:
 Bearer ********************************
 ```
 
-This ensures you retain the authentication type and key length without exposing the actual API key.
+This ensures you retain the authentication type and key length without exposing the API key.
 
 ### Default Masked Fields
 
@@ -74,6 +96,6 @@ By default, the following sensitive fields are masked in all Treblle SDKs:
 - `api_key`
 
 ### Custom Masked Fields
-You can define additional fields to be masked according to your application's specific requirements. 
+You can define additional fields to be masked according to your your application's requirements. 
 
 For instructions on customizing masked fields for your programming language or framework, refer to the [SDK documentation](https://docs.treblle.com/integrations/) in the integrations section.
