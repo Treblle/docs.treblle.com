@@ -43,11 +43,23 @@ This is an example of a basic Express API where masking is applied to sensitive 
 
 Masking these fields ensures that their values remain hidden but retain the original length in the API response.
 
-<img
-  src="/platform/masking-fields/code.png"
-  width="600"
-  style={{ borderRadius: "8px" }}
-/>
+```javascript
+app.use(
+    treblle({
+        apiKey: process.env.TREBLLE_API_KEY,
+        projectId: process.env.TREBLLE_PROJECT_ID,
+        additionalFieldsToMask: ['email', 'phone_number'],
+    })
+);
+
+app.post('/register', (req, res) => {
+    const { email, phone_number } = req.body;
+    res.status(201).json({
+        message: 'User registered successfully!',
+        data: { email, phone_number },
+    });
+});
+```
 
 ##### Masked Data View in Treblle Platform
 
