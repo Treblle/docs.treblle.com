@@ -78,9 +78,6 @@ export default defineConfig({
         label: 'API Documentation',
         link: '/treblle/api-documentation/'
       }, {
-        label: 'API Analytics',
-        link: '/treblle/api-analytics/'
-      }, {
         label: 'API Security',
         link: '/treblle/api-security/'
       }]
