@@ -35,14 +35,11 @@ export default defineConfig({
       label: 'Who is Treblle for?',
       link: '/who-is-treblle-for/'
     }, {
-      label: 'How Treblle works',
-      link: '/how'
-    }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
     }, {
       label: 'Workspace',
-      collapsed: false,
+      collapsed: true,
       items: [{
         label: 'Workspace',
         link: '/treblle/workspace/'
@@ -55,7 +52,7 @@ export default defineConfig({
       },]
     }, {
       label: 'Treblle Platform',
-      collapsed: false,
+      collapsed: true,
       items: [{
         label: 'Treblle Dashboard',
         link: '/treblle/dashboard/'
@@ -89,7 +86,7 @@ export default defineConfig({
       }]
     }, {
       label: 'Native Apps',
-      collapsed: false,
+      collapsed: true,
       items: [{
         label: 'Aspen',
         link: '/aspen/'
@@ -102,7 +99,7 @@ export default defineConfig({
       }]
     }, {
       label: 'Integrations',
-      collapsed: false,
+      collapsed: true,
       items: [{
         label: 'Treblle Integrations',
         link: '/integrations/'
@@ -347,10 +344,6 @@ export default defineConfig({
       status: 301,
       destination: '/who-is-treblle-for/'
     },
-    '/en/how-treblle-works': {
-      status: 301,
-      destination: '/how/'
-    },
     '/en/introduction': {
       status: 301,
       destination: '/guides/'
@@ -362,6 +355,10 @@ export default defineConfig({
     '/en/integrations/community-sdks': {
       status: 301,
       destination: '/integrations#community-sdks/'
+    },
+    '/treblle/ai-assistant/': {
+      status: 301,
+      destination: '/treblle/alfred/'
     }
   },
   themeConfig: {
