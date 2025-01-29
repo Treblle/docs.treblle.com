@@ -42,7 +42,7 @@ export default defineConfig({
       link: '/guides/getting-started/'
     }, {
       label: 'Workspace',
-      collapsed: false,
+      collapsed: true,
       items: [{
         label: 'Workspace',
         link: '/treblle/workspace/'
@@ -55,7 +55,7 @@ export default defineConfig({
       },]
     }, {
       label: 'Treblle Platform',
-      collapsed: false,
+      collapsed: true,
       items: [{
         label: 'Treblle Dashboard',
         link: '/treblle/dashboard/'
@@ -89,7 +89,7 @@ export default defineConfig({
       }]
     }, {
       label: 'Native Apps',
-      collapsed: false,
+      collapsed: true,
       items: [{
         label: 'Aspen',
         link: '/aspen/'
@@ -102,7 +102,7 @@ export default defineConfig({
       }]
     }, {
       label: 'Integrations',
-      collapsed: false,
+      collapsed: true,
       items: [{
         label: 'Treblle Integrations',
         link: '/integrations/'
@@ -362,6 +362,10 @@ export default defineConfig({
     '/en/integrations/community-sdks': {
       status: 301,
       destination: '/integrations#community-sdks/'
+    },
+    '/treblle/ai-assistant/': {
+      status: 301,
+      destination: '/treblle/alfred/'
     }
   },
   themeConfig: {
