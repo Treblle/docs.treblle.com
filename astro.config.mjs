@@ -35,9 +35,6 @@ export default defineConfig({
       label: 'Who is Treblle for?',
       link: '/who-is-treblle-for/'
     }, {
-      label: 'How Treblle works',
-      link: '/how'
-    }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
     }, {
@@ -346,10 +343,6 @@ export default defineConfig({
     '/en/who-is-treblle-for': {
       status: 301,
       destination: '/who-is-treblle-for/'
-    },
-    '/en/how-treblle-works': {
-      status: 301,
-      destination: '/how/'
     },
     '/en/introduction': {
       status: 301,
