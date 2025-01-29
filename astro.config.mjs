@@ -362,6 +362,10 @@ export default defineConfig({
     '/en/integrations/community-sdks': {
       status: 301,
       destination: '/integrations#community-sdks/'
+    },
+    '/treblle/ai-assistant/': {
+      status: 301,
+      destination: '/treblle/alfred/'
     }
   },
   themeConfig: {
