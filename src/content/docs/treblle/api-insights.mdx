@@ -18,9 +18,9 @@ You can use API Insights in several ways, depending on your preference. You can 
 3. **[CLI Tool](https://github.com/Treblle/treblle-cli)**
 4. **Using the [MacOS app](https://apps.apple.com/hr/app/api-insights-by-treblle/id6468354004)**
 
-### Option 1: **Web Browser (Dashboard)**
+### Setup via Web Browser (Dashboard)
 
-API Insights can be accessed through [apiinsights.io/](https://apiinsights.io/).
+You can access API Insights through [apiinsights.io/](https://apiinsights.io/).
 
 <img
   src="/platform/api-insights/dashboard.png"
@@ -30,7 +30,7 @@ API Insights can be accessed through [apiinsights.io/](https://apiinsights.io/).
 
 #### Example: **Analysing a demo API**
 
-This report is based on the [Demo API](https://apiinsights.io/reports/demo-report) which has 33 endpoints.
+This report analyzes the [Demo API](https://apiinsights.io/reports/demo-report), which has 33 endpoints.
 
 <img
   src="/platform/api-insights/demo.png"
@@ -52,11 +52,11 @@ For example:
 
 - **Design Issues** are identified based on predefined API design best practices.
 - **Performance metrics** are calculated based on each request's response times and server performance.
-- **Security checks** are based on common security vulnerabilities and attack patterns, such as IDOR and missing security headers.
+- **Security checks** identify common vulnerabilities and attack patterns, such as IDOR and missing security headers.
 
-### Option 2: VS Code Extension
+### Setup via VS Code Extension
 
-The API Insights VS Code Extension allows you to observe your API performance directly from your development environment.
+The API Insights VS Code Extension lets you observe your API performance directly from your development environment.
 
 #### Installation
 
@@ -73,8 +73,6 @@ To install the API Insights VS Code Extension:
 />
 
 #### Getting Started
-
-Select a File from Your Workspace
 
     1. You can begin the process once you have your **OpenAPI spec** file (usually in JSON or YAML format) in your workspace.
     2. Open the file in VS Code.
@@ -94,7 +92,7 @@ The extension works with OpenAPI specifications, so ensure your file is correctl
 
 The extension tracks any changes made to the file. If you modify the OpenAPI spec file, it will automatically re-check and update the score.
 
-Whenever a file change is detected, a prompt will appear in your editor, reminding you to re-check the score.
+When a file change is detected, a prompt will appear in your editor, reminding you to re-check the score.
 
 <img
   src="/platform/api-insights/demo-3.gif"
@@ -102,12 +100,12 @@ Whenever a file change is detected, a prompt will appear in your editor, remindi
   style={{ borderRadius: "8px" }}
 />
 
-### Option 3: CLI Tool
+### Setup via CLI Tool
 
 You can use the API Insights CLI tool if you prefer working in the terminal.
 
 :::note
-To use API Insights GitHub action with your project. Please visit [marketplace](https://github.com/treblle/treblle-cli).
+To use API Insights GitHub action with your project. Please visit the [marketplace](https://github.com/treblle/treblle-cli).
 :::
 
 #### Installing Treblle CLI
@@ -151,15 +149,13 @@ brew install treblle
          treblle-cli insights path/to/openapi-spec.json --details=All
          ```
 
-3. Minimum Score Limit
+    3. Minimum Score Limit: Using the `--minimum` flag, set a minimum score threshold for automated testing in CI/CD environments. For example, to require a minimum score of `90`:
 
-- Set a minimum score threshold for automated testing in CI/CD environments using the `--minimum` flag. For example, to require a minimum score of `90`:
+         ```bash
+         treblle-cli insights path/to/openapi-spec.json --minimum 90
+         ```
 
-  ```bash
-   treblle-cli insights path/to/openapi-spec.json --minimum 90
-  ```
-
-### Option 4: **Using the MacOS App**
+### Setup via Using the MacOS App
 
 <img
   src="/platform/api-insights/macos-app.png"
@@ -173,9 +169,9 @@ The app works like the browser version with the same insights and features in a 
 
 ### AI Readiness for your API
 
-As part of Treblle's commitment to making API integration with AI and LLMs smoother, we’ve introduced the AI-Ready badge.
+We've introduced the AI-Ready badge as part of Treblle’s commitment to smoother API integration with AI and LLMs.
 
-This badge is awarded when your API meets key criteria for AI integration.
+We award this badge when your API meets key criteria for AI integration.
 
 <img
   src="/platform/api-insights/api-score.png"
@@ -185,7 +181,7 @@ This badge is awarded when your API meets key criteria for AI integration.
 
 #### What Makes an API AI-Ready?
 
-The AI-Ready badge is granted when your API adheres to the following specifications:
+You receive the AI-Ready badge when your API adheres to the following specifications:
 
 1. **Endpoints Descriptions:** Each endpoint has a detailed and user-friendly description.
 
@@ -243,4 +239,4 @@ The AI-Ready badge is granted when your API adheres to the following specificati
       }
    ```
 
-So when you meet these requirements, your API will automatically receive an AI-Ready badge.
+So, when you meet these requirements, your API will automatically receive an AI-Ready badge.
