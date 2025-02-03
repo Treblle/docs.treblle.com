@@ -1,0 +1,111 @@
+---
+title: "Observability as a Service"
+description: "Integrate real-time API observability into your developer portal with Treblle."
+---
+
+Treblle’s embedded observability allows you to integrate real-time API request visibility into your developer portal directly. 
+
+Developers can inspect requests, filter logs, and troubleshoot integration issues without a separate observability stack.
+
+## Steps to Embedd Treblle's Observability 
+
+##### Adding the Observability Script
+
+Include the Treblle observability script in the `<head>` section of your HTML file:
+
+```html
+<script src="https://assets.treblle.com/oaas-v8.min.js"></script>
+```
+
+##### Embedding Treblle's Observability Logs
+
+Identify where you want to display API request logs and add the following `<div>`:
+
+For dark theme:
+
+```html
+<div class="treblle-embeded-logs dark-theme" data-project="YOUR_PROJECT_ID" data-customer="YOUR_CUSTOMER_ID">
+```
+
+For default theme:
+
+```html
+<div class="treblle-embedded-logs" data-projects="YOUR_PROJECT_ID" data-customers="YOUR_CUSTOMER_ID"></div>
+```
+
+Replace:
+
+`YOUR_PROJECT_ID` with your Treblle API ID (found under API Settings).
+
+  <img
+    src="/platform/observability-as-a-service/api-settings.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
+
+`YOUR_CUSTOMER_ID` with the customer name (found under Customer Section).
+
+  <img
+    src="/platform/observability-as-a-service/customer.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
+
+
+##### Save and Refresh
+
+After adding the script and `<div>`, save your changes and reload the portal. You should now see a real-time API request log section.
+
+### DEMO API Example
+
+This Demo API is an experience example. You can copy and test it in your environment to see how it works. Since it's a demo example, you can use the same project and customer ID.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Observability As A Service - Treblle" />
+    <meta name="author" content="Treblle" />
+    <title>Observability As A Service - Treblle</title>
+</head>
+
+<body style="background-color: #181821; /*background-color: #181821;*/">
+    <div style="margin: 0 auto; max-width: 1140px; width: 100%">
+        <div class="treblle-embeded-logs dark-theme" data-project="ByGdzSo2L0OI2OKu" data-customer="vedran">
+        </div>
+    </div>
+
+    <script src="https://assets.treblle.com/oaas-v8.min.js"></script>
+</body>
+
+</html>
+```
+
+After following the steps above, you should see embedded observability in your developer portal:
+
+  <img
+    src="/platform/observability-as-a-service/embedded.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
+
+## Filtering API Requests
+
+- Timeframe – View API requests within a specific date and time range.
+- Threat Level – Identify and filter requests based on security risk levels (High, Medium, Low)
+- Response Code – Sort requests by HTTP status codes like 200, 400, or 500.
+- HTTP Method – Filter requests by method type, such as GET, POST, or DELETE.
+- Device – See API requests grouped by device type (mobile, desktop, IOS, etc.).
+- Endpoint – Focus on requests to a specific API route or path.
+- User Location – Track and filter requests based on the user's location.
+- Request Data – Inspect request payloads, headers, and query parameters.
+
+  <img
+    src="/platform/observability-as-a-service/filter.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />

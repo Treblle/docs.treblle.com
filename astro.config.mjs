@@ -80,6 +80,9 @@ export default defineConfig({
       }, {
         label: 'API Security',
         link: '/treblle/api-security/'
+      }, {
+        label: 'Observability as a Service',
+        link: '/treblle/observability-as-a-service/'
       }]
     }, {
       label: 'Native Apps',
