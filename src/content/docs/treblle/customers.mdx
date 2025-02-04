@@ -1,0 +1,128 @@
+---
+title: Customers
+---
+
+The Customer section in Treblle provides a comprehensive view of your API's usage by individual customers. 
+
+It helps you understand how different customers interact with your API, identify trends in their usage patterns, and pinpoint potential issues or areas for improvement.
+
+## Steps to View the Customer Section
+
+Click on **"Customers"** in the left navigation bar.
+
+  <img
+    src="/platform/customers/customer.png"
+    width="200"
+    style={{ borderRadius: "8px" }}
+  />
+
+#### Overview of the Customer Section
+
+The Customer Dashboard provides a comprehensive overview of all your customers and their API usage. 
+
+Here's what you'll find:
+    
+  - **Customer Profiles:**  A list of all your customers, identified by their name or Customer ID.
+  - **Request Count:**  The total number of API requests each customer makes.
+  - **Overall Percentage:** The percentage of total API requests attributed to each customer, giving you a sense of their impact on your API traffic.
+  - **Last Active:** A timestamp indicating when each customer made their last API request.
+
+    <img
+      src="/platform/customers/overview.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
+
+#### Sorting Options
+    
+To help you find the information you need, you can sort the customer list by:
+
+  - **Customer ID:**  Organize customers alphabetically by their ID.
+  - **Request Count:**  See your most active customers first.
+  - **Most Recent Request:**  Identify the customers who recently interacted with your API.
+
+    <img
+      src="/platform/customers/sort.png"
+      width="300"
+      style={{ borderRadius: "8px" }}
+    />
+
+
+#### Customer Profile
+
+Click on a customer's profile to access a detailed breakdown of their API usage. 
+
+The Customer Profile includes:
+  - **Request History:**  A complete list of all API requests made by that customer.
+  - **Request Graph:**  A visual representation of the customer's API request activity over time. This graph helps you identify peak usage periods, trends, and potential anomalies. 
+  
+    <img
+      src="/platform/customers/dashboard.png"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
+
+### Adding Customer/User ID to Requests
+
+Treblle does not automatically add a Customer or User ID to API requests. If you want to track API usage by individual customers, you must modify the request headers to include one.
+
+#### Steps to add the Customer ID in Treblle's [Express SDK](https://docs.treblle.com/integrations/javascript/express/)
+
+To ensure every API request contains a Customer ID, you can create a middleware that extracts the authenticated user’s ID and adds it to the request headers before Treblle processes it.
+
+Here's how you can modify your [Express](https://docs.treblle.com/integrations/javascript/express/) middleware to add the `Customer ID` to the request headers:
+
+```javascript
+// Custom middleware to add Customer ID
+app.use((req, res, next) => {
+    if (req.user) {  // Ensure the user is authenticated
+        req.headers['X-Customer-ID'] = req.user.id; // Attach Customer ID to headers
+    }
+    next();
+});
+
+// Treblle Middleware
+app.use(treblle({
+    apiKey: process.env.TREBLLE_API_KEY,
+    projectId: process.env.TREBLLE_PROJECT_ID
+}));
+```
+
+#### Treblle Dashboard View of Customer ID
+
+The image below shows how the customer ID will appear on the Treblle dashboard once you add it to the request.
+
+<img
+  src="/platform/customers/header.png"
+  width="500"
+  style={{ borderRadius: "8px" }}
+/>
+
+
+#### Implementing Customer ID Tracking in Other SDKs
+
+For other SDKs, the approach is similar. Here's how you can implement it:
+
+1. First, check the user authentication, and then you can retrieve the Customer ID from the authentication system.
+
+   ```bash
+   if (isAuthenticated) {
+       customerId = getCustomerIdFromSession() // Fetch Customer ID from session or token
+   }
+   ```
+
+2. After authentication, you can add the Customer ID to the request headers (typically as "X-Customer-ID").
+
+   ```bash
+   request.headers.set('X-Customer-ID', customerId)
+   ```
+
+3. Apply middleware to track customer data in API requests.
+
+   ```bash
+   applyMiddleware('customerTrackingMiddleware', routes) 
+   ```
+
+For specific integration details for other SDKs, please refer to the [Integration page](https://docs.treblle.com/integrations/).
+
+The Customer section in Treblle gives valuable insights into how your customers use your API. It provides a clear view of each customer’s interactions, helping you spot patterns, monitor usage, and address performance or support issues early on.

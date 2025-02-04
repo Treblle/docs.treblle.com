@@ -63,6 +63,9 @@ export default defineConfig({
         label: 'Endpoints',
         link: '/treblle/endpoints/'
       }, {
+        label: 'Customers',
+        link: '/treblle/customers/'
+      }, {
         label: 'Problems',
         link: '/treblle/problems/'
       }, {
@@ -80,6 +83,9 @@ export default defineConfig({
       }, {
         label: 'API Security',
         link: '/treblle/api-security/'
+      }, {
+        label: 'Observability as a Service',
+        link: '/treblle/observability-as-a-service/'
       }]
     }, {
       label: 'API Toolkit',
