@@ -82,14 +82,14 @@ export default defineConfig({
         link: '/treblle/api-security/'
       }]
     }, {
-      label: 'Native Apps',
+      label: 'API Toolkit',
       collapsed: true,
       items: [{
         label: 'Aspen',
         link: '/aspen/'
       }, {
         label: 'Alfred AI',
-        link: '/treblle/alfred/'
+        link: '/treblle/alfred-ai/'
       }, {
         label: 'API Insights',
         link: '/treblle/api-insights/',
@@ -355,7 +355,11 @@ export default defineConfig({
     },
     '/treblle/ai-assistant/': {
       status: 301,
-      destination: '/treblle/alfred/'
+      destination: '/treblle/alfred-ai/'
+    },
+    '/treblle/alfred/': {
+      status: 301,
+      destination: '/treblle/alfred-ai/'
     }
   },
   themeConfig: {
