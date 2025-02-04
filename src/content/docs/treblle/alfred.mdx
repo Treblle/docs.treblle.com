@@ -1,45 +1,49 @@
 ---
 title: Alfred AI
-description: Learn how to use Alfred, Treblle's AI assistant for improving API workflows.
+description: Learn how to use Alfred, Treblle's AI assistant, to improve API workflows.
 ---
 
-## What is Alfred AI?
+### What is Alfred AI?
 
-[Alfred](https://treblle.com/product/alfred) is Treblle’s AI assistant that helps improve your API workflows. It uses your API documentation to provide real-time answers.
+[Alfred](https://treblle.com/product/alfred) is Treblle’s AI assistant. It helps improve your API workflows by using your API documentation to provide real-time answers.
 
 :::note
-Alfred accesses only your API documentation and does not store or analyze your data. It helps you by improving your documentation and integration process based on your current API setup.
+Alfred accesses only your API documentation and does not store or analyze your data. Based on your current API setup it helps you improve your documentation and integration process.
 :::
 
-You can use Alfred in several ways:
+There are several ways to use Alfred:
 
-### Integrate with Treblle SDK
+- Integrating with Treblle SDK.
+- Uploading your OpenAPI Specification.
+- Embedding Alfred to your Developer Portal.
+
+### Integrating with Treblle SDK
 
 Integrating the Treblle SDK will automatically generate API docs and a developer portal with Alfred.
 
 You can find integration guides for various languages and platforms [here](https://www.treblle.com/integrations/).
 
-#### Step 1: Access Alfred
+#### Step 1: Accessing Alfred
 
-- Go to the API Docs section of your Treblle workspace.
+  Go to the API Docs section of your Treblle workspace.
 
-  <img
+   <img
     src="/platform/alfred/api-docs.png"
     width="200"
     style={{ borderRadius: "8px" }}
-  />
+   />
 
-- Look for Alfred in the bottom right corner of the screen.
+  Look for Alfred in the bottom right corner of the screen.
 
-  <img
-    src="/platform/alfred/alfred.png"
-    width="800"
-    style={{ borderRadius: "8px" }}
-  />
+   <img
+     src="/platform/alfred/alfred.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
 
 #### Step 2: Interact with Alfred
 
-- Click on Alfred to open an interface with predefined prompts.
+  Click on Alfred to open an interface with predefined prompts.
 
   <img
     src="/platform/alfred/interface.png"
@@ -47,7 +51,7 @@ You can find integration guides for various languages and platforms [here](https
     style={{ borderRadius: "8px" }}
   />
 
-- Ask questions or request assistance with your API documentation, such as identifying issues, generating code examples, or improving endpoint documentation.
+  Ask questions or request assistance with your API documentation, such as identifying issues, generating code examples, or improving endpoint documentation.
 
 #### Example:
 
@@ -57,17 +61,17 @@ You can find integration guides for various languages and platforms [here](https
   style={{ borderRadius: "8px" }}
 />
 
-### Upload your OpenAPI Specification
+### Uploading your OpenAPI Specification
 
 If you are not integrating the Treblle SDK, you can upload your [OpenAPI Specification](https://swagger.io/specification/) (version 3 or above) directly to the Treblle platform.
 
 :::note
-You will need to update the specification manually whenever changes are made to keep Alfred's information up to date.
+To keep Alfred's information up to date, you must manually update the specification whenever changes occur.
 :::
 
 #### Step 1: Access OpenAPI Specification
 
-- Go to the API Setting section of your Treblle workspace.
+  Go to the API Setting section of your Treblle workspace.
 
   <img
     src="/platform/alfred/api-setting.png"
@@ -77,7 +81,7 @@ You will need to update the specification manually whenever changes are made to 
 
 #### Step 2: Upload OpenAPI Specification
 
-- Click on upload to add your OpenAPI Specification.
+  Click on upload to add your OpenAPI Specification.
 
   <img
     src="/platform/alfred/open-api.png"
@@ -85,24 +89,24 @@ You will need to update the specification manually whenever changes are made to 
     style={{ borderRadius: "8px" }}
   />
 
-### Embed Alfred in your Developer Portal
+### Embedding Alfred to your Developer Portal
 
 To embed Alfred into your developer portal, follow these steps:
 
-1. Add a one line script to your HTML:
+1. Add a one-line script to your HTML:
 
-```html
-<script src="https://assets.treblle.com/alfred-embed-v5.min.js"></script>
-```
+   ```html
+   <script src="https://assets.treblle.com/alfred-embed-v5.min.js"></script>
+   ```
 
-Place the script before your portal's `</body>` tag to ensure smooth page rendering.
+   Place the script before your portal's `</body>` tag to ensure smooth page rendering.
 
-2. Replace `_YOUR_TREBLLE_PROJECT_ID_` with your API ID and `_YOUR_CUSTOMER_API_KEY_` with your SDK TOKEN. This enables Alfred to append your customer's details into the integration process.
+2. Replace `_YOUR_TREBLLE_PROJECT_ID_` with your API ID and `_YOUR_CUSTOMER_API_KEY_` with your SDK TOKEN.
 
- ```javascript
-<div
-  class="getalfred-io"
-  data-api="_YOUR_TREBLLE_PROJECT_ID_"
-  data-auth="_YOUR_CUSTOMER_API_KEY_"
-></div>
-```
+   ```javascript
+   <div
+     class="getalfred-io"
+     data-api="_YOUR_TREBLLE_PROJECT_ID_"
+     data-auth="_YOUR_CUSTOMER_API_KEY_"
+   ></div>
+   ```
