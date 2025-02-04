@@ -62,4 +62,73 @@ The Customer Profile includes:
       style={{ borderRadius: "8px" }}
     />
 
+### Attaching Customer/User ID to Requests
+
+Treblle does not automatically attach a Customer or User ID to API requests. If you want to track API usage by individual customers, you need to modify the request headers to include a Customer or User ID.
+
+#### Example: Adding Customer ID in Express
+
+To ensure every API request contains a Customer ID, you can create a middleware that extracts the authenticated user’s ID and adds it to the request headers before Treblle processes the request.
+
+Modify your Express middleware to include the `Customer ID` in request headers.
+
+```javascript
+// Custom middleware to add Customer ID
+app.use((req, res, next) => {
+    if (req.user) {  // Ensure the user is authenticated
+        req.headers['X-Customer-ID'] = req.user.id; // Attach Customer ID to headers
+    }
+    next();
+});
+
+// Treblle Middleware
+app.use(treblle({
+    apiKey: process.env.TREBLLE_API_KEY,
+    projectId: process.env.TREBLLE_PROJECT_ID
+}));
+```
+
+#### Treblle Dashboard View of Customer ID
+
+```javascript
+app.use((req, res, next) => {
+    // Simulating an authenticated user
+    req.user = { id: "12345" }; // Replace with a real user ID from your database
+    req.headers['X-Customer-ID'] = req.user.id;
+    next();
+});
+```
+<img
+  src="/platform/customers/header.png"
+  width="500"
+  style={{ borderRadius: "8px" }}
+/>
+
+
+#### Pseudo-Code for Other SDKs
+
+For other SDKs, the process is similar, and here’s a pseudo-code to help you understand the general approach:
+
+1. Check if the user is authenticated and Retrieve the Customer ID from the authentication system.
+
+   ```bash
+   if (isAuthenticated) {
+       customerId = getCustomerIdFromSession() // Fetch Customer ID from session or token
+   }
+   ```
+
+2. Add the Customer ID to the request headers (typically as "X-Customer-ID").
+
+   ```bash
+   request.headers.set('X-Customer-ID', customerId)
+   ```
+
+3. Apply middleware to track customer data in API requests.
+
+   ```bash
+   applyMiddleware('customerTrackingMiddleware', routes) 
+   ```
+
+For specific integration details for other SDKs, please refer to the [Integration page](https://docs.treblle.com/integrations/).
+
 The Customer section in Treblle gives you valuable insights into how your customers are using your API. You can use this information to improve your product, support, and overall customer experience.
