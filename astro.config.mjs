@@ -88,14 +88,14 @@ export default defineConfig({
         link: '/treblle/observability-as-a-service/'
       }]
     }, {
-      label: 'Native Apps',
+      label: 'API Toolkit',
       collapsed: true,
       items: [{
         label: 'Aspen',
         link: '/aspen/'
       }, {
         label: 'Alfred AI',
-        link: '/treblle/alfred/'
+        link: '/treblle/alfred-ai/'
       }, {
         label: 'API Insights',
         link: '/treblle/api-insights/',
@@ -359,9 +359,21 @@ export default defineConfig({
       status: 301,
       destination: '/integrations#community-sdks/'
     },
+    '/treblle/ai-assistant': {
+      status: 301,
+      destination: '/treblle/alfred-ai/'
+    },
+    '/treblle/alfred': {
+      status: 301,
+      destination: '/treblle/alfred-ai/'
+    },
     '/treblle/ai-assistant/': {
       status: 301,
-      destination: '/treblle/alfred/'
+      destination: '/treblle/alfred-ai/'
+    },
+    '/treblle/alfred/': {
+      status: 301,
+      destination: '/treblle/alfred-ai/'
     }
   },
   themeConfig: {
