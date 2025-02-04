@@ -64,11 +64,11 @@ The Customer Profile includes:
 
 ### Attaching Customer/User ID to Requests
 
-Treblle does not automatically attach a Customer or User ID to API requests. If you want to track API usage by individual customers, you need to modify the request headers to include a Customer or User ID.
+Treblle does not automatically attach a Customer or User ID to API requests. If you want to track API usage by individual customers, you need to modify the request headers to include one.
 
 #### Example: Adding Customer ID in Express
 
-To ensure every API request contains a Customer ID, you can create a middleware that extracts the authenticated user’s ID and adds it to the request headers before Treblle processes the request.
+To ensure every API request contains a Customer ID, you can create a middleware that extracts the authenticated user’s ID and adds it to the request headers before Treblle processes it.
 
 Modify your Express middleware to include the `Customer ID` in request headers.
 
@@ -131,4 +131,4 @@ For other SDKs, the process is similar, and here’s a pseudo-code to help you u
 
 For specific integration details for other SDKs, please refer to the [Integration page](https://docs.treblle.com/integrations/).
 
-The Customer section in Treblle gives you valuable insights into how your customers are using your API. You can use this information to improve your product, support, and overall customer experience.
+The Customer section in Treblle gives valuable insights into how your customers use your API. You can use this information to improve your product, support, and overall customer experience.
