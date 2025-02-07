@@ -33,21 +33,3 @@ body {
 		--rotation: 0deg;
 	}
 }
-
-/* Ensure links are #0058ff ONLY inside the accordion */
-.accordion-container a {
-	color: #0058ff !important;
-	text-decoration: underline;
-}
-
-/* Ensure code blocks inside the accordion use the right colors */
-.accordion-container code {
-	background-color: var(--code-bg) !important;
-	color: var(--code-text) !important;
-}
-
-/* Prevent global styles from affecting the rest of the docs */
-body a {
-	color: inherit !important;
-	text-decoration: none;
-}
