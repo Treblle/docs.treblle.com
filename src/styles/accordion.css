@@ -1,0 +1,126 @@
+:root {
+    --code-bg: #f6f7fa;
+    --code-text: #01041a;
+    --accordion-title: #01041a;
+    --accordion-bg-active: #0058ff;
+    --accordion-text: #01041a;
+    --accordion-text-bg: #ebedf0;
+}
+
+[data-theme="dark"] {
+    --code-bg: #1e1e1e;
+    --code-text: #ffffff;
+    --accordion-bg-active: #0058ff;
+    --accordion-text: #ffffff;
+    --accordion-text-bg: #1e1e1e;
+}
+
+code {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.rc-accordion-body a {
+    color: #0058ff;
+    text-decoration: underline;
+}
+
+.rc-accordion-body a:hover {
+    color: #003bb3;
+}
+
+[data-page="faqs"] a {
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+[data-page="faqs"] a:hover {
+    color: #0056b3;
+}
+
+.rc-accordion-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    background-color: #ebedf0;
+    transition: 0.3s;
+    padding: 18px 24px;
+    min-height: 60px;
+}
+
+.rc-accordion-toggle .rc-accordion-title {
+    font-weight: 500;
+    font-size: 14px;
+    color: #01041a;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.rc-accordion-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.rc-accordion-toggle.active {
+    background-color: var(--accordion-bg-active);
+}
+
+.rc-accordion-toggle.active .rc-accordion-title {
+    color: #ffffff;
+}
+
+.rc-accordion-toggle.active .rc-accordion-icon {
+    transform: rotate(180deg);
+    color: #fff;
+}
+
+.rc-accordion-card {
+    overflow: hidden;
+}
+
+.rc-accordion-card:last-child {
+    margin-bottom: 0;
+}
+
+.rc-accordion-icon {
+    font-size: 22px;
+    font-weight: 700;
+    margin-left: 12px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.rc-accordion-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 15px;
+    background-color: var(--accordion-text-bg);
+}
+
+.rc-accordion-body p {
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--accordion-text);
+}
+
+.rc-collapse {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+}
+
+.rc-collapse.show {
+    height: auto;
+}

@@ -21,12 +21,10 @@ body {
 	--rotation: 90deg;
 	@apply h-[20px] w-[1.5px] bg-gradient-to-t md:h-[1.5px] md:w-[30px] lg:w-[40px] xl:w-[50px];
 	background-color: hsla(0, 0%, 100%, 0.1);
-	background-image: linear-gradient(
-		var(--rotation),
-		rgba(255, 255, 255, 0) 50%,
-		#c39dff 50%,
-		rgba(255, 255, 255, 0) 70%
-	);
+	background-image: linear-gradient(var(--rotation),
+			rgba(255, 255, 255, 0) 50%,
+			#c39dff 50%,
+			rgba(255, 255, 255, 0) 70%);
 	background-size: 500% 500%;
 }
 
@@ -34,4 +32,22 @@ body {
 	.signal-line {
 		--rotation: 0deg;
 	}
+}
+
+/* Ensure links are #0058ff ONLY inside the accordion */
+.accordion-container a {
+	color: #0058ff !important;
+	text-decoration: underline;
+}
+
+/* Ensure code blocks inside the accordion use the right colors */
+.accordion-container code {
+	background-color: var(--code-bg) !important;
+	color: var(--code-text) !important;
+}
+
+/* Prevent global styles from affecting the rest of the docs */
+body a {
+	color: inherit !important;
+	text-decoration: none;
 }
