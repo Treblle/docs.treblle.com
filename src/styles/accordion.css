@@ -11,13 +11,13 @@
     --code-bg: #1e1e1e;
     --code-text: #ffffff;
     --accordion-bg-active: #0058ff;
-    --accordion-text: #ffffff;
-    --accordion-text-bg: #1e1e1e;
+    --accordion-text: #01041a;
+    --accordion-text-bg: #f6f7fa;
 }
 
 code {
     background-color: var(--code-bg);
-    color: var(--code-text);
+    color: var(--code-text) !important;
     padding: 2px 4px;
     border-radius: 4px;
     font-family: monospace;
