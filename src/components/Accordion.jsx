@@ -5,9 +5,11 @@ const faqs = [
     {
         id: 1,
         header: "How do I map my API credentials in Treblle?",
-        text: `You can set your credentials using environment variables. Assign your:\n
+        text: `You can set your credentials using environment variables. Assign your:
         - **API ID** to \`TREBLLE_PROJECT_ID\`\n- **SDK Token** to \`TREBLLE_API_KEY\`\n
-        Verify these values come from your current Treblle 3.0 workspace configuration. Check [How to get started.](https://docs.treblle.com/guides/getting-started/)`
+        Verify these values come from your current Treblle 3.0 workspace configuration. 
+        
+        Check [How to get started.](https://docs.treblle.com/guides/getting-started/)`
     },
     {
         id: 2,
@@ -15,12 +17,17 @@ const faqs = [
         text: `First, confirm that you are accessing [platform.treblle.com](https://platform.treblle.com/) instead of the legacy URL ([app.treblle.com](http://app.treblle.com/)).\n
         - Verify that the environment variables \`TREBLLE_PROJECT_ID\` and \`TREBLLE_API_KEY\` match your current 3.0 workspace configuration.
         - Check that your outbound network/firewall settings permit HTTPS requests to all **\`*.treblle.com\`** endpoints.
-        - Ensure your API traffic does not exceed the **monthly request cap** defined by your plan.`
+        - Ensure your API traffic does not exceed your plan's **monthly request cap**.
+
+        If you still don't see API requests, contact **Support** by going to:
+        **[Treblle Website](https://treblle.com/) → Resources → Support**
+        <img src="/platform/faqs/support.png" alt="Support" />`
+
     },
     {
         id: 3,
-        header: "How does Treblle handle security and privacy ?",
-        text: `Treblle prioritizes security and privacy:\n
+        header: "How does Treblle handle Security and Privacy ?",
+        text: `Treblle prioritizes Security and Privacy:\n
     - Sensitive fields such as passwords and API keys are **automatically detected and masked**.
     - All data is **encrypted in transit and at rest**.
     - You have full control over what data you log and can **exclude specific fields** in your [SDK configuration](https://docs.treblle.com/integrations/).
@@ -37,14 +44,19 @@ const faqs = [
         - **Exclude the endpoint entirely:** Use your framework’s middleware or routing controls to bypass Treblle’s logging on that endpoint.
         - **Redesign the URL:** Consider restructuring your endpoint so that sensitive values aren’t part of the path if they don’t need to be visible.
 
-        Check how to [Mask Fields](https://docs.treblle.com/security/masking/) in Treblle.`
+        Check how to [Mask Fields](https://docs.treblle.com/security/masking/) in Treblle.
+
+        Example:
+        <img src="/platform/masking-fields/platform.png" alt="platform" />`
+
+
     },
     {
         id: 5,
         header: "How does Treblle generate API docs?",
         text: `Treblle **automatically creates documentation** from the API traffic.\n
-        - When your API receives consistent requests to a new endpoint, Treblle analyzes the payloads and **generates documentation** based on that data.
-        - If your documentation isn’t showing up, ensure you're **tracking endpoints correctly** and keeping request/response payloads in a **consistent format**.
+        - When your API receives consistent requests to a new endpoint, Treblle analyzes the payloads and generates documentation based on that data.
+        - If your documentation isn’t showing up, ensure you're tracking endpoints correctly and keeping request/response payloads in a consistent format.
         - For example, once a new endpoint is created and published, you can use **[Aspen](http://localhost:4321/aspen/)** to make an HTTP call and then see the API Docs on the Treblle Platform.\n
         Check [API documentation](https://docs.treblle.com/treblle/api-documentation/) for more information.`
     },
@@ -68,15 +80,23 @@ const faqs = [
         text: `Connection errors like **SSL timeouts** often point to **network-related issues**.\n
         Verify that your **deployment environment** can reach external services and that no **firewall rules or proxy settings** block outbound requests.
         
-        Consider **adding retries** or **more detailed logging** around your SDK calls to diagnose intermittent delays when establishing **SSL connections** with Treblle’s servers.`
+        Consider adding retries or more detailed logging around your SDK calls to diagnose intermittent delays when establishing SSL connections with Treblle’s servers.`
+
     },
     {
         id: 9,
         header: "How do I access my invoices in Treblle 3.0?",
-        text: `**Invoices**  are unavailable via the dashboard for now.
+        text: `You can download invoices through **Workspace Settings → Billing**.  
         
-        - Invoice PDFs and **payment links** are sent directly to the **email registered** with your Treblle account.
-        - Check your **spam folder** or contact **[support](https://treblle.com/book-a-demo#)** with your account details if you don't see them.`
+        On the Treblle billing page, find the **Invoice History** section and click on it to download your invoice.
+
+        <img src="/platform/faqs/invoice.png" alt="Invoice" />
+        
+        If you still don't see your invoice, contact **Support** by going to:
+        
+        **[Treblle Website](https://treblle.com/) → Resources → Support** with your account details.
+        <img src="/platform/faqs/support.png" alt="Support" />`
+
     },
     {
         id: 10,
