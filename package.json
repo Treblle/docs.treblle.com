@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.8.3",
+    "@astrojs/react": "^3.6.0",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/starlight": "^0.25.5",
     "@astrojs/starlight-tailwind": "^2.0.3",
@@ -22,6 +23,7 @@
     "astro-og-canvas": "^0.5.3",
     "astro-seo-schema": "^4.0.2",
     "canvaskit-wasm": "^0.39.1",
+    "gsap": "^3.12.7",
     "schema-dts": "^1.1.2",
     "sharp": "^0.32.6",
     "svelte": "^4.2.19",
