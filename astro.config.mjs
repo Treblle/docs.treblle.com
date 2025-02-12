@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import tailwind from "@astrojs/tailwind";
-import sitemap from "@astrojs/sitemap";
-
-import svelte from "@astrojs/svelte";
+import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
+import react from '@astrojs/react';
+import svelte from '@astrojs/svelte';
 
 // https://astro.build/config
 export default defineConfig({
@@ -218,10 +218,13 @@ export default defineConfig({
         label: 'Masking Fields',
         link: '/security/masking/'
       }]
-    },]
+    }, {
+      label: 'FAQs',
+      link: '/faqs/'
+    }]
   }), tailwind({
     applyBaseStyles: false
-  }), sitemap(), svelte()],
+  }), sitemap(), react(), svelte()],
   redirects: {
     '/en/integrations': {
       status: 301,
