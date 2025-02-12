@@ -34,7 +34,7 @@ description: Integrate Treblle with Kong Gateway to monitor real-time API traffi
     </div>
     <div class="grid grid-cols-4 gap-4 px-2 py-2">
       <div class="col-span-4">
-        <h3 class="text-xl font-semibold">treblle-wso2</h3>
+        <h3 class="text-xl font-semibold">treblle-kong</h3>
         <p class="text-sm font-medium">The official Treblle plugin for Kong.</p>
       </div>
     </div>
@@ -203,11 +203,6 @@ Sample Commands:
    --data "name=httpbin-service" \
    --data "url=https://httpbin.org"
     ```
-
-1. **Create a Service**:
-   ```sh
-   curl -X POST http://localhost:8001/services --data name=httpbin-service --data url=https://httpbin.org
-   ```
 
 2. **Create a Route**:
    ```sh
