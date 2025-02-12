@@ -113,6 +113,9 @@ export default defineConfig({
         label: 'API Gateways',
         collapsed: true,
         items: [{
+          label: 'Kong',
+          link: '/integrations/gateways/kong/'
+        }, {
           label: 'Traefik',
           link: '/integrations/gateways/traefik/'
         }, {
