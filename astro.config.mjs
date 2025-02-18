@@ -231,7 +231,7 @@ export default defineConfig({
         label: 'Laravel API Course',
         link: 'https://apiacademy.treblle.com/laravel-api-course/'
       }, {
-        label: 'API Knowledgebase',
+        label: 'API Knowledge Base',
         link: 'https://treblle.com/knowledge-base/your-first-api/'
       }]
     }]
