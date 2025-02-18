@@ -222,8 +222,18 @@ export default defineConfig({
         link: '/security/masking/'
       }]
     }, {
-      label: 'FAQs',
-      link: '/faqs/'
+      label: 'Resources',
+      collapsed: true,
+      items: [{
+        label: 'FAQs',
+        link: '/faqs/'
+      }, {
+        label: 'Laravel API Course',
+        link: 'https://apiacademy.treblle.com/laravel-api-course/'
+      }, {
+        label: 'API Knowledge Base',
+        link: 'https://treblle.com/knowledge-base/your-first-api/'
+      }]
     }]
   }), tailwind({
     applyBaseStyles: false
