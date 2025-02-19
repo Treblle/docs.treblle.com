@@ -62,21 +62,25 @@ The Customer Profile includes:
       style={{ borderRadius: "8px" }}
     />
 
-### Adding Customer/User ID to Requests
+### Adding Customer/User Information to Requests
 
-Treblle does not automatically add a Customer or User ID to API requests. If you want to track API usage by individual customers, you must modify the request headers to include one.
+Treblle provides two important headers that you can use to enhance your API monitoring with customer information:
 
-#### Steps to add the Customer ID in Treblle's [Express SDK](https://docs.treblle.com/integrations/javascript/express/)
+- `treblle-user-id`: Used to identify your customers. You can pass any value here such as ID, UUID, email, username, or company name.
+- `treblle-tag-id`: Used if you want to pass a trace ID across multiple microservices or use it as an additional parameter to pass more user data.
 
-To ensure every API request contains a Customer ID, you can create a middleware that extracts the authenticated user’s ID and adds it to the request headers before Treblle processes it.
+These headers can be included in either Request or Response Headers - Treblle will pick them up from both.
 
-Here's how you can modify your [Express](https://docs.treblle.com/integrations/javascript/express/) middleware to add the `Customer ID` to the request headers:
+#### Steps to add the Customer Information in Treblle's [Express SDK](https://docs.treblle.com/integrations/javascript/express/)
+
+Here's how you can modify your [Express](https://docs.treblle.com/integrations/javascript/express/) middleware to add these headers:
 
 ```javascript
-// Custom middleware to add Customer ID
+// Custom middleware to add Customer information
 app.use((req, res, next) => {
     if (req.user) {  // Ensure the user is authenticated
-        req.headers['X-Customer-ID'] = req.user.id; // Attach Customer ID to headers
+        req.headers['treblle-user-id'] = req.user.id; // Attach Customer ID
+        req.headers['treblle-tag-id'] = req.user.traceId; // Optional: Attach trace ID
     }
     next();
 });
@@ -88,16 +92,15 @@ app.use(treblle({
 }));
 ```
 
-#### Treblle Dashboard View of Customer ID
+#### Treblle Dashboard View of Customer Information
 
-The image below shows how the customer ID will appear on the Treblle dashboard once you add it to the request.
+The image below shows how the customer information will appear on the Treblle dashboard once you add it to the request.
 
 <img
   src="/platform/customers/header.png"
   width="500"
   style={{ borderRadius: "8px" }}
 />
-
 
 #### Implementing Customer ID Tracking in Other SDKs
 
@@ -111,10 +114,10 @@ For other SDKs, the approach is similar. Here's how you can implement it:
    }
    ```
 
-2. After authentication, you can add the Customer ID to the request headers (typically as "X-Customer-ID").
+2. After authentication, you can add the Customer ID to the request headers (typically as "treblle-user-id").
 
    ```bash
-   request.headers.set('X-Customer-ID', customerId)
+   request.headers.set('treblle-user-id', customerId)
    ```
 
 3. Apply middleware to track customer data in API requests.
