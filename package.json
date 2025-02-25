@@ -24,6 +24,7 @@
     "astro-seo-schema": "^4.0.2",
     "canvaskit-wasm": "^0.39.1",
     "gsap": "^3.12.7",
+    "react-helmet": "^6.1.0",
     "schema-dts": "^1.1.2",
     "sharp": "^0.32.6",
     "svelte": "^4.2.19",

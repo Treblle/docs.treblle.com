@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import '../styles/accordion.css';
 
 const faqs = [
@@ -14,11 +15,11 @@ const faqs = [
     {
         id: 2,
         header: "My API requests aren’t showing up on the dashboard.",
-        text: `First, confirm that you are accessing [platform.treblle.com](https://platform.treblle.com/) instead of the legacy URL ([app.treblle.com](http://app.treblle.com/)).\n
+        text: `First, confirm that you are accessing [platform.treblle.com](https://platform.treblle.com/) instead of the legacy URL ([app.treblle.com](https://app.treblle.com/)).\n
         - Verify that the environment variables \`TREBLLE_PROJECT_ID\` and \`TREBLLE_API_KEY\` match your current 3.0 workspace configuration.
         - Check that your outbound network/firewall settings permit HTTPS requests to all **\`*.treblle.com\`** endpoints.
         - Ensure your API traffic does not exceed your plan's **monthly request cap**.
-
+    
         If you still don't see API requests, contact **Support** by going to:
         **[Treblle Website](https://treblle.com/) → Resources → Support**
         <img src="/platform/faqs/support.png" alt="Support" />`
@@ -34,7 +35,7 @@ const faqs = [
     - Treblle offers [compliance scanning](https://docs.treblle.com/features/api-compliance/) to help detect vulnerabilities.
     - Treblle is committed to maintaining high-security standards and is **ISO 27001, GDPR, AICPA SOC 2, CCPA READY, and PCI DSS COMPLIANT**.\n
     Our rigorous assessment process ensures that our infrastructure, sub-processors, third-party vendors, and employees adhere to strict security policies.
-    
+        
     Learn more about [How we handle Security](https://docs.treblle.com/security/).`
     },
     {
@@ -43,9 +44,9 @@ const faqs = [
         text: `Treblle only **masks data** in request/response bodies and headers, **not** the URL path. You have two options if your endpoint URL contains sensitive information (e.g., dynamic keys).\n
         - **Exclude the endpoint entirely:** Use your framework’s middleware or routing controls to bypass Treblle’s logging on that endpoint.
         - **Redesign the URL:** Consider restructuring your endpoint so that sensitive values aren’t part of the path if they don’t need to be visible.
-
+    
         Check how to [Mask Fields](https://docs.treblle.com/security/masking/) in Treblle.
-
+    
         Example:
         <img src="/platform/masking-fields/platform.png" alt="platform" />`
 
@@ -79,7 +80,7 @@ const faqs = [
         header: "I’m getting connection errors (e.g., SSL connection timeout) after deployment.",
         text: `Connection errors like **SSL timeouts** often point to **network-related issues**.\n
         Verify that your **deployment environment** can reach external services and that no **firewall rules or proxy settings** block outbound requests.
-        
+            
         Consider adding retries or more detailed logging around your SDK calls to diagnose intermittent delays when establishing SSL connections with Treblle’s servers.`
 
     },
@@ -87,13 +88,13 @@ const faqs = [
         id: 9,
         header: "How do I access my invoices in Treblle 3.0?",
         text: `You can download invoices through **Workspace Settings → Billing**.  
-        
+            
         On the Treblle billing page, find the **Invoice History** section and click on it to download your invoice.
-
+    
         <img src="/platform/faqs/invoice.png" alt="Invoice" />
-        
+            
         If you still don't see your invoice, contact **Support** by going to:
-        
+            
         **[Treblle Website](https://treblle.com/) → Resources → Support** with your account details.
         <img src="/platform/faqs/support.png" alt="Support" />`
 
@@ -157,18 +158,36 @@ export const Accordion = () => {
     };
 
     return (
-        <div className="container-fluid mt-5 mb-5">
-            <div className="row justify-content-center">
-                <div className="col-md-8 mt-2">
-                    <div className="card">
-                        <div className="card-body">
-                            {faqs.map((faq) => (
-                                <AccordionItem key={faq.id} active={active} handleToggle={handleToggle} faq={faq} />
-                            ))}
+        <>
+            <Helmet>
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        "mainEntity": faqs.map(faq => ({
+                            "@type": "Question",
+                            "name": faq.header,
+                            "acceptedAnswer": {
+                                "@type": "Answer",
+                                "text": faq.text.replace(/\n/g, ' ')
+                            }
+                        }))
+                    })}
+                </script>
+            </Helmet>
+            <div className="container-fluid mt-5 mb-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-8 mt-2">
+                        <div className="card">
+                            <div className="card-body">
+                                {faqs.map((faq) => (
+                                    <AccordionItem key={faq.id} active={active} handleToggle={handleToggle} faq={faq} />
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
