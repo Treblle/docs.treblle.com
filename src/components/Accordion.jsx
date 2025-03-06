@@ -36,7 +36,7 @@ const faqs = [
     - Treblle is committed to maintaining high-security standards and is **ISO 27001, GDPR, AICPA SOC 2, CCPA READY, and PCI DSS COMPLIANT**.\n
     Our rigorous assessment process ensures that our infrastructure, sub-processors, third-party vendors, and employees adhere to strict security policies.
         
-    Learn more about [How we handle Security](https://docs.treblle.com/security/).`
+    Learn more about [How we handle Security](https://docs.treblle.com/security/certification/).`
     },
     {
         id: 4,
@@ -58,7 +58,7 @@ const faqs = [
         text: `Treblle **automatically creates documentation** from the API traffic.\n
         - When your API receives consistent requests to a new endpoint, Treblle analyzes the payloads and generates documentation based on that data.
         - If your documentation isn’t showing up, ensure you're tracking endpoints correctly and keeping request/response payloads in a consistent format.
-        - For example, once a new endpoint is created and published, you can use **[Aspen](http://localhost:4321/aspen/)** to make an HTTP call and then see the API Docs on the Treblle Platform.\n
+        - For example, once a new endpoint is created and published, you can use **[Aspen](https://docs.treblle.com/aspen/)** to make an HTTP call and then see the API Docs on the Treblle Platform.\n
         Check [API documentation](https://docs.treblle.com/treblle/api-documentation/) for more information.`
     },
     {
