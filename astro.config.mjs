@@ -243,6 +243,10 @@ export default defineConfig({
       status: 301,
       destination: '/guides/'
     },
+    '/en/introduction/': {
+      status: 301,
+      destination: '/guides/'
+    },
     '/security/': {
       status: 301,
       destination: '/security/certification/'
