@@ -375,10 +375,6 @@ export default defineConfig({
       status: 301,
       destination: '/who-is-treblle-for/'
     },
-    '/en/introduction': {
-      status: 301,
-      destination: '/guides/'
-    },
     '/en/sdk-development': {
       status: 301,
       destination: '/integrations/custom/'
