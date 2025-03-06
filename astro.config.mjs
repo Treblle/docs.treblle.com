@@ -239,14 +239,6 @@ export default defineConfig({
     applyBaseStyles: false
   }), sitemap(), react(), svelte()],
   redirects: {
-    '/en/introduction': {
-      status: 301,
-      destination: '/guides/'
-    },
-    '/en/introduction/': {
-      status: 301,
-      destination: '/guides/'
-    },
     '/security/': {
       status: 301,
       destination: '/security/certification/'
@@ -382,26 +374,6 @@ export default defineConfig({
     '/en/integrations/community-sdks': {
       status: 301,
       destination: '/integrations#community-sdks/'
-    },
-    '/treblle/ai-assistant': {
-      status: 301,
-      destination: '/treblle/alfred-ai/'
-    },
-    '/treblle/alfred': {
-      status: 301,
-      destination: '/treblle/alfred-ai/'
-    },
-    '/treblle/ai-assistant/': {
-      status: 301,
-      destination: '/treblle/alfred-ai/'
-    },
-    '/treblle/alfred/': {
-      status: 301,
-      destination: '/treblle/alfred-ai/'
-    },
-    '/treblle/alfred-ai': {
-      status: 301,
-      destination: '/treblle/alfred-ai/'
     },
   },
   themeConfig: {

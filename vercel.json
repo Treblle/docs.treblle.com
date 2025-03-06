@@ -9,6 +9,31 @@
             "source": "/en/introduction/",
             "destination": "/guides/",
             "permanent": true
+        },
+        {
+            "source": "/treblle/ai-assistant",
+            "destination": "/treblle/alfred-ai/",
+            "permanent": true
+        },
+        {
+            "source": "/treblle/alfred",
+            "destination": "/treblle/alfred-ai/",
+            "permanent": true
+        },
+        {
+            "source": "/treblle/ai-assistant/",
+            "destination": "/treblle/alfred-ai/",
+            "permanent": true
+        },
+        {
+            "source": "/treblle/alfred/",
+            "destination": "/treblle/alfred-ai/",
+            "permanent": true
+        },
+        {
+            "source": "/treblle/alfred-ai",
+            "destination": "/treblle/alfred-ai/",
+            "permanent": true
         }
     ]
 }
