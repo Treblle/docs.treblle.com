@@ -1,0 +1,14 @@
+{
+    "redirects": [
+        {
+            "source": "/en/introduction",
+            "destination": "/guides/",
+            "permanent": true
+        },
+        {
+            "source": "/en/introduction/",
+            "destination": "/guides/",
+            "permanent": true
+        }
+    ]
+}
