@@ -3,15 +3,19 @@ import type { Props } from "@astrojs/starlight/props";
 // Don't import the default head - we'll build our own
 // import Default from "@astrojs/starlight/components/Head.astro"
 
-const ogImageUrl = new URL(
-  `/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`,
-  Astro.site,
-);
+const ogImageUrl = Astro.site 
+  ? new URL(`/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`, Astro.site)
+  : `/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`;
 
 // Get the custom meta title if it exists, otherwise use the page title
 const metaTitle = Astro.props.entry.data.metaTitle || Astro.props.entry.data.title;
 const description = Astro.props.entry.data.description;
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const canonical = Astro.site 
+  ? new URL(Astro.url.pathname, Astro.site).href 
+  : Astro.url.pathname;
+
+// Extract host from site URL if it exists
+const domain = Astro.site?.host || '';
 ---
 
 <!-- Build our custom head from scratch -->
@@ -40,12 +44,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 {
   Astro.props.entry.data.image
   ? (
-    <meta property="og:image" content={new URL(Astro.props.entry.data.image, Astro.site).href} /> 
-    <meta name="twitter:image" content={new URL(Astro.props.entry.data.image, Astro.site).href} />
+    <meta property="og:image" content={Astro.site ? new URL(Astro.props.entry.data.image, Astro.site).href : Astro.props.entry.data.image} /> 
+    <meta name="twitter:image" content={Astro.site ? new URL(Astro.props.entry.data.image, Astro.site).href : Astro.props.entry.data.image} />
   )
   : (
-    <meta property="og:image" content={ogImageUrl.href} />
-    <meta name="twitter:image" content={ogImageUrl.href} />
+    <meta property="og:image" content={typeof ogImageUrl === 'string' ? ogImageUrl : ogImageUrl.href} />
+    <meta name="twitter:image" content={typeof ogImageUrl === 'string' ? ogImageUrl : ogImageUrl.href} />
   )
 }
 
@@ -53,7 +57,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={metaTitle} />
 <meta name="twitter:description" content={description} />
-<meta property="twitter:domain" content={Astro.site.host} />
+<meta property="twitter:domain" content={domain} />
 <meta property="twitter:url" content={canonical} />
 
 <!-- Sitemap -->
