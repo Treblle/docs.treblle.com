@@ -1,52 +1,74 @@
 ---
 import type { Props } from "@astrojs/starlight/props";
-import Default from "@astrojs/starlight/components/Head.astro"
+// Don't import the default head - we'll build our own
+// import Default from "@astrojs/starlight/components/Head.astro"
 
-const ogImageUrl = new URL(
-`/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`,
-  Astro.site,
-)
+const ogImageUrl = Astro.site 
+  ? new URL(`/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`, Astro.site)
+  : `/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`;
 
 // Get the custom meta title if it exists, otherwise use the page title
 const metaTitle = Astro.props.entry.data.metaTitle || Astro.props.entry.data.title;
+const description = Astro.props.entry.data.description;
+const canonical = Astro.site 
+  ? new URL(Astro.url.pathname, Astro.site).href 
+  : Astro.url.pathname;
+
+// Extract host from site URL if it exists
+const domain = Astro.site?.host || '';
 ---
 
-<!-- First, remove the default title -->
-<meta name="robots" content="noindex,nofollow" data-replace-head>
+<!-- Build our custom head from scratch -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="index,follow" />
 
-<!-- Then include your custom head with modified title -->
-<Default {...Astro.props}><slot /></Default>
+<!-- Title tag without Starlight's formatting -->
+<title>{metaTitle}</title>
 
-<!-- Override the title tag -->
-<title set:html={metaTitle} />
+<!-- Meta tags -->
+<meta name="description" content={description} />
+<meta name="generator" content={Astro.generator} />
 
-<!-- Add your other meta tags -->
+<!-- Canonical URL -->
+<link rel="canonical" href={canonical} />
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Open Graph / Social media tags -->
+<meta property="og:title" content={metaTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content="article" />
 {
   Astro.props.entry.data.image
   ? (
-    <meta property="og:image" content={new URL(Astro.props.entry.data.image, Astro.site)} /> 
-    <meta name="twitter:image" content={new URL(Astro.props.entry.data.image, Astro.site)} />
-    <meta property="og:title" content={metaTitle} />
-    <meta name="twitter:title" content={metaTitle} />
+    <meta property="og:image" content={Astro.site ? new URL(Astro.props.entry.data.image, Astro.site).href : Astro.props.entry.data.image} /> 
+    <meta name="twitter:image" content={Astro.site ? new URL(Astro.props.entry.data.image, Astro.site).href : Astro.props.entry.data.image} />
   )
   : (
-    <meta property="og:image" content={ogImageUrl} />
-    <meta name="twitter:image" content={ogImageUrl} />
-    <meta property="og:title" content={metaTitle} />
-    <meta name="twitter:title" content={metaTitle} />
+    <meta property="og:image" content={typeof ogImageUrl === 'string' ? ogImageUrl : ogImageUrl.href} />
+    <meta name="twitter:image" content={typeof ogImageUrl === 'string' ? ogImageUrl : ogImageUrl.href} />
   )
 }
 
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={metaTitle} />
+<meta name="twitter:description" content={description} />
+<meta property="twitter:domain" content={domain} />
+<meta property="twitter:url" content={canonical} />
+
+<!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-<!-- Google tag (gtag.js) -->
+<!-- Analytics -->
 <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-QF2CWF97TK"></script>
-
 <script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-QF2CWF97TK');
 </script>
 
@@ -57,7 +79,8 @@ const metaTitle = Astro.props.entry.data.metaTitle || Astro.props.entry.data.tit
     height="0"
     width="0"
     style="display:none;visibility:hidden"
-  >
-  </iframe>
+  ></iframe>
 </noscript>
-<!-- End Google Tag Manager (noscript) -->
+
+<!-- Pass through any injected head content -->
+<slot />
