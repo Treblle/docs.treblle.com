@@ -6,10 +6,16 @@ const ogImageUrl = new URL(
 `/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`,
   Astro.site,
 )
+
+// Get the custom meta title if it exists, otherwise use the page title
+const metaTitle = Astro.props.entry.data.metaTitle || Astro.props.entry.data.title;
 ---
 
+<!-- Remove the default title tag from Starlight -->
 <Default {...Astro.props}><slot /></Default>
 
+<!-- Add your custom title tag -->
+<title>{metaTitle}{Astro.props.lang === 'en' ? '' : ` - ${Astro.props.lang}`}</title>
 
 {
   Astro.props.entry.data.image

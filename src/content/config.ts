@@ -5,7 +5,8 @@ export const collections = {
 	docs: defineCollection({
 		schema: docsSchema({
 			extend: z.object({
-				image: z.string().optional()
+				image: z.string().optional(),
+				metaTitle: z.string().optional() // Add this line
 			})
 		})
 	}),
