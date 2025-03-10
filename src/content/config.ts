@@ -6,7 +6,7 @@ export const collections = {
 		schema: docsSchema({
 			extend: z.object({
 				image: z.string().optional(),
-				metaTitle: z.string().optional() // Add this line
+				metaTitle: z.string().optional()
 			})
 		})
 	}),
