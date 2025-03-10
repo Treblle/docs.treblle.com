@@ -34,6 +34,11 @@
             "source": "/treblle/alfred-ai",
             "destination": "/treblle/alfred-ai/",
             "permanent": true
+        },
+        {
+            "source": "/security/",
+            "destination": "/security/certification/",
+            "permanent": true
         }
     ]
 }

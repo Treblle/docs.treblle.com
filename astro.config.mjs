@@ -239,10 +239,6 @@ export default defineConfig({
     applyBaseStyles: false
   }), sitemap(), react(), svelte()],
   redirects: {
-    '/security/': {
-      status: 301,
-      destination: '/security/certification/'
-    },
     '/en/integrations': {
       status: 301,
       destination: '/integrations/'
