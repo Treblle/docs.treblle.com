@@ -66,6 +66,9 @@ export default defineConfig({
         label: 'Customers',
         link: '/treblle/customers/'
       }, {
+        label: 'API Traceability',
+        link: '/treblle/api-traceability/'
+      }, {
         label: 'Problems',
         link: '/treblle/problems/'
       }, {

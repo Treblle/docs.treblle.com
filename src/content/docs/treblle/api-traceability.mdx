@@ -4,8 +4,18 @@ description: "API traceability is a feature in Treblle that allows you to trace 
 image: "/og-images/api-traceability.jpg"
 ---
 
-API traceability in Treblle helps you monitor the request and response of API calls across all your APIs.
+API traceability in Treblle helps you monitor and track API request and response data across all your APIs.
 
-To optimize this feature, use a custom header called `treblle-tag-id`. This trace ID will trace the request across any APIs you have registered with Treblle.
+:::note
+Only workspace owners can access this feature.
+:::
 
-A best practice is to prefix this trace ID header with something unique to you, like: treblle-identity-123123123, indicating the trace originated from the Treblle organization, on the Identity service. The random letters or numbers after can be a hash, ULID, or anything fitting your scenario.
+### Using Trace IDs
+
+To enable traceability, include a custom header called `treblle-tag-id`. This trace ID allows tracking of requests across all APIs registered with Treblle.
+
+### Best Practices
+
+- Use a unique prefix: Format your trace ID as `treblle-identity-123123123` to indicate its origin within Treblle.
+
+- Ensure uniqueness: Append a unique identifier such as a hash, ULID, or any suitable format for your system.
