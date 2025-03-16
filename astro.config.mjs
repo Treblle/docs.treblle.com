@@ -141,6 +141,9 @@ export default defineConfig({
         }, {
           label: 'Treblle with AWS Lambda',
           link: '/integrations/java/aws-lambda/'
+        }, {
+          label: 'Treblle with JavaX',
+          link: '/integrations/java/javax/'
         }]
       }, {
         label: 'JavaScript',
