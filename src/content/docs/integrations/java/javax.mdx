@@ -1,7 +1,7 @@
 ---
 title: "Treblle with JavaX"
 metaTitle: "Set Up Treblle in JavaX | Treblle Docs"
-description: "Integrate Treblle with JavaX Servlet API to capture API requests, track errors, and improve visibility. Learn how to set up Treblle for real-time API insights"
+description: "Integrate Treblle with JavaX Servlet API to capture API requests, track errors, and improve visibility. Learn how to set up Treblle for real-time API insights."
 image: "/og-images/treblle-javax.jpg"
 ---
 
@@ -18,7 +18,7 @@ image: "/og-images/treblle-javax.jpg"
       <div className="col-span-4">
         <h3 className="text-xl font-semibold">treblle-javax</h3>
         <p className="text-sm font-medium">
-          The official Treblle SDK for JavaX. Seamlessly integrate Treblle with JavaX Servlet API 3.1.0 and JavaX RS API 2.1.1 to monitor your API traffic, track errors, and secure sensitive data.
+          The official Treblle SDK for JavaX. Integrate Treblle with JavaX Servlet API 3.1.0 and JavaX RS API 2.1.1 to monitor your API traffic, track errors, and secure sensitive data.
         </p>
       </div>
     </div>
@@ -51,11 +51,14 @@ Add the following dependency to your project:
 implementation 'com.treblle:treblle-javax:1.0.2'
 ```
 
+#### Check Maven Central Repository
+For all available versions and metadata, visit the [Maven Central Repository](https://central.sonatype.com/artifact/com.treblle/treblle-javax/overview).
+
 ## Getting started
-First, create a FREE account on treblle.com to get an API key and Project ID.
+First, create a FREE account on [treblle.com](treblle.com) to get an API key and Project ID.
 
 ### Basic Configuration
-To set up Treblle in your JavaX application, you'll need to configure the filter to intercept requests and responses. Here's a basic configuration example:
+To set up Treblle in your JavaX application, you must configure the filter to intercept requests and responses. Here's a basic configuration example:
 
 ```java
 // Import necessary classes
@@ -106,7 +109,7 @@ public class MyApplication extends Application {
 }
 ```
 
-That's it! Your API requests and responses are now being sent to your Treblle project. You'll get features like: auto-documentation, real-time request/response monitoring, error tracking and so much more.
+That's it! Your API requests and responses are now being sent to your Treblle project. You'll get features like auto-documentation, real-time request/response monitoring, error tracking, and more.
 
 ### Filter Configuration Options
 
@@ -132,9 +135,9 @@ filter.setInitParameter("debug", "true");
 filter.setInitParameter("endpoint", "https://rocknrolla.treblle.com");
 ```
 
-### Running Treblle only for certain URL patterns
+### Running Treblle only for specific URL patterns
 
-By default, Treblle applies its filter to all requests (/*). If you want to run Treblle only for certain URL patterns, you can specify them during filter registration:
+By default, Treblle applies its filter to all requests (/*). If you want to run Treblle only for specific URL patterns, you can specify them during filter registration:
 
 ```java
 // Register the filter only for API endpoints
