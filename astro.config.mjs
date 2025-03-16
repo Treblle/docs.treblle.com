@@ -138,6 +138,9 @@ export default defineConfig({
         items: [{
           label: 'Treblle with Spring',
           link: '/integrations/java/spring/'
+        }, {
+          label: 'Treblle with AWS Lambda',
+          link: '/integrations/java/aws-lambda/'
         }]
       }, {
         label: 'JavaScript',
