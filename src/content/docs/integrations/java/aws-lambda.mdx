@@ -1,0 +1,197 @@
+---
+title: "Treblle with AWS Lambda"
+metaTitle: "Set Up Treblle in AWS Lambda | Treblle Docs"
+description: "Integrate Treblle with AWS Lambda to capture API requests, track errors, and improve visibility"
+image: "/og-images/treblle-aws-lambda.jpg"
+---
+
+<div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
+  <a href="https://central.sonatype.com/artifact/com.treblle/treblle-aws-lambda/1.0.2/overview" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
+    <div>
+      <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+      </svg>
+    </div>
+    <div class="grid grid-cols-4 gap-4 px-2 py-2">
+      <div class="col-span-4">
+      	<h3 class="text-xl font-semibold">treblle-aws-lambda</h3>
+      	<p class="text-sm font-medium">
+          The official Treblle SDK for AWS Lambda. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data in your serverless functions.
+        </p>
+      </div>
+    </div>
+  </a>
+</div>
+
+## Requirements
+
+- AWS Lambda environment
+- Java 8+
+- Maven or Gradle build system
+
+## Installation
+
+Add the following dependency to your Maven project:
+
+```xml
+<dependency>
+    <groupId>com.treblle</groupId>
+    <artifactId>treblle-aws-lambda</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
+
+If you're using Gradle, add:
+
+```gradle
+implementation 'com.treblle:treblle-aws-lambda:1.0.2'
+```
+
+## Check Maven Central Repository
+
+For all available versions and metadata, visit the [Maven Central Repository](https://central.sonatype.com/artifact/com.treblle/treblle-aws-lambda/1.0.2/overview).
+
+## Getting started
+
+First, you must create a FREE account on [treblle.com](treble.com) to get an API key and Project ID. After you have those, you must integrate Treblle into your AWS Lambda handler.
+
+### Basic Implementation
+
+Here's a simple example of integrating Treblle with an AWS Lambda function that handles API Gateway requests:
+
+```java
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+import com.treblle.aws.lambda.TreblleHandler;
+
+public class MyLambdaHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+
+    private final TreblleHandler treblleHandler;
+
+    public MyLambdaHandler() {
+        // Initialize Treblle with your API key and Project ID
+        this.treblleHandler = new TreblleHandler(
+            "YOUR_API_KEY", 
+            "YOUR_PROJECT_ID"
+        );
+    }
+
+    @Override
+    public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
+        // Your Lambda handler code wrapped with Treblle monitoring
+        return treblleHandler.handle(request, context, this::processRequest);
+    }
+
+    // Your actual business logic
+    private APIGatewayProxyResponseEvent processRequest(APIGatewayProxyRequestEvent request, Context context) {
+        APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
+        
+        try {
+            // Your API implementation
+            response.setStatusCode(200);
+            response.setBody("{\"message\":\"Success\"}");
+        } catch (Exception e) {
+            // Treblle will automatically capture this error
+            response.setStatusCode(500);
+            response.setBody("{\"error\":\"Internal server error\"}");
+        }
+        
+        return response;
+    }
+}
+```
+
+That's it! 
+
+Your API requests and responses from your AWS Lambda function are being sent to your Treblle project. This gives you features like auto-documentation, real-time request/response monitoring, error tracking, etc.
+
+## Configuration Options
+
+The `TreblleHandler` constructor supports several configuration options:
+
+```java
+// Initialize Treblle with additional options
+TreblleHandler treblleHandler = new TreblleHandler(
+    "YOUR_API_KEY",               // Your Treblle API key
+    "YOUR_PROJECT_ID",            // Your Treblle Project ID
+    Arrays.asList("secret_field", "sensitive_data"), // Additional fields to mask
+    false                         // Debug mode
+);
+```
+
+## Environment Variables
+
+You can also configure Treblle using environment variables in your AWS Lambda configuration:
+
+- `TREBLLE_API_KEY` - Your Treblle API key
+- `TREBLLE_PROJECT_ID` - Your Treblle Project ID
+- `TREBLLE_MASKING_KEYWORDS` - Comma-separated list of additional fields to mask
+- `TREBLLE_DEBUG` - Set to "true" to enable debug mode
+- `TREBLLE_ENDPOINT` - (Optional) Custom endpoint URL
+
+With environment variables, you can simplify your code:
+
+```java
+// Reads configuration from environment variables
+TreblleHandler treblleHandler = new TreblleHandler();
+```
+
+## Need to hide additional fields?
+
+Treblle automatically masks sensitive data like passwords, tokens, and authentication information. If you want to expand the list of fields you want to hide, you can pass additional field names to the constructor or set them via environment variables:
+
+### Via constructor
+
+```java
+List<String> additionalFields = Arrays.asList("secretField", "privateKey");
+TreblleHandler treblleHandler = new TreblleHandler(
+    "YOUR_API_KEY", 
+    "YOUR_PROJECT_ID",
+    additionalFields
+);
+```
+
+### Via environment variables
+
+```java
+TREBLLE_MASKING_KEYWORDS=secretField,privateKey
+```
+
+### Masking Entire Objects
+
+To mask entire JSON objects and all their properties, use the pattern:
+
+```java
+fieldName.*
+```
+
+## Performance Considerations
+
+Treblle is designed to have minimal impact on your Lambda's performance:
+
+- Initialize the TreblleHandler once in your class constructor to avoid creating it on each invocation
+- Treblle uses asynchronous processing to minimize the impact on your Lambda execution time
+- The SDK is lightweight and optimized for serverless environments
+
+## Deployment
+
+When deploying your Lambda function with Treblle, make sure:
+
+- Your function has internet access (if in a VPC).
+- You've correctly set up environment variables for your API key and Project ID.
+- You've given your Lambda enough memory and timeout to accommodate the additional Treblle processing.
+
+## Error Handling
+
+Treblle automatically captures and reports errors that occur in your Lambda function. The SDK captures:
+
+- Exception details
+- Stacktrace information
+- Request context
+- Response data
+
+This information is sent securely to your Treblle dashboard, where you can review and address issues.
