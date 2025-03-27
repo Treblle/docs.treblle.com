@@ -45,182 +45,254 @@ image: "/og-images/treblle-kong.jpg"
 
 The [Kong](https://konghq.com/) plugin captures API requests and responses in real time through Kong Gateway and sends them to Treblle for monitoring, security, and analytics.
 
-### Terminologies
+## Prerequisites
 
-- **Plugin**: Executes actions within Kong before or after a request is proxied to the upstream API.
-- **Service**: Represents an external upstream API or microservice within Kong.
-- **Route**: Maps downstream requests to upstream services in Kong.
-- **Consumer**: Represents a developer or machine using the API. Consumers interact with Kong, which proxies every call to the upstream API.
-- **Credential**: A unique string associated with a Consumer, commonly called an API key.
-- **Upstream Service**: Refers to your API or service behind Kong, receiving client requests via Kong.
-- **API**: Kong deprecated this entity, which represented upstream services, and replaced it with Services starting from CE 0.13.0 and EE 0.32.
+- Docker installed (for MacOS or Linux)
+- Git installed
+- A Treblle account with an API key and Project ID
 
-## Installation
+## Installation Options
 
-#### 1. Installing the Treblle Plugin
+- MacOS with Docker
+- Linux with Docker
 
-Clone the `treblle-kong` repository and copy the source code content to the correct location: 
+### MacOS Installation
 
-`/usr/local/share/lua/5.1/kong/plugins/treblle`
+1. **Clone the repository**
 
-```bash
-git clone https://github.com/Treblle/treblle-kong.git
-```
+    ```bash
+     git clone https://github.com/Treblle/treblle-kong.git
+     cd treblle-kong
+    ```
 
-:::note
-A sample [Dockerfile](https://github.com/Treblle/treblle-kong/blob/main/Dockerfile) is available for reference.
-:::
+2. **Build the Docker image**
 
-#### 2. Updating the Plugins List
+    ```bash
+     docker build -t k:v1 .
+    ```
 
-In `kong.conf`, append `treblle` to the `plugins` field (or custom_plugins in older Kong versions) and ensure the field is not a comment.
+3. **Start the container**
 
-```ini
-plugins = bundled,treblle     # Comma-separated list of plugins this node should load. 
-                              # By default, only plugins bundled in official distributions 
-                              # are loaded via the `bundled` keyword.
-```
+    ```bash
+     docker-compose up -d
+    ```
 
-If `kong.conf` is missing, create one from the default configuration:
+### Linux Installation
 
-```sh
-cp /etc/kong/kong.conf.default /etc/kong/kong.conf
-```
+1. **Prepare the project directory structure**
 
-#### 3. Starting Kong
+    ```
+     kong-treblle-sandbox/
+     │
+     ├── docker-compose.yml
+     ├── kong.conf
+     ├── Dockerfile
+     └── kong.yml
+    ```
 
-Start the Kong server as usual.
+2. **Creating the Dockerfile**
 
-## Configuration
+     The Dockerfile builds a custom Kong image with the Treblle plugin installed. It installs necessary dependencies, adds the Treblle plugin via luarocks, and configures Kong to use it.
 
-#### Enabling the Treblle Plugin Globally
+    ```dockerfile
+     FROM kong:3.4.0
 
-To enable the Treblle plugin globally, create an API in Treblle and obtain the `SDK token` and `API ID` from the Treblle dashboard.
+     USER root
+     RUN apk add --no-cache git unzip curl luarocks
+     RUN luarocks install --server=http://luarocks.org/manifests/treblle kong-plugin-treblle
+     COPY kong.conf /etc/kong/kong.conf
+     USER kong
+    ```
 
-Check how to start with the [Treblle Platform](https://docs.treblle.com/guides/getting-started/).
+3. **Creating the kong.conf**
 
-In Kong, a plugin not associated with any specific Service, Route, Consumer, or API (in older versions) is considered "global" and applies to every request.
+     The kong.conf file configures database connections and enables the Treblle plugin. It sets up PostgreSQL connection parameters and adds Treblle to the list of available plugins.
 
-For more details, refer to the [Plugin Reference](https://legacy-gateway--kongdocs.netlify.app/gateway-oss/2.4.x/admin-api/#add-plugin) and [Plugin Precedence](https://legacy-gateway--kongdocs.netlify.app/gateway-oss/2.4.x/admin-api/#precedence) sections.
+    ```ini
+     database = on
+     pg_host = postgres
+     pg_port = 5432
+     pg_user = kong
+     pg_password = kong
+     pg_database = kong
+     plugins = bundled,treblle
+    ```
 
-```sh
-curl -i -X POST --url http://localhost:8001/plugins/ \
-    --data "name=treblle" \
-    --data "config.api_key=<SDK Token>" \
-    --data "config.project_id=<API_ID>"
-```
+4. **Creating the docker-compose.yml**
 
-#### Enabling the Plugin on a Service
+     The docker-compose.yml orchestrates three containers: a PostgreSQL database, a Kong migration service that initializes the database, and the Kong service itself with the Treblle plugin enabled.
 
-To enable the plugin for a specific [Service](https://legacy-gateway--kongdocs.netlify.app/gateway-oss/2.4.x/admin-api/#service-object), send the following request to your Kong server:
+    ```yaml
+     services:
+       postgres:
+         image: postgres:13
+         environment:
+           POSTGRES_DB: kong
+           POSTGRES_PASSWORD: kong
+           POSTGRES_USER: kong
+         volumes:
+           - postgres_data:/var/lib/postgresql/data
+         healthcheck:
+           test: ["CMD", "pg_isready", "-U", "kong"]
+           interval: 30s
+           timeout: 30s
+           retries: 3
 
-To configure the plugin on a particular service:
+       kong-migration:
+         image: kong:3.4.0
+         command: kong migrations bootstrap
+         environment:
+           KONG_DATABASE: postgres
+           KONG_PG_HOST: postgres
+           KONG_PG_PASSWORD: kong
+           KONG_PG_USER: kong
+         depends_on:
+           postgres:
+             condition: service_healthy
 
-- **config.api_key** – Find your Treblle SDK Token in the Treblle Portal.
-- **config.project_id** – Find your Treblle API ID in the Treblle Portal.
-- **service** – Use the service ID or name to apply the plugin.
+       kong:
+         build: 
+           context: .
+           dockerfile: Dockerfile
+         container_name: kong-treblle
+         environment:
+           KONG_DATABASE: postgres
+           KONG_PG_HOST: postgres
+           KONG_PG_PASSWORD: kong
+           KONG_PG_USER: kong
+           KONG_PLUGINS: bundled,treblle
+           KONG_PROXY_ACCESS_LOG: /dev/stdout
+           KONG_ADMIN_ACCESS_LOG: /dev/stdout
+           KONG_PROXY_ERROR_LOG: /dev/stderr
+           KONG_ADMIN_ERROR_LOG: /dev/stderr
+           KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+         ports:
+           - "9000:8000"   # Proxy port
+           - "9001:8001"   # Admin API port
+           - "9443:8443"
+           - "9444:8444"
+         depends_on:
+           postgres:
+             condition: service_healthy
+           kong-migration:
+             condition: service_completed_successfully
+         healthcheck:
+           test: ["CMD", "kong", "health"]
+           interval: 10s
+           timeout: 10s
+           retries: 10
 
+     volumes:
+       postgres_data:
+    ```
 
-```sh
-curl -X POST http://kong:8001/services/{service}/plugins \
-    --data "name=treblle"  \
-    --data "config.api_key=<SDK Token>" \
-    --data "config.project_id=<API_ID>"
-```
+5. **Start the containers**
 
-#### Enabling the Plugin on a Route
+    ```bash
+     docker-compose up -d
+    ```
 
-To configure the plugin for a specific [route](https://legacy-gateway--kongdocs.netlify.app/gateway-oss/2.4.x/admin-api/#route-object), use the following command. 
+## Configuration Steps
 
-`route_id`: The plugin applies to the route with this ID.
+     Follow these steps to configure Treblle with Kong. Commands vary slightly between MacOS and Linux installations.
 
-```sh
-curl -X POST http://kong:8001/routes/{route_id}/plugins \
-    --data "name=treblle"  \
-    --data "config.api_key=<SDK Token>" \
-    --data "config.project_id=<API_ID>"
-```
+### For MacOS
 
-## Parameters
+    ```bash
+     # Verify plugin is enabled
+     curl -i -X GET http://localhost:8001/plugins/enabled
 
-The following table outlines the available configuration parameters for the Treblle plugin, including their default values and descriptions:
+     # Create a service
+     curl -i -X POST http://localhost:8001/services \
+       --data "name=httpbin-service" \
+       --data "url=https://httpbin.org"
 
-| Parameter | Default (Kong 1.x, 2.x) | Default (Kong 3.x+) | Description |
-|-----------|-------------------------|---------------------|-------------|
-| `name` | - | - | The plugin's name (`treblle`). |
-| `service_id` | - | - | The ID of the service where the plugin is applied. |
-| `route_id` | - | - | The ID of the route where the plugin is applied. |
-| `enabled` | true | true | Specifies whether the plugin is active. |
-| `config.api_key` | - | - | The Treblle SDK token. |
-| `config.project_id` | - | - | The Treblle API ID. |
-| `config.connect_timeout` | 1000 | 1000 | Connection timeout in milliseconds. |
-| `config.send_timeout` | 5000 | 5000 | Timeout for sending data (in milliseconds). |
-| `config.keepalive` | 5000 | 5000 | Duration (in milliseconds) to keep idle connections alive. |
-| `config.request_max_body_size_limit` | 100000 | 100000 | Maximum request body size (in bytes). |
-| `config.response_max_body_size_limit` | 100000 | 100000 | Maximum response body size (in bytes). |
-| `config.debug` | false | false | Enables or disables debug logs. |
-| `config.enable_compression` | false | false | Enables or disables request compression. |
-| `config.max_retry_count` | 1 | 1 | Number of retries for API requests. |
-| `config.retry_interval` | 5 | 5 | Interval (in seconds) between retries. |
-| `config.mask_keywords` | - | - | List of keywords to mask in request/response logs. |
+     # Create a route
+     curl -i -X POST http://localhost:8001/services/httpbin-service/routes \
+       --data "name=httpbin-route-post" \
+       --data "paths[]=/httpbin" \
+       --data "methods[]=POST"
 
+     # Add Treblle plugin
+     curl -i -X POST http://localhost:8001/services/httpbin-service/plugins \
+       --data "name=treblle" \
+       --data "config.api_key=YOUR_TREBLLE_API_KEY" \
+       --data "config.project_id=YOUR_TREBLLE_PROJECT_ID" \
+       --data "config.mask_keywords[]=Authorization" \
+       --data "config.mask_keywords[]=User-Agent" \
+       --data "config.mask_keywords[]=Cookie"
 
-### Masking Sensitive Data
+     # Test
+     curl -i -X POST http://localhost:8000/httpbin/post \
+       -H "Content-Type: application/json" \
+       -d '{"test": "data", "foo": "bar"}'
+    ```
 
-To enable masking of sensitive data, use the following cURL command:
+### For Linux
 
-```sh
-curl -i -X POST http://localhost:8001/plugins/ \
-    --data "name=treblle" \
-    --data "config.api_key=<SDK Token>" \
-    --data "config.project_id=<API_ID>" \
-    --data "config.mask_keywords[]=Authorization" \
-    --data "config.mask_keywords[]=API_Key"
-```
-For more details on masking fields in Treblle, refer to the [Masking Fields documentation](https://docs.treblle.com/security/masking/).
+    ```bash
+     # Create a service
+     curl -i -X POST http://localhost:9001/services \
+       --data name=httpbin-service \
+       --data url=https://httpbin.org
+
+     # Create a route
+     curl -i -X POST http://localhost:9001/services/httpbin-service/routes \
+       --data "name=httpbin-route" \
+       --data "paths[]=/test" \
+       --data "methods[]=POST"
+
+     # Add Treblle plugin
+     curl -i -X POST http://localhost:9001/services/httpbin-service/plugins \
+       --data "name=treblle" \
+       --data "config.api_key=YOUR_TREBLLE_API_KEY" \
+       --data "config.project_id=YOUR_TREBLLE_PROJECT_ID" \
+       --data "config.mask_keywords[]=Authorization" \
+       --data "config.mask_keywords[]=API_Key" \
+       --data "config.mask_keywords[]=Secure-Token"
+
+     # Test
+     curl -X POST http://localhost:9000/test/post
+    ```
 
 ## Troubleshooting
 
-:::note
-Avoid installing multiple instances of the plugin. Instead, update the existing configuration.
+### Enable Debug Logs
 
-Use `config.max_retry_count` and `config.retry_interval` to manage network issues.
-:::
+     To print Treblle debug logs, set the debug flag to true:
 
-#### Enabling Debug Logs
-
-To enable Treblle debug logs, set `--data "config.debug=true"` when configuring the plugin.
-
-If you already have Treblle, update the existing plugin configuration instead of installing it again.
-
-Kong does not support multiple instances of the same plugin.
-
-#### Updating the Plugin with Debug Enabled
-
-Sample Commands:
-
-1. **Create a Service**:  
-   ```sh
-   curl -X POST http://localhost:8001/services \
-   --data "name=httpbin-service" \
-   --data "url=https://httpbin.org"
+    ```bash
+     curl -i -X POST http://localhost:8001/services/httpbin-service/plugins \
+       --data "name=treblle" \
+       --data "config.api_key=YOUR_TREBLLE_API_KEY" \
+       --data "config.project_id=YOUR_TREBLLE_PROJECT_ID" \
+       --data "config.debug=true"
     ```
 
-2. **Create a Route**:
-   ```sh
-   curl --location 'http://localhost:8001/services/httpbin-service/routes' \
-   --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode 'name=httpbin-route' \
-   --data-urlencode 'paths%5B%5D=/httpbin' \
-   --data-urlencode 'methods%5B%5D=POST'
-   ```
+### Verification Commands (Linux)
 
-3. **Enable the Plugin with Masking**:
-   ```sh
-   curl -i -X POST http://localhost:8001/services/httpbin-service/plugins \
-   --data "name=treblle" \
-   --data "config.api_key=<SDK Token>" \
-   --data "config.project_id=<API_ID>" \
-   --data "config.mask_keywords[]=Authorization" \
-   --data "config.mask_keywords[]=API_Key"
-   ```
+     Use these commands to verify your setup:
+
+    ```bash
+     # Check Docker containers
+     docker-compose ps
+
+     # View Kong logs
+     docker-compose logs kong
+    ```
+
+## Configuration Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| config.api_key | | The Treblle SDK token |
+| config.project_id | | The Treblle API ID |
+| config.mask_keywords | | Masking keywords for the payload |
+| config.debug | false | Enables debug logging |
+| config.enable_compression | false | Compresses requests before sending |
+| config.connect_timeout | 1000 | Connection timeout (ms) |
+| config.send_timeout | 5000 | Send timeout (ms) |
+| config.request_max_body_size_limit | 100000 | Max request body size (bytes) |
+| config.response_max_body_size_limit | 100000 | Max response body size (bytes) |
+
+For more advanced configuration options, refer to our [GitHub repository](https://github.com/Treblle/treblle-kong).
