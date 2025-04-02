@@ -380,6 +380,14 @@ export default defineConfig({
       status: 301,
       destination: '/integrations#community-sdks/'
     },
+    '/guides/': {
+      status: 301,
+      destination: '/guides/getting-started/'
+    },
+    '/en/introduction': {
+      status: 301,
+      destination: '/guides/getting-started/'
+    },
   },
   themeConfig: {
     nav: [
