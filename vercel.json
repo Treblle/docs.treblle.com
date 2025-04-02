@@ -1,13 +1,18 @@
 {
     "redirects": [
         {
+            "source": "/guides/",
+            "destination": "/guides/getting-started/",
+            "permanent": true
+        },
+        {
             "source": "/en/introduction",
-            "destination": "/guides/",
+            "destination": "/guides/getting-started/",
             "permanent": true
         },
         {
             "source": "/en/introduction/",
-            "destination": "/guides/",
+            "destination": "/guides/getting-started/",
             "permanent": true
         },
         {
