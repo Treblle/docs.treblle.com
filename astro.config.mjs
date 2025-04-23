@@ -124,6 +124,9 @@ export default defineConfig({
         }, {
           label: 'WSO2',
           link: '/integrations/gateways/wso2/'
+        }, {
+          label: 'MuleSoft',
+          link: '/integrations/gateways/mulesoft/'
         }]
       }, {
         label: 'Go',
