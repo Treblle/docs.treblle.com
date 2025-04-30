@@ -101,7 +101,7 @@ If you are using Laravel 11, then all you need to do is register the middleware 
 ```php
 ->withMiddleware(function (Middleware $middleware): void {
   $middleware->alias([
-    'treblle' => \Treblle\Middlewares\TreblleMiddleware::class,
+    'treblle' => \Treblle\Laravel\Middlewares\TreblleMiddleware::class,
   ]);
 })
 ```
@@ -109,7 +109,7 @@ If you are using Laravel 11, then all you need to do is register the middleware 
 Or, alternatively you can inline this inside your routes:
 
 ```php
-Route::middleware([Treblle\Middlewares\TreblleMiddleware::class])->group(
+Route::middleware([\Treblle\Laravel\Middlewares\TreblleMiddleware::class])->group(
   // add your observable routes in here.
 );
 ```
