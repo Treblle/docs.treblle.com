@@ -139,6 +139,73 @@ Ensure your API is already deployed and running in CloudHub or Runtime Manager b
 
 The request should appear in Treblle within a few seconds, including headers, payload, and response data.
 
+## Using Automated Policy for Multiple APIs
+
+If you want to group all your APIs under a single Treblle policy configuration, you can use the Automated Policy feature. This approach means that all your APIs will share the same data masking settings and appear as one unified API on the Treblle platform, rather than adding the Treblle policy to each API manually.
+
+### Setting up Automated Policy
+
+1. Navigate to Automated Policies
+
+    - Go to API Manager in your Anypoint Platform
+    - On the left sidebar, locate and click on Automated Policies
+
+    <img
+    src="/platform/mulesoft/AutomatedPolicy.jpeg"
+    alt="Automated Policies in API Manager sidebar"
+    width="800"
+    style={{ borderRadius: "8px" }}
+    />
+
+2. Configure the Treblle Policy
+
+    - Click Add to create a new automated policy
+    - Select the `treblle-policy` from the available policies
+    - Configure the following required fields:
+
+      - API Key: Enter your Treblle API Key (Project ID)
+      - SDK Token: Enter your Treblle SDK Token
+      - Mask Keywords: Add any sensitive data fields you want to mask (e.g., email,id)
+
+    <img
+    src="/platform/mulesoft/EditPolicy.jpeg"
+    alt="Automated Policy Configuration"
+    width="800"
+    style={{ borderRadius: "8px" }}
+    />
+
+3. Advanced Configuration Options
+
+    - Click on Advanced options to configure policy version and application rules:
+
+    - Policy version: Select the appropriate version (e.g., 1.0.6 latest)
+    - Rule of application: Choose how the policy should be applied:
+
+      - All runtimes: Apply to all APIs with Flex and Mule (4.1.1 and above)
+      - Flex gateways only: Apply only to Flex gateways (note: this version may not support implementations)
+      - Mule gateways only: Apply only to Mule gateways
+      - Version range: Specify the Mule runtime version range (e.g., from 4.1.1)
+      - Java Versions: Choose to apply to all Java versions or specify particular versions
+
+    <img
+    src="/platform/mulesoft/AdvanceOption.jpeg"
+    alt="Advanced Options for Automated Policy"
+    width="800"
+    style={{ borderRadius: "8px" }}
+    />
+
+### Benefits of Automated Policy
+
+- Centralized Management: Manage all your API monitoring from a single policy configuration
+- Consistent Data Masking: Apply the same masking rules across all your APIs
+- Unified Dashboard: View all API traffic in one consolidated view on the Treblle platform
+- Reduced Maintenance: No need to individually configure each API
+- Automatic Coverage: New APIs automatically inherit the policy configuration
+
+:::note
+When using automated policies, all APIs within the specified scope will be monitored under the same Treblle project. This is ideal for organizations that want a unified view of their API ecosystem.
+:::
+
 ### Masking Fields
 
 To mask fields in MuleSoft:
