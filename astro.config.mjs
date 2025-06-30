@@ -53,8 +53,12 @@ export default defineConfig({
     }, {
       label: 'Treblle Platform',
       collapsed: true,
-      items: [{
-        label: 'Treblle Dashboard',
+      items: [
+        {
+        label: 'API Dashboard',
+        link: '/treblle/apidashboard/'
+      }, {
+        label: 'Individual API Dashboard',
         link: '/treblle/dashboard/'
       }, {
         label: 'Requests',
