@@ -53,8 +53,12 @@ export default defineConfig({
     }, {
       label: 'Treblle Platform',
       collapsed: true,
-      items: [{
-        label: 'Treblle Dashboard',
+      items: [
+        {
+        label: 'API Dashboard',
+        link: '/treblle/apidashboard/'
+      }, {
+        label: 'Individual API Dashboard',
         link: '/treblle/dashboard/'
       }, {
         label: 'Requests',
@@ -387,7 +391,11 @@ export default defineConfig({
       status: 301,
       destination: '/guides/getting-started/'
     },
-    '/en/introduction': {
+    '/en/integrations/community-sdks': {
+      status: 301,
+      destination: '/integrations#community-sdks/'
+    },
+    '/guides/': {
       status: 301,
       destination: '/guides/getting-started/'
     },
