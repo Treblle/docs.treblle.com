@@ -19,15 +19,15 @@ Here’s what you can do while using the API Dashboard:
 
 ## Key Highlights
 - **Individual API Blocks**: Each API in your workspace is displayed as a **dedicated, clear block** showing essential details at a glance, making it easy to scan and prioritize across all your APIs.
-### Requests and Endpoints: See **total requests** and **endpoints** per API directly on the dashboard, on every API block. This helps you:
-- Track adoption and usage
-- Identify your most active APIs
-- Manage and plan for growth trends
-### Heartbeat with Good(Green) and Bad(Red) Requests: Each API block includes a **compact heartbeat graph** showing request trends with:
-- **Green** indicating successful requests
-- **Red** indicating errors
+- **Requests and Endpoints**: See **total requests** and **endpoints** per API directly on the dashboard, on every API block. This helps you:
+  - Track adoption and usage
+  - Identify your most active APIs
+  - Manage and plan for growth trends
+**Heartbeat with Good(Green) and Bad(Red) Requests**: Each API block includes a **compact heartbeat graph** showing request trends with:
+  - **Green** indicating successful requests
+  - **Red** indicating errors
 This makes it easy to spot spikes, drops, and anomalies in API performance at a glance.
-### API Governance Score for Every API: View the **governance and compliance score** for each API, allowing you to:
-- Track adherence to security and governance standards
-- Identify APIs that need improvement
-- Maintain a consistent quality baseline across your API estate
+**API Governance Score for Every API**: View the **governance and compliance score** for each API, allowing you to:
+  - Track adherence to security and governance standards
+  - Identify APIs that need improvement
+  - Maintain a consistent quality baseline across your API estate
