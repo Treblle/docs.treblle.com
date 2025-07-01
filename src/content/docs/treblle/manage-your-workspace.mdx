@@ -1,0 +1,61 @@
+---
+title: "Treblle Manage your Team"
+metaTitle: "Manage your Team | Treblle Docs"
+description: "Treblle provides two layers of roles and permissions to ensures security, accountability, and efficient collaboration across your API landscape."
+image: "/og-images/dashboard.jpg"
+---
+
+
+## Treblle Roles and Permissions
+
+Treblle provides **two layers of roles and permissions**:
+- **Workspace Level:** Manage who can access, administer, and add APIs across your entire workspace.
+- **API Level:** Manage who can access and modify individual APIs with granular control.
+
+This ensures **security, accountability, and efficient collaboration** across your API landscape.
+
+
+## Workspace-Level Roles and Permissions
+### Key Actions
+Under **Workspace Settings > People**, workspace **Owners** can:
+- **Invite users** via email or an **invite link** (link expires in 24 hours and can be regenerated anytime).
+- **Assign roles** (Owner, Member, Customer) during or after inviting.
+- **View and manage users**, including their emails and roles.
+- **Change user roles** as team needs evolve.
+- **Delete users** to remove workspace access.
+
+<img src="/platform/manage-your-workspace/Workspace-API-Settings.png" width="800" style={{ borderRadius: "8px" }} />
+
+
+### Roles and Permissions
+
+| Role        | Can Add/Delete Users       | Can Change Permissions | API Creation                  | Access to APIs             | Notes                                                                   |
+|-------------|----------------------------|------------------------|-------------------------------|----------------------------|-------------------------------------------------------------------------|
+| **Owner**   | Yes                        | Yes                    |  Production & Non-Production  |  All APIs                  | Admin of workspace; manages billing, settings, and user control.        |
+| **Member**  | Can invite, cannot delete  | No                     |  Non-Production only          |  All non-private APIs      | Cannot manage billing or add production-tagged APIs.                    |
+| **Customer**| No                         | No                     |  No                           |  Assigned APIs (read-only) | For external users; can view docs and their request data only.          |
+
+
+## API-Level Roles and Permissions
+
+### Key Actions
+
+-  **Invite users to specific APIs** within your workspace.
+-  **Assign API-level roles** (Owner, Member).
+-  **View and manage users** with access to this API.
+-  **Change API-level roles** as needed.
+-  **Remove users** from an API while retaining workspace access.
+-  **Make the API private** for invite-only access.
+-  **Delete API** if and when needed.
+
+<img src="/platform/manage-your-workspace/Workspace-People.png" width="800" style={{ borderRadius: "8px" }} />
+
+
+### Roles and Permissions
+
+| Role        | Can Delete API | Can Make API Private | View Dashboards | Modify API Settings |
+|-------------|----------------|----------------------|-----------------|---------------------|
+| **Owner**   |  Yes           | Yes                  |  Yes            |  Yes                |
+| **Member**  |  No            |  No                  |  Yes            |  No                 |
+
+Treblle’s layered roles ensure your teams can collaborate securely, maintain control, and enable your API workflows efficiently.
