@@ -57,8 +57,7 @@ export default defineConfig({
         {
         label: 'Workspace Dashboard',
         link: '/treblle/workspace-dashboard/'
-      }
-        {
+      }, {
         label: 'API Dashboard',
         link: '/treblle/apidashboard/'
       }, {
