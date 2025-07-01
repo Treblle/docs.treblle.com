@@ -100,8 +100,7 @@ export default defineConfig({
     }, {
       label: 'Administer Treblle',
       collapsed: true,
-      items: [
-        {
+      items: [{
         label: 'Team Management',
         link: '/treblle/manage-your-workspace/'
       }, {
