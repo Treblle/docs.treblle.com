@@ -98,6 +98,13 @@ export default defineConfig({
         link: '/treblle/observability-as-a-service/'
       }]
     }, {
+      label: 'Administer Treblle',
+      collapsed: true,
+      items: [
+        {
+        label: 'Team Management',
+        link: '/treblle/manage-your-workspace/'
+      }, {
       label: 'API Toolkit',
       collapsed: true,
       items: [{
