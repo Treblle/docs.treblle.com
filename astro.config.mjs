@@ -103,7 +103,8 @@ export default defineConfig({
       items: [{
         label: 'Team Management',
         link: '/treblle/manage-your-workspace/'
-      }], {
+      }]
+    }, {
       label: 'API Toolkit',
       collapsed: true,
       items: [{
