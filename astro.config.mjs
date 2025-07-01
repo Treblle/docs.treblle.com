@@ -55,6 +55,9 @@ export default defineConfig({
       collapsed: true,
       items: [
         {
+        label: 'Workspace Dashboard',
+        link: '/treblle/workspace-dashboard/'
+      }, {
         label: 'API Dashboard',
         link: '/treblle/apidashboard/'
       }, {
