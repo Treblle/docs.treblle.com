@@ -47,8 +47,8 @@ export default defineConfig({
         label: 'API Catalog',
         link: '/features/api-catalog/'
       }, {
-        label: 'Authentication',
-        link: '/features/authentication/'
+        label: 'Single Sign-On',
+        link: '/features/single-sign-on/'
       },]
     }, {
       label: 'Treblle Platform',
