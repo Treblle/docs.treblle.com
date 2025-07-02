@@ -46,7 +46,7 @@ export default defineConfig({
       }, {
         label: 'API Catalog',
         link: '/features/api-catalog/'
-      },]
+      }]
     }, {
       label: 'Treblle Platform',
       collapsed: true,
