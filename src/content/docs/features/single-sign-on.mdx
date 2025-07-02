@@ -1,15 +1,26 @@
 ---
-title: "Authentication"
-metaTitle: "Secure Your Treblle Workspace with Authentication | Treblle Docs"
+title: "Single Sign On"
+metaTitle: "Secure Your Treblle Workspace with Single Sign On | Treblle Docs"
 description: "Treblle offers Single Sign-On (SSO), Multi-Factor Authentication (MFA), and Social Sign-On for secure access to your workspace. Learn how to set up authentication."
 image: "/og-images/authentication.jpg"
 ---
 
-Treblle's Authentication feature provides options like Single Sign-On (SSO), Multi-Factor Authentication (MFA), and Social Sign-On to secure your workspace effectively.
+### Intro to SSO
 
-## Single Sign-On (SSO)
+Single sign-on (SSO) services enable you to manage your team's identity across all the SaaS products that you use.
 
-Single Sign-On (SSO) allows users to log in once and gain access to multiple applications or systems without needing to authenticate repeatedly.
+With an SSO service, a user can access multiple applications using one set of credentials (for example, an email address and password). The SSO service authenticates the user once for all the applications the user has been given rights to and eliminates further prompts when the user switches applications during the same session.
+
+
+### What are the advantages of SSO?
+- Removes the need for users to remember and manage multiple passwords.
+- Simplifies users' experience by enabling them to sign in at a single access point and work seamlessly across multiple applications.
+- Increases productivity by reducing the password-related support emails.
+- Reduces phishing attempts that try to trick users into giving away sensitive information.
+
+### SSO with Treblle
+- **Team's identity provider (IdP)** must support the SAML 2.0 standard.
+- **Supported IdPs** include Microsoft AD FS, Microsoft Entra ID, Custom SAML, Google Workspace, Okta, OneLogin, and Ping Identity
 
 ### Steps to Set up SSO
 
@@ -88,48 +99,3 @@ Single Sign-On (SSO) allows users to log in once and gain access to multiple app
 ### SSO Flow Across Workspaces
 
 Once SSO is enabled, users can log in using their organization's identity provider. If a user switches between an SSO-protected workspace and a standard workspace, Treblle will prompt for extra authentication to maintain security.
-
-### Social Sign-On
-
-Social Sign-On offers teams or contractors a fast and convenient way to access workspaces by linking Google or GitHub accounts.
-
-## Multi-Factor Authentication (MFA)
-
-     The <a href="https://en.wikipedia.org/wiki/Multi-factor_authentication" target="_blank" rel="noopener noreferrer"> MFA </a> adds a layer of security by requiring two or more verification steps during login. Typically, it combines something you know (like a password) and something you have (like a mobile app code).
-
-### Enabling MFA
-
-1. **Go to Account Settings**
-
-     Locate the **Multi-Factor Authentication** option.
-
-     <img
-       src="/platform/authentication/mfa.png"
-       width="500"
-       style={{ borderRadius: "8px" }}
-     />
-
-2. **Enable MFA**
-
-     Click **Enable MFA** to generate a QR code.
-
-    <img
-      src="/platform/authentication/mfa-enable.png"
-      width="800"
-      style={{ borderRadius: "8px" }}
-    />
-
-3. **Scan and Verify**
-   - Use an authentication app (e.g., Google Authenticator) to scan the QR code.
-   - Verify your MFA setup by entering the code from the app.
-
-## Social Sign-On
-
-- The <a href="https://en.wikipedia.org/wiki/Social_login" target="_blank" rel="noopener noreferrer"> Social Sign-On </a> lets users log in with existing accounts such as Google or GitHub.
-- This feature is handy for teams that prefer using familiar credentials instead of creating new ones.
-
-   <img
-     src="/platform/authentication/social-sign-on.png"
-     width="300"
-     style={{ borderRadius: "8px" }}
-   />
