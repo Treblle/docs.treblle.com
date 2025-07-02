@@ -38,6 +38,9 @@ export default defineConfig({
       label: 'Getting Started',
       link: '/guides/getting-started/'
     }, {
+      label: 'Your Account',
+      link: '/treblle/your-account'
+    }, {
       label: 'Workspace',
       collapsed: true,
       items: [{
@@ -258,7 +261,7 @@ export default defineConfig({
         link: 'https://apiacademy.treblle.com/laravel-api-course/'
       }, {
         label: 'API Knowledge Base',
-        link: 'https://treblle.com/knowledge-base/your-first-api/'
+        link: 'https://treblle.com/knowledgebase'
       }]
     }]
   }), tailwind({
