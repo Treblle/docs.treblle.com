@@ -7,60 +7,108 @@ image: "/og-images/getting-started.jpg"
 
 import { Steps } from '@astrojs/starlight/components';
 
-Treblle helps you build, improve, and observe your APIs with ease. Let's get you set up in just a few minutes.
+This quickstart helps you integrate the Treblle SDK into your API and get started with Treblle.
 
 <Steps>
 
-1. **Create a Treblle Account**
-   
-   First, [sign up for a free Treblle account](https://identity.treblle.com/register). This will give you access to the Treblle dashboard, where you can observe your APIs.
+1.  **Create a Treblle Account**
 
-2. **Create Your First Project**
-   
-   After logging in:
-   - Go to your [Treblle dashboard](https://platform.treblle.com)
-   - Click "Create new project"
-   - Fill in your project details:
-     - Project name
-     - Base URL (e.g., `https://api.example.com`)
-     - Select your platform
-     - Choose your environment (Production, Staging, Development, or Local)
-     - Optionally add team members' emails
+    Go to the Treblle website and [sign up for a free Treblle account](https://treblle.com/).
 
-3. **Install the SDK**
-   
-   Choose the SDK for your platform from our wide range of supported languages and frameworks:
+    <img
+     src="/getting-started/create-account.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+    />
 
-   ### Popular SDKs
-   - [Laravel](/integrations/php/laravel/)
-   - [Express](/integrations/javascript/express/)
-   - [Spring](/integrations/java/spring/)
-   - [.NET Core](/integrations/net/net-core/)
-   - [Ruby on Rails](/integrations/ruby/rails/)
+2.  **Create Your Workspace**
 
-   Can't find your platform? Check our complete [integrations list](/integrations/) or suggest it on our [Discord channel](https://discord.gg/NJWYYmMvuE).
+    After logging in, you'll enter your Treblle account settings page. Click on the Treblle Platform button from the Apps section.
 
-4. **Configure Your API**
+    <img
+     src="/getting-started/account-settings.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+    />
 
-   Add your Treblle credentials to your project:
-   ```env
-   TREBLLE_API_KEY=your_sdk_token
-   TREBLLE_PROJECT_ID=your_api_id
-   ```
+    Create a new workspace by clicking on the "Create new workspace" button. You can also join an existing workspace by clicking on the "Join workspace" button.
 
-5. **Enable Treblle**
+    <img
+     src="/getting-started/create-workspace.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+    />
 
-   Add the Treblle middleware to your API routes. The exact implementation varies by platform, but here's a general example:
+    Team members can be invited to your workspace at this stage or at a later time.
 
-   ```php
-   Route::middleware(['treblle'])->group(function () {
-       // Your API routes go here
-   });
-   ```
+    <img
+     src="/getting-started/invite-team.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+    />
+
+    The Treblle Homepage provides a bird's-eye view of all your APIs and important metrics related to them. This is also where you can add new APIs.
+
+    <img
+     src="/getting-started/home-dashboard.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+    />
+
+3.  **Add an API**
+
+    When you're ready to add a new API, enter a logical API name and the base URL of the API.
+
+    :::note
+    A base URL includes only the essential parts of the URL (scheme, domain, and optionally, port). Paths, queries, and fragments are excluded.
+    Example: https://api.example.com
+    :::
+
+    To help with understanding the status of the API, it is also mandatory to add the environment type (Development, Staging, Production) and the framework being used.
+
+    <img
+     src="/getting-started/add-new-api.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+    />
+
+    Based on what language and framework you are using, Treblle will provide you with the necessary SDK to integrate Treblle into your API.
+
+    As suggested by Treblle, follow the next steps and [install the SDK](https://github.com/Treblle?view_as=public#available-sdks).
+
+    Can't find your platform? Check our complete [integrations list](/integrations/).
+
+4.  **Configure Your API**
+
+    Add your Treblle credentials to your project:
+
+    ```env
+    TREBLLE_API_KEY=your_api_key
+    TREBLLE_SDK_TOKEN=your_sdk_token
+    ```
+
+5.  **Enable Treblle**
+
+    Add the Treblle middleware to your API routes. The exact implementation varies by platform, but here's a general example:
+
+    ```php
+    Route::middleware(['treblle'])->group(function () {
+        // Your API routes go here
+    });
+    ```
 
 </Steps>
 
-## What's Next?
+## Observing your first API request in Treblle
+
+Once you've added the Treblle API key and SDK token to your API middleware, Treblle will start capturing and monitoring all your API activities.
+
+<img
+    src="/getting-started/first-request.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+/>
+
 
 Once integrated, Treblle automatically provides you with:
 
@@ -73,9 +121,6 @@ Once integrated, Treblle automatically provides you with:
 - API management on the go
 - [Error reporting](/treblle/problems/)
 
-## Need Help?
-
-- Join our [Discord community](https://discord.gg/NJWYYmMvuE)
-- Found a missing integration? Suggest it or contribute on [GitHub](https://github.com/Treblle)
+Found a missing integration? Suggest it or contribute on [GitHub](https://github.com/Treblle)
 
 The Treblle documentation is open source, and we welcome contributions from developers like you!
