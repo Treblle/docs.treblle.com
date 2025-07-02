@@ -37,18 +37,18 @@ export default defineConfig({
     }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
-    }, {
-      label: 'Workspace',
+    },  {
+      label: 'Your Account',
       collapsed: true,
       items: [{
-        label: 'Workspace',
-        link: '/treblle/workspace/'
+        label: 'Profile',
+        link: '/treblle/profile/'
       }, {
-        label: 'API Catalog',
-        link: '/features/api-catalog/'
+        label: 'Preferences',
+        link: '/treblle/preferences/'
       }, {
-        label: 'Single Sign-On',
-        link: '/features/single-sign-on/'
+        label: 'Security and Access',
+        link: '/treblle/security-and-access/'
       },]
     }, {
       label: 'Treblle Platform',
@@ -258,7 +258,7 @@ export default defineConfig({
         link: 'https://apiacademy.treblle.com/laravel-api-course/'
       }, {
         label: 'API Knowledge Base',
-        link: 'https://treblle.com/knowledge-base/your-first-api/'
+        link: 'https://treblle.com/knowledgebase'
       }]
     }]
   }), tailwind({
