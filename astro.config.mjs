@@ -37,21 +37,18 @@ export default defineConfig({
     }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
-    }, {
+    },  {
       label: 'Your Account',
-      link: '/treblle/your-account'
-    }, {
-      label: 'Workspace',
       collapsed: true,
       items: [{
-        label: 'Workspace',
-        link: '/treblle/workspace/'
+        label: 'Profile',
+        link: '/treblle/profile/'
       }, {
-        label: 'API Catalog',
-        link: '/features/api-catalog/'
+        label: 'Preferences',
+        link: '/treblle/preferences/'
       }, {
-        label: 'Single Sign-On',
-        link: '/features/single-sign-on/'
+        label: 'Security and Access',
+        link: '/treblle/security-and-access/'
       },]
     }, {
       label: 'Treblle Platform',
