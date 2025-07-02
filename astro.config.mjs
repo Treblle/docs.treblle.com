@@ -32,8 +32,8 @@ export default defineConfig({
     customCss: ['./src/tailwind.css', '@fontsource/poppins/600.css', '@fontsource-variable/inter/standard.css'],
     lastUpdated: true,
     sidebar: [{
-      label: 'Who is Treblle for?',
-      link: '/who-is-treblle-for/'
+      label: 'Introduction',
+      link: '/documentation-overview/'
     }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
