@@ -72,16 +72,19 @@ export default defineConfig({
     }, {
       label: 'Treblle Platform',
       collapsed: true,
-      items: [
-        {
-        label: 'Workspace Dashboard',
-        link: '/treblle/workspace-dashboard/'
-      }, {
-        label: 'API Dashboard',
-        link: '/treblle/apidashboard/'
-      }, {
-        label: 'Individual API Dashboard',
-        link: '/treblle/dashboard/'
+      items: [{
+        label: 'Workspace and Sidebar',
+        collapsed: true,
+        items: [{
+          label: 'Home',
+          link: '/treblle/workspace-dashboard/'
+        }, {
+          label: 'APIs',
+          link: '/treblle/apilist/'
+        }, {
+          label: 'API Dashboard',
+          link: '/treblle/dashboard/'
+        }]
       }, {
         label: 'Requests',
         link: '/treblle/requests/'
