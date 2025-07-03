@@ -51,6 +51,25 @@ export default defineConfig({
         link: '/treblle/security-and-access/'
       },]
     }, {
+      label: 'Administer Treblle',
+      collapsed: true,
+      items: [{
+        label: 'Invite Users',
+        link: '/admin/invite-users/'
+      }, {
+        label: 'Team Management',
+        link: '/admin/manage-your-workspace/'
+      }, {
+        label: 'Single Sign-On',
+        link: '/admin/single-sign-on/'
+      }, {
+        label: 'Billing and Subscription Management',
+        link: '/admin/billing-subscription/'
+      }, {
+        label: 'Workspace Settings',
+        link: '/admin/workspace-settings/'
+      }]
+    }, {
       label: 'Treblle Platform',
       collapsed: true,
       items: [
@@ -96,13 +115,6 @@ export default defineConfig({
       }, {
         label: 'Observability as a Service',
         link: '/treblle/observability-as-a-service/'
-      }]
-    }, {
-      label: 'Administer Treblle',
-      collapsed: true,
-      items: [{
-        label: 'Team Management',
-        link: '/treblle/manage-your-workspace/'
       }]
     }, {
       label: 'API Toolkit',
