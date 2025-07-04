@@ -82,9 +82,12 @@ export default defineConfig({
           label: 'APIs',
           link: '/treblle/apilist/'
         }, {
-          label: 'API Dashboard',
-          link: '/treblle/dashboard/'
+          label: 'Trace',
+          link: '/treblle/api-traceability/'
         }]
+      }, {
+        label: 'API Dashboard',
+        link: '/treblle/dashboard/'
       }, {
         label: 'Requests',
         link: '/treblle/requests/'
@@ -94,9 +97,6 @@ export default defineConfig({
       }, {
         label: 'Customers',
         link: '/treblle/customers/'
-      }, {
-        label: 'API Traceability',
-        link: '/treblle/api-traceability/'
       }, {
         label: 'Problems',
         link: '/treblle/problems/'
