@@ -84,7 +84,13 @@ export default defineConfig({
         }, {
           label: 'Trace',
           link: '/treblle/api-traceability/'
-        }]
+        }, {
+          label: 'Catalog',
+          link: '/features/api-catalog/'
+        }, {
+          label: 'Alfred AI',
+          link: '/treblle/alfred-ai/'
+        }, ]
       }, {
         label: 'API Dashboard',
         link: '/treblle/dashboard/'
@@ -125,9 +131,6 @@ export default defineConfig({
       items: [{
         label: 'Aspen',
         link: '/aspen/'
-      }, {
-        label: 'Alfred AI',
-        link: '/treblle/alfred-ai/'
       }, {
         label: 'API Insights',
         link: '/treblle/api-insights/',
