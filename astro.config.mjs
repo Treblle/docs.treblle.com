@@ -159,6 +159,9 @@ export default defineConfig({
         }, {
           label: 'MuleSoft',
           link: '/integrations/gateways/mulesoft/'
+        }, {
+          label: 'MuleSoft App',
+          link: '/integrations/gateways/mulesoft-app/'
         }]
       }, {
         label: 'Go',

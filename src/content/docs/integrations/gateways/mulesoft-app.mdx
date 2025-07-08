@@ -1,0 +1,216 @@
+---
+title: "MuleSoft App for Treblle"
+metaTitle: "Deploy MuleSoft App for Treblle Auto-Discovery | Treblle Docs"
+description: "Set up the Treblle MuleSoft app for automatic API discovery and registration. Deploy to Anypoint Platform with VS Code extension and monitor your APIs seamlessly."
+image: "/og-images/treblle-mulesoft-app.jpg"
+---
+
+<div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
+  <a href="https://github.com/Treblle/autodiscovery" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
+    <div>
+      <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+      </svg>
+    </div>
+    <div class="grid grid-cols-4 gap-4 px-2 py-2">
+      <div class="col-span-4">
+        <h3 class="text-xl font-semibold">treblle-autodiscovery</h3>
+        <p class="text-sm font-medium">The official Treblle MuleSoft App for automatic API discovery and registration with Treblle platform.</p>
+      </div>
+    </div>
+  </a>
+</div>
+
+:::note
+Recommended to be configured while on a call with the Treblle team to ensure it's set up correctly and optimized for your use case. Please reach out to your Treblle point of contact before starting, so they can guide you through the setup and help address any specifics in real time.
+:::
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- Visual Studio Code installed
+- Access to Anypoint Platform
+- Maven 3.8+ configured
+- A [Treblle account](https://identity.treblle.com/) with API key and Project ID
+
+## Step 1: Install MuleSoft VS Code Extension
+
+Install the MuleSoft extension pack in VS Code:
+
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X)
+3. Search for `salesforce.mule-dx-extension-pack`
+4. Install and enable the extension
+
+<img
+  src="/platform/mulesoft-app/extension.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Step 2: Access MuleSoft Tools
+
+Once the extension is enabled, you'll see the MuleSoft logo in the left navbar of VS Code. Click on it to find options like:
+
+<img
+  src="/platform/mulesoft-app/navbar.jpg"
+  width="500"
+  style={{ borderRadius: "8px" }}
+/>
+
+- Design an API
+- Implement an API
+- Develop an Integration
+
+Click on **Develop an Integration**.
+
+## Step 3: Create New Project
+
+When "Develop an Integration" opens:
+
+1. Give a name to your project
+2. Leave other options as default
+3. Click **Create Project**
+
+<img
+  src="/platform/mulesoft-app/create-project.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+The project creation will take around 5-10 seconds.
+
+<img
+  src="/platform/mulesoft-app/mulesoft-project.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Step 4: Clone Treblle Auto-Discovery Repository
+
+1. **Delete the src folder** in your MuleSoft project that you created
+
+2. **Clone the Treblle repository**:
+   ```bash
+   git clone https://github.com/Treblle/autodiscovery.git
+   ```
+
+3. **Open the cloned repository** in VS Code as a separate folder
+
+4. **Copy the src folder** from the cloned repository and paste it into your MuleSoft project
+
+5. **Copy the pom.xml content** from the cloned repository and paste it into your MuleSoft project's pom.xml
+
+## Step 5: Build the Project
+
+1. Save your changes
+2. Run the following command in your MuleSoft project directory:
+   ```bash
+   mvn clean install
+   ```
+
+## Step 6: Locate the JAR File
+
+Navigate to your `.m2` folder and find the JAR file:
+```
+treblle-register-apis-1.0.0-SNAPSHOT-mule-application.jar
+```
+
+<img
+  src="/platform/mulesoft-app/jar-file.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Step 7: Create Connected App
+
+1. Go to [Anypoint Platform Connected Apps](https://anypoint.mulesoft.com/accounts/connectedApps)
+2. Navigate to **Access Management > Connected Apps**
+
+<img
+  src="/platform/mulesoft-app/app.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+3. Create a new app with the required information and scopes:
+
+<img
+  src="/platform/mulesoft-app/scope.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+4. Copy the **Client ID** and **Client Secret** - these will be needed for deployment:
+
+<img
+  src="/platform/mulesoft-app/client-id-secret.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Step 8: Deploy to Runtime Manager
+
+1. Go to **Runtime Manager** and click **Deploy Application**
+
+<img
+  src="/platform/mulesoft-app/deploy.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+2. Provide a name for the application and upload the JAR file: `treblle-register-apis-1.0.0-SNAPSHOT-mule-application.jar`
+
+<img
+  src="/platform/mulesoft-app/application-file.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Step 9: Configure Application Properties
+
+Go to the **Properties** section and add the following:
+
+- **CLIENT_ID**: Your Connected App Client ID
+- **CLIENT_SECRET**: Your Connected App Client Secret  
+- **BUSINESS_GROUP_ID**: Your MuleSoft Business Group ID
+
+<img
+  src="/platform/mulesoft-app/properties.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+Click **Deploy Application**.
+
+## Step 10: Monitor Deployment
+
+1. Once the app is deployed, click on it:
+
+<img
+  src="/platform/mulesoft-app/deployed-app.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+2. Click on **Logs** to view all application logs:
+
+<img
+  src="/platform/mulesoft-app/logs.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## How It Works
+
+The Treblle MuleSoft Auto-Discovery app automatically:
+
+1. **Discovers APIs** in your MuleSoft environment
+2. **Registers them** with the Treblle platform
+3. **Monitors changes** and updates API information
+4. **Provides visibility** into your API landscape
+
+This enables smooth integration between your MuleSoft APIs and Treblle's observability.
