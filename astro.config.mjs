@@ -124,6 +124,9 @@ export default defineConfig({
       }, {
         label: 'Observability as a Service',
         link: '/treblle/observability-as-a-service/'
+      }, {
+        label: 'Data Masking',
+        link: '/treblle/data-masking/'
       }]
     }, {
       label: 'API Toolkit',
@@ -259,16 +262,21 @@ export default defineConfig({
         }]
       }]
     }, {
-      label: 'Security',
+      label: 'Trust Center',
       collapsed: true,
       items: [{
-        label: 'Certification',
+        label: 'Treblle Privacy Policy',
         link: '/security/certification/'
       }, {
-        label: 'Masking Fields',
-        link: '/security/masking/'
+        label: 'Trust Center',
+        link: 'https://trust.treblle.com/'
       }]
-    }, {
+    }, 
+    {
+      label: 'API Knowledge Base',
+      link: 'https://treblle.com/knowledgebase'
+    },
+    {
       label: 'Resources',
       collapsed: true,
       items: [{
@@ -277,9 +285,6 @@ export default defineConfig({
       }, {
         label: 'Laravel API Course',
         link: 'https://apiacademy.treblle.com/laravel-api-course/'
-      }, {
-        label: 'API Knowledge Base',
-        link: 'https://treblle.com/knowledgebase'
       }]
     }]
   }), tailwind({
