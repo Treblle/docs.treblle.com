@@ -1,0 +1,198 @@
+---
+title: "Metadata"
+metaTitle: "Treblle Metadata – Correlate Business Metrics with API Data | Treblle Docs"
+description: "Learn how to send additional metadata with your API requests to correlate business metrics with API insights. Track customers, companies, environments, and custom identifiers in Treblle."
+image: "/og-images/treblle-metadata.jpg"
+---
+
+Treblle Metadata allows you to send additional contextual information about your API requests, enabling you to correlate your key business metrics with the API data, usage, and insights that Treblle provides.
+
+Through metadata, you can pass information that ties into your business logic, helping you filter and analyze API data with more specificity and context.
+
+## What is Treblle Metadata?
+
+Metadata in Treblle is additional information you can attach to each API request to provide business context. This could include:
+
+- **Company identifiers** to track which organization made the request
+- **User information** to understand individual user behavior
+- **Customer data** to analyze usage patterns by customer segment
+- **Environment tags** to differentiate between development, staging, and production
+- **Custom business identifiers** like transaction IDs, campaign codes, or feature flags
+
+## Why Use Treblle Metadata?
+
+By sending metadata to Treblle, you can:
+
+- **Correlate business metrics** with API performance and usage
+- **Filter requests** by specific business criteria
+- **Analyze API usage** by customer, company, or user segments
+- **Track feature adoption** across different user groups
+- **Monitor environment-specific** API behavior
+- **Debug issues** with better business context
+
+## How Metadata Works
+
+Metadata is sent by adding a `treblle-metadata` header to your API requests. The value should be a **stringified JSON object** containing key-value pairs with your business context.
+
+### Implementation Format
+
+You need to append the `treblle-metadata` header to your API request calls with a stringified JSON object:
+
+```javascript
+// Example API request headers
+const headers = {
+    "Host": "api.yourservice.com",
+    "Accept-Encoding": "br;q=1.0, gzip;q=0.9, deflate;q=0.8",
+    "Accept-Language": "en;q=1.0, hr-US;q=0.9",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edg/91.0.864.48",
+    "Content-Type": "application/json",
+    'treblle-metadata': JSON.stringify({
+        'trace-id': 'seeder-we3e3er321e312e2',
+        'env-id': 'development',
+        'user-id': 'rahul',
+        'x-customer-id': 'rah1510',
+        'custom-username': 'rahul-1503',
+    })
+};
+```
+
+### How Headers Are Transmitted
+
+When you use `JSON.stringify()`, the metadata object gets converted to an escaped JSON string. Here's what actually gets sent in the HTTP headers:
+
+```json
+{
+  "accept-encoding": "br;q=1.0, gzip;q=0.9, deflate;q=0.8",
+  "accept-language": "en;q=1.0, hr-US;q=0.9",
+  "authorization": "Bearer 5940100",
+  "cache-control": "no-cache",
+  "cookie": "XSRF-TOKEN=8648303; treblle_session=4239811",
+  "host": "test.treblle.com",
+  "user-agent": "Mozilla/5.0 (X11; U; Linux armv7l like Android; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/533.2+ Kindle/3.0+",
+  "treblle-metadata": "{\"tag-id\":\"2ef634ed-1875-473b-a06a-1b6dd354db93\",\"trace-id\":\"seeder-817ee077-6436-4aa0-ae8d-21381c32745e\",\"env-id\":\"develpment\",\"user-id\":\"I5paNJD0miydDAJ\",\"x-customer-id\":\"sdwfer2332\",\"treblle-username\":\"rahul\",\"company_gv2iK\":\"IeiulI0mpf\",\"company_5FasU\":\"zKhfdvPaxq\",\"company_8r6nP\":\"a2fUftO0Pk\",\"company_joJhj\":\"EGGJeDyiHz\",\"company_b1FG7\":\"PDd3mVj6Aj\"}"
+}
+```
+
+You can see this exact format in the Treblle dashboard when inspecting request headers:
+
+<img
+  src="/platform/metadata/general.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+The screenshot shows the `treblle-metadata` header highlighted in line 11, containing the escaped JSON string exactly as transmitted by the client.
+
+### Key Points
+- The header name is exactly `treblle-metadata`
+- The value must be a **stringified JSON** using `JSON.stringify()`
+- HTTP headers are key-value pairs where values are strings, numbers, or booleans
+- The JSON object gets escaped and sent as a single string value
+- The JSON should contain flat key-value pairs (no nested objects)
+- Maximum 2000 characters total for the entire stringified JSON
+
+## Special Metadata Fields
+
+Some metadata fields have special meaning in Treblle:
+
+### Trace ID
+- **Field**: `trace-id`
+- **Purpose**: Used for [API Traceability](/treblle/api-traceability/) to group and track related requests across multiple services in the **Trace** section
+- **Note**: `tag-id` is still supported for backward compatibility, but `trace-id` is recommended going forward
+
+### User ID
+- **Field**: `user-id`
+- **Purpose**: Links requests to the [Customer Dashboard](/treblle/customers/) for user-specific analysis and appears in the **Customers** section
+- **Use case**: Track API usage patterns by individual users and customers
+
+### Custom Business Fields
+All other metadata fields appear in the **Metadata** section of request details and can be used for filtering, allowing you to:
+- Filter requests by any custom business identifier
+- Track custom business identifiers and values
+- Add environment, campaign, or feature flag information
+- Store any business-relevant data for analysis and debugging
+
+## Metadata Requirements and Limitations
+
+### Format Requirements
+- **Must be valid JSON**: The metadata must be properly formatted JSON
+- **Flat structure only**: No nested objects or arrays are allowed
+- **Key-value pairs**: Only simple key-value pairs are supported
+
+### Size Limitations
+- **Maximum 2000 characters**: The entire metadata JSON string cannot exceed 2000 characters
+- **Reasonable key names**: Use descriptive but concise key names to maximize available space
+
+### Valid Metadata Example
+```json
+{
+  "trace-id": "abc-123-def",
+  "user-id": "user123",
+  "company": "acme-corp",
+  "environment": "production",
+  "version": "v2.1",
+  "feature": "beta-checkout"
+}
+```
+
+### Invalid Metadata Example
+```json
+{
+  "user": {
+    "id": "123",
+    "name": "John"
+  },
+  "tags": ["important", "urgent"]
+}
+```
+
+## Viewing Metadata in Treblle
+
+Once you've implemented metadata, you can view it in several places within Treblle:
+
+### Request Details - Headers Tab
+1. Go to the **Requests** section
+2. Click on any request to view details
+3. Navigate to the **Headers** tab to see the raw `treblle-metadata` header
+
+<img
+  src="/platform/metadata/general.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+In the Headers section, you can see the `treblle-metadata` header containing the stringified JSON with all your custom metadata fields.
+
+### Request Details - Metadata Tab
+1. Go to the **Requests** section  
+2. Click on any request to view details
+3. Navigate to the **Metadata** tab to see all parsed metadata fields in a clean interface
+
+<img
+  src="/platform/metadata/metadata.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+The Metadata tab displays each metadata field as a separate, easy-to-read entry:
+- **Customer**: Shows the `user-id` field value - this will populate the [Customer Dashboard](/treblle/customers/)
+- **Trace ID**: Displays the `trace-id` for [API Traceability](/treblle/api-traceability/) - this groups related requests together
+- **Custom Fields**: All other metadata fields like `company_SAqzO`, `treblle-username`, `x-customer-id`, etc. - these can be used for filtering requests
+
+### Customer Dashboard
+Requests with `user-id` metadata will automatically appear in the **Customers** section, allowing you to:
+- Track individual customer API usage
+- Analyze customer behavior patterns
+- Monitor customer-specific issues
+
+### API Traceability
+Requests with `trace-id` metadata will be grouped together in the **Trace** section, enabling you to:
+- Follow requests across multiple services
+- Understand complete transaction flows
+- Debug complex distributed system interactions
+
+### Custom Filtering
+All other metadata fields become available for filtering and analysis:
+- Filter requests by company, environment, or any custom identifier
+- Analyze API usage by business segments
+- Debug issues with specific business context

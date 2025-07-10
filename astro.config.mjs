@@ -98,6 +98,9 @@ export default defineConfig({
         label: 'Requests',
         link: '/treblle/requests/'
       }, {
+        label: 'Metadata',
+        link: '/treblle/metadata/'
+      }, {
         label: 'Endpoints',
         link: '/treblle/endpoints/'
       }, {
