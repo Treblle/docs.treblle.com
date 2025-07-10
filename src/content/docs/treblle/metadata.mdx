@@ -100,6 +100,29 @@ Some metadata fields have special meaning in Treblle:
 - **Purpose**: Used for [API Traceability](/treblle/api-traceability/) to group and track related requests across multiple services in the **Trace** section
 - **Note**: `tag-id` is still supported for backward compatibility, but `trace-id` is recommended going forward
 
+#### Trace ID Priority
+If you send a trace ID both as a root header and within the metadata object, the one in metadata will override the root header:
+
+```javascript
+const headers = {
+    'trace-id': 'seeder-3',  // Root header
+    "Host": "test.treblle.com",
+    "Accept-Encoding": "br;q=1.0, gzip;q=0.9, deflate;q=0.8",
+    "Accept-Language": "en;q=1.0, hr-US;q=0.9",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edg/91.0.864.48",
+    "Refreshcache": "refreshCache",
+    'treblle-metadata': JSON.stringify({
+        'trace-id': 'seeder-we3e3er321e312e2',  // This will override the root header
+        'env-id': "development",
+        'user-id': 'rahul',
+        'x-customer-id': 'rahul1510',
+        'custom-username': 'rahul-1503',
+    }),
+};
+```
+
+In this example, the final trace ID will be `seeder-we3e3er321e312e2` (from metadata), not `seeder-3` (from root header).
+
 ### User ID
 - **Field**: `user-id`
 - **Purpose**: Links requests to the [Customer Dashboard](/treblle/customers/) for user-specific analysis and appears in the **Customers** section
