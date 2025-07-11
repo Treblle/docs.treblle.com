@@ -92,6 +92,16 @@ export default defineConfig({
           link: '/treblle/alfred-ai/'
         }, ]
       }, {
+        label: 'Notifications and Alerts',
+        collapsed: true,
+        items: [{
+          label: 'Default Alerts',
+          link: '/treblle/default-alerts/'
+        }, {
+          label: 'Custom Alerts',
+          link: '/features/custom-alert/'
+        }]
+      }, {
         label: 'API Dashboard',
         link: '/treblle/dashboard/'
       }, {
@@ -115,9 +125,6 @@ export default defineConfig({
       }, {
         label: 'API Compliance',
         link: '/features/api-compliance/'
-      }, {
-        label: "Custom Alert",
-        link: "/features/custom-alert/",
       }, {
         label: 'API Documentation',
         link: '/treblle/api-documentation/'
