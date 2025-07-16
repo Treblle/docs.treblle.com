@@ -158,6 +158,44 @@ Click **Deploy Application**.
   style={{ borderRadius: "8px" }}
 />
 
+## For Multiple Business Groups
+
+If you need to monitor APIs across different business groups, follow these additional steps:
+
+1. **Update Connected App Scopes**: Click the checkbox for different business groups to expand the scope permissions.
+
+<img
+  src="/platform/mulesoft-app/business-scope.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+2. **Add Scopes for Other Business Groups**: Ensure you add the same scopes for each business group you want to monitor.
+
+<img
+  src="/platform/mulesoft-app/business-scope-2.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+3. **Configure Business Group IDs**: In the connected app properties, add multiple business group IDs separated by commas (`,`).
+
+   Example: `businessGroupIDs: group1-id,group2-id,group3-id`
+
+<img
+  src="/platform/mulesoft-app/business-scope-3.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+*The logs will show different organization IDs when monitoring multiple business groups.*
+
+<img
+  src="/platform/mulesoft-app/business-logs.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
 ## How It Works
 
 The Treblle MuleSoft Auto-Discovery app automatically:

@@ -237,6 +237,28 @@ This is how it will look in the Treblle dashboard:
   style={{ borderRadius: "8px" }}
 />
 
+### Masking the Entire Payload
+
+To mask the entire payload in MuleSoft:
+
+1. **Check the Mask Payload option** while adding a policy to your API
+
+<img
+  src="/platform/mulesoft/tick-mask-payload.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+2. **View the masked payload** in your API requests - it will appear like this in your Treblle dashboard:
+
+<img
+  src="/platform/mulesoft/mask-payload.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+When the "Mask Payload" option is enabled, the entire request and response payload will be masked with asterisks (*****) while preserving the structure and length of the original data.
+
 ## How It Works
 
 The Treblle MuleSoft policy acts as a middleware that:
