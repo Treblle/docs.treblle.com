@@ -1,0 +1,108 @@
+---
+title: "DDoS Attack Detection"
+metaTitle: "DDoS Attack Detection & Monitoring | Treblle Docs"
+description: "Treblle automatically detects potential DDoS attacks by monitoring traffic spikes and comparing them to daily averages. Learn how threat levels are calculated and how to respond to potential attacks."
+image: "/og-images/ddos-attack-detection.jpg"
+---
+
+Treblle's DDoS Attack Detection feature helps you identify potential Distributed Denial of Service (DDoS) attacks by monitoring traffic patterns and flagging unusual request spikes that could indicate malicious activity.
+
+## How DDoS Detection Works
+
+Treblle continuously monitors your API traffic and compares current request volumes to historical patterns to identify potential DDoS attacks.
+
+### Detection Algorithm
+
+The system tracks request spikes by:
+- **Monitoring 15-minute intervals**: Analyzing traffic in 15-minute windows
+- **Comparing to daily averages**: Using historical data to establish baseline traffic patterns
+- **Calculating percentage increases**: Determining how much current traffic exceeds normal levels
+- **Flagging potential threats**: Automatically categorizing threat levels based on traffic increases
+
+### Threat Level Classification
+
+DDoS threats are categorized into three levels based on traffic increase percentages:
+
+#### Low Threat (80-150% increase)
+- **Range**: 80-150% above daily average
+- **Indication**: Moderate traffic spike that could be legitimate increased usage or a small-scale attack
+- **Response**: Monitor closely and investigate if sustained
+
+#### Medium Threat (150-350% increase)
+- **Range**: 150-350% above daily average
+- **Indication**: Significant traffic spike likely indicating coordinated activity
+- **Response**: Implement rate limiting and investigate source IPs
+
+#### High Threat (350%+ increase)
+- **Range**: 350% or more above daily average
+- **Indication**: Severe traffic spike strongly suggesting a DDoS attack
+- **Response**: Immediate action required - activate DDoS mitigation measures
+
+## Accessing DDoS Monitoring
+
+### Enable DDoS Monitoring Widget
+
+1. **Navigate to API Dashboard**
+   
+   Go to your individual API dashboard for the API you want to monitor.
+
+2. **Open Customize Dashboard**
+   
+   Click the **Customize Dashboard** button (four squares icon) on the right side of the dashboard.
+
+    In the customize menu, find and enable the **"Denial of Service"** widget.
+
+   <img
+     src="/platform/api-security/sub/enable-ddos.jpg"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+3. **Save Changes**
+   
+   Click **Save Changes** to add the DDoS monitoring widget to your dashboard.
+
+### Understanding the DDoS Widget
+
+The Denial of Service widget displays:
+- **Current threat level**: Visual indicator of the current DDoS threat status
+- **Traffic comparison**: Real-time comparison of current vs. average traffic
+- **Percentage increase**: Exact percentage of traffic increase
+- **Time-based graph**: Historical view of traffic patterns and spikes
+
+<img
+  src="/platform/api-security/sub/ddos.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### Preventive Measures
+
+To protect against DDoS attacks:
+
+1. **Configure Rate Limiting**
+   - Set appropriate request limits per IP
+   - Implement progressive delays for repeated requests
+
+2. **Use CDN Services**
+   - Leverage Content Delivery Networks for traffic distribution
+   - Enable DDoS protection features offered by CDN providers
+
+3. **Monitor IP Reputation**
+   - Use Treblle's [Risky IPs](/treblle/api-security/ip-address/) feature
+   - Implement automatic blocking of known malicious IPs
+
+4. **Set Up Custom Alerts**
+   - Create [Custom Alerts](/features/custom-alert/) for traffic spikes
+   - Configure notifications for immediate threat response
+
+## Integration with Other Security Features
+
+DDoS detection works alongside other Treblle security features:
+
+- **[IP Address Security](/treblle/api-security/ip-address/)**: Identify malicious IP sources
+- **[Request Information](/treblle/api-security/request-information/)**: Analyze request patterns and origins
+- **API Security Checks**: Comprehensive security auditing for all requests
+
+
+By leveraging Treblle's DDoS detection capabilities, you can quickly identify and respond to potential attacks, maintaining the availability and performance of your APIs even under malicious traffic conditions.
