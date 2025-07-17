@@ -1,0 +1,114 @@
+---
+title: "IP Address Security"
+metaTitle: "IP Address Security & Reputation Monitoring | Treblle Docs"
+description: "Monitor and analyze IP address security with Treblle's reputation checking system. Identify risky IPs, track malicious activity, and protect your APIs from threats using real-time IP intelligence."
+image: "/og-images/ip-address-security.jpg"
+---
+
+Treblle's IP Address Security feature provides comprehensive IP reputation monitoring and analysis to help you identify potential security threats and protect your APIs from malicious activities. 
+
+The system evaluates IP addresses using both Treblle's own network and third-party services to assess trustworthiness and reputation.
+
+### Individual Request IP Information
+
+For each request, you can view detailed IP information in the Info tab:
+
+#### User Data Section
+- **User IP**: Complete IP address of the requesting client
+- **Location**: Full geographic location including city, state, and country
+- **Visual Map**: Interactive map showing the exact geographic origin of the request
+
+#### Geographic Visualization
+The Info tab includes a map widget that shows:
+- **Pin Location**: Exact geographic location of the IP address
+- **Regional Context**: Surrounding geographic area
+- **Interactive Features**: Zoom and explore the request origin location
+
+<img
+  src="/platform/api-security/sub/user-ip-info.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### View IP Security in Individual Requests
+
+1. **Navigate to Requests**
+   
+   Go to the **Requests** section in your API dashboard.
+
+2. **Select a Request**
+   
+   Click on any request to open the detailed view.
+
+3. **Check Security Tab**
+   
+   In the request details, click on the **Security** tab to view IP reputation information.
+
+   The Security section shows the IP reputation check results along with other security assessments.
+
+   <img
+     src="/platform/api-security/sub/ip-security.jpg"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+   
+### How IP Reputation Checking Works
+
+IP Reputation check **evaluates the trustworthiness and reputation of an IP address** based on its historical behavior and associations. It helps identify potential threats, such as spam or malicious activity, by assessing the IP's track record and reputation within the online community.
+
+Treblle uses **its own network alongside 3rd party services** to check the reputation of your user's IP addresses, providing comprehensive threat intelligence for every request.
+
+## Risky IPs Dashboard Widget
+
+### Enable Risky IPs Monitoring
+
+1. **Access API Dashboard**
+   
+   Navigate to your individual API dashboard.
+
+2. **Open Customize Dashboard**
+   
+   Click the **Customize Dashboard** button (four squares icon) on the right side of the dashboard.
+
+3. **Enable Risky IPs Widget**
+   
+   In the customize menu, find and enable the **"Risky IPs"** widget.
+
+   <img
+     src="/platform/api-security/sub/enable-risky.jpg"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+4. **Save Configuration**
+   
+   Click **Save Changes** to add the Risky IPs widget to your dashboard.
+
+### Understanding the Risky IPs Widget
+
+   <img
+     src="/platform/api-security/sub/risky-ip.jpg"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+
+The Risky IPs widget displays a comprehensive table with the following information:
+
+#### Widget Columns
+- **IP Address**: The specific IP address flagged as risky
+- **Risk Score**: Risk level indicator (Medium, High, etc.)
+- **Location**: Geographic location of the IP address including city, state/region, and country
+- **Requests #**: Number of requests made from this IP address
+- **Last Seen**: Timestamp of when this IP was last detected making requests
+
+### Risk Assessment Factors
+
+The risk scoring considers multiple factors:
+- **Historical Behavior**: Past malicious activities associated with the IP
+- **Geographic Risk**: Location-based risk assessment
+- **Network Reputation**: Reputation of the hosting network or ISP
+- **Activity Patterns**: Unusual request patterns or behaviors
+- **Threat Intelligence**: Data from security feeds and databases
+
+By utilizing Treblle's comprehensive IP Address Security features, you can effectively identify and respond to potential threats, maintain the security of your APIs, and protect your users from malicious activities.

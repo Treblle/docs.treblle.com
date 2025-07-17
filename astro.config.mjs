@@ -130,7 +130,20 @@ export default defineConfig({
         link: '/treblle/api-documentation/'
       }, {
         label: 'API Security',
-        link: '/treblle/api-security/'
+        collapsed: true,
+        items: [{
+          label: 'Overview',
+          link: '/treblle/api-security/'
+        }, {
+          label: 'DDoS Attack Detection',
+          link: '/treblle/api-security/ddos-attack/'
+        }, {
+          label: 'Request Information',
+          link: '/treblle/api-security/request-information/'
+        }, {
+          label: 'IP Address Security',
+          link: '/treblle/api-security/ip-address/'
+        }]
       }, {
         label: 'Observability as a Service',
         link: '/treblle/observability-as-a-service/'
