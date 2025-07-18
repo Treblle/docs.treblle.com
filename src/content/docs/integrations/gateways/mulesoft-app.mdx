@@ -162,7 +162,13 @@ Click **Deploy Application**.
 
 If you need to monitor APIs across different business groups, follow these additional steps:
 
-1. **Update Connected App Scopes**: Click the checkbox for different business groups to expand the scope permissions.
+Step 1: Build and Deploy the Treblle Policy on the business group that you want to add.
+
+Step 2: Apply policy to the APIs. 
+
+(Refer to the [MuleSoft policy documentation](https://docs.treblle.com/integrations/gateways/mulesoft/#creating-and-deploying-the-custom-policy) for detailed steps on how to apply policies to APIs)
+
+Step 3: Update Connected App Scopes: Click the checkbox for different business groups to expand the scope permissions.
 
 <img
   src="/platform/mulesoft-app/business-scope.jpg"
@@ -170,7 +176,7 @@ If you need to monitor APIs across different business groups, follow these addit
   style={{ borderRadius: "8px" }}
 />
 
-2. **Add Scopes for Other Business Groups**: Ensure you add the same scopes for each business group you want to monitor.
+**Step 4: Add Scopes for Other Business Groups**: Ensure you add the same scopes for each business group you want to monitor.
 
 <img
   src="/platform/mulesoft-app/business-scope-2.jpg"
@@ -178,7 +184,7 @@ If you need to monitor APIs across different business groups, follow these addit
   style={{ borderRadius: "8px" }}
 />
 
-3. **Configure Business Group IDs**: In the connected app properties, add multiple business group IDs separated by commas (`,`).
+**Step 5: Configure Business Group IDs**: In the connected app properties, add multiple business group IDs separated by commas (`,`).
 
    Example: `businessGroupIDs: group1-id,group2-id,group3-id`
 
