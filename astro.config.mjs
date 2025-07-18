@@ -145,6 +145,9 @@ export default defineConfig({
           link: '/treblle/api-security/ip-address/'
         }]
       }, {
+        label: 'Sustainability',
+        link: '/treblle/sustainability/'
+      }, {
         label: 'Observability as a Service',
         link: '/treblle/observability-as-a-service/'
       }, {
