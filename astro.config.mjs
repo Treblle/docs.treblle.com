@@ -191,6 +191,9 @@ export default defineConfig({
         }, {
           label: 'MuleSoft App',
           link: '/integrations/gateways/mulesoft-app/'
+        }, {
+          label: 'AWS API Gateway',
+          link: '/integrations/gateways/aws/'
         }]
       }, {
         label: 'Go',
