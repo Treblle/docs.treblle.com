@@ -5,57 +5,235 @@ description: "Learn how to create a custom Treblle SDK for your framework. Captu
 image: "/og-images/treblle-sdk.jpg"
 ---
 
-Treblle SDKs are at the heart of how Treblle works. They act as gateways through which you access the entire features of your Treblle dashboard.
+Building a custom Treblle SDK allows you to integrate Treblle with frameworks or languages we don't officially support yet. 
 
-## How Treblle SDK works
+This guide walks you through creating a production-ready SDK that captures API data and sends it to Treblle.
 
-In most languages and frameworks, a Treblle SDK is essentially a middleware that sends the needed request and response data to your Treblle dashboard.
+## When to Build a Custom SDK
 
+Consider building a custom SDK when:
 
-## Creating an SDK
+- Your framework/language isn't in our [official integrations](/integrations/)
+- You need specialized functionality for your infrastructure
+- You're building a proprietary framework that needs Treblle integration
+- You want to contribute back to the Treblle ecosystem
 
+## How Treblle SDKs Work
 
-### Request/Response data
+Treblle SDKs act as middleware that:
 
-To create an SDK for your framework or language, you need to make sure you can get access to the request and response data. Most often the way to do this would be via a middleware but this might not hold true for your particular use case.
+1. **Intercept requests** before they reach your application
+2. **Capture request/response data** without modifying the API behavior  
+3. **Mask sensitive information** before it leaves your server
+4. **Send data asynchronously** to Treblle's servers for analysis
 
-### Data masking
+The key principle: **Your API performance is never affected**. Data collection happens alongside your normal request processing.
 
-Once you'd made sure you can get the request and response data, you'd also need to implement a masking algorithm.
+## Core Requirements
 
-If the SDK you are creating is written in JavaScript/TypeScript then you can use the masking algorithm provided in [`treblle-utils`](https://github.com/treblle/treblle-utils)
+Every Treblle SDK must implement these essential components:
 
-See more on the [Masked fields](/security/masking/) section of this docs.
+### 1. Request/Response Capture
 
-### Send payload to Treblle
+Your SDK needs access to:
+- Request method, URL, headers, and body
+- Response status code, headers, body, and timing
+- Server information (IP, timezone, OS details)
 
-The last piece of logic your SDK needs to do is send the payload to Treblle. This is done via a POST request to one of the following endpoints.
+Most frameworks provide this through middleware hooks or request interceptors.
 
-- https://rocknrolla.treblle.com
-- https://punisher.treblle.com
-- https://sicario.treblle.com
+### 2. Data Masking
 
-You can randomly pick one of the mentioned endpoints to send the payload to. Here is an implementation in JavaScript which randomly picks and endpoint to send the payload to. This act as a sort of ad hoc load balancing strategy implemented within the SDK itself.
+Sensitive data must be masked **before leaving your server**. Implement masking for:
 
-```js
-function getTreblleEndpoint() {
-  const treblleBaseUrls = [
-    'https://rocknrolla.treblle.com',
-    'https://punisher.treblle.com',
-    'https://sicario.treblle.com',
-  ]
-  const randomUrlIndex = Math.floor(Math.random() * treblleBaseUrls.length)
+**Default masked fields:**
+```
+password, pwd, secret, password_confirmation, 
+cc, card_number, ccv, ssn, credit_score, api_key
+```
 
-  return treblleBaseUrls[randomUrlIndex]
+**Masking strategy:**
+- Replace field values with asterisks (`*`) matching the original length
+- Apply to request/response bodies, headers, and nested objects
+- Allow custom field configuration
+
+### 3. Treblle Payload Format
+
+Your SDK must format data according to Treblle's JSON schema and send it to one of these endpoints:
+
+```
+https://rocknrolla.treblle.com
+https://punisher.treblle.com  
+https://sicario.treblle.com
+```
+
+**Load balancing**: Randomly select an endpoint for each request to distribute load.
+
+## Implementation Steps
+
+### Step 1: Framework Integration
+
+Identify how to hook into your framework's request lifecycle:
+
+```javascript
+// Example: Express.js middleware pattern
+function treblleMiddleware(req, res, next) {
+  // Capture request data
+  const startTime = Date.now();
+  
+  // Continue to application
+  next();
+  
+  // Capture response data after completion
+  res.on('finish', () => {
+    const endTime = Date.now();
+    // Send to Treblle
+  });
 }
 ```
 
-### Configuration
+### Step 2: Data Collection
 
-Your Treblle SDK should provide a way for its user to specify the Treblle Project ID, Treblle API Key and additional fields to mask.
+Gather the required information:
 
+```javascript
+const treblleData = {
+  api_key: "YOUR_API_KEY",
+  project_id: "YOUR_PROJECT_ID", 
+  version: 1.0,
+  sdk: "your-framework-name",
+  data: {
+    server: { /* server info */ },
+    language: { /* runtime info */ },
+    request: { /* request details */ },
+    response: { /* response details */ },
+    errors: [] /* any captured errors */
+  }
+};
+```
 
-## JSON schema
+### Step 3: Implement Masking
 
-See the reference for the [Treblle JSON Schema](/reference/json-schema/).
+Create a masking function that processes nested objects:
 
+```javascript
+function maskSensitiveData(data, maskingKeywords) {
+  // Recursively traverse objects/arrays
+  // Replace values for keys matching maskingKeywords
+  // Return masked copy of data
+}
+```
+
+### Step 4: Send to Treblle
+
+Make an asynchronous POST request:
+
+```javascript
+function sendToTreblle(data) {
+  const endpoints = [
+    'https://rocknrolla.treblle.com',
+    'https://punisher.treblle.com', 
+    'https://sicario.treblle.com'
+  ];
+  
+  const endpoint = endpoints[Math.floor(Math.random() * endpoints.length)];
+  
+  // Send POST request with data
+  // Handle errors gracefully - don't break user's API
+}
+```
+
+## JSON Schema Reference
+
+Your payload must match this structure:
+
+```json
+{
+  "api_key": "string",
+  "project_id": "string", 
+  "version": "number|string",
+  "sdk": "string",
+  "data": {
+    "server": {
+      "ip": "string",
+      "timezone": "string", 
+      "os": {
+        "name": "string",
+        "release": "string",
+        "architecture": "string"
+      },
+      "software": "string|null",
+      "signature": "string|null", 
+      "protocol": "string",
+      "encoding": "string"
+    },
+    "language": {
+      "name": "string",
+      "version": "string"
+    },
+    "request": {
+      "timestamp": "string",
+      "ip": "string",
+      "url": "string", 
+      "user_agent": "string",
+      "method": "string",
+      "headers": "object",
+      "body": "object"
+    },
+    "response": {
+      "headers": "object",
+      "code": "integer", 
+      "size": "integer|string",
+      "load_time": "number",
+      "body": "string|object|null"
+    },
+    "errors": "array"
+  }
+}
+```
+
+[View complete JSON schema](/reference/json-schema/) for detailed field requirements.
+
+## Configuration
+
+Provide these configuration options:
+
+```javascript
+const treblle = new TreblleSDK({
+  apiKey: "required",
+  projectId: "required", 
+  additionalFieldsToMask: ["custom_field"], // optional
+  enabledEnvironments: ["production"], // optional
+  debug: false // optional
+});
+```
+
+## Testing Your SDK
+
+1. **Basic functionality**: Verify requests appear in your Treblle dashboard
+2. **Masking verification**: Confirm sensitive fields are properly masked
+3. **Error handling**: Ensure SDK failures don't break user APIs
+4. **Performance**: Test with high request volumes
+5. **Edge cases**: Empty responses, malformed data, network failures
+
+## Examples and Reference
+
+Study existing SDKs for implementation patterns:
+- [PHP SDK](https://github.com/Treblle/treblle-php) - Framework-agnostic approach
+- [Express.js SDK](https://github.com/Treblle/treblle-express) - Middleware pattern
+- [Laravel SDK](https://github.com/Treblle/treblle-laravel) - Framework-specific integration
+
+## Getting Support
+
+- **Technical questions**: [Discord community](https://discord.gg/NJWYYmMvuE)
+- **SDK submission**: Email [hello@treblle.com](mailto:hello@treblle.com)
+- **Documentation**: This guide and [JSON schema reference](/reference/json-schema/)
+
+## Contributing Back
+
+Once your SDK is working:
+1. Open source it on GitHub
+2. Submit it to our [community SDKs list](/integrations/#community-sdks)
+3. Consider making it an official Treblle SDK
+
+Building a custom SDK helps expand Treblle's ecosystem and enables more developers to benefit from API observability.

@@ -7,62 +7,109 @@ image: "/og-images/treblle-right-sdk.jpg"
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-Treblle provides SDKs that let you seamlessly adds Treblle to your APIs.
+Treblle integrates with your existing tech stack through SDKs and gateway plugins. 
 
-Treblle SDKs can...
+All integrations automatically provide API monitoring, documentation generation, security analysis, and error tracking.
 
-- Send requests to your Treblle dashboard
-- Send error to your Treblle dashboard
-- Mask sensitive values in your payload before sending the payload to your Treblle dashboard
+## API Gateway Integrations
 
-## Picking your install
-
-Treblle comes in many flavours, we can guarantee you will find one that fits your needs. If you can't find the language you need, feel free to reach out to us!
+Deploy Treblle at the infrastructure level for organization-wide visibility:
 
 <CardGrid>
   <LinkCard
-    title="PHP"
-    href="/integrations/php/no-framework/"
-    description="From plain old PHP, to Laravel and Symfony. We support them all with our easy to install composer packages."
+    title="AWS API Gateway"
+    href="/integrations/gateways/aws/"
+    description="Serverless Lambda function for automatic API discovery across multiple AWS regions."
   />
   <LinkCard
-    title="JavaScript"
-    href="/integrations/javascript/node/"
-    description="From Node to Fastify, and AdonisJS to Nest. We support a wide range of JavaScript and TypeScript frameworks and runtimes."
+    title="Kong"
+    href="/integrations/gateways/kong/"
+    description="Plugin for Kong Gateway with request filtering and custom field masking."
   />
   <LinkCard
-    title=".NET"
-    href="/integrations/net/net/"
-    description="We have support for both .NET, and .NET core. Just use our NuGet package and you are off to the races."
+    title="MuleSoft"
+    href="/integrations/gateways/mulesoft/"
+    description="Policy and auto-discovery app for enterprise MuleSoft environments."
   />
   <LinkCard
-    title="Go"
-    href="/integrations/go/core/"
-    description="Built around the net/http core library, our Go Module is easy to use, configure, and build."
+    title="Traefik"
+    href="/integrations/gateways/traefik/"
+    description="Middleware plugin for Traefik proxy with route filtering capabilities."
   />
   <LinkCard
-    title="Python"
-    href="/integrations/python/django/"
-    description="We currently support Django and Flask, and more frameworks on the way. Simple install using pip, and get your Python API underway."
-  />
-  <LinkCard
-    title="Ruby"
-    href="/integrations/ruby/rails/"
-    description="We currently only support Ruby on Rails, which is the most commonly used Ruby framework. Install our Ruby gem and start monitoring your RoR API in seconds."
-  />
-  <LinkCard
-    title="Java"
-    href="/integrations/java/spring/"
-    description="Simply add our Java dependency to your SpringBoot application, and you are ready to go."
+    title="WSO2"
+    href="/integrations/gateways/wso2/"
+    description="Global Synapse Handler integration for WSO2 API Manager."
   />
 </CardGrid>
 
+## Language SDKs
+
+### JavaScript & Node.js
+<CardGrid>
+  <LinkCard title="Node.js" href="/integrations/javascript/node/" description="Core Node.js middleware for any framework" />
+  <LinkCard title="Express" href="/integrations/javascript/express/" description="Express.js middleware with request filtering" />
+  <LinkCard title="Fastify" href="/integrations/javascript/fastify/" description="Fastify plugin with async processing" />
+  <LinkCard title="NestJS" href="/integrations/javascript/nest/" description="NestJS interceptor with decorator support" />
+  <LinkCard title="Koa" href="/integrations/javascript/koa/" description="Koa middleware for async request handling" />
+  <LinkCard title="AdonisJS" href="/integrations/javascript/adonis/" description="AdonisJS middleware with configuration support" />
+  <LinkCard title="SailsJS" href="/integrations/javascript/sails/" description="Sails.js hook with route monitoring" />
+  <LinkCard title="Strapi" href="/integrations/javascript/strapi/" description="Strapi v4 plugin for content API monitoring" />
+  <LinkCard title="Directus" href="/integrations/javascript/directus/" description="Directus extension hook for API monitoring" />
+</CardGrid>
+
+### PHP
+<CardGrid>
+  <LinkCard title="Laravel" href="/integrations/php/laravel/" description="Laravel middleware with Vapor and Octane support" />
+  <LinkCard title="Symfony" href="/integrations/php/symfony/" description="Symfony bundle with service container integration" />
+  <LinkCard title="Lumen" href="/integrations/php/lumen/" description="Lumen middleware for microservices" />
+  <LinkCard title="Pure PHP" href="/integrations/php/no-framework/" description="Framework-agnostic PHP integration" />
+</CardGrid>
+
+### Java
+<CardGrid>
+  <LinkCard title="Spring Boot" href="/integrations/java/spring/" description="Spring Boot starter with annotation support" />
+  <LinkCard title="AWS Lambda" href="/integrations/java/aws-lambda/" description="Lambda handler wrapper for serverless functions" />
+  <LinkCard title="JavaX" href="/integrations/java/javax/" description="Servlet filter for JavaX applications" />
+</CardGrid>
+
+### Python
+<CardGrid>
+  <LinkCard title="Django" href="/integrations/python/django/" description="Django middleware with settings configuration" />
+  <LinkCard title="Flask" href="/integrations/python/flask/" description="Flask decorator for route monitoring" />
+</CardGrid>
+
+### .NET
+<CardGrid>
+  <LinkCard title=".NET Core" href="/integrations/net/net-core/" description="ASP.NET Core middleware with attribute support" />
+  <LinkCard title=".NET Framework" href="/integrations/net/net/" description="Traditional .NET filter attribute" />
+</CardGrid>
+
+### Other Languages
+<CardGrid>
+  <LinkCard title="Go" href="/integrations/go/core/" description="HTTP middleware built on net/http standard library" />
+  <LinkCard title="Ruby on Rails" href="/integrations/ruby/rails/" description="Rails middleware with environment configuration" />
+</CardGrid>
+
+## Custom Integration
+
+<LinkCard
+  title="Build Your Own SDK"
+  href="/integrations/custom/"
+  description="SDK development guide with JSON schema and masking implementation details."
+/>
+
 ## Community SDKs
 
-Alongside the official Treblle SDKs, we have a collection of community contributed SDKs that you can use.
+- [Actix (Rust)](https://github.com/barrage/actix-treblle) - Community integration for Actix web framework
 
-- <a href="https://github.com/barrage/actix-treblle" target="_blank">
-    Actix
-  </a>
+If you have an SDK you'd like listed here, please send a [pull request](https://github.com/Treblle/docs.treblle.com/blob/main/src/content/docs/integrations/index.mdx).
 
-If you have an SDK you'd like listed here, please send a <a href="https://github.com/Treblle/docs.treblle.com/blob/main/src/content/docs/integrations/index.mdx" target="_blank">pull request</a>.
+## Getting Started
+
+1. Choose your integration above
+2. Follow the installation guide for your platform
+3. Configure your API key and Project ID
+4. Deploy and start monitoring
+
+Missing your platform? [Open an issue](https://github.com/Treblle/docs.treblle.com/issues) or check our [custom integration guide](/integrations/custom/).
