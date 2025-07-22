@@ -44,6 +44,26 @@
             "source": "/security/",
             "destination": "/security/certification/",
             "permanent": true
-        }
+        },
+        {
+            "source": "/integrations/gateways/mulesoft",
+            "destination": "/integrations/gateways/mulesoft/policy/",
+            "permanent": true
+          },
+          {
+            "source": "/integrations/gateways/mulesoft/",
+            "destination": "/integrations/gateways/mulesoft/policy/",
+            "permanent": true
+          },
+          {
+            "source": "/integrations/gateways/mulesoft-app",
+            "destination": "/integrations/gateways/mulesoft/app/",
+            "permanent": true
+          },
+          {
+            "source": "/integrations/gateways/mulesoft-app/",
+            "destination": "/integrations/gateways/mulesoft/app/",
+            "permanent": true
+          }
     ]
 }
