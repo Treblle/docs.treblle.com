@@ -186,14 +186,18 @@ export default defineConfig({
           label: 'WSO2',
           link: '/integrations/gateways/wso2/'
         }, {
-          label: 'MuleSoft',
-          link: '/integrations/gateways/mulesoft/'
-        }, {
-          label: 'MuleSoft App',
-          link: '/integrations/gateways/mulesoft-app/'
-        }, {
           label: 'AWS API Gateway',
           link: '/integrations/gateways/aws/'
+        }, {        
+          label: 'MuleSoft',
+          collapsed: true,
+          items: [{
+            label: 'Policy Integration',
+            link: '/integrations/gateways/mulesoft/policy/'
+          }, {
+            label: 'Auto-Discovery App',
+            link: '/integrations/gateways/mulesoft/app/'
+          }]
         }]
       }, {
         label: 'Go',
