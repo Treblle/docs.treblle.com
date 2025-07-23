@@ -1,0 +1,94 @@
+---
+title: "Spike Alerts"
+metaTitle: "Spike Alerts for DDoS Protection & Traffic Monitoring | Treblle Docs"
+description: "Configure Spike Alerts in Treblle to detect DDoS attacks, traffic anomalies, and sudden request spikes. Get instant notifications to protect your APIs from malicious traffic and unexpected load."
+image: "/og-images/treblle-spike-alerts.jpg"
+---
+
+Spike Alerts are designed to detect sudden and significant increases in API traffic that could indicate DDoS attacks, malfunctioning clients, or unexpected traffic surges. 
+
+This proactive monitoring helps you respond quickly to potential threats and minimize their impact on your infrastructure and costs.
+
+## What Are Spike Alerts?
+
+Spike Alerts monitor your API traffic patterns and notify you when there's an abnormal increase in request volume. Unlike saved search alerts that monitor specific criteria, spike alerts focus on traffic volume patterns and can help detect:
+
+- **DDoS attacks**: Malicious attempts to overwhelm your API
+- **Bot traffic**: Automated requests that exceed normal usage patterns
+- **Malfunctioning clients**: Applications making excessive requests due to bugs
+- **Viral content**: Legitimate but unexpected traffic spikes
+- **Retry storms**: Cascading failures causing exponential request growth
+
+## How Spike Detection Works
+
+Treblle's spike detection algorithm analyzes your API traffic using:
+
+- **Baseline comparison**: Compares current traffic to historical averages
+- **Time-based analysis**: Evaluates traffic patterns over 15-minute intervals
+- **Request volume thresholds**: Detects when traffic exceeds normal variations
+- **Pattern recognition**: Distinguishes between organic growth and suspicious spikes
+
+The system automatically adapts to your API's normal traffic patterns, reducing false positives while maintaining sensitivity to genuine threats.
+
+## Setting Up Spike Alerts
+
+### 1. Navigate to My Alerts
+
+- Open the **My Alerts** section from the navigation menu
+- Click **New Alert** to create a new alert
+
+<img
+  src="/platform/spike-alerts/my-alerts.jpg"
+  alt="New Alert dialog with Spike option"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### 2. Configure Spike Alert Settings
+
+When creating a new alert, configure the following settings:
+
+#### Alert Type Selection
+- **Name**: Provide a descriptive name (e.g., "DDoS Protection Alert", "Traffic Spike Monitor")
+- **Type**: Select **"Spike"** from the dropdown
+
+#### Fixed Configuration
+- **From saved search**: This field is automatically grayed out for Spike alerts
+- **Frequency**: Fixed at **15 minutes** for optimal detection sensitivity
+
+#### Notification Settings
+- **Channel**: Choose your preferred notification method (Email, Slack, In-app)
+- **People**: Select team members who should receive spike alerts
+
+<img
+  src="/platform/spike-alerts/spike-alerts.jpg"
+  alt="Selecting Spike as alert type"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### 3. Notification Channels
+
+#### Email Notifications
+Spike alerts via email include:
+- Alert timestamp and severity
+- Traffic volume comparison (current vs. baseline)
+- Affected endpoints and request patterns
+- Recommended mitigation steps
+
+#### Slack Integration
+For Slack notifications:
+- Add your [Slack webhook URL](https://api.slack.com/messaging/webhooks) in API settings
+- Receive real-time alerts with traffic data and quick action links
+- Share alerts with your team for coordinated response
+
+#### In-App Notifications
+- Immediate dashboard notifications with traffic visualizations
+- Historical spike data and trend analysis
+- Direct links to affected endpoints and request details
+
+---
+
+Spike Alerts provide essential protection against DDoS attacks and traffic anomalies, helping you maintain API availability and control infrastructure costs. 
+
+Combined with Treblle's comprehensive monitoring suite, they offer proactive defense against various API threats and performance issues.

@@ -96,10 +96,13 @@ export default defineConfig({
         collapsed: true,
         items: [{
           label: 'Default Alerts',
-          link: '/treblle/default-alerts/'
+          link: '/features/default-alerts/'
         }, {
           label: 'Custom Alerts',
           link: '/features/custom-alert/'
+        }, {
+          label: 'Spike Alerts',
+          link: '/features/spike-alert/'
         }]
       }, {
         label: 'API Dashboard',
