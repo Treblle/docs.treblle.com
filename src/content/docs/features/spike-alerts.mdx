@@ -23,7 +23,7 @@ Spike Alerts monitor your API traffic patterns and notify you when there's an ab
 
 Treblle's spike detection algorithm analyzes your API traffic using:
 
-- **Baseline comparison**: Compares current traffic to historical averages
+- **7-day baseline comparison**: Compares current traffic to your API's 7-day average
 - **Time-based analysis**: Evaluates traffic patterns over 15-minute intervals
 - **Request volume thresholds**: Detects when traffic exceeds normal variations
 - **Pattern recognition**: Distinguishes between organic growth and suspicious spikes
@@ -72,9 +72,17 @@ When creating a new alert, configure the following settings:
 #### Email Notifications
 Spike alerts via email include:
 - Alert timestamp and severity
-- Traffic volume comparison (current vs. baseline)
+- Traffic volume comparison (current vs. 7-day average)
+- Percentage increase above baseline (e.g., "2720.83% above 7-day average")
 - Affected endpoints and request patterns
 - Recommended mitigation steps
+
+<img
+  src="/platform/spike-alerts/email-notification.jpg"
+  alt="Spike alert email notification example"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
 
 #### Slack Integration
 For Slack notifications:

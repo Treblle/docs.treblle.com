@@ -99,10 +99,10 @@ export default defineConfig({
           link: '/features/default-alerts/'
         }, {
           label: 'Custom Alerts',
-          link: '/features/custom-alert/'
+          link: '/features/custom-alerts/'
         }, {
           label: 'Spike Alerts',
-          link: '/features/spike-alert/'
+          link: '/features/spike-alerts/'
         }]
       }, {
         label: 'API Dashboard',
