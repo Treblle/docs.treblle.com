@@ -191,7 +191,10 @@ export default defineConfig({
         }, {
           label: 'AWS API Gateway',
           link: '/integrations/gateways/aws/'
-        }, {        
+        }, {    
+          label: 'Azure API Gateway',
+          link: '/integrations/gateways/azure/'
+        }, {   
           label: 'MuleSoft',
           collapsed: true,
           items: [{
