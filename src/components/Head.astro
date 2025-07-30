@@ -91,5 +91,64 @@ const domain = Astro.site?.host || '';
   ></iframe>
 </noscript>
 
+<!-- External links script -->
+<script is:inline>
+// List of specific external URLs for sidebar that should open in new tabs
+const sidebarExternalUrls = [
+  'https://trust.treblle.com/',
+  'https://treblle.com/knowledgebase',
+  'https://apiacademy.treblle.com/laravel-api-course/'
+];
+
+// Function to add target="_blank" to ALL links
+function addTargetBlankToAllLinks() {
+  // Handle specific sidebar external links
+  const sidebarLinks = document.querySelectorAll('.sidebar a[href], nav a[href], .sl-sidebar a[href]');
+  
+  sidebarLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    
+    // Check if the link is in our sidebar external URLs list
+    if (sidebarExternalUrls.some(url => href === url || href.startsWith(url))) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+
+  // Handle ALL links in documentation content (both internal and external)
+  const allLinks = document.querySelectorAll('main a[href], .content a[href], .sl-markdown-content a[href], article a[href]');
+  
+  allLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    
+    // Skip anchor links (same page navigation)
+    if (!href || href.startsWith('#')) {
+      return;
+    }
+    
+    // Add target="_blank" to ALL links (internal and external)
+    link.setAttribute('target', '_blank');
+    
+    // Add rel="noopener noreferrer" for security (especially important for external links)
+    if (href.startsWith('http://') || href.startsWith('https://')) {
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+}
+
+// Run when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', addTargetBlankToAllLinks);
+} else {
+  addTargetBlankToAllLinks();
+}
+
+// Also run when navigating (for SPA-like behavior)
+document.addEventListener('astro:page-load', addTargetBlankToAllLinks);
+
+// Run after a small delay to catch dynamically loaded content
+setTimeout(addTargetBlankToAllLinks, 500);
+</script>
+
 <!-- Pass through any injected head content -->
 <slot />
