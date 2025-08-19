@@ -54,7 +54,7 @@ Before you begin, make sure you have:
 
 ## Step 1: Install WSO2 API Manager
 
-1. **Download** the WSO2 API Manager 4.3.0 from the official [WSO2 website](https://wso2.com/api-manager/).
+1. **Download** the WSO2 API Manager 4.3.0 from the official [WSO2 website](https://wso2.com/api-manager/previous-releases/).
 
 <img
   src="/platform/wso2/wso2-website.png"
@@ -65,8 +65,8 @@ Before you begin, make sure you have:
 2. **Unzip the archive**:
    ```bash
    unzip wso2am-4.3.0.zip
-   cd /path/wso2am-4.3.0/bin/
-   export JAVA_HOME=$(/usr/libexec/java_home -v 11) ./api-manager.sh
+   cd wso2am-4.3.0/bin/
+   ./api-manager.sh
    ```
 3. **Open the Admin Console in your browser**:
    - URL: `https://localhost:9443/carbon`
@@ -93,7 +93,7 @@ Before you begin, make sure you have:
 
    <img
      src="/platform/wso2/api-details.png"
-     width="400"
+     width="800"
      style={{ borderRadius: "8px" }}
    />
 
@@ -101,7 +101,7 @@ Before you begin, make sure you have:
 
    <img
      src="/platform/wso2/publish.png"
-     width="400"
+     width="800"
      style={{ borderRadius: "8px" }}
    />
 
@@ -111,7 +111,7 @@ Before you begin, make sure you have:
 
    <img
      src="/platform/wso2/developer-portal.png"
-     width="400"
+     width="800"
      style={{ borderRadius: "8px" }}
    />
 
@@ -121,58 +121,26 @@ Before you begin, make sure you have:
 
    <img
      src="/platform/wso2/subscribe.png"
-     width="500"
+     width="800"
      style={{ borderRadius: "8px" }}
    />
 
    - Use the **Subscription and Key Generation Wizard** to generate an access token:
 
    <img
-     src="/platform/wso2/access-token.png"
-     width="500"
+     src="/platform/wso2/access-token.jpg"
+     width="800"
      style={{ borderRadius: "8px" }}
    />
 
-- Provide details such as:
-
-  - Application Name.
-  - Description.
-  - Shared Quota.
-
-  <img
-    src="/platform/wso2/key-generate.png"
-    width="500"
-    style={{ borderRadius: "8px" }}
-  />
-
-- Generate the access token and copy it. You will use this token to authenticate your requests.
-
-## Step 3: Define API Resources
-
-- In the WSO2 Publisher, go to the **Resources** section.
-
-  <img
-    src="/platform/wso2/api-resource.png"
-    width="500"
-    style={{ borderRadius: "8px" }}
-  />
-
-- Define the endpoints for your API, such as `/users`.
-
-  <img
-    src="/platform/wso2/define-endpoint.png"
-    width="500"
-    style={{ borderRadius: "8px" }}
-  />
-
-## Step 4: Test the API
+## Step 3: Test the API
 
 - Return to the Developer Portal and locate the API you subscribed to.
 - Click the **Try Out** option to test your API directly within the portal.
 
   <img
     src="/platform/wso2/try-out.png"
-    width="500"
+    width="800"
     style={{ borderRadius: "8px" }}
   />
 
@@ -183,7 +151,7 @@ Before you begin, make sure you have:
 
   <img
     src="/platform/wso2/test-key.png"
-    width="500"
+    width="800"
     style={{ borderRadius: "8px" }}
   />
 
@@ -191,7 +159,7 @@ Before you begin, make sure you have:
 
   <img
     src="/platform/wso2/try-it-out-2.png"
-    width="500"
+    width="800"
     style={{ borderRadius: "8px" }}
   />
 
@@ -199,11 +167,11 @@ Before you begin, make sure you have:
 
   <img
     src="/platform/wso2/working-api.png"
-    width="500"
+    width="800"
     style={{ borderRadius: "8px" }}
   />
 
-## Step 5: Set Up Treblle
+## Step 4: Set Up Treblle
 
 Follow these steps to integrate Treblle with your WSO2 API Manager:
 
@@ -217,7 +185,7 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
 
    <img
      src="/platform/wso2/treblle-api.png"
-     width="500"
+     width="800"
      style={{ borderRadius: "8px" }}
    />
 
@@ -228,18 +196,18 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
 
    <img
      src="/platform/wso2/sdk.png"
-     width="500"
+     width="800"
      style={{ borderRadius: "8px" }}
    />
 
     These credentials are essential for integrating Treblle with your WSO2 API Manager.
 
-## Step 6: Install Treblle Data Publisher Extension
+## Step 5: Install Treblle Data Publisher Extension
 
 1. Clone the Treblle Data Publisher repository:
    ```bash
    git clone https://github.com/Treblle/treblle-wso2.git
-   cd /path/treblle-wso2/wso2am-4.3.0
+   cd wso2am-4.3.0
    ```
 2. Build the project:
    ```bash
@@ -252,6 +220,7 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
    cp target/treblle-data-publisher-*.jar /path/wso2am-4.3.0/repository/components/lib
    ```
 
+:::note
     If `mvn clean install` is giving ERRORS. Please download the `aspectjweaver-1.8.5.jar` file from the [WSO2 Nexus repository](https://maven.wso2.org/nexus/content/groups/wso2-public/org/aspectj/aspectjweaver/1.8.5/aspectjweaver-1.8.5.jar) manually.
 
     Assuming your downloaded JAR is in your Downloads folder: 
@@ -259,10 +228,20 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
      ```bash 
      mv ~/Downloads/aspectjweaver-1.8.5.jar ~/.m2/repository/org/aspectj/aspectjweaver/1.8.5/
      ```
+  
+:::
 
-## Step 7: Configure WSO2 API Manager for Treblle
+## Step 6: Configure WSO2 API Manager for Treblle
 
-1. Update the `deployment.toml` file (Add at the **beginning of the file**):
+1. **Stop WSO2 if it's running:**
+   ```bash
+   cd /path/to/your/wso2am-4.3.0/bin
+   ./api-manager.sh stop
+   # Or force kill if needed:
+   # pkill -f "org.wso2.carbon.bootstrap.Bootstrap"
+   ```
+
+2. Update the `deployment.toml` file (Add at the **beginning of the file**):
 
    ```bash
    /wso2am-4.3.0/repository/conf/deployment.toml
@@ -274,7 +253,7 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
    class="com.treblle.wso2publisher.handlers.APILogHandler"
    ```
 
-2. Update `log4j2.properties`:
+3. Update `log4j2.properties`:
 
     To enable the logs to populate under the default wso2carbon.log, you can create a custom appender to log the entries to a separate log file.
 
@@ -289,9 +268,11 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
      logger.treblle_publisher.appenderRef.CARBON_LOGFILE.ref = CARBON_LOGFILE
      ```
 
-3. Set `environment variables`:
+4. Set `environment variables`:
 
    Open a terminal and add the following environment variables. Alternatively, set these variables in your .bash_profile or .bashrc to make them persistent across sessions.
+
+   **IMPORTANT:** Set these environment variables before starting WSO2. Open a terminal and run:
 
    **For MacOS/Linux:**
    ```bash
@@ -337,14 +318,14 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
    echo %TREBLLE_GATEWAY_URL%
    ```
 
-## Step 8: Configure OAuth2 Authentication
+## Step 7: Configure OAuth2 Authentication
 
 - To generate an OAuth2 Token, log in to the Developer Portal at `https://localhost:9443/devportal`.
 - Under the **Subscription** section, click on your created application.
 
   <img
     src="/platform/wso2/try.png"
-    width="500"
+    width="800"
     style={{ borderRadius: "8px" }}
   />
 
@@ -352,162 +333,137 @@ Follow these steps to integrate Treblle with your WSO2 API Manager:
 
   <img
     src="/platform/wso2/production.png"
-    width="500"
+    width="800"
     style={{ borderRadius: "8px" }}
   />
 
 - Click **Generate Key** for the chosen environment and copy the generated access token.
 - This token is essential for accessing protected resources in your API.
 
-## Step 9: Testing API Requests with OAuth2 Authentication
+## Step 8: Verify Treblle Integration
 
-  After setting up your WSO2 API and Treblle integration, you'll need to test the API with proper authentication. Here are curl commands for different scenarios:
-
-1. Generate an OAuth2 Access Token
-     First, obtain an access token:
-
+1. **Check WSO2 logs for Treblle activity:**
    ```bash
-     curl -k -X POST \
-       https://localhost:8243/token \
-       -H "Authorization: Basic $(echo -n client_id:client_secret | base64)" \
-       -H "Content-Type: application/x-www-form-urlencoded" \
-       -d "grant_type=password&username=admin&password=admin&scope=default"
+   tail -f /path/to/your/wso2am-4.3.0/repository/logs/wso2carbon.log | grep -i treblle
    ```
 
-   Replace client_id and client_secret with the credentials from your application.
+2. **Look for success messages** (not 403 Forbidden errors):
+   - ✅ Good: `Event successfully published.`
+   - ❌ Bad: `Event publishing failed for project id: your-project-id with status code: 403`
 
-2. Retrieve Users from Your API
+3. **Check your Treblle dashboard** to see captured API requests.
 
-   Use the token to make a GET request:
+## Troubleshooting
 
-   ```bash
-     curl -k -X GET \
-       "https://localhost:8243/user-management/v1/users" \
-       -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-   ```
+### Common Issues and Solutions:
 
-3. Get a Specific User
-
-   ```bash
-     curl -k -X GET \
-       "https://localhost:8243/user-management/v1/users/1" \
-       -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-   ```
-
-4. Create a New User
-
-   ```bash
-    curl -k -X POST \
-     "https://localhost:8243/user-management/v1/users" \
-     -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "email": "john.doe@example.com",
-       "first_name": "John",
-       "last_name": "Doe"
-     }'
-   ```
-
-5. Update a User
-
-   ```bash
-   curl -k -X PUT \
-     "https://localhost:8243/user-management/v1/users/1" \
-     -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "email": "john.doe@example.com",
-       "first_name": "John",
-       "last_name": "Smith"
-     }'
-   ```
-
-6. Delete a User
-
-   ```bash
-   curl -k -X DELETE \
-     "https://localhost:8243/user-management/v1/users/1" \
-     -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-   ```
-
-## Testing the Treblle Integration
-
-   To verify that Treblle is capturing your API requests correctly, make a series of API calls:
-
-   ```bash
-   curl -k -X GET "https://localhost:8243/user-management/v1/users" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-   curl -k -X GET "https://localhost:8243/user-management/v1/users/1" -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-   ```
-
-Then check the Treblle dashboard to confirm the requests are being logged.
-
-## Step 10: Restart WSO2 API Manager
-
-Restart the server to apply the configurations:
-
+**1. Database Lock Error:**
 ```bash
-cd /path/wso2am-4.3.0/bin
-./api-manager.sh restart
+# Kill any running WSO2 processes
+pkill -f "org.wso2.carbon.bootstrap.Bootstrap"
+
+# Remove lock files
+cd /path/to/your/wso2am-4.3.0/repository/database/
+rm -f *.lock *.lck *.tmp
 ```
 
-## Step 11: Test API Observability with Treblle
+**2. 403 Forbidden Errors in Logs:**
+- Verify your Treblle credentials are correct
+- Make sure you're using actual API key and project ID, not placeholder text
+- Check that `TREBLLE_GATEWAY_URL` contains only the base URL
 
-    Use cURL to send a request:
+**3. Extension Not Loading:**
+- Ensure the JAR file is in the correct location: `/repository/components/lib/`
+- Verify the `deployment.toml` configuration is at the beginning of the file
+- Check that log4j2.properties has been updated correctly
 
-    Replace "access_token" with a valid OAuth2 token.
+**4. SSL Certificate Issues:**
+- Use the `-k` flag with cURL for testing
+- In Postman, disable SSL certificate verification in settings
+- For development, you can use HTTP port 8280 instead of HTTPS 8243
 
-   ```bash
-     curl -k -X GET "https://localhost:8243/<api-context>/<version>" -H "Authorization: Bearer <access_token>"
-     ```
+**5. View detailed logs:**
+```bash
+# View all WSO2 logs
+tail -f /path/to/your/wso2am-4.3.0/repository/logs/wso2carbon.log
 
-     <img
-       src="/platform/wso2/example.png"
-       width="500"
-       style={{ borderRadius: "8px" }}
-     />
+# Filter for Treblle-specific logs
+tail -f /path/to/your/wso2am-4.3.0/repository/logs/wso2carbon.log | grep "treblle\|PublisherClient\|APILogHandler"
+```
 
-### Troubleshooting the Integration
+## Example API Testing Commands
 
-    If you're not seeing requests in Treblle, check the logs:
+Here are example curl commands for different HTTP methods:
 
-   ```bash
-    # View WSO2 logs
-     tail -f /path/wso2am-4.3.0/repository/logs/wso2carbon.log | grep "treblle"
-     ```
+**GET Request:**
+```bash
+curl -k -X GET \
+  "https://localhost:8243/test/v1" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+**POST Request:**
+```bash
+curl -k -X POST \
+  "https://localhost:8243/user-management/v1/users" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "john.doe@example.com", "first_name": "John", "last_name": "Doe"}'
+```
+
+**PUT Request:**
+```bash
+curl -k -X PUT \
+  "https://localhost:8243/user-management/v1/users/1" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "john.doe@example.com", "first_name": "John", "last_name": "Smith"}'
+```
+
+**DELETE Request:**
+```bash
+curl -k -X DELETE \
+  "https://localhost:8243/user-management/v1/users/1" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
 
 ## Dashboard Overview
 
-   The Treblle dashboard provides real-time insights into API requests, compliance checks, and potential issues.
+The Treblle dashboard provides real-time insights into API requests, compliance checks, and potential issues.
 
-   <img
-     src="/platform/wso2/dashboard.png"
-     width="500"
-     style={{ borderRadius: "8px" }}
-   />
+<img
+  src="/platform/wso2/dashboard.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
 
-  **Customize the View**: Use the customization options at the **top right** of the dashboard to tailor the information displayed according to your needs.
+**Customize the View**: Use the customization options at the **top right** of the dashboard to tailor the information displayed according to your needs.
 
-
-   <img
-     src="/platform/wso2/filter.png"
-     width="175"
-     style={{ borderRadius: "8px" }}
-   />
+<img
+  src="/platform/wso2/filter.png"
+  width="200"
+  style={{ borderRadius: "8px" }}
+/>
 
 ## Detailed API Request Logs
 
-  **Request List**: View a detailed list of API requests, including key metrics and diagnostic information.
+**Request List**: View a detailed list of API requests, including key metrics and diagnostic information.
 
-   <img
-     src="/platform/wso2/request.png"
-     width="500"
-     style={{ borderRadius: "8px" }}
-   />
+<img
+  src="/platform/wso2/request.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
 
-   **Inspect Individual Requests**:
+**Inspect Individual Requests**:
 
-   <img
-     src="/platform/wso2/request-detail.png"
-     width="500"
-     style={{ borderRadius: "8px" }}
-   />
+<img
+  src="/platform/wso2/request-detail.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+---
+
+That's it! 
+
+Your WSO2 API Manager is now integrated with Treblle. All API requests will be automatically captured and sent to your Treblle dashboard.
