@@ -68,6 +68,9 @@ export default defineConfig({
       }, {
         label: 'Workspace Settings',
         link: '/admin/workspace-settings/'
+      }, {
+        label: 'Manage Password',
+        link: '/admin/password/'
       }]
     }, {
       label: 'Treblle Platform',
