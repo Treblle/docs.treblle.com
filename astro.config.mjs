@@ -37,7 +37,10 @@ export default defineConfig({
     }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
-    },  {
+    }, {
+      label: 'Onboarding Checklist',
+      link: '/guides/onboarding/'
+    }, {
       label: 'Your Account',
       collapsed: true,
       items: [{
