@@ -33,7 +33,7 @@ export default defineConfig({
     lastUpdated: true,
     sidebar: [{
       label: 'Introduction',
-      link: '/documentation-overview/'
+      link: '/'
     }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
