@@ -32,42 +32,99 @@ export default defineConfig({
     customCss: ['./src/tailwind.css', '@fontsource/poppins/600.css', '@fontsource-variable/inter/standard.css'],
     lastUpdated: true,
     sidebar: [{
-      label: 'Who is Treblle for?',
-      link: '/who-is-treblle-for/'
+      label: 'Introduction',
+      link: '/'
     }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
     }, {
-      label: 'Workspace',
+      label: 'Onboarding Checklist',
+      link: '/guides/onboarding/'
+    }, {
+      label: 'Your Account',
       collapsed: true,
       items: [{
-        label: 'Workspace',
-        link: '/treblle/workspace/'
+        label: 'Profile',
+        link: '/treblle/profile/'
       }, {
-        label: 'API Catalog',
-        link: '/features/api-catalog/'
+        label: 'Preferences',
+        link: '/treblle/preferences/'
       }, {
-        label: 'Authentication',
-        link: '/features/authentication/'
+        label: 'Security and Access',
+        link: '/treblle/security-and-access/'
       },]
+    }, {
+      label: 'Administer Treblle',
+      collapsed: true,
+      items: [{
+        label: 'Invite Users',
+        link: '/admin/invite-users/'
+      }, {
+        label: 'Team Management',
+        link: '/admin/manage-your-workspace/'
+      }, {
+        label: 'Single Sign-On',
+        link: '/admin/single-sign-on/'
+      }, {
+        label: 'Billing and Subscription Management',
+        link: '/admin/billing-subscription/'
+      }, {
+        label: 'Workspace Settings',
+        link: '/admin/workspace-settings/'
+      }, {
+        label: 'Manage Password',
+        link: '/admin/password/'
+      }]
     }, {
       label: 'Treblle Platform',
       collapsed: true,
       items: [{
-        label: 'Treblle Dashboard',
+        label: 'Workspace and Sidebar',
+        collapsed: true,
+        items: [{
+          label: 'Home',
+          link: '/treblle/workspace-dashboard/'
+        }, {
+          label: 'APIs',
+          link: '/treblle/apilist/'
+        }, {
+          label: 'Trace',
+          link: '/treblle/api-traceability/'
+        }, {
+          label: 'Catalog',
+          link: '/features/api-catalog/'
+        }, {
+          label: 'Alfred AI',
+          link: '/treblle/alfred-ai/'
+        }, ]
+      }, {
+        label: 'Notifications and Alerts',
+        collapsed: true,
+        items: [{
+          label: 'Default Alerts',
+          link: '/features/default-alerts/'
+        }, {
+          label: 'Custom Alerts',
+          link: '/features/custom-alerts/'
+        }, {
+          label: 'Spike Alerts',
+          link: '/features/spike-alerts/'
+        }]
+      }, {
+        label: 'API Dashboard',
         link: '/treblle/dashboard/'
       }, {
         label: 'Requests',
         link: '/treblle/requests/'
+      }, {
+        label: 'Metadata',
+        link: '/treblle/metadata/'
       }, {
         label: 'Endpoints',
         link: '/treblle/endpoints/'
       }, {
         label: 'Customers',
         link: '/treblle/customers/'
-      }, {
-        label: 'API Traceability',
-        link: '/treblle/api-traceability/'
       }, {
         label: 'Problems',
         link: '/treblle/problems/'
@@ -78,17 +135,33 @@ export default defineConfig({
         label: 'API Compliance',
         link: '/features/api-compliance/'
       }, {
-        label: "Custom Alert",
-        link: "/features/custom-alert/",
-      }, {
         label: 'API Documentation',
         link: '/treblle/api-documentation/'
       }, {
         label: 'API Security',
-        link: '/treblle/api-security/'
+        collapsed: true,
+        items: [{
+          label: 'Overview',
+          link: '/treblle/api-security/'
+        }, {
+          label: 'DDoS Attack Detection',
+          link: '/treblle/api-security/ddos-attack/'
+        }, {
+          label: 'Request Information',
+          link: '/treblle/api-security/request-information/'
+        }, {
+          label: 'IP Address Security',
+          link: '/treblle/api-security/ip-address/'
+        }]
+      }, {
+        label: 'Sustainability',
+        link: '/treblle/sustainability/'
       }, {
         label: 'Observability as a Service',
         link: '/treblle/observability-as-a-service/'
+      }, {
+        label: 'Data Masking',
+        link: '/treblle/data-masking/'
       }]
     }, {
       label: 'API Toolkit',
@@ -96,9 +169,6 @@ export default defineConfig({
       items: [{
         label: 'Aspen',
         link: '/aspen/'
-      }, {
-        label: 'Alfred AI',
-        link: '/treblle/alfred-ai/'
       }, {
         label: 'API Insights',
         link: '/treblle/api-insights/',
@@ -124,6 +194,22 @@ export default defineConfig({
         }, {
           label: 'WSO2',
           link: '/integrations/gateways/wso2/'
+        }, {
+          label: 'AWS API Gateway',
+          link: '/integrations/gateways/aws/'
+        }, {    
+          label: 'Azure API Gateway',
+          link: '/integrations/gateways/azure/'
+        }, {   
+          label: 'MuleSoft',
+          collapsed: true,
+          items: [{
+            label: 'Policy Integration',
+            link: '/integrations/gateways/mulesoft/policy/'
+          }, {
+            label: 'Auto-Discovery App',
+            link: '/integrations/gateways/mulesoft/app/'
+          }]
         }]
       }, {
         label: 'Go',
@@ -221,16 +307,21 @@ export default defineConfig({
         }]
       }]
     }, {
-      label: 'Security',
+      label: 'Trust Center',
       collapsed: true,
       items: [{
-        label: 'Certification',
+        label: 'Treblle Privacy Policy',
         link: '/security/certification/'
       }, {
-        label: 'Masking Fields',
-        link: '/security/masking/'
+        label: 'Trust Center',
+        link: 'https://trust.treblle.com/'
       }]
-    }, {
+    }, 
+    {
+      label: 'API Knowledge Base',
+      link: 'https://treblle.com/knowledgebase'
+    },
+    {
       label: 'Resources',
       collapsed: true,
       items: [{
@@ -239,9 +330,6 @@ export default defineConfig({
       }, {
         label: 'Laravel API Course',
         link: 'https://apiacademy.treblle.com/laravel-api-course/'
-      }, {
-        label: 'API Knowledge Base',
-        link: 'https://treblle.com/knowledge-base/your-first-api/'
       }]
     }]
   }), tailwind({
@@ -384,7 +472,11 @@ export default defineConfig({
       status: 301,
       destination: '/guides/getting-started/'
     },
-    '/en/introduction': {
+    '/en/integrations/community-sdks': {
+      status: 301,
+      destination: '/integrations#community-sdks/'
+    },
+    '/guides/': {
       status: 301,
       destination: '/guides/getting-started/'
     },

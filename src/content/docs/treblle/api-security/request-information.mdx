@@ -1,0 +1,69 @@
+---
+title: "Request Information"
+metaTitle: "Analyze API Request Information & Metadata | Treblle Docs"
+description: "Get detailed insights into API request information including user data, server details, device information, and geographic data. Monitor and analyze request patterns with Treblle."
+image: "/og-images/security-request-information.jpg"
+---
+
+Treblle's Request Information feature provides comprehensive details about every API request, including user data, server information, device details, and geographic data. This information helps you understand request patterns, debug issues, and optimize your API performance.
+
+## Accessing Request Information
+
+### Navigate to Request Details
+
+1. **Go to Requests Section**
+   
+   Click on **Requests** in the left navigation bar of your API dashboard.
+
+2. **Select a Request**
+   
+   Click on any request from the list to open its detailed view.
+
+3. **Access Info Tab**
+   
+   In the request details panel, click on the **Info** tab to view comprehensive request information.
+
+   <img
+     src="/platform/api-security/sub/request-info.jpg"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+## User Data Information
+
+The User Data section provides details about the client making the request:
+
+### Device and Client Information
+- **Device Type**: Desktop, Mobile, Tablet, or other device categories
+- **Operating System**: Operating system information (may show N/A if not detected)
+- **Browser**: Browser type or SDK information
+- **App Name**: Name of the application making the request (may show N/A)
+- **Client**: Client application details (may show N/A)
+- **Bundle**: Application bundle information (may show N/A)
+
+### Network and Location Details
+- **User IP**: The client's IP address
+- **Location**: Geographic location including city, state/region, and country
+- **AI Agent**: Information about AI agent usage (may show N/A)
+
+### User Profile
+- **User**: Geographic location summary with IP address
+- Example: "Homewood, Illinois, United States IP: 69.241.194.92"
+
+## Server Data Information
+
+The Server Data section contains information about your API server and the request processing:
+
+### Server Environment
+- **Time Zone**: Server timezone (e.g., UTC)
+- **Operating System**: Server operating system (e.g., Linux)
+- **Software**: Server software or runtime environment (e.g., vapor)
+- **Protocol**: Network protocol information (may show N/A)
+
+### Server Network Information
+- **IP**: Server IP address (may show "bogon" for private/local IPs)
+- **City**: Server location city
+- **Region**: Server location region/state
+- **Country**: Server location country
+
+By utilizing Treblle's comprehensive Request Information feature, you can gain deep insights into your API usage patterns, enhance security monitoring, and optimize performance based on real user data and behaviors.

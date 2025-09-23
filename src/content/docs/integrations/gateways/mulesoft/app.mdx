@@ -1,0 +1,220 @@
+---
+title: "MuleSoft App for Auto Discovery"
+metaTitle: "Deploy MuleSoft App for Treblle Auto-Discovery | Treblle Docs"
+description: "Set up the Treblle MuleSoft app for automatic API discovery and registration. Deploy to Anypoint Platform with VS Code extension and monitor your APIs seamlessly."
+image: "/og-images/mulesoft-autodiscover-app.jpg"
+---
+
+<div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
+  <a href="https://github.com/Treblle/autodiscovery" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
+    <div>
+      <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+      </svg>
+    </div>
+    <div class="grid grid-cols-4 gap-4 px-2 py-2">
+      <div class="col-span-4">
+        <h3 class="text-xl font-semibold">treblle-autodiscovery</h3>
+        <p class="text-sm font-medium">The official Treblle MuleSoft App for automatic API discovery and registration with Treblle platform.</p>
+      </div>
+    </div>
+  </a>
+</div>
+
+This app is an extension of the MuleSoft integration enabled by the policy.
+
+It ensures Treblle can discover all inactive/stale APIs and correctly capture API names inside Treblle for complete visibility and gives you the best Treblle experience.
+
+Using the MuleSoft policy and this app together ensures you get 100% API visibility and a full Treblle experience across your MuleSoft environment.
+
+:::note
+Recommended to be configured while on a call with the Treblle team to ensure it's set up correctly and optimized for your use case. Please reach out to your Treblle point of contact before starting, so they can guide you through the setup and help address any specifics in real time.
+:::
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- Configure the [MuleSoft policy](https://docs.treblle.com/integrations/gateways/mulesoft/policy/)
+- Access to Anypoint Platform
+- Maven 3.8+ configured
+- A [Treblle account](https://identity.treblle.com/) with API key and Project ID
+
+## Step 1: Clone Treblle Auto-Discovery Repository
+
+1. **Clone the Treblle repository**:
+   ```bash
+   git clone https://github.com/Treblle/treblle-mulesoft-autodiscovery.git
+   ```
+
+2. **Open the cloned repository** in your development environment
+
+## Step 2: Obtain the JAR File
+
+You have two options to get the required JAR file:
+
+### Option A: Build the Project
+
+1. Save your changes
+2. Run the following command in your MuleSoft project directory:
+   ```bash
+   mvn clean install
+   ```
+3. Navigate to your `.m2` folder and find the JAR file:
+   ```
+   treblle-register-apis-1.0.0-SNAPSHOT-mule-application.jar
+   ```
+
+<img
+  src="/platform/mulesoft-app/jar-file.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### Option B: Use Pre-built JAR from Repository
+
+Alternatively, you can use the pre-built JAR file directly from the repository without building it yourself.
+
+## Step 3: Create Connected App
+
+1. Go to [Anypoint Platform Connected Apps](https://anypoint.mulesoft.com/accounts/connectedApps)
+2. Navigate to **Access Management > Connected Apps**
+
+<img
+  src="/platform/mulesoft-app/app.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+3. Create a new app with the required information and scopes:
+
+<img
+  src="/platform/mulesoft-app/scope.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+4. Copy the **Client ID** and **Client Secret** - these will be needed for deployment:
+
+<img
+  src="/platform/mulesoft-app/client-id-secret.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Step 4: Deploy to Runtime Manager
+
+1. Go to **Runtime Manager** and click **Deploy Application**
+
+<img
+  src="/platform/mulesoft-app/deploy.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+2. Provide a name for the application and upload the JAR file: `treblle-register-apis-1.0.0-SNAPSHOT-mule-application.jar`
+
+<img
+  src="/platform/mulesoft-app/application-file.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Step 5: Configure Application Properties
+
+Go to the **Properties** section and add the following:
+
+- **CLIENT_ID**: Your Connected App Client ID
+- **CLIENT_SECRET**: Your Connected App Client Secret  
+- **API_KEY**: Enter your Treblle API key
+- **SDK_TOKEN**: Enter your Treblle SDK token 
+- **OrganizationId**: Your MuleSoft Business Group ID
+
+<img
+  src="/platform/mulesoft-app/properties.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+Click **Deploy Application**.
+
+## Step 6: Monitor Deployment
+
+1. Once the app is deployed, click on it:
+
+<img
+  src="/platform/mulesoft-app/deployed-app.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+2. Click on **Logs** to view all application logs:
+
+<img
+  src="/platform/mulesoft-app/logs.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## For Multiple Business Groups
+
+If you need to monitor APIs across different business groups, follow these additional steps:
+
+Step 1: Build and Deploy the Treblle Policy on the business group that you want to add.
+
+Step 2: Apply policy to the APIs. 
+
+(Refer to the [MuleSoft policy documentation](https://docs.treblle.com/integrations/gateways/mulesoft/policy/#creating-and-deploying-the-custom-policy) for detailed steps on how to apply policies to APIs)
+
+Step 3: Update Connected App Scopes: Click the checkbox for different business groups to expand the scope permissions.
+
+<img
+  src="/platform/mulesoft-app/business-scope.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+**Step 4: Add Scopes for Other Business Groups**: Ensure you add the same scopes for each business group you want to monitor.
+
+<img
+  src="/platform/mulesoft-app/business-scope-2.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+<img
+  src="/platform/mulesoft-app/business-scope-3.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+**Step 5: Configure Business Group IDs**: In the connected app properties, add multiple business group IDs separated by commas (`,`).
+
+   Example: `businessGroupIDs: group1-id,group2-id,group3-id`
+
+<img
+  src="/platform/mulesoft-app/multiple-ids.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+*The logs will show different organization IDs when monitoring multiple business groups.*
+
+<img
+  src="/platform/mulesoft-app/business-logs.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+## How It Works
+
+The Treblle MuleSoft Auto-Discovery app automatically:
+
+1. **Discovers APIs** in your MuleSoft environment
+2. **Registers them** with the Treblle platform
+3. **Monitors changes** and updates API information
+4. **Provides visibility** into your API landscape
+
+This enables smooth integration between your MuleSoft APIs and Treblle's Intelligence.

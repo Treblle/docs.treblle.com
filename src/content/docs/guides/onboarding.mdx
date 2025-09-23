@@ -1,0 +1,278 @@
+---
+title: "Treblle Onboarding Checklist"
+metaTitle: "Enterprise Treblle Setup Guide | Treblle Docs"
+description: "Complete step-by-step checklist for deploying Treblle across your organization. From workspace setup to IT coordination, ensure smooth enterprise-wide implementation."
+image: "/og-images/treblle-onboarding-checklist.jpg"
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+
+This comprehensive checklist guides you through deploying Treblle across your organization, ensuring secure setup, smooth team onboarding, and enterprise-grade API Intelligance from day one.
+
+## Prerequisites
+
+Before starting, ensure you have:
+
+- **Account access** - [Sign up for Treblle](https://treblle.com/) or access your existing account
+- **Admin permissions** - Workspace Owner role or equivalent access
+- **IT coordination** - Contact with your IT/Security team for network configuration
+- **Integration details** - List of APIs, frameworks, and infrastructure components
+
+---
+
+## Phase 1: Initial Workspace Setup
+
+<Steps>
+
+1. **Create and Configure Your Workspace**
+
+   Navigate to your [Treblle Dashboard](https://platform.treblle.com/) and set up your organization's workspace:
+
+   - **Workspace Name**: Use your organization or project name (e.g., "Acme Corp APIs", "Platform Team")
+   - **Upload Logo**: Add your company logo for easy team recognition
+   - **Description**: Brief description of your API landscape or team
+
+   📖 **Reference:** [Workspace Settings Guide](/admin/workspace-settings/)
+
+2. **Set Up Team Access & Permissions**
+
+   Configure user access based on your organizational structure:
+
+   **Role Assignment:**
+   - **Owner** - Platform/API leads, DevOps managers (full administrative access)
+   - **Member** - Developers, QA engineers (API access and monitoring)
+   - **Customer** - External partners, vendors (limited read-only access)
+
+   **Invitation Methods:**
+   - **Email Invites**: For specific team members
+   - **Invite Links**: For broader team onboarding (expires in 24 hours)
+
+   📖 **Reference:** [Team Management Guide](/admin/manage-your-workspace/)
+
+3. **Configure Enterprise Authentication (Optional - Enterprise Feature)**
+
+   Set up Single Sign-On (SSO) for secure, centralized access:
+
+   **Supported Providers:**
+   - Microsoft Azure AD / Entra ID
+   - Google Workspace
+   - Okta
+   - OneLogin
+   - Custom SAML 2.0 providers
+
+   **Setup Process:**
+   1. Coordinate with your IT team
+   2. Exchange SAML metadata
+   3. Configure and test authentication
+   4. Enable for your workspace
+
+   📖 **Reference:** [Single Sign-On Setup](/admin/single-sign-on/)
+
+</Steps>
+
+---
+
+## Phase 2: Choose Your Integration Strategy
+
+Select the integration approach that best fits your architecture and team size:
+
+<CardGrid>
+  <Card title="SDK Integration" icon="puzzle">
+    **Best for:** Small to medium teams, microservices
+    
+    **Frameworks supported:**
+    - Node.js (Express, Fastify, NestJS)
+    - Python (Django, Flask)
+    - Java (Spring Boot, AWS Lambda)
+    - PHP (Laravel, Symfony)
+    - .NET Core
+    - Go, Ruby on Rails
+
+    **Choose SDK for:** Deep integration, rich metadata, easy setup
+    
+    📖 [Browse all SDKs](/integrations/)
+  </Card>
+
+  <Card title="Gateway Integration" icon="rocket">
+    **Best for:** Enterprise, infrastructure-first approach
+    
+    **Supported Gateways:**
+    - AWS API Gateway
+    - Azure API Management
+    - Kong Gateway
+    - MuleSoft Anypoint
+    - WSO2 API Manager
+    - Traefik
+
+    **Choose API Gateway for:** Infrastructure-level visibility, scales automatically
+    
+    **Note:** Contact the [Treblle team](mailto:support@treblle.com) when integrating with API Gateway for assistance.
+    
+    📖 [Gateway Integration Guides](/integrations/)
+  </Card>
+</CardGrid>
+
+### Integration Quick Start
+
+<Steps>
+
+1. **Select Your Integration Method**
+   
+   Choose based on your infrastructure:
+   - **API Gateway**: If you use enterprise gateways
+   - **SDK**: For direct application integration
+
+2. **Get Your Credentials**
+   
+   From your Treblle workspace:
+   - Navigate to **API Settings**
+   - Copy your **SDK Token** and **API Key**
+   - Store securely (environment variables recommended)
+
+3. **Follow Integration Guide**
+   
+   Use our step-by-step guides:
+   - 📖 [Getting Started Guide](/guides/getting-started/)
+   - 📖 [All Integrations](/integrations/)
+
+4. **Deploy and Test**
+   
+   - Deploy your integration
+   - Send test API requests
+   - Verify data appears in your Treblle dashboard
+
+</Steps>
+
+---
+
+## Phase 3: IT & Security Coordination
+
+#### Network Configuration Checklist
+
+Share this technical information with your IT/Security team:
+
+##### Required Outbound Access
+
+**Treblle API Endpoints** (Port 443/HTTPS):
+```
+rocknrolla.treblle.com
+punisher.treblle.com
+sicario.treblle.com
+autodiscovery.treblle.com
+```
+
+**Platform Access**:
+```
+platform.treblle.com
+identity.treblle.com
+assets.treblle.com
+```
+
+**Wildcard Rule** (recommended):
+```
+*.treblle.com (Port 443)
+```
+
+##### Security Requirements
+
+<CardGrid>
+  <Card title="TLS/SSL" icon="security">
+    - **Minimum**: TLS 1.2+
+    - **Certificate validation**: Standard CA trust
+    - **Custom CAs**: Contact support if needed
+  </Card>
+
+  <Card title="Firewall Rules" icon="approve-check-circle">
+    - **Outbound HTTPS** to `*.treblle.com`
+    - **No inbound** connections required
+    - **Proxy exceptions** if corporate proxy blocks external APIs
+  </Card>
+
+  <Card title="Data Privacy" icon="security">
+    - **Data masking** built-in for sensitive fields
+    - **GDPR, SOC 2, ISO 27001** compliant
+    - **Encryption** in transit and at rest
+  </Card>
+</CardGrid>
+
+#### Enterprise Security Features
+
+- **SSO Integration**: Centralized authentication
+- **Data Masking**: Automatic PII/sensitive data protection
+- **Compliance**: GDPR, CCPA, PCI DSS ready
+- **Audit Logging**: Complete access and activity logs
+
+📖 **Reference:** [Security & Compliance](/security/certification/)
+
+---
+
+## Phase 4: Verify Your Setup
+
+<Steps>
+
+1. **Dashboard Verification**
+   
+   - Navigate to your [Treblle Dashboard](https://platform.treblle.com/)
+   - Trigger test API requests
+   - Confirm data appears within 30 seconds
+
+2. **Team Access Testing**
+   
+   - Verify team members can log in
+   - Check role-based permissions work correctly
+   - Test SSO if configured
+
+3. **Data Quality Check**
+   
+   - Review request/response data accuracy
+   - Verify sensitive data is properly masked
+   - Check all expected APIs are reporting
+
+</Steps>
+
+### Common Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| **No data appearing** | Verify SDK Token/API Key are correct |
+| **Connection errors** | Check firewall allows `*.treblle.com` |
+| **Missing requests** | Ensure integration is deployed to correct environment |
+| **Login issues** | Verify SSO configuration with IT team |
+---
+
+## Support & Resources
+
+<CardGrid>
+  <Card title="Support" icon="rocket">
+    **For 100+ APIs or complex deployments:**
+    - Contact your Customer Success Manager
+    - Email: [support@treblle.com](mailto:support@treblle.com)
+  </Card>
+
+  <Card title="Resources" icon="discord">
+    - 📖 [Documentation](https://docs.treblle.com)
+    - 🎥 [YouTube Tutorials](https://www.youtube.com/@treblle)
+    - **Security**: [Trust Center](https://trust.treblle.com/) - Security practices and compliance
+    - **Updates**: [Release Notes](https://treblle.com/news?category=release-notes) - Latest features and improvements
+    - **Learning**: [Knowledge Base](https://treblle.com/knowledgebase) - API best practices and guides
+  </Card>
+</CardGrid>
+---
+
+## Success Checklist
+
+Before considering your deployment complete, ensure:
+
+- [ ] **Workspace configured** with proper branding and settings
+- [ ] **Team members invited** with appropriate roles
+- [ ] **SSO configured** (if required by organization)
+- [ ] **Integration deployed** and tested across environments
+- [ ] **IT team coordinated** network access and security requirements
+- [ ] **Data validation** completed in Treblle dashboard
+- [ ] **Team training** completed for key users
+- [ ] **Monitoring setup** with alerts and governance tracking
+
+**Congratulations!** 🎉 
+
+Your organization now has enterprise-grade API Intelligance with Treblle. Your APIs are monitored, your team is enabled, and you're ready to build better APIs with confidence.

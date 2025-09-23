@@ -2,13 +2,294 @@
 title: "Frequently Asked Questions"
 metaTitle: "FAQs | Treblle Docs"
 description: "Find answers to common Treblle questions, from API credential mapping to security, documentation, request logging, and more."
-image: "/og-images/faq.jpg"
+image: "/og-images/faqs.jpg"
 ---
 
-import { Accordion } from "../../components/Accordion.jsx";
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-<Accordion client:load/>
+Get quick answers to the most common questions about Treblle.
 
-<div data-page="faqs">
-If you have more questions, feel free to ask in our [Discord Community](https://discord.com/invite/NJWYYmMvuE) – we’re happy to help!
-</div>
+---
+
+<Card title="How do I map my API credentials in Treblle?">
+
+Set your credentials using environment variables:
+
+```bash
+TREBLLE_PROJECT_ID=your_project_id
+TREBLLE_API_KEY=your_api_key
+```
+
+**Where to find these values:**
+- Go to your Treblle 3.0 workspace
+- Navigate to API Settings
+- Copy your Project ID and API Key
+
+📖 **Need help?** Check our [Getting Started Guide](https://docs.treblle.com/guides/getting-started/)
+
+</Card>
+
+<Card title="My API requests aren't showing up. What should I check?">
+
+**First, verify you're using the correct platform:**
+- ✅ Use [platform.treblle.com](https://platform.treblle.com/) 
+- ❌ Don't use the legacy [app.treblle.com](https://app.treblle.com/)
+
+**Common troubleshooting steps:**
+
+1. **Check your credentials** - Ensure `TREBLLE_PROJECT_ID` and `TREBLLE_API_KEY` match your workspace
+2. **Network settings** - Allow HTTPS requests to `*.treblle.com` domains
+3. **Request limits** - Verify you haven't exceeded your plan's monthly limit
+4. **SDK integration** - Confirm the Treblle SDK is properly installed and configured
+
+**Still not working?** Contact support at [treblle.com](https://treblle.com/) → Resources → Support
+
+<img src="/platform/faqs/support.png" alt="Support" width="800" style={{ borderRadius: "8px" }} />
+
+</Card>
+
+<Card title="Can I test Treblle with localhost?">
+
+**Yes!** Treblle works with localhost if:
+
+- ✅ SDK is properly initialized
+- ✅ Your machine has internet access  
+- ✅ No proxy blocks traffic to Treblle endpoints
+
+**Quick test:** Make a request to your local API and check your Treblle dashboard within a few seconds.
+
+</Card>
+
+---
+
+## 🔒 Security & Privacy
+
+<Card title="How does Treblle protect my data?">
+
+**Treblle prioritizes security with multiple layers of protection:**
+
+**🔐 Automatic Data Masking**
+- Passwords, API keys, and sensitive fields are automatically masked
+- Data is masked **before leaving your server**
+- You control which additional fields to mask
+
+**🛡️ Encryption & Compliance**
+- All data encrypted in transit and at rest
+- ISO 27001, GDPR, SOC 2, CCPA, and PCI DSS compliant
+- Regular security audits and assessments
+
+**🎯 What you can control:**
+- Exclude specific endpoints from logging
+- Configure custom field masking
+- Set up compliance scanning
+
+📚 **Learn more:** [Trust Center](https://trust.treblle.com/)
+
+</Card>
+
+<Card title="How do I mask sensitive data in URLs?">
+
+**Important:** Treblle only masks request/response bodies and headers - **not URL paths**.
+
+**If your URLs contain sensitive data, you have two options:**
+
+**Option 1: Exclude the endpoint**
+```javascript
+// Example: Skip Treblle for sensitive endpoints
+if (req.path.includes('/sensitive-endpoint')) {
+  return next(); // Skip Treblle middleware
+}
+```
+
+**Option 2: Redesign the URL structure**
+```bash
+# Instead of:
+/api/users/secret-key-123/profile
+
+# Use:
+/api/users/profile?token=secret-key-123
+# (token will be masked in query parameters)
+```
+
+📖 **Full guide:** [Data Masking Documentation](https://docs.treblle.com/treblle/data-masking/)
+
+</Card>
+
+<Card title="Do I need to change DNS settings for Treblle?">
+
+**No DNS changes required!** 
+
+Treblle integrates directly into your API backend via our SDK. You keep using your custom domain exactly as before.
+
+**How it works:**
+- Your API runs on your domain (e.g., `api.yourcompany.com`)
+- Treblle SDK captures request/response data
+- Data is sent to Treblle's servers for analysis
+- Your API continues working normally
+
+</Card>
+
+---
+
+## 📚 Documentation & Features
+
+<Card title="How does Treblle generate API documentation?">
+
+**Treblle creates docs automatically from your API traffic:**
+
+**📊 Real-time Analysis**
+- Analyzes incoming requests and responses
+- Identifies patterns and data structures
+- Generates OpenAPI specifications
+
+**🔄 Continuous Updates**
+- Documentation updates as your API evolves
+- New endpoints automatically discovered
+- Response schemas updated based on actual data
+
+**🧪 Testing Integration**
+- Use [Aspen](https://docs.treblle.com/aspen/) to test endpoints
+- Documentation appears immediately after API calls
+- Interactive documentation with examples
+
+**💡 Pro tip:** Keep request/response formats consistent for better documentation quality.
+
+📖 **Learn more:** [API Documentation Guide](https://docs.treblle.com/treblle/api-documentation/)
+
+</Card>
+
+---
+
+## 🔧 Troubleshooting
+
+<Card title="I upgraded my SDK but still have issues with keys">
+
+**Common issue with Treblle 3.0 upgrades:**
+
+**✅ Use environment variables (recommended):**
+```bash
+# In your .env file
+TREBLLE_API_KEY=your_api_key
+TREBLLE_PROJECT_ID=your_project_id
+```
+
+**❌ Remove hardcoded credentials:**
+```javascript
+// Remove this old configuration
+treblle({
+  apiKey: "hardcoded_key",
+  projectId: "hardcoded_id"
+})
+
+// SDK will automatically use environment variables
+treblle()
+```
+
+**🔍 Debugging steps:**
+1. Check your `.env` file has correct values
+2. Restart your application after changes
+3. Verify you're using the latest SDK version
+4. Check for typos in environment variable names
+
+</Card>
+
+<Card title="Getting SSL connection timeout errors?">
+
+**SSL timeout errors usually indicate network issues:**
+
+**🌐 Network Troubleshooting:**
+- Check if your deployment environment can reach external services
+- Verify no firewall rules block outbound HTTPS requests
+- Test connection to `treblle.com` from your server
+
+**🔧 Code Solutions:**
+```javascript
+// Add retry logic for network issues
+const treblle = require('treblle');
+
+// Configure with timeout settings
+treblle({
+  timeout: 10000, // 10 second timeout
+  retries: 3      // Retry failed requests
+});
+```
+
+**📊 Monitoring:**
+- Add detailed logging around SDK initialization
+- Monitor SSL handshake timing
+- Check server resource usage during requests
+
+</Card>
+
+---
+
+## 💳 Billing & Plans
+
+<Card title="How do I download my invoices?">
+
+**Access your invoices through Workspace Settings:**
+
+**📄 Step-by-step:**
+1. Go to **Workspace Settings** → **Billing**
+2. Find the **Invoice History** section
+3. Click on any invoice to download PDF
+
+<img src="/platform/faqs/invoice.png" alt="Invoice History" width="500" style={{ borderRadius: "8px" }} />
+
+**💡 Need help?** Contact support with your account details:
+- Visit [treblle.com](https://treblle.com/) → Resources → Support
+- Email: support@treblle.com
+
+</Card>
+
+<Card title="What happens when I hit the free plan limit?">
+
+**Free plan includes 250,000 requests per month.**
+
+**📊 When you exceed the limit:**
+- ⏹️ Treblle stops processing new requests
+- 📈 Your API continues working normally
+- 🔄 Limit resets at the start of next month
+
+**🚀 Solutions:**
+- **Monitor usage:** Check your dashboard regularly
+- **Upgrade plan:** Consider higher tiers for more requests
+- **Optimize:** Focus logging on critical endpoints only
+
+**💰 View pricing:** [treblle.com/pricing](https://treblle.com/pricing)
+
+</Card>
+
+---
+
+## 🆘 Still Need Help?
+
+<CardGrid>
+  <Card title="📖 Documentation" icon="document">
+    Browse our comprehensive guides and tutorials
+    
+    [docs.treblle.com](https://docs.treblle.com/)
+  </Card>
+  
+  <Card title="💬 Discord Community" icon="discord">
+    Join thousands of developers in our community
+    
+    [discord.com/invite/NJWYYmMvuE](https://discord.com/invite/NJWYYmMvuE)
+  </Card>
+  
+  <Card title="📧 Direct Support" icon="email">
+    Get help directly from our support team via email
+    
+    [support@treblle.com]
+  </Card>
+  
+  <Card title="🎓 API Knowledge Base" icon="information">
+    Learn API best practices and advanced techniques
+    
+    [treblle.com/knowledgebase](https://treblle.com/knowledgebase)
+  </Card>
+</CardGrid>
+
+---
+
+*Last updated: December 2024*

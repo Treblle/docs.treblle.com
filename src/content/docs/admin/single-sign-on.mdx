@@ -1,0 +1,101 @@
+---
+title: "Single Sign-On"
+metaTitle: "Secure Your Treblle Workspace with Single Sign On | Treblle Docs"
+description: "Treblle offers Single Sign-On (SSO), Multi-Factor Authentication (MFA), and Social Sign-On for secure access to your workspace. Learn how to set up authentication."
+image: "/og-images/single-sign-on.jpg"
+---
+
+### Intro to SSO
+
+Single Sign-On (SSO) services enable you to manage your team's identity across all the SaaS products that you use.
+
+With an SSO service, a user can access multiple applications using one set of credentials (for example, an email address and password). The SSO service authenticates the user once for all the applications the user has been given rights to and eliminates further prompts when the user switches applications during the same session.
+
+
+### What are the advantages of SSO?
+- Removes the need for users to remember and manage multiple passwords.
+- Simplifies users' experience by enabling them to sign in at a single access point and work seamlessly across multiple applications.
+- Increases productivity by reducing the password-related support emails.
+- Reduces phishing attempts that try to trick users into giving away sensitive information.
+
+### SSO with Treblle
+- **Team's identity provider (IdP)** must support the SAML 2.0 standard.
+- **Supported IdPs** include Microsoft AD FS, Microsoft Entra ID, Custom SAML, Google Workspace, Okta, OneLogin, and Ping Identity
+
+### Steps to Set up SSO
+
+1. **Go to Authentication Settings**
+
+     As a workspace owner, locate the Authentication section in your workspace settings.
+
+     <img
+       src="/platform/authentication/sso-empty.png"
+       width="800"
+       style={{ borderRadius: "8px" }}
+     />
+
+2. **Choose Your Authentication Type**
+
+     Select between <a href="https://auth0.com/blog/how-saml-authentication-works/" target="_blank" rel="noopener noreferrer"> SAML </a> or <a href="https://openid.net/developers/how-connect-works/" target="_blank" rel="noopener noreferrer"> OpenID Connect</a> based on your identity provider.
+
+     <img
+       src="/platform/authentication/sso-config-type.png"
+       width="800"
+       style={{ borderRadius: "8px" }}
+     />
+
+3. **Input Required Fields**
+
+     Fill in details like:
+     - <a
+         href="https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language"
+         target="_blank"
+         rel="noopener noreferrer"
+       >
+         Assertion Consumer Service (ACS) URL{" "}
+       </a>
+     - <a
+         href="https://en.wikipedia.org/wiki/Identity_provider"
+         target="_blank"
+         rel="noopener noreferrer"
+       >
+         Identity Provider Issuer{" "}
+       </a>
+     - <a
+         href="https://en.wikipedia.org/wiki/Identity_provider_(SAML)"
+         target="_blank"
+         rel="noopener noreferrer"
+       >
+         Identity Provider Certificate (IdP){" "}
+       </a>
+
+   <img
+     src="/platform/authentication/sso-config.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+4. **Save and Test Configuration**
+
+     Test the setup to ensure successful authentication.
+
+     <img
+       src="/platform/authentication/sso.png"
+       width="800"
+       style={{ borderRadius: "8px" }}
+     />
+
+5. **Log In with SSO**
+
+   - Go to the Treblle <a href="https://identity.treblle.com/login" target="_blank" rel="noopener noreferrer">Treblle Sign-In</a> page.
+   - Sign in with SSO, enter your organization’s identifier, and log in.
+
+     <img
+       src="/platform/authentication/sso-sign-in.png"
+       width="250"
+       style={{ borderRadius: "8px" }}
+     />
+
+### SSO Flow Across Workspaces
+
+Once SSO is enabled, users can log in using their organization's identity provider. If a user switches between an SSO-protected workspace and a standard workspace, Treblle will prompt for extra authentication to maintain security.

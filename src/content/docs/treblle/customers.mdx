@@ -67,12 +67,9 @@ The Customer Profile includes:
 
 ### Adding Customer/User Information to Requests
 
-Treblle provides two important headers that you can use to enhance your API monitoring with customer information:
+`treblle-user-id` is used to identify your customers. You can pass any value here, such as ID, UUID, email, username, or company name.
 
-- `treblle-user-id`: Used to identify your customers. You can pass any value here such as ID, UUID, email, username, or company name.
-- `treblle-tag-id`: Used if you want to pass a trace ID across multiple microservices or use it as an additional parameter to pass more user data.
-
-These headers can be included in either Request or Response Headers - Treblle will pick them up from both.
+The header can be included in either Request or Response Headers - Treblle will pick them up from both.
 
 #### Steps to add the Customer Information in Treblle's [Express SDK](https://docs.treblle.com/integrations/javascript/express/)
 
@@ -83,7 +80,6 @@ Here's how you can modify your [Express](https://docs.treblle.com/integrations/j
 app.use((req, res, next) => {
     if (req.user) {  // Ensure the user is authenticated
         req.headers['treblle-user-id'] = req.user.id; // Attach Customer ID
-        req.headers['treblle-tag-id'] = req.user.traceId; // Optional: Attach trace ID
     }
     next();
 });

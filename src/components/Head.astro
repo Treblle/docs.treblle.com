@@ -91,5 +91,91 @@ const domain = Astro.site?.host || '';
   ></iframe>
 </noscript>
 
+<!-- External links script with SEO optimization -->
+<script is:inline>
+// List of specific external URLs for sidebar that should open in new tabs
+const sidebarExternalUrls = [
+  'https://trust.treblle.com/',
+  'https://treblle.com/knowledgebase',
+  'https://apiacademy.treblle.com/laravel-api-course/'
+];
+
+// Function to add target="_blank" to EXTERNAL links only (SEO optimized)
+function addTargetBlankToExternalLinks() {
+  // Handle specific sidebar external links
+  const sidebarLinks = document.querySelectorAll('.sidebar a[href], nav a[href], .sl-sidebar a[href]');
+  
+  sidebarLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    
+    // Check if the link is in our sidebar external URLs list
+    if (sidebarExternalUrls.some(url => href === url || href.startsWith(url))) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+
+  // Handle ONLY external links in documentation content
+  const allLinks = document.querySelectorAll('main a[href], .content a[href], .sl-markdown-content a[href], article a[href]');
+  
+  allLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    
+    // Skip anchor links (same page navigation)
+    if (!href || href.startsWith('#')) {
+      return;
+    }
+    
+    // Only process external links (http:// or https://)
+    if (href.startsWith('http://') || href.startsWith('https://')) {
+      const currentDomain = window.location.hostname;
+      
+      try {
+        const linkUrl = new URL(href);
+        
+        // Only apply target="_blank" if it's a different domain (truly external)
+        if (linkUrl.hostname !== currentDomain) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+          
+          // SEO Enhancement: Add title attribute for accessibility and context
+          if (!link.getAttribute('title') && !link.getAttribute('aria-label')) {
+            const linkText = link.textContent || link.innerText;
+            if (linkText) {
+              link.setAttribute('title', `${linkText} (opens in new tab)`);
+            }
+          }
+        }
+        // Same domain links (like docs.treblle.com) remain as normal navigation
+      } catch (e) {
+        // If URL parsing fails, assume it's external and apply target="_blank"
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    }
+    
+    // Internal links (starting with /, ./, ../) remain untouched for normal navigation
+    // This preserves the user journey and improves SEO metrics:
+    // - Better bounce rate
+    // - Increased session duration  
+    // - Higher dwell time
+    // - Improved user engagement signals
+  });
+}
+
+// Run when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', addTargetBlankToExternalLinks);
+} else {
+  addTargetBlankToExternalLinks();
+}
+
+// Also run when navigating (for SPA-like behavior)
+document.addEventListener('astro:page-load', addTargetBlankToExternalLinks);
+
+// Run after a small delay to catch dynamically loaded content
+setTimeout(addTargetBlankToExternalLinks, 500);
+</script>
+
 <!-- Pass through any injected head content -->
 <slot />

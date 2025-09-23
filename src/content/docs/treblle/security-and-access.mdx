@@ -1,0 +1,99 @@
+---
+title: "Security and Access"
+metaTitle: "Secure Your Treblle Account with MFA & Access Controls | Treblle Docs"
+description: "Configure multi-factor authentication, manage passwords, generate API tokens, and control access to your Treblle account with advanced security features."
+image: "/og-images/security-and-access.jpg"
+---
+
+Protect your Treblle account with robust security features including multi-factor authentication, secure password management, and access controls. These security measures help safeguard your API data and account information.
+
+## Multi-Factor Authentication (MFA)
+
+Enhance your account security with multi-factor authentication, adding an extra layer of protection beyond your password.
+
+### Setting Up MFA
+
+1. **Navigate to Security Settings**
+   
+   Access the Multi-Factor Authentication section in your account settings.
+
+2. **Scan QR Code**
+   
+   Use an authenticator app (such as Google Authenticator, Authy, or Microsoft Authenticator) to scan the provided QR code.
+
+   <img
+     src="/platform/account/mfa1.png"
+     width="400"
+     style={{ borderRadius: "8px" }}
+   />
+
+3. **Enter Verification Code**
+   
+   Input the 6-digit code from your authenticator app to verify the setup.
+
+4. **Complete Setup**
+   
+   Click **Verify MFA** to enable multi-factor authentication on your account.
+
+### Using MFA
+
+Once enabled, you'll need to provide a one-time secret from your authenticator app every time you log in, significantly improving your account security.
+
+### Managing MFA
+
+- **Disable MFA**: Use the **Disable MFA** button if you need to turn off multi-factor authentication
+- **Re-enable MFA**: Follow the setup process again to re-activate MFA
+
+<img
+  src="/platform/account/mfa2.png"
+  width="400"
+  style={{ borderRadius: "8px" }}
+/>
+
+## Password Management
+
+### Update Password
+
+Regularly updating your password helps maintain account security:
+
+1. **Current Password**: Enter your existing password
+2. **New Password**: Choose a strong, unique password
+3. **Confirm Password**: Re-enter your new password to confirm
+
+<img
+  src="/platform/account/update-password.png"
+  width="500"
+  style={{ borderRadius: "8px" }}
+/>
+
+**Password Best Practices:**
+- Use a long, random password with mixed characters
+- Avoid reusing passwords from other accounts
+- Consider using a password manager
+- Update passwords regularly
+
+## Developer Settings
+
+### Personal Access Tokens
+
+Generate personal access tokens to access your account through the API programmatically.
+
+<img
+  src="/platform/account/developer-settings.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+#### Creating a Token
+
+1. **Token Name**: Provide a descriptive name for identification
+2. **App Selection**: Choose the application or service that will use this token
+3. **Expiration**: Set an appropriate expiration date for security
+4. **Generate Token**: Click to create your personal access token
+
+#### Token Security
+
+- Store tokens securely and never share them
+- Use tokens with appropriate scope limitations
+- Regularly rotate tokens for enhanced security
+- Delete unused tokens promptly

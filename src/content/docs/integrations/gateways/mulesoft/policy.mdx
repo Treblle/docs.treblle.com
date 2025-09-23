@@ -1,0 +1,269 @@
+---
+title: "Treblle Policy for Mulesoft"
+metaTitle: "Set Up Treblle in MuleSoft | Treblle Docs"
+description: "This is Treblle’s official MuleSoft policy that enables organizations to discover and get full visibility into all their APIs."
+image: "/og-images/api-gateways-mulesoft.jpg"
+---
+
+<div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
+  <a href="https://github.com/Treblle/treblle-mulesoft" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
+    <div>
+      <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+      </svg>
+    </div>
+    <div class="grid grid-cols-4 gap-4 px-2 py-2">
+      <div class="col-span-4">
+        <h3 class="text-xl font-semibold">treblle-mulesoft</h3>
+        <p class="text-sm font-medium">This repository is the official Treblle custom policy for MuleSoft, which enables you to integrate Treblle to capture and monitor API traffic in your MuleSoft environment.</p>
+      </div>
+    </div>
+  </a>
+</div>
+
+This is Treblle’s official MuleSoft policy that enables organizations to discover and get full visibility into all their APIs.
+
+The policy also enables features like **payload masking** and captures **detailed API-specific metadata** to give you the best Treblle experience.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- MuleSoft API Gateway 4+
+- Java 17 or higher
+- Anypoint Studio 7.21.0 or later
+- An active MuleSoft account with API Manager access
+- Maven 3.8+ configured with proper `settings.xml`
+- A [Treblle account](https://identity.treblle.com/) with API key and SDK token
+
+## Creating and Deploying the Custom Policy
+
+This guide will walk you through creating, configuring, and deploying a custom Mule 4 policy that sends incoming request payloads and headers to Treblle when a request is received.
+
+### Obtaining Organization ID
+
+1. Navigate to [Anypoint Platform Business Groups](https://anypoint.mulesoft.com/accounts/businessGroups)
+2. Select your business group
+3. Note the **Business Group ID** from the URL or page details. You'll need this for the next step.
+
+:::note
+The Business Group ID is a unique identifier that looks like: `68ef933a-6a4e-4d9d-8262-9c2a93c11111`
+:::
+
+### Updating Policy Configuration
+
+1. Clone the Treblle MuleSoft repository:
+
+   ```bash
+   git clone https://github.com/Treblle/treblle-mulesoft.git
+   cd treblle-mulesoft
+   ```
+
+2. Open `treblle-policy/pom.xml` and update the `groupId` with your Business Group ID:
+
+   ```xml
+   <groupId>{BUSINESS_GROUP_ID}</groupId>
+   ```
+
+### Configuring Maven Settings
+
+1. Navigate to the `samples/.m2/settings.xml` file
+2. Update your MuleSoft credentials:
+
+   ```xml
+   <username>{YOUR_MULESOFT_USERNAME}</username>
+   <password>{YOUR_MULESOFT_PASSWORD}</password>
+   ```
+
+:::caution
+Ensure your MuleSoft account has sufficient permissions to deploy to Exchange. You may need the Exchange Contributor or Exchange Administrator role.
+:::
+
+### Building and Deploying the Policy
+
+1. Navigate to the `treblle-policy` directory:
+
+   ```bash
+   cd treblle-policy
+   ```
+
+2. Build the policy:
+
+   ```bash
+   mvn -s ../samples/.m2/settings.xml clean package
+   ```
+
+3. Deploy to MuleSoft Exchange:
+
+   ```bash
+   mvn -s ../samples/.m2/settings.xml clean deploy
+   ```
+
+:::tip
+If you encounter permission errors during deployment, verify that your MuleSoft account has the necessary API Manager and Exchange permissions.
+:::
+
+### Verifying Policy Installation
+
+1. Visit [Anypoint Exchange](https://anypoint.mulesoft.com/exchange)
+2. Search for "treblle policy"
+3. Confirm the policy is available in your organization
+
+The policy should appear with version 1.0.0 and display as a Custom Policy.
+
+## Applying the Treblle Policy to Your API
+
+### Configuring API Manager
+
+1. Log in to [Anypoint Platform](https://anypoint.mulesoft.com/)
+2. Navigate to **API Manager**
+3. Select your API (e.g., `hello-world`)
+4. Go to the **Policies** tab
+5. Click **Apply New Policy**
+
+:::note
+Ensure your API is already deployed and running in CloudHub or Runtime Manager before applying the policy.
+:::
+
+### Configuring Treblle Policy
+
+1. Choose **treblle-policy** from the list of available policies
+2. Configure the policy with your Treblle credentials:
+   - **API Key**: Enter your Treblle API key
+   - **SDK Token**: Enter your Treblle SDK token
+
+### Applying and Testing
+
+1. Save the policy configuration
+2. Apply the policy to your API
+3. Invoke your API endpoint with a test request
+4. Check your [Treblle Dashboard](https://treblle.com/) to see the API traffic
+
+The request should appear in Treblle within a few seconds, including headers, payload, and response data.
+
+## Using Automated Policy for Multiple APIs
+
+If you want to group all your APIs under a single Treblle policy configuration, you can use the Automated Policy feature. This approach means that all your APIs will share the same data masking settings and appear as one unified API on the Treblle platform, rather than adding the Treblle policy to each API manually.
+
+:::note
+Recommended to be configured while on a call with the Treblle team to ensure it's set up correctly and optimized for your use case. Please reach out to your Treblle point of contact before starting, so they can guide you through the setup and help address any specifics in real time.
+:::
+
+### Setting up Automated Policy
+
+1. Navigate to Automated Policies
+
+    - Go to API Manager in your Anypoint Platform
+    - On the left sidebar, locate and click on Automated Policies
+
+    <img
+    src="/platform/mulesoft/AutomatedPolicy.jpeg"
+    alt="Automated Policies in API Manager sidebar"
+    width="800"
+    style={{ borderRadius: "8px" }}
+    />
+
+2. Configure the Treblle Policy
+
+    - Click Add to create a new automated policy
+    - Select the `treblle-policy` from the available policies
+    - Configure the following required fields:
+
+      - API Key: Enter your Treblle API Key (Project ID)
+      - SDK Token: Enter your Treblle SDK Token
+      - Mask Keywords: Add any sensitive data fields you want to mask (e.g., email,id)
+
+    <img
+    src="/platform/mulesoft/EditPolicy.jpeg"
+    alt="Automated Policy Configuration"
+    width="800"
+    style={{ borderRadius: "8px" }}
+    />
+
+3. Advanced Configuration Options
+
+    - Click on Advanced options to configure policy version and application rules:
+
+    - Policy version: Select the appropriate version (e.g., 1.0.6 latest)
+    - Rule of application: Choose how the policy should be applied:
+
+      - All runtimes: Apply to all APIs with Flex and Mule (4.1.1 and above)
+      - Flex gateways only: Apply only to Flex gateways (note: this version may not support implementations)
+      - Mule gateways only: Apply only to Mule gateways
+      - Version range: Specify the Mule runtime version range (e.g., from 4.1.1)
+      - Java Versions: Choose to apply to all Java versions or specify particular versions
+
+    <img
+    src="/platform/mulesoft/AdvanceOption.jpeg"
+    alt="Advanced Options for Automated Policy"
+    width="800"
+    style={{ borderRadius: "8px" }}
+    />
+
+### Benefits of Automated Policy
+
+- Centralized Management: Manage all your API monitoring from a single policy configuration
+- Consistent Data Masking: Apply the same masking rules across all your APIs
+- Unified Dashboard: View all API traffic in one consolidated view on the Treblle platform
+- Reduced Maintenance: No need to individually configure each API
+- Automatic Coverage: New APIs automatically inherit the policy configuration
+
+:::note
+When using automated policies, all APIs within the specified scope will be monitored under the same Treblle project. This is ideal for organizations that want a unified view of their API ecosystem.
+:::
+
+### Masking Fields
+
+To mask fields in MuleSoft:
+
+-  Go to your API
+-  Navigate to Policies
+-  Click Edit Treblle Policy Configuration
+-  Add Masking Fields and separate them with commas
+
+<img
+  src="/platform/mulesoft/masking.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+This is how it will look in the Treblle dashboard:
+
+<img
+  src="/platform/mulesoft/treblle-masking.png"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### Masking the Entire Payload
+
+To mask the entire payload in MuleSoft:
+
+1. **Check the Mask Payload option** while adding a policy to your API
+
+<img
+  src="/platform/mulesoft/tick-mask-payload.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+2. **View the masked payload** in your API requests - it will appear like this in your Treblle dashboard:
+
+<img
+  src="/platform/mulesoft/mask-payload.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+When the "Mask Payload" option is enabled, the entire request and response payload will be masked with asterisks (*****) while preserving the structure and length of the original data.
+
+## How It Works
+
+The Treblle MuleSoft policy acts as a middleware that:
+
+1. Intercepts incoming API requests before they reach your implementation
+2. Captures request payloads and headers without modifying them
+3. Sends the data asynchronously to Treblle's servers
+4. Allows the request to continue to your API implementation without delay
