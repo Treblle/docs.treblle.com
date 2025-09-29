@@ -252,6 +252,10 @@ export default defineConfig({
         }, {
           label: 'Treblle with NestJS',
           link: '/integrations/javascript/nest/'
+        }, 
+        {
+          label: 'Treblle with Next.js',
+          link: '/integrations/javascript/nextjs/'
         }, {
           label: 'Treblle with NodeJS',
           link: '/integrations/javascript/node/'
