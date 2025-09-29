@@ -33,11 +33,14 @@ export default defineConfig({
     lastUpdated: true,
     sidebar: [{
       label: 'Introduction',
-      link: '/documentation-overview/'
+      link: '/'
     }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
-    },  {
+    }, {
+      label: 'Onboarding Checklist',
+      link: '/guides/onboarding/'
+    }, {
       label: 'Your Account',
       collapsed: true,
       items: [{
@@ -68,6 +71,9 @@ export default defineConfig({
       }, {
         label: 'Workspace Settings',
         link: '/admin/workspace-settings/'
+      }, {
+        label: 'Manage Password',
+        link: '/admin/password/'
       }]
     }, {
       label: 'Treblle Platform',
