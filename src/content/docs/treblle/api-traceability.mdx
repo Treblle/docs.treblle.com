@@ -5,9 +5,25 @@ description: "Trace and monitor a complete request lifecycle as it flows through
 image: "/og-images/platform-trace.jpg"
 ---
 
-With Treblle's Trace feature, you can follow a single request's entire journey, even when it travels across multiple APIs and services. 
+With Treblle's Trace feature, you can follow a single request's entire journey, even when it travels across multiple APIs and services.
 
-<img src="/platform/apidashboard/trace-list-view.png" alt="Treblle Trace List View" width="800" style={{ borderRadius: "8px" }} />
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', marginBottom: '1.5rem' }}>
+  <iframe
+    src="https://www.youtube.com/embed/ln3H4rWYxa8?si=R0ucl_UMXSFhFayZ"
+    title="Treblle API Tracing"
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      border: 0,
+      borderRadius: '8px'
+    }}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen>
+  </iframe>
+</div>
 
 ## How Tracing Works
 To link requests together, Treblle uses a unique identifier called a Trace ID. The Treblle SDKs automatically look for a header on the incoming request. 
