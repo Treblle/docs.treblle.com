@@ -31,7 +31,7 @@ image: "/og-images/treblle-laravel.jpg"
 
 ## Requirements
 - PHP 8+
-- Laravel 10
+- Laravel 10, 11, 12
 
 ## Dependencies
 
@@ -49,12 +49,12 @@ composer require treblle/treblle-laravel
 
 Create an account, login to your existing account, create a new project and get all the `.ENV` keys you need to start using Treblle.
 
-You can also visit our website [https://app.treblle.com](https://app.treblle.com) and create a FREE account to get your API key and Project ID. Once
+You can also visit our website [https://app.treblle.com](https://app.treblle.com) and create a FREE account to get your API key and SDK token. Once
 you have them, simply add them to your `.ENV` file:
 
 ```shell
 TREBLLE_API_KEY=YOUR_API_KEY
-TREBLLE_PROJECT_ID=YOUR_PROJECT_ID
+TREBLLE_SDK_TOKEN=YOUR_SDK_TOKEN
 ```
 ## Enabling Treblle on your API
 
@@ -63,6 +63,36 @@ NOTE: In case you want to temporarily disable observability, you can do so by se
 :::tip
 We've created a comprehensive, hands-on guide to building your Laravel API. Check out our [Laravel API Course](https://apiacademy.treblle.com/laravel-api-course/) for a detailed, step-by-step walkthrough.
 :::
+
+## Upgrading from v5.x to v6.0
+
+Version 6.0 introduces breaking changes to environment variable names. If you're upgrading from v5.x:
+
+1. **Update your `.env` file:**
+   ```shell
+   # Old configuration (v5.x)
+   TREBLLE_API_KEY=your_old_api_key
+   TREBLLE_PROJECT_ID=your_old_project_id
+
+   # New configuration (v6.0)
+   TREBLLE_SDK_TOKEN=your_old_api_key
+   TREBLLE_API_KEY=your_old_project_id
+   ```
+
+2. **If using dynamic middleware parameters, update route definitions:**
+   ```php
+   // Old (v5.x)
+   Route::middleware(['treblle:project-id-1'])->group(function () { ... });
+
+   // New (v6.0)
+   Route::middleware(['treblle:api-key-1'])->group(function () { ... });
+   ```
+
+3. **Clear caches:**
+   ```bash
+   php artisan config:clear
+   php artisan cache:clear
+   ```
 
 ## Configuration options
 
