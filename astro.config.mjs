@@ -115,7 +115,14 @@ export default defineConfig({
         link: '/treblle/dashboard/'
       }, {
         label: 'Requests',
-        link: '/treblle/requests/'
+        collapsed: true,
+        items: [{
+          label: 'Requests Dashboard',
+          link: '/treblle/requests/'
+        }, {
+          label: 'AI Agent Detection',
+          link: '/treblle/ai-agent-detection/'
+        }]
       }, {
         label: 'Metadata',
         link: '/treblle/metadata/'
