@@ -1,0 +1,91 @@
+---
+title: "AI Agent Detection in Requests"
+metaTitle: "AI Agent Detection – Identify AI Traffic in API Requests | Treblle Docs"
+description: "Treblle automatically detects and identifies AI agents making API requests. Track Claude, ChatGPT, Perplexity, and other AI services accessing your APIs with real-time detection and filtering capabilities."
+image: "/og-images/ai-agent-detection.jpg"
+---
+
+Treblle's AI Agent Detection feature automatically identifies when API requests originate from AI services like Claude, ChatGPT, Perplexity, and other large language models (LLMs). 
+
+This helps you understand how AI agents interact with your APIs, monitor AI-driven traffic patterns, and optimize your API for AI consumption.
+
+## What is AI Agent Detection?
+
+AI Agent Detection analyzes incoming API requests to identify when they originate from AI services rather than traditional applications or human users. 
+
+Treblle recognizes various AI agents including:
+
+- **Claude** (Anthropic's AI assistant)
+- **ChatGPT** (OpenAI's conversational AI)
+- **Perplexity** (AI-powered search and answer engine)
+- Other AI services and LLMs
+
+This detection happens automatically for every request, with no additional configuration required.
+
+## Enabling AI Agent Column
+
+To view AI agent detection in your requests:
+
+1. **Navigate to Requests**
+   
+   Go to the **Requests** section in your API dashboard.
+
+2. **Open View Fields**
+   
+   Click the **View fields** button in the top-right corner of the Requests table.
+
+3. **Enable AI Agent Column**
+   
+   In the column visibility menu, toggle **AI Agent** to enable it.
+   
+   <img
+   src="/platform/ai-agent-detection/enable-ai-agent.png"
+   width="800"
+   style={{ borderRadius: "8px" }}
+   />
+
+## Viewing AI Agent Information
+
+### AI Agent Column in Requests Table
+
+Once enabled, the **AI Agent** column displays which AI service made each request.
+
+The AI Agent column shows:
+- **Specific AI agent name** (e.g., "Claude", "ChatGPT", "Perplexity") when detected
+- **Dash (-)** when the request originates from a non-AI source
+
+  <img
+    src="/platform/ai-agent-detection/ai-agent-tab.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
+
+### AI Agent in Request Details
+
+For detailed information about AI agent usage in a specific request:
+
+1. **Select a Request**
+   
+   Click on any request from the Requests list to open the detailed view.
+
+2. **Navigate to Info Tab**
+   
+   Click on the **Info** tab in the request details panel.
+
+3. **View AI Agent Information**
+   
+   In the **User Data** section, you'll see the **AI Agent** field displaying the detected AI service.
+
+  <img
+    src="/platform/ai-agent-detection/request-info.png"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
+
+The AI Agent field will show:
+- The specific AI agent name when detected (e.g., "Claude")
+- "N/A" or "-" when no AI agent is detected
+
+---
+
+By leveraging Treblle's AI Agent Detection, you can gain valuable insights into how AI services interact with your APIs, optimize for AI consumption, and maintain control over AI-driven traffic patterns.
