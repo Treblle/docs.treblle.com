@@ -200,6 +200,9 @@ export default defineConfig({
         }, {    
           label: 'Azure API Gateway',
           link: '/integrations/gateways/azure/'
+        }, {    
+          label: 'Apigee',
+          link: '/integrations/gateways/apigee/'
         }, {   
           label: 'MuleSoft',
           collapsed: true,
