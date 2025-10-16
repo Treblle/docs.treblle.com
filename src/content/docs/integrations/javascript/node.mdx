@@ -1,7 +1,7 @@
 ---
-title: "Treblle with Node"
-metaTitle: "Set Up Treblle in NestJS | Treblle Docs"
-description: "Learn how to integrate Treblle with Node.js, Express, and NestJS. Capture API requests, enhance security, and gain real-time insights with a simple setup."
+title: "Treblle with Node.js"
+metaTitle: "Set Up Treblle in Node.js | Treblle Docs"
+description: "Learn how to integrate Treblle with Node.js. Capture API requests, enhance security, and gain real-time insights with minimal setup. Supports Express, Fastify, Koa, and more."
 image: "/og-images/treblle-nodejs.jpg"
 ---
 
@@ -16,282 +16,153 @@ image: "/og-images/treblle-nodejs.jpg"
     </div>
     <div class="grid grid-cols-4 gap-4 px-2 py-2">
       <div class="col-span-4">
-      	<h3 class="text-xl font-semibold">treblle-node</h3>
+      	<h3 class="text-xl font-semibold">treblle</h3>
       	<p class="text-sm font-medium">
-          The official Treblle SDK for NodeJS/ExpressJS/NestJS. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
+          The official Treblle SDK for Node.js supports all major frameworks. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
         </p>
       </div>
     </div>
   </a>
 </div>
 
+Treblle provides a unified SDK for Node.js that works with all major frameworks. This page covers the core Node.js integration and points to framework-specific guides.
+
 ## Requirements
 
-- Node.js
-
-## Dependencies
-
-- [`express`](https://www.npmjs.com/package/express)
-- [`node-fetch`](https://www.npmjs.com/package/node-fetch)
+- Node.js: `>=14.0.0` (14.x LTS or higher recommended)
 
 ## Installation
 
-You can install Treblle for Node via [NPM](https://www.npmjs.com/). Simply run the following command:
-
 ```bash
-$ npm install treblle
+npm install treblle@^2.0.0
 ```
 
-Don't forget to load the required JavaScript modules in your `app.js` like so:
+## Setting up credentials
 
+Create a free account on [treblle.com](https://treblle.com) to get your credentials:
+- `sdkToken` (SDK Token)
+- `apiKey` (API Key)
+
+Add these to your `.env` file:
+
+```env
+TREBLLE_SDK_TOKEN=your_sdk_token
+TREBLLE_API_KEY=your_api_key
+```
+
+## Choose Your Framework
+
+The Treblle SDK works with popular Node.js frameworks:
+
+### **Express** (Most Popular)
+[Full Express integration guide →](/integrations/javascript/express/)
 ```js
-const express = require('express')
-const { useTreblle } = require('treblle')
+const { useTreblle } = require("treblle");
+useTreblle(app, { sdkToken: "...", apiKey: "..." });
 ```
 
-## Getting started
-
-Next, create a free account on [treblle.com](https://treblle.com) to get an API key and Project ID. After you have those simply initialize Treblle in your `app.js` file like so for Express:
-
+### **Fastify** (High Performance)
+[Full Fastify integration guide →](/integrations/javascript/fastify/)
 ```js
-const app = express()
-app.use(express.json())
-
-useTreblle(app, {
-  apiKey: '_YOUR_API_KEY_',
-  projectId: '_YOUR_PROJECT_ID_',
-})
+const { fastifyTreblle } = require("treblle");
+await fastify.register(fastifyTreblle, { sdkToken: "...", apiKey: "..." });
 ```
 
-That's it. Your API requests and responses are now being sent to your Treblle project. Just by adding that line of code you get features like: auto-documentation, real-time request/response monitoring, error tracking and so much more.
-
-One thing that you need to bear in mind is that express will use first in first out when it comes to middleware. So if you want Treblle to capture unfiltered/altered request and response data, then it needs to be the first middleware in your middleware pipeline.
-
-## Koa integration
-
-If you're using koa, then you can enable Treblle like this:
-
+### **Koa** (Minimalist)
+[Full Koa integration guide →](/integrations/javascript/koa/)
 ```js
-const Koa = require('koa')
-const KoaRouter = require('koa-router')
-const KoaBody = require('koa-body')
-const { koaTreblle } = require('treblle')
-
-const app = new Koa()
-const router = new KoaRouter()
-
-app.use(
-  koaTreblle({
-    apiKey: '_YOUR_API_KEY_',
-    projectId: '_YOUR_PROJECT_ID_',
-  })
-)
+const { koaTreblle } = require("treblle");
+app.use(koaTreblle({ sdkToken: "...", apiKey: "..." }));
 ```
 
-## Strapi integration
-
-> This integration is for Strapi v3, for Strapi v4 check out [this](/integrations/javascript/strapi/) integraion guide instead
-
-Treblle has support for Strapi as well, to start using it you need to define the middleware first and then enable the middleware.
-
-This guide is based on the strapi quickstart project, you can create it and follow by running the following command:
-
-```sh
-npx create-strapi-app my-project --quickstart
-```
-
-First define the middleware in `middlewares/treblle/index.js` like this:
-
-```js
-const { strapiTreblle } = require('treblle')
-
-module.exports = (strapi) => {
-  return {
-    initialize() {
-      strapi.app.use(
-        strapiTreblle({
-          apiKey: '_YOUR_API_KEY_',
-          projectId: '_YOUR_PROJECT_ID_',
-        })
-      )
-    },
-  }
-}
-```
-
-Then enable the Treblle middleware in `config/middleware.js` like this:
-
-```js
-module.exports = {
-  settings: {
-    treblle: {
-      enabled: true,
-    },
-  },
-}
-```
-
-## Cloudflare Workers integration
-
-### Service workers
-
-To use external packages (like Treblle) inside your workers you need a bundler (eg. Webpack or Rollup) to gather all dependencies into a single file which can be then deployed to Cloudflare. Read more about it in Cloudflare [webpack](https://developers.cloudflare.com/workers/cli-wrangler/webpack/) & [configuration](https://developers.cloudflare.com/workers/cli-wrangler/configuration/#service-workers) official documentation, and in an [official example](https://github.com/cloudflare/service-worker-custom-build).
-
-Example - Wrangler's webpack
-
-```toml
-# wrangler.toml
-
-...
-type = "webpack"
-webpack_config = "webpack.config.js"
-
-[build.upload]
-format = "service-worker"
-```
-
-```js
-// webpack.config.js
-
-module.exports = {
-  entry: './index.js',
-  target: 'webworker',
-  mode: 'production',
-  output: {
-    filename: 'worker.js',
-  },
-}
-```
-
-```js
-// worker.js
-
-const { serviceWorkerTreblle } = require('treblle')
-
-// Call this function for initialization, Treblle will attach itself to the 'fetch' event to be able to listen for response
-const treblle = serviceWorkerTreblle({
-  apiKey: '_YOUR_API_KEY_',
-  projectId: '_YOUR_PROJECT_ID_',
-  additionalFieldsToMask: ['key1', 'key2'], // Optional
-  showErrors: true, // Optional, defaults to true
-})
-
-// Wrap your 'fetch' handler inside returned Treblle function, so Treblle can listen for unhandled application errors in your code
-addEventListener(
-  'fetch',
-  treblle((event) => {
-    event.respondWith(
-      new Response('Hello worker!', {
-        headers: { 'content-type': 'text/plain' },
-      })
-    )
-  })
-)
-```
-
-### Module workers
-
-Similar as with Service workers above, you need a bundler to package Treblle SDK together with your application code. Be sure to check out official Cloudflare documentation about [webpack]() & [modules configuration](https://developers.cloudflare.com/workers/cli-wrangler/configuration/#modules) if you are stuck.
-
-Here is also an official example of a setup with both Modules and CommonJS, using Webpack: [link](https://github.com/cloudflare/modules-webpack-commonjs).
-
-Example
-
-```js
-// worker.js
-
-import { moduleWorkerTreblle } from 'treblle'
-
-// Initialize Treblle with this function, and store Treblle wrapper inside a variable
-const treblle = moduleWorkerTreblle({
-  apiKey: '_YOUR_API_KEY_',
-  projectId: '_YOUR_PROJECT_ID_',
-  additionalFieldsToMask: ['key1', 'key2'], // Optional
-  showErrors: true, // Optional, defaults to true
-})
-
-export default {
-  // Wrap your 'fetch' handlers inside Treblle wrapper function to use it
-  fetch: treblle(async (request) => {
-    return new Response(JSON.stringify({ sample: 'json' }), {
-      headers: { 'content-type': 'application/json' },
-    })
-  }),
-}
-```
-
-**Important Note**
-
-Treblle package (currently) uses some Node native libraries for other integrations, like `os` & `url`, which are not supported in Cloudflare Workers Runtime. They are not used in this integration, so it is enough to polyfil them with empty modules.
-
-```js
-// webpack.config.js
-
-...
-  resolve: {
-    fallback: {
-      os: false,
-      url: false
-    }
-  }
-...
-```
-
-## NestJS (with Express)
-
-```js
-// NestJS's boostrap function
+### **NestJS** (Full-Featured)
+[Full NestJS integration guide →](/integrations/javascript/nest/)
+```ts
 const { useNestTreblle } = require("treblle");
-const app = await NestFactory.create(AppModule);
-
-...
-
-const expressInstance = app.getHttpAdapter().getInstance();
-
-useNestTreblle(expressInstance, {
-  apiKey: "_YOUR_API_KEY_",
-  projectId: "_YOUR_PROJECT_ID_",
-});
-
-...
+useNestTreblle(expressInstance, { sdkToken: "...", apiKey: "..." });
 ```
 
-## Running Treblle only in production
+### **Strapi** (Headless CMS)
+[Full Strapi integration guide →](/integrations/javascript/strapi/)
+```js
+const { strapiTreblle } = require("treblle");
+strapiTreblle({ sdkToken: "...", apiKey: "..." });
+```
 
-If you want to run Treblle only in production, you can rely on the environment variables, or use a similar approach via your app config.
+### **Next.js** (React Framework)
+[Full Next.js integration guide →](/integrations/javascript/nextjs/)
+```ts
+import { withTreblle } from "@treblle/next/integrations/nextjs";
+export const GET = withTreblle(async () => NextResponse.json({}));
+```
+
+### **Other Frameworks**
+- [AdonisJS](/integrations/javascript/adonis/) - Recommended using unified SDK
+- [SailsJS](/integrations/javascript/sails/) - Recommended using unified SDK with Koa
+- [Directus](/integrations/javascript/directus/) - Headless CMS integration
+
+## Core Configuration
+
+All frameworks use the same unified configuration:
 
 ```js
-const app = express()
-app.use(express.json())
-
-if (process.env.NODE_ENV === 'production') {
-  useTreblle(app, {
-    apiKey: '_YOUR_API_KEY_',
-    projectId: '_YOUR_PROJECT_ID_',
-  })
+{
+  sdkToken: "required",                    // Your SDK Token
+  apiKey: "required",                      // Your API Key
+  additionalFieldsToMask: [],              // Optional: Extra fields to mask
+  blocklistPaths: [],                      // Optional: Paths to exclude
+  ignoreDefaultBlockedPaths: false,        // Optional: Disable defaults
+  debug: false                             // Optional: Show errors
 }
 ```
 
-## Need to hide additional fields?
+## Automatic Field Masking
 
-If you want to expand the list of fields you want to hide, you can pass property names you want to hide by using the `additionalFieldsToMask` setting like in the example below.
+The following fields are automatically masked:
+
+- `password`, `pwd`, `secret`, `password_confirmation`, `passwordConfirmation`
+- `cc`, `card_number`, `cardNumber`, `ccv`
+- `ssn`
+- `credit_score`, `creditScore`
+
+Add custom fields:
 
 ```js
-useTreblle(app, {
-  apiKey: '_YOUR_API_KEY_',
-  projectId: '_YOUR_PROJECT_ID_',
-  additionalFieldsToMask: ['secretField', 'highlySensitiveField'],
-})
+additionalFieldsToMask: ["apiKey", "internalId", "sessionToken"]
 ```
 
-## Logging errors
+## Default Blocked Paths
 
-For easier debugging when sending the data to Treblle errors are visible by default, you can control it via the `showErrors` flag, you can disable the errors with `showErrors` set to `false`:
+These paths are automatically skipped:
+
+- **Files**: `favicon.ico`, `robots.txt`, `sitemap.xml`, `manifest.json`, `sw.js`
+- **Directories**: `/.well-known/`, `/static/`, `/assets/`, `/public/`, `/images/`
+- **Extensions**: `.css`, `.js`, `.png`, `.jpg`, `.gif`, `.svg`, `.ico`, `.woff`, `.ttf`
+
+Disable defaults:
 
 ```js
-useTreblle(app, {
-  apiKey: '_YOUR_API_KEY_',
-  projectId: '_YOUR_PROJECT_ID_',
-  showErrors: false,
-})
+ignoreDefaultBlockedPaths: true
+```
+
+## Production Setup
+
+Run Treblle only in production:
+
+```js
+if (process.env.NODE_ENV === "production") {
+  // Initialize Treblle
+}
+```
+
+## Debugging
+
+Enable debug mode:
+
+```js
+{
+  sdkToken: "...",
+  apiKey: "...",
+  debug: true  // Show errors in console
+}
 ```

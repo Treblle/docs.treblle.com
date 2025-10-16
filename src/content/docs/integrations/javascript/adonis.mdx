@@ -5,6 +5,38 @@ description: "Integrate Treblle with AdonisJS using our official SDK to capture 
 image: "/og-images/javascript-adonisjs.jpg"
 ---
 
+> **Legacy Notice**: The dedicated AdonisJS integration is in maintenance mode. We recommend using our unified JavaScript SDK (`treblle-node`) instead, which provides better support and more frequent updates. Support for this integration will end on December 31, 2025. To migrate, follow the updated setup guide below.
+
+## Recommended: Using the Unified SDK
+
+We now recommend using our unified JavaScript SDK which works with AdonisJS:
+
+```sh
+npm install treblle@^2.0.0
+```
+
+Initialize in your AdonisJS application using Koa support (since Adonis runs on Koa):
+
+```ts
+// start/kernel.ts
+import { koaTreblle } from "treblle";
+
+Server.middleware.register([
+  () => ({
+    handle: koaTreblle({
+      sdkToken: process.env.TREBLLE_SDK_TOKEN,
+      apiKey: process.env.TREBLLE_API_KEY,
+    }),
+  }),
+]);
+```
+
+---
+
+## Legacy Integration (Deprecated)
+
+The original AdonisJS-specific integration is still available but no longer actively maintained.
+
 <div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
   <a href="https://github.com/Treblle/treblle-adonisjs" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
     <div>
@@ -18,22 +50,22 @@ image: "/og-images/javascript-adonisjs.jpg"
       <div class="col-span-4">
       	<h3 class="text-xl font-semibold">treblle-adonisjs</h3>
       	<p class="text-sm font-medium">
-          The official Treblle SDK for AdonisJS framework. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
+          The legacy Treblle SDK for AdonisJS framework (maintenance mode, support ending December 31, 2025).
         </p>
       </div>
     </div>
   </a>
 </div>
 
-To integrate Treblle with [AdonisJS](https://adonisjs.com), we provide an official SDK for Adonis - [`treblle-adonisjs`](https://github.com/Treblle/treblle-adonisjs).
+### Legacy Installation
 
-## Installation
+If you're still using the legacy integration:
 
 ```sh
 npm i @treblle/adonisjs --save
 ```
 
-After installation run the configuration command in your AdonisJS project:
+After installation, run the configuration command:
 
 ```sh
 node ace configure @treblle/adonisjs
@@ -41,40 +73,29 @@ node ace configure @treblle/adonisjs
 
 This will create the `treblle-adonisjs` config in `config/treblle.ts`.
 
-`treblle-adonisjs` relies on the following environment variables:
+### Legacy Credentials
+
+`treblle-adonisjs` requires the following environment variables:
 
 - `TREBLLE_API_KEY`
 - `TREBLLE_PROJECT_ID`
 
-So make sure you touch your `.env` file to have those environment variables(You can find the values in your Treblle dashboard)
-
-Since `treblle-adonisjs` depends on the above environment variables, we recommend validating them.
-
-Open the `env.ts` file and paste the following code inside the `Env.rules` object.
+Validate them in your `env.ts` file:
 
 ```ts
 TREBLLE_API_KEY: Env.schema.string(),
 TREBLLE_PROJECT_ID: Env.schema.string(),
 ```
 
-- Here we expect both `TREBLLE_API_KEY` and `TREBLLE_PROJECT_ID` environment variables to be always present
-- And both should be valid strings
+### Legacy Setup
 
-## Setup
-
-`treblle-adonisjs` exposes a middleware that you can add globally in your `start/kernel.ts` global middleware array like so:
+Add the middleware globally in your `start/kernel.ts`:
 
 ```ts
 Server.middleware.register([() => import('@treblle/adonisjs')])
 ```
 
-And that's it, Treblle will now monitor your API.
-
-## Named middleware
-
-Assuming you have an AdonisJS app that's not completely an API i.e a fullstack app that exposes API endpoints in say `api/v1`, you can use a named middleware so you can apply Treblle's middleware to the routes you want to monitor and observe.
-
-For example we can do:
+Or use it as a named middleware for specific routes:
 
 ```ts
 // start/kernel.ts
@@ -83,7 +104,7 @@ Server.middleware.registerNamed({
 })
 ```
 
-Then in `routes.ts` you can have:
+Then apply to routes:
 
 ```ts
 Route.group(() => {
@@ -94,22 +115,27 @@ Route.group(() => {
       data: request.body(),
     }
   })
-  Route.post('/users/login', async ({ request }) => {
-    return { success: true, message: 'Log in successful', data: request.body() }
-  })
-  Route.post('/licenses', async ({ request }) => {
-    return {
-      success: true,
-      message: 'License created successfully',
-      data: request.body(),
-    }
-  })
-  Route.post('/error', async ({ response }) => {
-    return response
-      .status(500)
-      .send({ success: false, message: 'Something went wrong' })
-  })
 })
   .prefix('/api/v1')
   .middleware('treblle')
 ```
+
+---
+
+## Migration Guide
+
+To migrate from the legacy integration to the unified SDK:
+
+1. Install the new package:
+   ```sh
+   npm install treblle@^2.0.0
+   npm uninstall @treblle/adonisjs
+   ```
+
+2. Update your environment variables from `TREBLLE_API_KEY` / `TREBLLE_PROJECT_ID` to `TREBLLE_SDK_TOKEN` / `TREBLLE_API_KEY`
+
+3. Update your middleware registration in `start/kernel.ts` to use the Koa middleware from the unified SDK
+
+4. Test your API endpoints to ensure requests are being captured
+
+For questions during migration, contact support at support@treblle.com

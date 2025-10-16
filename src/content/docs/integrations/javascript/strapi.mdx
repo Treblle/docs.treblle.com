@@ -1,12 +1,12 @@
 ---
 title: "Treblle with Strapi"
-metaTitle: "Set Up Treblle in NestJS | Treblle Docs"
+metaTitle: "Set Up Treblle in Strapi | Treblle Docs"
 description: "Integrate Treblle with Strapi to capture API requests, monitor errors, and enhance security. Follow our setup guide to configure Treblle for real-time API insights."
 image: "/og-images/treblle-strapi.jpg"
 ---
 
 <div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
-  <a href="https://github.com/Treblle/treblle-strapi" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
+  <a href="https://github.com/Treblle/treblle-node" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
     <div>
       <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -16,75 +16,153 @@ image: "/og-images/treblle-strapi.jpg"
     </div>
     <div class="grid grid-cols-4 gap-4 px-2 py-2">
       <div class="col-span-4">
-      	<h3 class="text-xl font-semibold">treblle-strapi</h3>
+      	<h3 class="text-xl font-semibold">treblle</h3>
       	<p class="text-sm font-medium">
-          The official Treblle SDK for Strapi. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
+          The official Treblle SDK for JavaScript frameworks including Strapi. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
         </p>
       </div>
     </div>
   </a>
 </div>
 
-To integrate Treblle with [Strapi](http://strapi.io), we provide an official SDK for Strapi which is a Strapi plugin - [`treblle-strapi`](https://github.com/Treblle/treblle-strapi/).
+To integrate Treblle with [Strapi](http://strapi.io), we provide an official unified SDK for JavaScript frameworks - [`treblle-node`](https://github.com/Treblle/treblle-node).
+
+Since Strapi runs on Koa under the hood, Treblle integrates as middleware in your Strapi configuration.
 
 ## Requirements
 
-- Strapi v4
+- Node.js: `>=18.0.0` LTS
+- Strapi: `4.x` or `5.x`
 
 ## Installation
 
 ```sh
-npm i @treblle/strapi --save
+npm install treblle@^2.0.0
 ```
 
-After installation set the following environment variables your `.env`
+## Setting up credentials
 
-> You can find the values in your Treblle dashboard
+Create a free account on [treblle.com](https://treblle.com) to get your credentials:
+- `sdkToken` (SDK Token)
+- `apiKey` (API Key)
 
-- `TREBLLE_API_KEY`
-- `TREBLLE_PROJECT_ID`
+Add these to your `.env` file:
 
-## Setup
+```env
+TREBLLE_SDK_TOKEN=your_sdk_token
+TREBLLE_API_KEY=your_api_key
+```
 
-`treblle-strapi` exposes a middleware that you can add in your `config/middlewares.js` array like so:
+## Step 1: Create the middleware
+
+Create the middleware in `middlewares/treblle/index.js`:
 
 ```js
-module.exports = [
-  //...
-  'plugin::treblle.treblle',
-]
+const { strapiTreblle } = require("treblle");
+
+module.exports = (strapi) => {
+  return {
+    initialize() {
+      strapi.app.use(
+        strapiTreblle({
+          sdkToken: process.env.TREBLLE_SDK_TOKEN,
+          apiKey: process.env.TREBLLE_API_KEY,
+        })
+      );
+    },
+  };
+};
 ```
 
-And that's it, Treblle will now monitor your Strapi content API.
+## Step 2: Enable the middleware
 
-## Config
-
-### AdditionalFieldsToMask
-
-You can specify additional fields to be [masked](/security/masking/) before sending the Treblle payload. To do so, add the following config in `config/plugins.js`
+Enable the middleware in `config/middleware.js`:
 
 ```js
 module.exports = {
-  treblle: {
-    config: {
-      additionalFieldsToMask: ['FIELD_TO_MASK_1'],
+  settings: {
+    treblle: {
+      enabled: true,
     },
   },
-}
+};
 ```
 
-> Do replace `FIELDS_TO_MASK_1` with the field you want to mask.
+And that's it! Treblle will now monitor your Strapi content API.
 
-### routesToMonitor
+## Configuration Options
 
-By default, this Strapi plugin will monitor only routes that starts has `/api` in the URL. You can override this by passing a `routesToMonitor` array in the `config` of the plugin.
+You can pass additional configuration options to the middleware:
+
+```js
+strapi.app.use(
+  strapiTreblle({
+    sdkToken: process.env.TREBLLE_SDK_TOKEN,
+    apiKey: process.env.TREBLLE_API_KEY,
+    additionalFieldsToMask: ["customSecret", "internalId"], // Optional
+    blocklistPaths: ["admin", "webhooks"], // Optional: Skip logging certain paths
+    ignoreDefaultBlockedPaths: false, // Optional: Disable default blocked paths
+    debug: true, // Optional: Show Treblle errors in console
+    ignoreAdminRoutes: ["admin", "content-manager"], // Optional: Ignore admin routes
+  })
+);
+```
+
+### Available options:
+
+- `sdkToken` (required): Your Treblle SDK token
+- `apiKey` (required): Your Treblle API key
+- `additionalFieldsToMask` (optional): Array of field names to mask in addition to default fields
+- `blocklistPaths` (optional): Array of path prefixes or RegExp to exclude from logging
+- `ignoreDefaultBlockedPaths` (optional): Boolean to disable default blocked paths (default: false)
+- `debug` (optional): Boolean to show Treblle-related errors in console (default: false)
+- `ignoreAdminRoutes` (optional): Array of admin route prefixes to ignore (default: `["admin", "content-type-builder", "content-manager"]`)
+
+### Note on ignoreAdminRoutes
+
+The `ignoreAdminRoutes` option helps avoid logging internal admin panel requests that are typically not part of your public API. By default, it ignores the admin panel and content management routes.
+
+## Production-only Setup
+
+Run Treblle only in production by conditionally enabling the middleware:
 
 ```js
 module.exports = {
-  treblle: {
-    config: {
-      routesToMonitor: ['api'], // this is the default
+  settings: {
+    treblle: {
+      enabled: process.env.NODE_ENV === "production",
     },
   },
-}
+};
+```
+
+## Masking Sensitive Data
+
+The following fields are automatically masked:
+
+- `password`, `pwd`, `secret`, `password_confirmation`, `passwordConfirmation`
+- `cc`, `card_number`, `cardNumber`, `ccv`
+- `ssn`
+- `credit_score`, `creditScore`
+
+Add custom fields to mask:
+
+```js
+strapiTreblle({
+  sdkToken: process.env.TREBLLE_SDK_TOKEN,
+  apiKey: process.env.TREBLLE_API_KEY,
+  additionalFieldsToMask: ["customSecret", "apiToken"],
+});
+```
+
+## Debugging
+
+Enable debug mode to see Treblle errors in your console:
+
+```js
+strapiTreblle({
+  sdkToken: process.env.TREBLLE_SDK_TOKEN,
+  apiKey: process.env.TREBLLE_API_KEY,
+  debug: true,
+});
 ```
