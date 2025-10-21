@@ -3,13 +3,15 @@ import type { Props } from "@astrojs/starlight/props";
 // Don't import the default head - we'll build our own
 // import Default from "@astrojs/starlight/components/Head.astro"
 
-const ogImageUrl = Astro.site 
+const ogImageUrl = Astro.props.id && Astro.site 
   ? new URL(`/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`, Astro.site)
-  : `/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`;
+  : Astro.props.id 
+    ? `/og/${Astro.props.id.replace(/\.\w+$/, '.png')}`
+    : '/og/default.png';
 
 // Get the custom meta title if it exists, otherwise use the page title
-const metaTitle = Astro.props.entry.data.metaTitle || Astro.props.entry.data.title;
-const description = Astro.props.entry.data.description;
+const metaTitle = Astro.props.entry?.data?.metaTitle || Astro.props.entry?.data?.title || 'Treblle Documentation';
+const description = Astro.props.entry?.data?.description || 'Treblle is your End to End API Ops platform';
 const canonical = Astro.site 
   ? new URL(Astro.url.pathname, Astro.site).href 
   : Astro.url.pathname;
@@ -42,7 +44,7 @@ const domain = Astro.site?.host || '';
 <meta property="og:url" content={canonical} />
 <meta property="og:type" content="article" />
 {
-  Astro.props.entry.data.image
+  Astro.props.entry?.data?.image
   ? (
     <meta property="og:image" content={Astro.site ? new URL(Astro.props.entry.data.image, Astro.site).href : Astro.props.entry.data.image} /> 
     <meta name="twitter:image" content={Astro.site ? new URL(Astro.props.entry.data.image, Astro.site).href : Astro.props.entry.data.image} />
