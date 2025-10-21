@@ -1,0 +1,880 @@
+---
+title: "Apigee API Gateway"
+metaTitle: "Set Up Treblle in Apigee API Gateway | Treblle Docs"
+description: "Integrate Treblle with Apigee API Gateway using shared flows and policies for automatic API monitoring. Capture requests, enhance security, and gain real-time insights with zero latency."
+image: "/og-images/api-gateways-apigee.jpg"
+---
+
+<div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
+  <a href="https://github.com/Treblle/treblle-apigee" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
+    <div>
+      <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+      </svg>
+    </div>
+    <div class="grid grid-cols-4 gap-4 px-2 py-2">
+      <div class="col-span-4">
+        <h3 class="text-xl font-semibold">treblle-apigee</h3>
+        <p class="text-sm font-medium">The official Treblle SDK for Apigee API Gateway. Capture data in real-time with zero-latency and monitor your APIs seamlessly.</p>
+      </div>
+    </div>
+  </a>
+</div>
+
+The Treblle Apigee SDK brings native support to Google Apigee API Gateway across all Apigee versions. The SDK captures data in real-time with zero-latency and sends that data to Treblle for processing.
+
+This integration captures detailed API request and response data without requiring code changes to your existing APIs and is designed to be non-blocking, ensuring zero impact on client response times.
+
+The Apigee API Gateway integration automatically:
+
+- **Zero-Latency Monitoring**: Non-blocking data collection that doesn't impact API response times
+- **Real-time Capture**: Captures requests, responses, and performance metrics instantly
+- **Data Masking**: Automatically masks sensitive information with customizable keywords
+- **Endpoint Blocking**: Block specific endpoints from being tracked with wildcard support
+- **Load Balancing**: Automatically selects from multiple Treblle endpoints for reliability
+- **Error Reporting**: Captures Apigee fault variables and HTTP error states automatically
+- **Flexible Deployment**: Deploy at API level or environment level
+
+## Supported Apigee Versions
+
+| Framework | Supported Versions | Status |
+|-------------------|-------------------|---------------------|
+| **Apigee Edge** | All Versions| ✅ Full Support|
+| **Apigee X** | All Versions | ✅ Full Support |
+| **Apigee Hybrid** | All Versions | ✅ Full Support |
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- Apigee Edge, Apigee X, or Apigee Hybrid account
+- [Treblle account](https://treblle.com/) with API key and SDK token
+- Access to Apigee Management Console or Apigee API access
+- `gcloud` CLI configured (for API-based deployment)
+
+### Required Permissions
+
+- **API Proxy Developer**: To deploy policies and resources
+- **Environment Admin**: To create and manage Key Value Maps
+- **Shared Flow Developer**: To create the async logging flow
+
+### Network Requirements
+
+- Outbound HTTPS access to Treblle endpoints:
+  - `rocknrolla.treblle.com`
+  - `punisher.treblle.com`
+  - `sicario.treblle.com`
+- Ports: 443 (HTTPS)
+
+## Architecture Overview
+
+### API-Level Architecture
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   API Client    │───▶│  Apigee Proxy   │───▶│  Backend API    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                │                       │
+                       ┌────────┴────────┐              │
+                       │                 │              │
+                  ┌────▼──────┐    ┌────▼──────┐      │
+                  │  Request  │    │ Response  │      │
+                  │  PreFlow  │    │ PreFlow   │◀─────┘
+                  └───────────┘    └─────┬─────┘
+                                         │
+                                         ▼
+                                ┌─────────────────┐
+                                │  JS-treblle     │ (PreFlow Response)
+                                │ Captures Data   │
+                                └─────────────────┘
+                                         │
+                       ┌─────────────────┴─────────────────┐
+                       │                                   │
+                  ┌────▼──────┐                     ┌─────▼──────┐
+                  │  Request  │                     │  Response  │
+                  │ PostFlow  │                     │  PostFlow  │
+                  └─────┬─────┘                     └─────┬──────┘
+                        │                                 │
+                        ▼                                 ▼
+                ┌────────────────┐            ┌──────────────────┐
+                │  KVM-Treblle   │            │  FC-Async-       │
+                │Get Credentials │            │  Treblle-Logger  │
+                └────────────────┘            └────────┬─────────┘
+                                                       │
+                                                       ▼
+                                              ┌─────────────────┐
+                                              │  Shared Flow:   │
+                                              │ treblle-logger  │
+                                              │ SC-SendToTreblle│
+                                              └────────┬────────┘
+                                                       │
+                                                       ▼
+                                              ┌─────────────────┐
+                                              │  Treblle API    │
+                                              │ (Load Balanced) │
+                                              └─────────────────┘
+```
+
+### Environment-Level Architecture
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   API Client    │───▶│  Any API Proxy  │───▶│  Backend API    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                │                       │
+                                │                       ▼
+                                │              ┌─────────────────┐
+                                │              │ Backend Response│
+                                │              └────────┬────────┘
+                                │                       │
+                                ▼                       ▼
+                       ┌──────────────────────────────────────┐
+                       │   PostTargetFlow Hook (Env Level)    │
+                       │                                      │
+                       │  Shared Flow: treblle-env-monitor   │
+                       │                                      │
+                       │  ┌────────────────────────────┐     │
+                       │  │ 1. KVM-GetCredentials      │     │
+                       │  └────────────┬───────────────┘     │
+                       │               ▼                      │
+                       │  ┌────────────────────────────┐     │
+                       │  │ 2. JS-ProcessPayload       │     │
+                       │  └────────────┬───────────────┘     │
+                       │               ▼                      │
+                       │  ┌────────────────────────────┐     │
+                       │  │ 3. SC-SendToTreblle        │     │
+                       │  └────────────────────────────┘     │
+                       └──────────────────┬───────────────────┘
+                                          │
+                                          ▼
+                                 ┌─────────────────┐
+                                 │  Treblle API    │
+                                 │ (Load Balanced) │
+                                 └─────────────────┘
+```
+
+### Flow Execution Order
+
+**API-Level:**
+1. **Request PreFlow**: Client request enters Apigee proxy
+2. **Backend Call**: Request forwarded to backend API
+3. **Response PreFlow**: Backend response received
+4. **PreFlow Response**: `JS-treblle` captures complete request/response data
+5. **PostFlow Request**: `KVM-Treblle` retrieves credentials (SDK Token & API Key)
+6. **PostFlow Response**: `FC-Async-Treblle-Logger` calls shared flow
+7. **Shared Flow**: `SC-SendToTreblle` sends data to Treblle API
+8. **Client Response**: Original response sent to client (zero latency)
+
+**Environment-Level:**
+1. **Request**: Client request to any API proxy in environment
+2. **Backend Call**: Request forwarded to backend
+3. **Response**: Backend responds
+4. **PostTargetFlow Hook**: Environment-level shared flow executes
+   - KVM retrieves credentials
+   - JS captures and processes data
+   - SC sends to Treblle API
+5. **Client Response**: Original response sent to client (zero latency)
+
+---
+
+## Installation
+
+Choose your deployment method based on your monitoring needs:
+
+| Deployment Method | Use Case | Coverage |
+|-------------------|----------|----------|
+| **API-Level** | Monitor specific API proxies individually | Selected APIs only |
+| **Environment-Level** | Monitor all APIs in an environment automatically | All APIs in environment |
+
+### Step 1: Get Your Treblle Credentials
+
+1. Sign up for a free account at [treblle.com](https://treblle.com)
+2. Create a new API in your Treblle dashboard
+3. Copy your **SDK Token** and **API Key** from the project settings
+
+### Step 2: Clone the Repository
+
+```bash
+git clone https://github.com/Treblle/treblle-apigee.git
+cd treblle-apigee
+```
+
+### Step 3: Create Environment Configuration
+
+Create an encrypted Key Value Map (KVM) to store your Treblle credentials securely.
+
+<details>
+<summary>Option A: Using Apigee Management API (Recommended)</summary>
+
+Replace the placeholders with your actual values:
+- `YOUR_ORGANIZATION`: Your Apigee organization name
+- `YOUR_ENVIRONMENT`: Target environment (test, prod, etc.)
+- `YOUR_TREBLLE_SDK_TOKEN`: From your Treblle project
+- `YOUR_TREBLLE_API_KEY`: From your Treblle project
+
+```bash
+# Create the KVM
+curl -X POST "https://apigee.googleapis.com/v1/organizations/YOUR_ORGANIZATION/environments/YOUR_ENVIRONMENT/keyvaluemaps" \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "treblle-kvm",
+    "encrypted": true
+  }'
+
+# Add SDK Token
+curl -X POST "https://apigee.googleapis.com/v1/organizations/YOUR_ORGANIZATION/environments/YOUR_ENVIRONMENT/keyvaluemaps/treblle-kvm/entries" \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "treblle_sdk_token",
+    "value": "YOUR_TREBLLE_SDK_TOKEN"
+  }'
+
+# Add API Key
+curl -X POST "https://apigee.googleapis.com/v1/organizations/YOUR_ORGANIZATION/environments/YOUR_ENVIRONMENT/keyvaluemaps/treblle-kvm/entries" \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "treblle_api_key", 
+    "value": "YOUR_TREBLLE_API_KEY"
+  }'
+
+# Verify the setup
+curl "https://apigee.googleapis.com/v1/organizations/YOUR_ORGANIZATION/environments/YOUR_ENVIRONMENT/keyvaluemaps/treblle-kvm/entries" \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)"
+```
+
+</details>
+
+<details>
+<summary>Option B: Using Apigee UI</summary>
+
+1. Navigate to **Admin > Environments** in Apigee Console
+2. Select your target environment
+3. Go to **Key Value Maps**
+4. Click **+ Key Value Map**
+5. Configure:
+   - **Name**: `treblle-kvm`
+   - **Encrypted**: Yes (recommended)
+6. Click **Create**
+7. Add entries:
+   - **Key**: `treblle_sdk_token`, **Value**: Your Treblle SDK token
+   - **Key**: `treblle_api_key`, **Value**: Your Treblle API key
+
+</details>
+
+---
+
+## Deployment
+
+<details>
+<summary>Deployment Option 1: API-Level</summary>
+
+Deploy Treblle monitoring to specific API proxies individually. This approach gives you granular control over which APIs are monitored.
+
+### When to Use API-Level Deployment
+
+- You want to monitor only specific APIs
+- You need different configurations for different APIs
+- You're testing Treblle integration on a single API first
+- You have a small number of APIs to monitor
+
+### Step 4: Create Shared Flow for Service Callout
+
+Create a shared flow to handle asynchronous service callouts to Treblle.
+
+1. In Apigee UI, go to **Develop > Shared Flows**
+2. Click **+ Shared Flow**
+3. Name: `treblle-logger`
+4. Create a new policy: **Service Callout**
+
+**Service Callout Policy (SC-SendToTreblle.xml):**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout continueOnError="true" enabled="true" name="SC-SendToTreblle">
+    <DisplayName>SC-SendToTreblle</DisplayName>
+    <Request clearPayload="true" variable="treblleRequest">
+        <Set>
+            <Headers>
+                <Header name="Content-Type">application/json</Header>
+                <Header name="x-api-key">{treblle_sdk_token}</Header>
+            </Headers>
+            <Payload contentType="application/json">{treblle_payload}</Payload>
+            <Verb>POST</Verb>
+        </Set>
+    </Request>
+    <Response>treblle_response</Response>
+    <HTTPTargetConnection>
+        <URL>https://{treblle_selected_host}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>
+```
+
+5. Configure the shared flow:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SharedFlow name="treblle-logger">
+  <Step>
+    <n>SC-SendToTreblle</n>
+  </Step>
+</SharedFlow>
+```
+
+6. Deploy `treblle-logger` to your target environment
+
+### Step 5: Configure Your API Proxy
+
+#### Upload JavaScript Resource
+
+1. Go to **Develop > API Proxies > [Your Proxy]**
+2. Navigate to **Resources > JavaScript**
+3. Click **+ Resource**
+4. Upload `treblle-payload-processor.js` from the repository
+
+#### Create Policies
+
+Create the following three policies in your API proxy:
+
+**1. Key Value Map Policy (KVM-GetTreblleCredentials.xml):**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations mapIdentifier="treblle-kvm" continueOnError="false" enabled="true" name="KVM-GetTreblleCredentials">
+    <DisplayName>KVM-GetTreblleCredentials</DisplayName>
+    <Get assignTo="treblle_sdk_token">
+        <Key>
+            <Parameter>treblle_sdk_token</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="treblle_api_key">
+        <Key>
+            <Parameter>treblle_api_key</Parameter>
+        </Key>
+    </Get>
+    <Scope>environment</Scope>
+</KeyValueMapOperations>
+```
+
+**2. JavaScript Policy (JS-ProcessTrebllePayload.xml):**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript continueOnError="false" enabled="true" timeLimit="200" name="JS-ProcessTrebllePayload">
+    <DisplayName>JS-ProcessTrebllePayload</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://treblle-payload-processor.js</ResourceURL>
+</Javascript>
+```
+
+**3. Flow Callout Policy (FC-TreblleAsyncLogger.xml):**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FlowCallout continueOnError="true" enabled="true" name="FC-TreblleAsyncLogger">
+    <DisplayName>FC-TreblleAsyncLogger</DisplayName>
+    <SharedFlowBundle>treblle-logger</SharedFlowBundle>
+</FlowCallout>
+```
+
+#### Attach Policies to Proxy Flow
+
+Configure your proxy endpoint to execute policies in the correct order:
+
+**Complete Proxy Endpoint Configuration:**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+  <Description/>
+  <FaultRules/>
+  
+  <!-- PreFlow Response: Capture request/response data -->
+  <PreFlow name="PreFlow">
+    <Request/>
+    <Response>
+      <Step>
+        <n>JS-ProcessTrebllePayload</n>
+      </Step>
+    </Response>
+  </PreFlow>
+  
+  <!-- PostFlow: Retrieve credentials and send to Treblle -->
+  <PostFlow name="PostFlow">
+    <Request>
+      <Step>
+        <n>KVM-GetTreblleCredentials</n>
+      </Step>
+    </Request>
+    <Response>
+      <Step>
+        <n>FC-TreblleAsyncLogger</n>
+      </Step>
+    </Response>
+  </PostFlow>
+  
+  <Flows/>
+  <HTTPProxyConnection>
+    <BasePath>/your-api-path</BasePath>
+  </HTTPProxyConnection>
+  <RouteRule name="default">
+    <TargetEndpoint>default</TargetEndpoint>
+  </RouteRule>
+</ProxyEndpoint>
+```
+
+### Step 6: Save and Deploy
+
+1. Save all changes to your API proxy
+2. Deploy the new revision to your environment
+3. Test with a request to verify monitoring is working
+
+</details>
+
+---
+
+<details>
+<summary>Deployment Option 2: Environment-Level</summary>
+
+Deploy Treblle monitoring to all APIs in an environment automatically using Flow Hooks. This approach monitors every API in the environment without individual proxy configuration.
+
+### When to Use Environment-Level Deployment
+
+- You want to monitor all APIs in an environment automatically
+- You have many API proxies and want centralized management
+- You want consistent monitoring configuration across all APIs
+- You need to add/remove monitoring quickly across all APIs
+
+### Step 4: Create Environment-Level Shared Flow
+
+Create a single shared flow that contains all Treblle policies in the correct execution order.
+
+1. In Apigee UI, go to **Develop > Shared Flows**
+2. Click **+ Shared Flow**
+3. Name: `treblle-env-monitor`
+
+#### Upload JavaScript Resource to Shared Flow
+
+1. In the shared flow, navigate to **Resources > JavaScript**
+2. Click **+ Resource**
+3. Upload `treblle-payload-processor.js` from the repository
+
+#### Add Policies to Shared Flow
+
+Add the following three policies to your shared flow in this **exact order**:
+
+**Policy Execution Order: KVM → JS → SC**
+
+1. **KVM-GetTreblleCredentials** (First - retrieves credentials)
+2. **JS-ProcessTrebllePayload** (Second - captures and processes data)
+3. **SC-SendToTreblle** (Third - sends to Treblle API)
+
+**1. Key Value Map Policy:**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations mapIdentifier="treblle-kvm" continueOnError="false" enabled="true" name="KVM-GetTreblleCredentials">
+    <DisplayName>KVM-GetTreblleCredentials</DisplayName>
+    <Get assignTo="treblle_sdk_token">
+        <Key>
+            <Parameter>treblle_sdk_token</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="treblle_api_key">
+        <Key>
+            <Parameter>treblle_api_key</Parameter>
+        </Key>
+    </Get>
+    <Scope>environment</Scope>
+</KeyValueMapOperations>
+```
+
+**2. JavaScript Policy:**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript continueOnError="false" enabled="true" timeLimit="200" name="JS-ProcessTrebllePayload">
+    <DisplayName>JS-ProcessTrebllePayload</DisplayName>
+    <Properties/>
+    <ResourceURL>jsc://treblle-payload-processor.js</ResourceURL>
+</Javascript>
+```
+
+**3. Service Callout Policy:**
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout continueOnError="true" enabled="true" name="SC-SendToTreblle">
+    <DisplayName>SC-SendToTreblle</DisplayName>
+    <Request clearPayload="true" variable="treblleRequest">
+        <Set>
+            <Headers>
+                <Header name="Content-Type">application/json</Header>
+                <Header name="x-api-key">{treblle_sdk_token}</Header>
+            </Headers>
+            <Payload contentType="application/json">{treblle_payload}</Payload>
+            <Verb>POST</Verb>
+        </Set>
+    </Request>
+    <Response>treblle_response</Response>
+    <HTTPTargetConnection>
+        <URL>https://{treblle_selected_host}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>
+```
+
+#### Configure Shared Flow
+
+Configure the shared flow to execute policies in order:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SharedFlow name="treblle-env-monitor">
+    <Step>
+        <n>KVM-GetTreblleCredentials</n>
+    </Step>
+    <Step>
+        <n>JS-ProcessTrebllePayload</n>
+    </Step>
+    <Step>
+        <n>SC-SendToTreblle</n>
+    </Step>
+</SharedFlow>
+```
+
+### Step 5: Deploy Shared Flow
+
+1. Save the shared flow configuration
+2. Click **Deploy**
+3. Select your target environment
+4. Verify deployment is successful
+
+### Step 6: Configure Flow Hooks
+
+Flow Hooks allow you to attach shared flows at the environment level, applying them to all API proxies automatically.
+
+#### Navigate to Flow Hooks
+
+1. Navigate to **Admin > Environments** in Apigee Console
+2. Select your target environment (e.g., `test`, `prod`)
+3. Click on the **Flow Hooks** tab
+
+#### Attach Shared Flow to PostTargetFlow
+
+1. Locate the **PostTargetFlow** section
+2. Click **+ Flow Hook** (or edit if one exists)
+3. Configure:
+   - **Shared Flow**: Select `treblle-env-monitor`
+   - **Flow Hook Position**: PostTargetFlow
+4. Click **Save**
+
+**What is PostTargetFlow?**
+
+The PostTargetFlow executes after the target (backend) responds but before the response is sent to the client. This is the ideal position for Treblle monitoring because:
+- The complete request/response cycle is available
+- Execution happens after backend processing
+- Non-blocking (doesn't add latency to client response)
+- Applies to all APIs in the environment automatically
+
+**Flow Hooks Execution Flow:**
+
+```
+Client Request
+      │
+      ▼
+PreProxyFlow Hook (Optional)
+      │
+      ▼
+API Proxy Logic
+      │
+      ▼
+PreTargetFlow Hook (Optional)
+      │
+      ▼
+Backend/Target API
+      │
+      ▼
+PostTargetFlow Hook ← [Treblle Monitor Attached Here]
+      │              (treblle-env-monitor executes)
+      │              1. KVM gets credentials
+      │              2. JS captures data
+      │              3. SC sends to Treblle
+      ▼
+PostProxyFlow Hook (Optional)
+      │
+      ▼
+Client Response (Zero latency)
+```
+
+### Step 7: Verify Environment-Level Monitoring
+
+Test that all APIs in the environment are now being monitored:
+
+```bash
+# Test with any API proxy in the environment
+curl -X GET "https://YOUR_ORG-YOUR_ENV.apigee.net/api-1/users"
+curl -X POST "https://YOUR_ORG-YOUR_ENV.apigee.net/api-2/orders" \
+  -H "Content-Type: application/json" \
+  -d '{"item": "product"}'
+curl -X GET "https://YOUR_ORG-YOUR_ENV.apigee.net/api-3/products"
+```
+
+**Verification Steps:**
+
+1. Make requests to multiple different APIs in the environment
+2. Check your [Treblle Dashboard](https://treblle.com/) to verify all requests appear
+3. Enable Trace on any API proxy to see the shared flow execution in PostTargetFlow
+4. Verify the execution order: KVM → JS → SC in the Trace
+
+</details>
+
+---
+
+## Configuration
+
+### Data Masking
+
+Customize sensitive data detection by modifying the `maskingKeywords` variable in `treblle-payload-processor.js`:
+
+```javascript
+// Default masking keywords
+var maskingKeywords = 'password,secret,token,key,authorization,auth,credential,private,confidential,ssn,social_security,credit_card,card_number,cvv,pin,api_key,access_token,refresh_token,bearer,x-api-key,x-auth-token';
+
+// Add your custom keywords
+var maskingKeywords = 'password,secret,token,key,authorization,auth,credential,private,confidential,ssn,social_security,credit_card,card_number,cvv,pin,api_key,access_token,refresh_token,bearer,x-api-key,x-auth-token,customer_id,user_id,email,phone';
+```
+
+**Masking Behavior:**
+- Preserves original string length
+- Replaces all characters with `*`
+- Works in request/response bodies and headers
+- Case-insensitive matching
+- Supports nested JSON objects and arrays
+
+**Example:**
+
+```json
+// Before masking
+{
+  "username": "john.doe",
+  "password": "secret123",
+  "credit_card": "4532015112830366",
+  "email": "john@example.com"
+}
+
+// After masking
+{
+  "username": "john.doe",
+  "password": "*********",
+  "credit_card": "****************",
+  "email": "john@example.com"
+}
+```
+
+### Endpoint Blocking  
+
+Block specific endpoints from being tracked by modifying the `blockedEndpoints` variable:
+
+```javascript
+// Basic blocking
+var blockedEndpoints = 'health,status,ping';
+
+// Wildcard patterns
+var blockedEndpoints = 'health,status,ping,admin/*,internal/*,v1/auth/*';
+
+// Complex patterns
+var blockedEndpoints = 'health,status,ping,admin/*,internal/*,*/private/*,test-*';
+```
+
+**Wildcard Support:**
+- `admin/*` - Blocks all paths starting with `admin/`
+- `*/private/*` - Blocks any path containing `/private/`  
+- `test-*` - Blocks paths starting with `test-`
+
+**Examples:**
+
+```javascript
+// Block health check endpoints
+var blockedEndpoints = 'health,healthz,ready,alive';
+
+// Block admin and internal APIs
+var blockedEndpoints = 'admin/*,internal/*,private/*';
+
+// Block test and debug endpoints
+var blockedEndpoints = 'test-*,debug/*,*/test/*';
+```
+
+### Debug Mode
+
+Enable detailed logging for troubleshooting:
+
+```javascript
+var debugMode = true;  // Enable debug logging
+```
+
+**Debug Output Includes:**
+- Configuration validation results
+- Payload building process
+- Endpoint blocking decisions
+- Error details and stack traces
+- Performance timing information
+
+**Sample Debug Output:**
+
+```
+DEBUG: Starting Treblle SDK processing
+DEBUG: Configuration validated successfully  
+DEBUG: Endpoint allowed for tracking: /api/users
+DEBUG: Payload built successfully
+DEBUG: Payload serialized successfully - size: 1337 bytes
+DEBUG: Selected host: rocknrolla.treblle.com
+DEBUG: All validations passed - Treblle call prepared successfully
+DEBUG: Treblle SDK processing completed
+```
+
+### Environment-Specific Configuration
+
+Use different KVM names for different environments:
+
+**Development:**
+```xml
+<KeyValueMapOperations mapIdentifier="treblle-kvm-dev">
+  <!-- ... -->
+</KeyValueMapOperations>
+```
+
+**Staging:**
+```xml
+<KeyValueMapOperations mapIdentifier="treblle-kvm-staging">
+  <!-- ... -->
+</KeyValueMapOperations>
+```
+
+**Production:**
+```xml
+<KeyValueMapOperations mapIdentifier="treblle-kvm-prod">
+  <!-- ... -->
+</KeyValueMapOperations>
+```
+
+---
+
+## Testing the Integration
+
+<details>
+<summary>API-Level Testing</summary>
+
+### Step 1: Make a Test Request
+
+Send a test request to your monitored API proxy:
+
+```bash
+curl -X GET "https://YOUR_ORG-YOUR_ENV.apigee.net/your-api-path/users" \
+  -H "Content-Type: application/json" \
+  -H "User-Agent: Test-Client/1.0"
+```
+
+### Step 2: Enable Trace Mode
+
+1. Navigate to your API proxy in Apigee Console
+2. Click the **Trace** tab
+3. Start a trace session
+4. Make another test request
+5. Review the policy execution flow:
+   - **PreFlow Response**: `JS-ProcessTrebllePayload` should execute and capture data
+   - **PostFlow Request**: `KVM-GetTreblleCredentials` should retrieve credentials
+   - **PostFlow Response**: `FC-TreblleAsyncLogger` should call the shared flow
+   - **Shared Flow**: `SC-SendToTreblle` should execute
+
+### Step 3: Verify in Treblle Dashboard
+
+1. Visit your [Treblle Dashboard](https://treblle.com/)
+2. Navigate to your project
+3. Verify that the API request appears with:
+   - Request method, path, headers, body
+   - Response status, headers, body
+   - Response time and performance metrics
+   - Any captured errors or faults
+
+</details>
+
+<details>
+<summary>Environment-Level Testing</summary>
+
+### Step 1: Test Multiple APIs
+
+Make requests to different APIs in the environment:
+
+```bash
+# Test API 1
+curl -X GET "https://YOUR_ORG-YOUR_ENV.apigee.net/api-1/users"
+
+# Test API 2
+curl -X POST "https://YOUR_ORG-YOUR_ENV.apigee.net/api-2/orders" \
+  -H "Content-Type: application/json" \
+  -d '{"product": "item1", "quantity": 2}'
+
+# Test API 3
+curl -X GET "https://YOUR_ORG-YOUR_ENV.apigee.net/api-3/products"
+```
+
+### Step 2: Verify Flow Hook Execution
+
+1. Navigate to any API proxy in the environment
+2. Click the **Trace** tab
+3. Start a trace session
+4. Make a test request
+5. Look for the **PostTargetFlow** hook execution
+6. Verify the shared flow `treblle-env-monitor` executes with all three policies
+
+### Step 3: Verify All APIs in Dashboard
+
+1. Check your [Treblle Dashboard](https://treblle.com/)
+2. Verify that requests from all different APIs appear
+3. Confirm that all APIs in the environment are being monitored automatically
+
+</details>
+
+---
+
+## How It Works
+
+### Data Capture
+
+The JavaScript policy captures the following data:
+
+**Request Data:**
+- HTTP method (GET, POST, PUT, DELETE, etc.)
+- Full URL and path
+- Request headers
+- Query parameters
+- Request body
+- Client IP address
+- Timestamp
+
+**Response Data:**
+- HTTP status code
+- Response headers
+- Response body
+- Response time (in microseconds)
+- Payload size
+
+**Server Information:**
+- Server IP
+- Timezone
+- Protocol
+- Software signature
+
+**Error Information:**
+- Apigee fault variables
+- HTTP error states
+- Error messages and stack traces
+
+**Performance Metrics:**
+- Response time
+- Payload size
+- Load time

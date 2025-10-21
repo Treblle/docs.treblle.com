@@ -6,7 +6,7 @@ image: "/og-images/treblle-koa.jpg"
 ---
 
 <div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
-  <a href="https://github.com/Treblle/treblle-koa" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
+  <a href="https://github.com/Treblle/treblle-node" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
     <div>
       <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -16,62 +16,157 @@ image: "/og-images/treblle-koa.jpg"
     </div>
     <div class="grid grid-cols-4 gap-4 px-2 py-2">
       <div class="col-span-4">
-      	<h3 class="text-xl font-semibold">treblle-koa</h3>
+      	<h3 class="text-xl font-semibold">treblle</h3>
       	<p class="text-sm font-medium">
-          The official Treblle SDK for Koa framework. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
+          The official Treblle SDK for JavaScript frameworks including Koa. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
         </p>
       </div>
     </div>
   </a>
 </div>
 
-To integrate Treblle with [Koa](https://koajs.com), we provide an official SDK for Koa - [`treblle-koa`](https://github.com/Treblle/treblle-koa).
+To integrate Treblle with [Koa](https://koajs.com), we provide an official unified SDK for JavaScript frameworks - [`treblle-node`](https://github.com/Treblle/treblle-node).
+
+## Requirements
+
+- Node.js: `>=18.0.0`
+- Koa: `2.x` or `3.x`
 
 ## Installation
 
 ```sh
-npm i @treblle/koa --save
+npm install treblle@^2.0.0
+```
+
+Don't forget to load the required modules in your app file:
+
+```js
+const Koa = require("koa");
+const { koaTreblle } = require("treblle");
 ```
 
 ## Setting up credentials
 
-`@treblle/koa` expects your Treblle API key and project ID to be set as environment varibles in a `.env` file or in your production environment.
+Create a free account on [treblle.com](https://treblle.com) to get your credentials:
+- `sdkToken` (SDK Token)
+- `apiKey` (API Key)
 
-Below are the environment variable that will be checked by `@treblle/koa`
+Add these to your `.env` file:
 
-- `TREBLLE_API_KEY`
-- `TREBLLE_PROJECT_ID`
-
-## Setup middleware
-
-`@treblle/express` expose a `treblle` function which returns a middlware, you can pass this function to `app.use()` to register it a middleware.
-
-```js
-const Koa = require('koa')
-const treblle = require('@treblle/koa')
-const app = new Koa()
-
-app.use(treblle())
+```env
+TREBLLE_SDK_TOKEN=your_sdk_token
+TREBLLE_API_KEY=your_api_key
 ```
 
-Treblle will now now start monitoring requests on your Koa server.
+## Basic Setup
 
-## Config options
-
-You can optionally pass a config option to the `treblle` function.
+Initialize Treblle in your application:
 
 ```js
-const Koa = require('koa')
-const treblle = require('@treblle/koa')
-const app = new Koa()
+const Koa = require("koa");
+const KoaRouter = require("koa-router");
+const KoaBody = require("koa-body");
+const { koaTreblle } = require("treblle");
 
+const app = new Koa();
+const router = new KoaRouter();
+
+// Treblle middleware (add before body parsing)
 app.use(
-  treblle({
+  koaTreblle({
+    sdkToken: process.env.TREBLLE_SDK_TOKEN,
     apiKey: process.env.TREBLLE_API_KEY,
-    projectId: process.env.TREBLLE_PROJECT_ID,
-    additionalFieldsToMask: [],
   })
-)
+);
+
+// Body parsing
+app.use(KoaBody());
+
+// Routes
+router.get("/api/users", (ctx) => {
+  ctx.body = { users: [] };
+});
+
+app.use(router.routes());
+app.listen(3000);
 ```
 
-> The additionalFieldsToMask config option takes in an array of strings that matches properties in your response payload or header that you want to [mask](/security/masking/)
+That's it! Your API requests and responses are now being sent to your Treblle project. You'll get features like auto-documentation, real-time request/response monitoring, and error tracking.
+
+## Configuration Options
+
+You can pass additional configuration options:
+
+```js
+app.use(
+  koaTreblle({
+    sdkToken: process.env.TREBLLE_SDK_TOKEN,
+    apiKey: process.env.TREBLLE_API_KEY,
+    additionalFieldsToMask: ["customSecret", "internalId"], // Optional
+    blocklistPaths: ["admin", "health"], // Optional: Skip logging certain paths
+    ignoreDefaultBlockedPaths: false, // Optional: Disable default blocked paths
+    debug: true, // Optional: Show Treblle errors in console
+  })
+);
+```
+
+### Available options:
+
+- `sdkToken` (required): Your Treblle SDK token
+- `apiKey` (required): Your Treblle API key
+- `additionalFieldsToMask` (optional): Array of field names to mask in addition to default fields
+- `blocklistPaths` (optional): Array of path prefixes or RegExp to exclude from logging
+- `ignoreDefaultBlockedPaths` (optional): Boolean to disable default blocked paths (default: false)
+- `debug` (optional): Boolean to show Treblle-related errors in console (default: false)
+
+## Production-only Setup
+
+Run Treblle only in production:
+
+```js
+const app = new Koa();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(
+    koaTreblle({
+      sdkToken: process.env.TREBLLE_SDK_TOKEN,
+      apiKey: process.env.TREBLLE_API_KEY,
+    })
+  );
+}
+```
+
+## Masking Sensitive Data
+
+The following fields are automatically masked:
+
+- `password`, `pwd`, `secret`, `password_confirmation`, `passwordConfirmation`
+- `cc`, `card_number`, `cardNumber`, `ccv`
+- `ssn`
+- `credit_score`, `creditScore`
+
+Add custom fields to mask:
+
+```js
+app.use(
+  koaTreblle({
+    sdkToken: process.env.TREBLLE_SDK_TOKEN,
+    apiKey: process.env.TREBLLE_API_KEY,
+    additionalFieldsToMask: ["customSecret", "licensee_key"],
+  })
+);
+```
+
+## Debugging
+
+Enable debug mode to see Treblle errors in your console:
+
+```js
+app.use(
+  koaTreblle({
+    sdkToken: process.env.TREBLLE_SDK_TOKEN,
+    apiKey: process.env.TREBLLE_API_KEY,
+    debug: true,
+  })
+);
+```

@@ -6,7 +6,7 @@ image: "/og-images/treblle-fastify.jpg"
 ---
 
 <div class="max-w-full mx-auto shadow-lg rounded-lg overflow-hidden">
-  <a href="https://github.com/Treblle/treblle-fastify" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
+  <a href="https://github.com/Treblle/treblle-node" title="View source on GitHub" aria-label="View source on GitHub" class="relative no-underline">
     <div>
       <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -16,116 +16,129 @@ image: "/og-images/treblle-fastify.jpg"
     </div>
     <div class="grid grid-cols-4 gap-4 px-2 py-2">
       <div class="col-span-4">
-      	<h3 class="text-xl font-semibold">treblle-fastify</h3>
+      	<h3 class="text-xl font-semibold">treblle</h3>
       	<p class="text-sm font-medium">
-          The official Treblle SDK for Fastify. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
+          The official Treblle SDK for JavaScript frameworks including Fastify. Seamlessly integrate Treblle to manage communication with your dashboard, send errors, and secure sensitive data.
         </p>
       </div>
     </div>
   </a>
 </div>
 
-To integrate Treblle with [Fastify](https://fastify.io), we provide an official SDK for Fastify - [`treblle-fastify`](https://github.com/Treblle/treblle-fastify).
+To integrate Treblle with [Fastify](https://fastify.io), we provide an official unified SDK for JavaScript frameworks - [`treblle-node`](https://github.com/Treblle/treblle-node).
+
+## Requirements
+
+- Node.js: `>=16.0.0`
+- Fastify: `4.x` or later
 
 ## Installation
 
 ```sh
-npm i @treblle/fastify --save
+npm install treblle@^2.0.0
 ```
 
-## Register treblle-fastify
+## Setting up credentials
 
-`treblle-fastify` is a Fastify plugin, so you need to register it.
+Create a free account on [treblle.com](https://treblle.com) to get your credentials:
+- `sdkToken` (SDK Token)
+- `apiKey` (API Key)
 
-```js
-const treblleFastify = require('@treblle/fastify')
+Add these to your `.env` file:
 
-fastify.register(treblleFastify)
+```env
+TREBLLE_SDK_TOKEN=your_sdk_token
+TREBLLE_API_KEY=your_api_key
 ```
 
-Notice you are not providing your `apiKey` and `projectId`, this is because `treblle-fastify` will look for the following environment variables:
+## Basic Setup
 
-- `TREBLLE_API_KEY`
-- `TREBLLE_PROJECT_ID`
-
-And use them for the `apiKey` and `projectId` respectively. That said, we recommend you set these environment variables in your `.env` file or your production server environment.
-
-## Config options
-
-The `treblle-fastify` plugin can optionally take the following properties.
-
-- [`apiKey`](/treblle/dashboard/#accessing-your-api-key)
-- [`projectId`](/treblle/projects/#project-id)
-- `additionalFieldsToMask` - defaults to an empty array `[]`
-
-For example you can setup the `treblle-fastify` plugin like so:
+Initialize Treblle in your Fastify application:
 
 ```js
-const treblleFastify = require('@treblle/fastify')
+const fastify = require('fastify')();
+const { fastifyTreblle } = require('treblle');
 
-fastiy.register(treblleFastify, {
+// Register Treblle plugin
+await fastify.register(fastifyTreblle, {
+  sdkToken: process.env.TREBLLE_SDK_TOKEN,
   apiKey: process.env.TREBLLE_API_KEY,
-  projectId: process.env.TREBLLE_PROJECT_ID,
-  additionalFieldsToMask: ['licensee_key'],
-})
+});
+
+// Your routes
+fastify.get('/api/users', async (request, reply) => {
+  return { users: [] };
+});
+
+await fastify.listen({ port: 3000 });
 ```
 
-## Platformatic DB
+That's it! Your API requests and responses are now being sent to your Treblle project. You'll get features like auto-documentation, real-time request/response monitoring, and error tracking.
 
-Since the Treblle SDK for Fastify is a Fastify plugin, you can easily set up Treblle in a [Platformatic DB](https://docs.platformatic.dev/docs/reference/db/introduction) application with the following steps:
+## Configuration Options
 
-### install the SDK
-
-Run the below command to install the Treblle SDK in your Platformatic DB project
-
-```sh
-npm i @treblle/fastify --save
-```
-
-### Setup environment variables
-
-In your `.env` file, add the following environment variables for your Treblle API Key and Project ID respectively:
-
-- `PLT_TREBLLE_API_KEY`
-- `PLT_TREBLLE_PROJECT_ID`
-
-### Add plugin options
-
-Next edit your `platformatic.db.json` config file to have an `options` property with environment variable placeholders for the Treblle credentials you set earlier in your `.env` file:
-
-```json
-"plugins": {
-    "paths": [
-      {
-        "path": "./plugins",
-        "encapsulate": false,
-        "options": {
-          "treblleApiKey": "{PLT_TREBLLE_API_KEY}",
-          "treblleProjectId": "{PLT_TREBLLE_PROJECT_ID}"
-        }
-      },
-      {
-        "path": "./routes"
-      }
-    ]
-  },
-```
-
-### Setup the plugin
-
-To setup the plugin create `treblle.js` file in `plugins/` folder and add the below code:
+You can pass additional configuration options:
 
 ```js
-/// <reference path="../global.d.ts" />
-'use strict'
-/** @param {import('fastify').FastifyInstance} fastify */
-module.exports = async function (fastify, opts) {
-  const treblleFastify = require('@treblle/fastify')
-  fastify.register(treblleFastify, {
-    apiKey: opts.treblleApiKey,
-    projectId: opts.treblleProjectId,
-  })
+await fastify.register(fastifyTreblle, {
+  sdkToken: process.env.TREBLLE_SDK_TOKEN,
+  apiKey: process.env.TREBLLE_API_KEY,
+  additionalFieldsToMask: ["customSecret", "internalId"], // Optional
+  blocklistPaths: ["admin", "health"], // Optional: Skip logging certain paths
+  ignoreDefaultBlockedPaths: false, // Optional: Disable default blocked paths
+  debug: true, // Optional: Show Treblle errors in console
+});
+```
+
+### Available options:
+
+- `sdkToken` (required): Your Treblle SDK token
+- `apiKey` (required): Your Treblle API key
+- `additionalFieldsToMask` (optional): Array of field names to mask in addition to default fields
+- `blocklistPaths` (optional): Array of path prefixes or RegExp to exclude from logging
+- `ignoreDefaultBlockedPaths` (optional): Boolean to disable default blocked paths (default: false)
+- `debug` (optional): Boolean to show Treblle-related errors in console (default: false)
+
+## Production-only Setup
+
+Run Treblle only in production:
+
+```js
+if (process.env.NODE_ENV === "production") {
+  await fastify.register(fastifyTreblle, {
+    sdkToken: process.env.TREBLLE_SDK_TOKEN,
+    apiKey: process.env.TREBLLE_API_KEY,
+  });
 }
 ```
 
-Now when a request comes into your Platformatic DB app, it will get sent to your Treblle dashboard.
+## Masking Sensitive Data
+
+The following fields are automatically masked:
+
+- `password`, `pwd`, `secret`, `password_confirmation`, `passwordConfirmation`
+- `cc`, `card_number`, `cardNumber`, `ccv`
+- `ssn`
+- `credit_score`, `creditScore`
+
+Add custom fields to mask:
+
+```js
+await fastify.register(fastifyTreblle, {
+  sdkToken: process.env.TREBLLE_SDK_TOKEN,
+  apiKey: process.env.TREBLLE_API_KEY,
+  additionalFieldsToMask: ["customSecret", "licensee_key"],
+});
+```
+
+## Debugging
+
+Enable debug mode to see Treblle errors in your console:
+
+```js
+await fastify.register(fastifyTreblle, {
+  sdkToken: process.env.TREBLLE_SDK_TOKEN,
+  apiKey: process.env.TREBLLE_API_KEY,
+  debug: true,
+});
+```

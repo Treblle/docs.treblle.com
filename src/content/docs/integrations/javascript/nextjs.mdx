@@ -9,12 +9,13 @@ To integrate Treblle in your [Next.js](https://nextjs.org) application, we provi
 
 The SDK supports both Next.js routing patterns and is compatible with Edge runtime environments.
 
-- Pages Router: `pages/api/*` handlers
-- App Router: `app/api/*` route method exports
+- **Pages Router:** `pages/api/*` handlers
+- **App Router:** `app/api/*` route method exports
 
 ## Requirements
 
-- Node.js: Follows your Next.js version requirements (Node 18+ recommended)
+- Node.js: 18+ (recommended)
+- Next.js: 12.x or later
 - Runtimes: Node.js and Edge runtime supported
 
 ## Installation
@@ -29,7 +30,7 @@ yarn add @treblle/next
 
 ## Setting up credentials
 
-Create a [free account](https://treblle.com) and create a new workspace ( or join an existing one) to get your credentials:
+Create a [free account](https://treblle.com) and create a new workspace (or join an existing one) to get your credentials:
 - `sdkToken` (SDK Token)
 - `apiKey` (API Key)
 
@@ -40,7 +41,7 @@ TREBLLE_SDK_TOKEN=your_sdk_token
 TREBLLE_API_KEY=your_api_key
 ```
 
-> Keep keys server-only. Do not expose with `NEXT_PUBLIC_` prefix.
+> ⚠️ Keep keys server-only. Do not expose with `NEXT_PUBLIC_` prefix.
 
 ## Pages Router (pages/api)
 
@@ -139,7 +140,7 @@ const maybeTreblle = process.env.NODE_ENV === 'production'
 export const GET = maybeTreblle(async () => NextResponse.json({ ok: true }));
 ```
 
-### Masked Fields
+## Masked Fields
 
 The following fields are automatically masked in request/response bodies:
 
@@ -150,7 +151,7 @@ The following fields are automatically masked in request/response bodies:
 
 Add more fields via the `additionalFieldsToMask` option.
 
-### Blocked Paths
+## Blocked Paths
 
 The following paths are ignored by default to reduce noise:
 
@@ -174,18 +175,3 @@ const treblle = withTreblle({
 - Middleware runs at the edge by default
 - Bodies of non-GET requests are not readable in middleware
 - For full body and error detail capture, prefer wrapping route handlers over middleware
-
-
-## Troubleshooting
-
-1. Enable logs: Set `debug: true` and check server output
-2. Verify keys: Confirm `sdkToken` and `apiKey` from your Treblle dashboard
-3. Start simple: Add a `GET /api/health` endpoint and test it
-4. Check blocking: Ensure your route isn't blocked by default filters or `blocklistPaths`
-5. Edge body missing: Use handler wrapping instead of middleware for body capture
-
-## Security Notes
-
-- Store keys in server-only environment variables; never use `NEXT_PUBLIC_*` prefix
-- Avoid logging secrets; use `additionalFieldsToMask` for custom sensitive fields
-- Review [masking](/security/masking/) documentation for additional security practices
