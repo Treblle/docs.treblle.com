@@ -70,7 +70,24 @@ The API Compliance feature helps you ensure your API adheres to regulatory requi
   style={{ borderRadius: "8px" }}
 />
 
-##### 6. Manage Access
+##### 6. View Individual Request Compliance
+
+- Navigate to any specific API request to see detailed compliance checks for that request.
+- Treblle performs real-time compliance validation against multiple standards:
+  - **GDPR**: Checks for personal data handling (email addresses, names, etc.)
+  - **PCI DSS**: Validates credit card data protection and payment information security
+  - **CCPA**: Monitors California consumer data privacy requirements
+  - **HIPAA**: Ensures health information privacy and security standards
+- Each request displays a **Request Compliance Score** (percentage) and individual pass/fail status for each regulation.
+- Click on any compliance standard to see specific checks performed and detailed explanations of what was validated.
+
+<img
+  src="/platform/api-compliance/request-compliance.jpg"
+  width="600"
+  style={{ borderRadius: "8px" }}
+/>
+
+##### 7. Manage Access
 
 - Customize permissions for team members to control access to sensitive compliance logs, ensuring only authorized personnel can view or modify the data.
 

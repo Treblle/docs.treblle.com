@@ -27,7 +27,8 @@ image: "/og-images/treblle-net.jpg"
 
 ## Requirements
 
-- .NET Framework 4.6.1
+- .NET Framework 4.5 or higher
+- Newtonsoft.Json 13.0.3+
 
 ## Getting started
 
@@ -66,6 +67,262 @@ Now you can specify which endpoints you want Treblle to track by adding this sim
 
 That's it. Your API requests and responses are now being sent to your Treblle project. Just by adding a few lines of code you get features like: auto-documentation, real-time request/response monitoring, error tracking and so much more.
 
+## Supported Integration Types
+
+Treblle .NET supports both traditional ASP.NET Web API and Windows Communication Foundation (WCF) services.
+
+### ASP.NET Web API
+
+For ASP.NET Web API, use the `[Treblle]` attribute on controllers or methods:
+
+```csharp
+[Treblle]
+public class ProductsController : ApiController
+{
+    public IHttpActionResult Get()
+    {
+        return Ok(/* your data */);
+    }
+}
+```
+
+### Windows Communication Foundation (WCF)
+
+For WCF services, use the `[TreblleBehavior]` attribute on service classes or operation methods:
+
+```csharp
+[TreblleBehavior]
+public class UserService : IUserService
+{
+    public UserResponse GetUser(int id)
+    {
+        // Operation is tracked
+        return /* your data */;
+    }
+}
+```
+
+---
+
+## ASP.NET Web API Integration
+
+### Tracking Entire Controller
+
+```csharp
+using Treblle.Net;
+
+[Treblle]
+public class OrdersController : ApiController
+{
+    public IHttpActionResult Get()
+    {
+        var orders = _orderService.GetAll();
+        return Ok(orders);
+    }
+
+    public IHttpActionResult Get(int id)
+    {
+        var order = _orderService.GetById(id);
+        return Ok(order);
+    }
+
+    public IHttpActionResult Post(OrderRequest request)
+    {
+        var order = _orderService.Create(request);
+        return Created($"orders/{order.Id}", order);
+    }
+}
+```
+
+### Tracking Specific Methods
+
+```csharp
+public class ProductsController : ApiController
+{
+    [Treblle]
+    public IHttpActionResult GetPublic()
+    {
+        // This endpoint is tracked
+        return Ok(_productService.GetAll());
+    }
+
+    public IHttpActionResult GetInternal()
+    {
+        // This endpoint is NOT tracked
+        return Ok(_productService.GetInternalProducts());
+    }
+}
+```
+
+---
+
+## WCF Integration
+
+### Requirements
+
+- .NET Framework 4.5 or higher
+- WCF / System.ServiceModel
+- Newtonship.Json 13.0.3+
+
+### Tracking Entire Service
+
+Apply the `[TreblleBehavior]` attribute to your WCF service class to track all operations:
+
+```csharp
+using Treblle.Net;
+
+[TreblleBehavior]
+public class UserService : IUserService
+{
+    public UserResponse GetUser(int id)
+    {
+        // This operation is tracked
+        return _repository.GetUser(id);
+    }
+
+    public async Task<UserResponse> CreateUserAsync(UserRequest request)
+    {
+        // This async operation is tracked
+        return await _repository.CreateAsync(request);
+    }
+
+    public UserResponse UpdateUser(int id, UserRequest request)
+    {
+        // This operation is tracked
+        return _repository.Update(id, request);
+    }
+
+    public void DeleteUser(int id)
+    {
+        // This operation is tracked
+        _repository.Delete(id);
+    }
+}
+```
+
+### Tracking Specific Operations
+
+Apply the `[TreblleBehavior]` attribute to individual service methods to track only specific operations:
+
+```csharp
+public class OrderService : IOrderService
+{
+    [TreblleBehavior]
+    public OrderResponse GetOrder(int orderId)
+    {
+        // This operation is tracked
+        return _repository.GetOrder(orderId);
+    }
+
+    [TreblleBehavior]
+    public async Task<OrderResponse> CreateOrderAsync(OrderRequest request)
+    {
+        // This async operation is tracked
+        return await _repository.CreateAsync(request);
+    }
+
+    public OrderResponse GetInternalOrder(int orderId)
+    {
+        // This operation is NOT tracked
+        return _repository.GetInternalOrder(orderId);
+    }
+}
+```
+
+### WCF Service Configuration
+
+Ensure your WCF service is properly configured in Web.config:
+
+```xml
+<system.serviceModel>
+  <services>
+    <service name="YourNamespace.UserService" behaviorConfiguration="ServiceBehavior">
+      <endpoint address=""
+                binding="basicHttpBinding"
+                contract="YourNamespace.IUserService" />
+      <endpoint address="mex"
+                binding="mexHttpBinding"
+                contract="IMetadataExchange" />
+      <host>
+        <baseAddresses>
+          <add baseAddress="http://localhost:8000/UserService" />
+        </baseAddresses>
+      </host>
+    </service>
+  </services>
+
+  <behaviors>
+    <serviceBehaviors>
+      <behavior name="ServiceBehavior">
+        <serviceMetadata httpGetEnabled="true" />
+        <serviceDebug includeExceptionDetailInFaults="true" />
+      </behavior>
+    </serviceBehaviors>
+  </behaviors>
+
+  <serviceHostingEnvironment aspNetCompatibilityEnabled="true" />
+</system.serviceModel>
+```
+
+### Supported WCF Scenarios
+
+#### Synchronous Operations
+
+```csharp
+[TreblleBehavior]
+public UserResponse GetUser(int id)
+{
+    return _userService.GetById(id);
+}
+```
+
+#### Asynchronous Operations
+
+```csharp
+[TreblleBehavior]
+public async Task<UserResponse> GetUserAsync(int id)
+{
+    return await _userService.GetByIdAsync(id);
+}
+```
+
+#### Operations with Complex Types
+
+```csharp
+[TreblleBehavior]
+public OrderResponse CreateOrder(OrderRequest request)
+{
+    // Request and response complex types are fully tracked
+    return _orderService.Create(request);
+}
+```
+
+#### Operations with Multiple Parameters
+
+```csharp
+[TreblleBehavior]
+public SearchResponse Search(string query, int pageNumber, int pageSize)
+{
+    // All parameters are tracked
+    return _searchService.Execute(query, pageNumber, pageSize);
+}
+```
+
+### Data Captured for WCF Operations
+
+For each tracked WCF operation, Treblle captures:
+
+- **Request Information**: Service method name, parameters, headers, and body
+- **Response Information**: Return value, headers, and response status
+- **Performance Metrics**: Execution time and response size
+- **Error Information**: Exception details and fault strings
+- **Server Context**: Host information, environment, and timing
+- **Security**: Automatic masking of sensitive data
+
+---
+
+## Configuration Options
+
 ### Need to hide additional fields?
 
 If you want to expand the list of fields you want to hide, you can pass property names you want to hide by adding the `AdditionalFieldsToMask` property to your `Web.config` file like in the example below.
@@ -78,9 +335,12 @@ If you want to expand the list of fields you want to hide, you can pass property
 		<add  key="AdditionalFieldsToMask"  value="secretField,highlySensitiveField"  />
 	</appSettings>
 </configuration>
-
 ```
 
-## Support
+### Field Masking
 
-If you have problems of any kind feel free to reach out via [treblle.com](https://treblle.com) or email hello@treblle.com and we'll do our best to help you out.
+Treblle **masks sensitive information** from both the request and response data as well as the request headers data **before it even leaves your server**. The following parameters are automatically masked: `password`, `pwd`, `secret`, `password_confirmation`, `cc`, `card_number`, `ccv`, `ssn`, `credit_score`.
+
+This masking applies to both Web API and WCF services.
+
+---
