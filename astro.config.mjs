@@ -17,7 +17,6 @@ export default defineConfig({
     },
     components: {
       Head: './src/components/Head.astro',
-      SocialIcons: './src/components/SocialIcons.astro'
     },
     logo: {
       dark: './src/assets/logo-white.svg',
