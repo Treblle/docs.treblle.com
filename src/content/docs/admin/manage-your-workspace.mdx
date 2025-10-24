@@ -6,107 +6,56 @@ image: "/og-images/manage-your-workspace.jpg"
 ---
 
 
-## Role and Permissions
+## Roles and Permissions
 
-Treblle provides two layers of roles and permissions:
+Treblle provides **two layers of roles and permissions**:
+- **Workspace Level:** Manage who can access, administer, and add APIs across your entire workspace.
+- **API Level:** Manage who can access and modify individual APIs with granular control.
 
-- Workspace Level: Manage who can enter your workspace and what they can generally do.
-- API Level: Grant access to specific APIs (separate from workspace access) and control what users can do on those APIs.
+This ensures **security, accountability, and efficient collaboration** across your API landscape.
 
-This ensures security, accountability, and efficient collaboration across your API landscape.
-
----
 
 ## Workspace-Level Roles and Permissions
-
-![people.png](/platform/manage-your-workspace/people.png)
-
-### Key Actions (Workspace → Settings → People)
-
-Workspace Owners can:
-
-- Invite users via email or an invite link. When generating a link, you can preselect the role (Owner/Member/Customer) and optionally assign a Group before sharing. Invitees must create/sign in to a Treblle account for the link to work.
-- Assign roles during or after inviting.
-- View and manage users, including their emails and roles.
-- Change user roles as team needs evolve.
+### Key Actions
+Under **Workspace Settings > People**, workspace **Owners** can:
+- **Invite users** via email or an **invite link** (link expires in 24 hours and can be regenerated anytime).
+- **Assign roles** (Owner, Member, Customer) during or after inviting.
+- **View and manage users**, including their emails and roles.
+- **Change user roles** as team needs evolve.
 - **Delete users** to remove workspace access.
 
-> Note: The invite link role/group preset happens before you generate the link.
+<img src="/platform/manage-your-workspace/Workspace-API-Settings.png" width="800" style={{ borderRadius: "8px" }} />
 
 
-### Groups (Workspace → Settings → Groups)
+### Roles and Permissions
 
-![groups.png](/platform/manage-your-workspace/groups.png)
+| Role        | Can Add/Delete Users       | Can Change Permissions | API Creation                  | Access to APIs             | Notes                                                                   |
+|-------------|----------------------------|------------------------|-------------------------------|----------------------------|-------------------------------------------------------------------------|
+| **Owner**   | Yes                        | Yes                    |  Production & Non-Production  |  All APIs                  | Admin of workspace; manages billing, settings, and user control.        |
+| **Member**  | Can invite, cannot delete  | No                     |  Non-Production only          |  All non-private APIs      | Cannot manage billing or add production-tagged APIs.                    |
+| **Customer**| No                         | No                     |  No                           |  Assigned APIs (read-only) | For external users; can view docs and their request data only.          |
 
-Use Groups to grant API access in bulk:
-
-- Create groups (e.g., “Finance”, “Health”, “Vendors”), add members, then grant the group access to one or more APIs. Everyone in the group inherits that API access.
-- Revoking an individual’s API access does not remove access they still receive via a group. Remove them from the group or remove the group’s API access to fully revoke.
-
----
-
-## How Workspace and API Access Work Together
-
-- Inviting someone to the workspace does not automatically grant them access to any API. API access is a separate step.
-- You cannot invite directly to an API if the person isn’t in the workspace. First add them to the workspace, then grant API access (individually or via a Group).
-- API access can be managed centrally from Workspace → API Access (global view).
-
----
-
-## Workspace Roles
-
-![roles.png](/platform/manage-your-workspace/roles.png)
-
-| Role | Can Add/Delete Users | Can Change Permissions | API Creation | Access to APIs | Notes |
-| --- | --- | --- | --- | --- | --- |
-| Owner | Yes | Yes | Production & Non-Prod | All APIs (once granted) | Admin of workspace; billing, settings, user control. |
-| Member | Can invite, cannot delete | No | Non-Production only | Read-only by default; can filter and explore | Buttons for write/update actions are hidden; primarily **view** permissions. 
- |
-| Customer | No | No | No | Catalog-only by default | Intended for external users; default is “catalog only.” 
- |
-
-> Custom roles: You can create custom roles by mixing specific permissions (e.g., some “owner-level” capabilities with a subset of “member” ones). Editing/bespoke roles may depend on your plan; on some free workspaces, role editing is restricted.
-> 
-
----
 
 ## API-Level Roles and Permissions
 
-### Key Actions 
+### Key Actions
 
-From Workspace → API Access (or API settings, where available), you can:
+-  **Invite users to specific APIs** within your workspace.
+-  **Assign API-level roles** (Owner, Member).
+-  **View and manage users** with access to this API.
+-  **Change API-level roles** as needed.
+-  **Remove users** from an API while retaining workspace access.
+-  **Make the API private** for invite-only access.
+-  **Delete API** if and when needed.
 
-![api-access.png](/platform/manage-your-workspace/api-access.png)
+<img src="/platform/manage-your-workspace/Workspace-People.png" width="800" style={{ borderRadius: "8px" }} />
 
-- Grant API access to individuals or Groups.
-- Change API-level roles (e.g., make someone a read-only member).
-- Remove users from an API while retaining their workspace access.
-- Make the API private (invite-only) and delete the API (owner-level). *(Capabilities may vary by plan/UI location.)*
 
-### Default API Roles
+### Roles and Permissions
 
-| Role | View Dashboards & Traces | Modify API Settings | Make API Private | Delete API |
-| --- | --- | --- | --- | --- |
-| Owner | Yes | Yes | Yes | Yes |
-| Member | Yes (read, incl. filters) | No | No | No |
-- Member: read-only; can filter and explore, but update/action buttons are hidden.
+| Role        | Can Delete API | Can Make API Private | View Dashboards | Modify API Settings |
+|-------------|----------------|----------------------|-----------------|---------------------|
+| **Owner**   |  Yes           | Yes                  |  Yes            |  Yes                |
+| **Member**  |  No            |  No                  |  Yes            |  No                 |
 
----
-
-## Common Scenarios
-
-### Invite with preset role & group
-
-Generate a link in Settings → People, choose the default Role and optional Group, then share. Recipient signs in/creates an account, joins workspace with those presets. API access still needs granting (unless covered via the Group). 
-
-![invite-with-link.png](/platform/manage-your-workspace/invite-with-link.png)
-
-### Grant API access to a whole team
-
-Create a Group → add users → in API Access, grant the Group access. Everyone in the group immediately sees the API (read/write depending on role). 
-
-![edit-api-access.png](/platform/manage-your-workspace/edit-api-access.png)
-
-### Revoke API access cleanly
-
-If a user still sees an API after you removed their **individual** access, check if they inherit access **via a Group**. Remove them from the group or remove the group from API Access.
+Treblle’s layered roles ensure your teams can collaborate securely, maintain control, and enable your API workflows efficiently.
