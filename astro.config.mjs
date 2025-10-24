@@ -24,28 +24,12 @@ export default defineConfig({
       light: './src/assets/logo-black.svg',
       replacesTitle: true
     },
-    social: [
-      {
-        icon: 'github',
-        label: 'GitHub',
-        href: 'https://github.com/treblle'
-      },
-      {
-        icon: 'twitter',
-        label: 'Twitter',
-        href: 'https://twitter.com/treblleapi'
-      },
-      {
-        icon: 'youtube',
-        label: 'YouTube',
-        href: 'https://youtube.com/@treblle'
-      },
-      {
-        icon: 'discord',
-        label: 'Discord',
-        href: 'https://treblle.com/chat'
-      }
-    ],
+    social: {
+      github: 'https://github.com/treblle',
+      twitter: 'https://twitter.com/treblleapi',
+      youtube: 'https://youtube.com/@treblle',
+      discord: 'https://treblle.com/chat'
+    },
     customCss: ['./src/tailwind.css', '@fontsource/poppins/600.css', '@fontsource-variable/inter/standard.css'],
     lastUpdated: true,
     sidebar: [{

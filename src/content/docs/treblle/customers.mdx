@@ -1,11 +1,11 @@
 ---
 title: "Customers"
 metaTitle: "Track API Usage by Customer | Treblle Docs"
-description: "Gain insights into how individual customers use your API. Track request history, analyze trends, and optimize API performance with Treblle’s Customer Dashboard."
+description: "Gain insights into how individual customers use your API. Track request history, analyze trends, and optimize API performance with Treblle's Customer Dashboard at the API level."
 image: "/og-images/treblle-track-usage.jpg"
 ---
 
-The Customer section in Treblle provides a comprehensive view of your API's usage by individual customers. 
+The Customer Dashboard in Treblle provides a comprehensive view of your API's usage by individual customers. 
 
 It helps you understand how different customers interact with your API, identify trends in their usage patterns, and pinpoint potential issues or areas for improvement.
 
@@ -27,9 +27,12 @@ It helps you understand how different customers interact with your API, identify
   </iframe>
 </div>
 
-## Steps to View the Customer Section
+## Accessing the Customer Dashboard
 
-Click on **"Customers"** in the left navigation bar.
+The Customer Dashboard is available at the **individual API level**. To access it:
+
+1. Navigate to the specific API you want to analyze.
+2. Click on **"Customers"** in the left navigation bar.
 
   <img
     src="/platform/customers/customer.png"
@@ -37,59 +40,102 @@ Click on **"Customers"** in the left navigation bar.
     style={{ borderRadius: "8px" }}
   />
 
-#### Overview of the Customer Section
+3. The Customer Dashboard will display all customers and their usage data for that specific API.
 
-The Customer Dashboard provides a comprehensive overview of all your customers and their API usage. 
+:::tip
+At the workspace level (Home page), you can view a **Top Customers widget** showing high-level customer metrics across all APIs. For detailed customer analysis, use the Customer Dashboard at the individual API level.
+:::
+
+  <img
+    src="/platform/customers/workspace-level.jpg"
+    width="800"
+    style={{ borderRadius: "8px" }}
+  />
+
+## Customer Dashboard Overview
+
+The Customer Dashboard provides a comprehensive overview of all customers using your API. 
 
 Here's what you'll find:
     
-  - **Customer Profiles:**  A list of all your customers, identified by their name or Customer ID.
+  - **Customer Profiles:**  A list of all your customers, identified by their display name or Customer ID. When available, Treblle shows the customer's display name for easier identification instead of technical IDs.
   - **Request Count:**  The total number of API requests each customer makes.
   - **Overall Percentage:** The percentage of total API requests attributed to each customer, giving you a sense of their impact on your API traffic.
   - **Last Active:** A timestamp indicating when each customer made their last API request.
 
     <img
-      src="/platform/customers/overview.png"
+      src="/platform/customers/api-level.jpg"
       width="800"
       style={{ borderRadius: "8px" }}
     />
 
-#### Sorting Options
-    
-To help you find the information you need, you can sort the customer list by:
+### Dashboard Customization
 
-  - **Customer ID:**  Organize customers alphabetically by their ID.
-  - **Request Count:**  See your most active customers first.
-  - **Most Recent Request:**  Identify the customers who recently interacted with your API.
+You can customize the Customer Dashboard to show the widgets that matter most to you:
+
+1. Click the **Customize Dashboard** button (grid icon) in the top-right corner.
+2. Enable or disable widgets such as:
+   - **New Customers**: Number of new customers in your API
+   - **Active Customers**: Number of active customers in your API
+   - **Top Customer**: Customer with highest number of requests
+   - **Average Requests Per Customer**: Average number of API requests made by all customers
+   - **Customers List**: List of 10 most recent customers in your API
+   - **Favorite Customers**: List of customers you marked as favorite
+   - **Top Customers List**: List of customers with highest number of requests in your API
 
     <img
-      src="/platform/customers/sort.png"
-      width="300"
-      style={{ borderRadius: "8px" }}
-    />
-
-
-#### Customer Profile
-
-Click on a customer's profile to access a detailed breakdown of their API usage. 
-
-The Customer Profile includes:
-  - **Request History:**  A complete list of all API requests made by that customer.
-  - **Request Graph:**  A visual representation of the customer's API request activity over time. This graph helps you identify peak usage periods, trends, and potential anomalies. 
-  
-    <img
-      src="/platform/customers/dashboard.png"
+      src="/platform/customers/widget.jpg"
       width="800"
       style={{ borderRadius: "8px" }}
     />
 
-### Adding Customer/User Information to Requests
+## Individual Customer Profile
+
+Click on any customer from the list to access their detailed profile and request history.
+
+### Customer Profile Overview
+
+The Individual Customer Profile provides:
+
+  - **Customer Name:**  The display name or customer ID at the top of the page
+  - **Total Requests:**  The total number of API requests made by this customer
+  - **Overall Percentage:**  The percentage of total API requests attributed to this customer
+  - **Request Graph:**  A visual representation of the customer's API request activity over time, helping you identify peak usage periods, trends, and potential anomalies
+  - **Description Field:**  Space to add notes or context about the customer
+
+    <img
+      src="/platform/customers/individual-customer.jpg"
+      width="800"
+      style={{ borderRadius: "8px" }}
+    />
+
+### Customer Request History
+
+Below the overview, you'll find a complete list of all API requests made by that customer, including:
+
+  - **Method:**  HTTP method used (GET, POST, etc.)
+  - **Response:**  Response status code
+  - **Name:**  Endpoint name or path
+  - **Load Time:**  Request processing duration
+  - **Threat Level:**  Security assessment (Low, Medium, High)
+  - **Device:**  Device type used for the request
+  - **AI Agent:**  AI service detection if applicable
+  - **Location:**  Geographic location of the request
+  - **Time:**  Timestamp of the request
+
+You can filter, search, and sort these requests to analyze specific patterns or troubleshoot issues for individual customers.
+
+## Adding Customer/User Information to Requests
 
 `treblle-user-id` is used to identify your customers. You can pass any value here, such as ID, UUID, email, username, or company name.
 
 The header can be included in either Request or Response Headers - Treblle will pick them up from both.
 
-#### Steps to add the Customer Information in Treblle's [Express SDK](https://docs.treblle.com/integrations/javascript/express/)
+:::note
+When you provide a display name or customer identifier, Treblle will show this name in the Customer Dashboard instead of just the technical customer ID, making it easier to identify and analyze customer behavior.
+:::
+
+### Steps to add the Customer Information in Treblle's [Express SDK](https://docs.treblle.com/integrations/javascript/express/)
 
 Here's how you can modify your [Express](https://docs.treblle.com/integrations/javascript/express/) middleware to add these headers:
 
@@ -109,17 +155,17 @@ app.use(treblle({
 }));
 ```
 
-#### Treblle Dashboard View of Customer Information
+### Treblle Dashboard View of Customer Information
 
 The image below shows how the customer information will appear on the Treblle dashboard once you add it to the request.
 
 <img
-  src="/platform/customers/header.png"
+  src="/platform/customers/metadata.jpg"
   width="500"
   style={{ borderRadius: "8px" }}
 />
 
-#### Implementing Customer ID Tracking in Other SDKs
+### Implementing Customer ID Tracking in Other SDKs
 
 For other SDKs, the approach is similar. Here's how you can implement it:
 
@@ -145,4 +191,8 @@ For other SDKs, the approach is similar. Here's how you can implement it:
 
 For specific integration details for other SDKs, please refer to the [Integration page](https://docs.treblle.com/integrations/).
 
-The Customer section in Treblle gives valuable insights into how your customers use your API. It provides a clear view of each customer’s interactions, helping you spot patterns, monitor usage, and address performance or support issues early on.
+---
+
+The Customer Dashboard in Treblle gives valuable insights into how your customers use your API at the individual API level. With detailed customer profiles, request history, and usage analytics, you can spot patterns, monitor adoption, and address performance or support issues early on. 
+
+For a quick overview of top customers across all your APIs, use the **Top Customers widget** available on the workspace-level Home page.
