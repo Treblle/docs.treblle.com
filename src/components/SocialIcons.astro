@@ -2,22 +2,14 @@
 import config from 'virtual:starlight/user-config';
 import { Icon } from '@astrojs/starlight/components';
 
-// Handle social links - works with both object and array formats
-const socialLinks = config.social 
-  ? (Array.isArray(config.social)
-    ? config.social.map((item: any) => ({
-        icon: item.icon,
-        link: item.link || item.href,
-        label: item.label || (typeof item.icon === 'string' 
-          ? item.icon.charAt(0).toUpperCase() + item.icon.slice(1)
-          : 'Link')
-      }))
-    : Object.entries(config.social).map(([platform, url]: [string, any]) => ({
-        icon: platform,
-        link: url,
-        label: platform.charAt(0).toUpperCase() + platform.slice(1)
-      })))
-  : [];
+// Type assertion to handle the social links configuration
+const socialLinks = (config.social || []).map((item: any) => ({
+  icon: item.icon,
+  link: item.link || item.href,
+  label: item.label || (typeof item.icon === 'string' 
+    ? item.icon.charAt(0).toUpperCase() + item.icon.slice(1)
+    : 'Link')
+}));
 ---
 
 {
