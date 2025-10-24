@@ -2,19 +2,26 @@
 import config from 'virtual:starlight/user-config';
 import { Icon } from '@astrojs/starlight/components';
 
+// Define types for social links
+interface SocialLink {
+  icon: string;
+  link: string;
+  label: string;
+}
+
 // Handle social links - works with both object and array formats
-const socialLinks = config.social 
+const socialLinks: SocialLink[] = config.social 
   ? (Array.isArray(config.social)
     ? config.social.map((item: any) => ({
-        icon: item.icon,
-        link: item.link || item.href,
-        label: item.label || (typeof item.icon === 'string' 
+        icon: item.icon as string,
+        link: (item.link || item.href) as string,
+        label: (item.label || (typeof item.icon === 'string' 
           ? item.icon.charAt(0).toUpperCase() + item.icon.slice(1)
-          : 'Link')
+          : 'Link')) as string
       }))
     : Object.entries(config.social).map(([platform, url]: [string, any]) => ({
         icon: platform,
-        link: url,
+        link: url as string,
         label: platform.charAt(0).toUpperCase() + platform.slice(1)
       })))
   : [];
@@ -23,10 +30,10 @@ const socialLinks = config.social
 {
   socialLinks.length > 0 && (
     <>
-      {socialLinks.map(({ icon, link, label }) => (
+      {socialLinks.map(({ icon, link, label }: SocialLink) => (
           <a href={link} class="sl-flex" aria-label={label} title={label} target="_blank" rel="noopener noreferrer">
             <span class="sr-only">{label}</span>
-            <Icon name={icon} />
+            <Icon name={icon as any} />
           </a>
       ))}
       <a href="https://treblle.com" class="sl-flex" aria-label="treblle.com" title="treblle.com" target="_blank" rel="noopener noreferrer">
