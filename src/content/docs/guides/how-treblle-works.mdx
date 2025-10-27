@@ -1,0 +1,445 @@
+---
+title: "How Treblle Works"
+metaTitle: "How Treblle Works – Architecture & Integration Guide | Treblle Docs"
+description: "Understand how Treblle provides API Intelligence across your entire API estate. Learn about SDK and API Gateway integrations, data flow, and how to get the most value from Treblle."
+image: "/og-images/how-treblle-works.jpg"
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Treblle is your **API Intelligence Platform** that provides complete visibility, governance, and control across your entire API estate. 
+
+You can't fix what you can't see. Treblle shows you exactly what's happening with your APIs: real requests, actual errors, and performance bottlenecks. Build with confidence instead of guessing.
+
+---
+
+## Understanding Treblle's Architecture
+
+Think of Treblle as an **umbrella platform** that sits across your entire API infrastructure, providing unified visibility and intelligence regardless of where your APIs live or how they're built.
+
+<img
+  src="/platform/how-treblle-works/enterprise-landscape4.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+<CardGrid>
+  <Card title="SDK Integration" icon="rocket">
+    Best for small to medium teams and individual API development. 
+    
+    Deep integration with rich metadata and rapid deployment.
+  </Card>
+  <Card title="API Gateway Integration" icon="setting">
+    Best for large enterprises and platform teams. 
+    
+    Organization-wide visibility with automatic API discovery.
+  </Card>
+</CardGrid>
+
+---
+
+## Integration Paths
+
+<Tabs>
+  <TabItem label="SDK Integration">
+    ### Application Level Integration
+    
+    SDKs integrate directly into your application code, capturing request and response data at the application level.
+    
+    **Key Benefits:**
+    - Deep integration with rich metadata
+    - Framework-specific optimizations
+    - Easy setup with minimal configuration
+    - Rapid deployment for new APIs
+    
+    **Supported Platforms:**
+    
+    Node.js (Express, Fastify, NestJS, Koa), Python (Django, Flask, FastAPI), PHP (Laravel, Symfony, Lumen), Java (Spring Boot, AWS Lambda), .NET Core and .NET Framework, Go, Ruby on Rails, and more.
+    
+    [View all SDK integrations →](/integrations/)
+  </TabItem>
+  
+  <TabItem label="API Gateway Integration">
+    ### Infrastructure Level Integration
+    
+    API Gateway integrations deploy at the infrastructure level, providing automatic discovery and monitoring across all APIs.
+    
+    **Key Benefits:**
+    - Organization-wide visibility from day one
+    - Automatic API discovery without code changes
+    - Centralized deployment and management
+    - Infrastructure-level scalability
+    
+    **Supported Gateways:**
+    
+    AWS API Gateway, Azure API Management, Kong Gateway, MuleSoft Anypoint, WSO2 API Manager, Traefik Proxy, Apigee
+    
+    [View all gateway integrations →](/integrations/)
+  </TabItem>
+</Tabs>
+
+---
+
+## How Treblle Captures API Data
+
+Regardless of your integration method, Treblle follows a consistent data flow:
+
+<CardGrid>
+  <Card title="1. Request Interception" icon="magnifier">
+    When an API request arrives, Treblle captures request method, URL, headers, body, user information, authentication details, device type, location, network data, and unique identifiers.
+  </Card>
+  
+  <Card title="2. Data Masking & Security" icon="approve-check">
+    Before data leaves your server, Treblle automatically masks sensitive fields, applies custom masking rules, encrypts all data for secure transmission, and ensures compliance with GDPR, SOC 2, and other standards.
+  </Card>
+  
+  <Card title="3. Response Capture" icon="document">
+    As your API processes requests, Treblle captures response status codes, headers, response body, payload size, processing time, performance metrics, and any errors or exceptions that occurred.
+  </Card>
+  
+  <Card title="4. Intelligent Analysis" icon="star">
+    Data is analyzed in real-time for performance monitoring, security scanning, compliance checking, and governance scoring against best practices and industry standards.
+  </Card>
+</CardGrid>
+
+<Aside type="tip">
+  [Learn more about data masking](/treblle/data-masking/) to understand how Treblle protects your sensitive information.
+</Aside>
+
+### Actionable Insights
+
+All intelligence is presented in your Treblle dashboard:
+
+<CardGrid>
+  <Card title="Real-time Monitoring" icon="open-book">
+    Live API monitoring and instant alerting for complete visibility into your API traffic and performance.
+  </Card>
+  <Card title="Auto-generated Docs" icon="document">
+    OpenAPI specifications and interactive documentation that automatically stays current with your API.
+  </Card>
+  <Card title="Compliance Dashboard" icon="approve-check">
+    Track regulatory compliance with GDPR, PCI DSS, HIPAA, and other standards in real-time.
+  </Card>
+  <Card title="Error Tracking" icon="warning">
+    Comprehensive debugging tools with request replay capabilities and customer-specific error tracking.
+  </Card>
+  <Card title="Customer Analytics" icon="bars">
+    Understand who uses your APIs, how they interact, and what features drive the most value.
+  </Card>
+  <Card title="Performance Metrics" icon="rocket">
+    Track load times, response sizes, and identify optimization opportunities across your API estate.
+  </Card>
+</CardGrid>
+
+---
+
+## The Value Treblle Delivers
+
+Once integrated, Treblle provides immediate value across multiple dimensions:
+
+### API Visibility
+
+<CardGrid>
+  <Card title="Real-time Monitoring">
+    Complete visibility into all API requests and responses as they happen in your infrastructure.
+  </Card>
+  <Card title="Automatic Discovery">
+    Find and catalog APIs you didn't know existed across your entire organization automatically.
+  </Card>
+  <Card title="Customer Insights">
+    See exactly who's using your APIs, how they're being consumed, and usage patterns.
+  </Card>
+  <Card title="Geographic Tracking">
+    Identify where traffic originates globally and optimize infrastructure for better performance.
+  </Card>
+</CardGrid>
+
+### Auto-Documentation
+
+OpenAPI specifications generated automatically. Interactive documentation with Alfred AI assistance. Always up-to-date docs that reflect your actual API. Developer portal ready for internal and external use.
+
+[View API documentation features →](/treblle/api-documentation/)
+
+### Security & Compliance
+
+<Aside type="caution">
+  Treblle performs **13 security checks** on every request, including threat level detection, SQL injection monitoring, and DDoS attack detection.
+</Aside>
+
+Compliance scanning for GDPR, PCI DSS, CCPA, and HIPAA ensures your APIs meet regulatory requirements.
+
+[Explore API security →](/treblle/api-security/)
+
+### API Governance
+
+Quality scoring across design, performance, security, and AI-readiness. Best practices validation against industry standards. Governance dashboards for platform teams. Comparative analysis across your API portfolio.
+
+[Learn about API governance →](/treblle/api-governance/)
+
+### Performance Optimization
+
+<CardGrid>
+  <Card title="Load Time Tracking">
+    Monitor response times across all endpoints and identify slow queries that need optimization.
+  </Card>
+  <Card title="Response Size Analysis">
+    Track payload sizes to optimize data transfer and reduce bandwidth costs across APIs.
+  </Card>
+  <Card title="Performance Benchmarking">
+    Compare against industry standards and your own historical data to measure improvements.
+  </Card>
+  <Card title="Sustainability Tracking">
+    Monitor CO2 emissions and environmental impact of your API infrastructure for sustainability.
+  </Card>
+</CardGrid>
+
+[View sustainability features →](/treblle/sustainability/)
+
+### Error Tracking & Debugging
+
+Automatic error detection and categorization. Request replay for debugging. Customer-specific error tracking. Alert configuration for critical issues.
+
+[Understand the problems dashboard →](/treblle/problems/)
+
+---
+
+## Choosing Your Integration Path
+
+<Tabs>
+  <TabItem label="Choose SDK Integration">
+    ### Start with SDK Integration if:
+    
+    - You're building new APIs or microservices
+    - You want quick setup and rich metadata
+    - You need framework-specific optimizations
+    - You're a small to medium-sized team
+    - You want to integrate incrementally
+    
+    [Get started with SDKs →](/guides/getting-started/)
+  </TabItem>
+  
+  <TabItem label="Choose API Gateway">
+    ### Start with API Gateway if:
+    
+    - You're an enterprise with many existing APIs
+    - You want organization-wide visibility immediately
+    - You need centralized deployment and management
+    - Your APIs already route through a gateway
+    - You want infrastructure-level scalability
+    
+    [View gateway integrations →](/integrations/)
+  </TabItem>
+</Tabs>
+
+---
+
+## Getting Started with Treblle
+
+Ready to get started? Here's your path to API Intelligence:
+
+<CardGrid>
+  <Card title="Step 1: Create Your Account" icon="rocket">
+    [Sign up for a free Treblle account](https://treblle.com/) to get your **SDK Token** and **API Key**.
+  </Card>
+  
+  <Card title="Step 2: Choose Your Integration" icon="setting">
+    Select SDK or Gateway integration based on your needs. Follow the installation guide for your platform.
+  </Card>
+  
+  <Card title="Step 3: Explore Your Dashboard" icon="open-book">
+    Access workspace dashboard, request monitoring, auto-generated docs, governance scoring, and security insights.
+  </Card>
+  
+  <Card title="Step 4: Configure Team Access" icon="group">
+    Invite team members, configure alerts, set up data masking, and enable SSO if needed.
+  </Card>
+</CardGrid>
+
+<Aside type="tip">
+  Most developers have Treblle running in production within 30 minutes of starting the integration process.
+</Aside>
+
+### Integration Options
+
+<Tabs>
+  <TabItem label="SDK Integration">
+    **For SDK Integration:**
+    
+    1. Choose your [language/framework integration](/integrations/)
+    2. Install the Treblle SDK via npm, pip, composer, or NuGet
+    3. Configure with your SDK Token and API Key
+    4. Deploy and start monitoring
+  </TabItem>
+  
+  <TabItem label="Gateway Integration">
+    **For API Gateway Integration:**
+    
+    1. Choose your [gateway integration](/integrations/)
+    2. Deploy Treblle's gateway plugin or policy
+    3. Configure with your credentials
+    4. Enable automatic API discovery
+  </TabItem>
+</Tabs>
+
+### Dashboard Features
+
+Once integrated, explore these key features:
+
+<CardGrid>
+  <Card title="Workspace Dashboard" icon="open-book">
+    [Overview of your entire API estate](/treblle/workspace-dashboard/)
+  </Card>
+  <Card title="Individual API Dashboards" icon="document">
+    [Detailed metrics per API](/treblle/dashboard/)
+  </Card>
+  <Card title="Requests" icon="magnifier">
+    [Real-time request monitoring](/treblle/requests/)
+  </Card>
+  <Card title="API Documentation" icon="document">
+    [Auto-generated docs](/treblle/api-documentation/)
+  </Card>
+  <Card title="API Governance" icon="approve-check">
+    [Quality scoring and best practices](/treblle/api-governance/)
+  </Card>
+  <Card title="API Security" icon="warning">
+    [Security and threat detection](/treblle/api-security/)
+  </Card>
+  <Card title="Compliance" icon="approve-check">
+    [Regulatory compliance tracking](/features/api-compliance/)
+  </Card>
+</CardGrid>
+
+### Team Configuration
+
+Set up your team for success:
+
+- [Invite team members](/admin/invite-users/) to your workspace
+- [Configure custom alerts](/features/custom-alerts/) for critical events
+- [Set up data masking](/treblle/data-masking/) for sensitive fields
+- [Enable Single Sign-On](/admin/single-sign-on/) for Enterprise teams
+
+---
+
+## Enterprise Deployment
+
+For large enterprises with hundreds or thousands of APIs, Treblle offers comprehensive solutions:
+
+<CardGrid>
+  <Card title="Comprehensive Onboarding" icon="rocket">
+    Dedicated support from the Treblle team, integration planning sessions, custom deployment strategies, and team training.
+    
+    [View enterprise onboarding checklist →](/guides/onboarding/)
+  </Card>
+  
+  <Card title="Advanced Features" icon="star">
+    SSO with Azure AD, Okta, Google Workspace. Role-based access control. Custom data retention. Advanced alerting. API tracing. Custom integrations.
+  </Card>
+  
+  <Card title="Scalability & Performance" icon="rocket">
+    Cloud-native architecture built for scale. Global infrastructure for low-latency. High-volume handling. Enterprise SLA with 99.9% uptime.
+  </Card>
+</CardGrid>
+
+---
+
+## Security & Compliance
+
+Treblle is built with security and compliance as core principles:
+
+### Data Protection
+
+<CardGrid>
+  <Card title="Automatic Data Masking" icon="approve-check">
+    Sensitive data is automatically masked before leaving your server for maximum protection.
+  </Card>
+  <Card title="End-to-end Encryption" icon="approve-check">
+    All data is encrypted in transit using TLS and at rest using AES-256 encryption.
+  </Card>
+  <Card title="No Raw Data Storage" icon="approve-check">
+    Sensitive data is never stored in raw form within Treblle's infrastructure systems.
+  </Card>
+  <Card title="Regular Audits" icon="approve-check">
+    Continuous security audits and penetration testing ensure the highest security standards.
+  </Card>
+</CardGrid>
+
+### Compliance Certifications
+
+<Aside type="note">
+  Treblle maintains industry-leading security and compliance certifications to ensure your data is protected.
+</Aside>
+
+- ✅ **ISO 27001** - Information security management
+- ✅ **SOC 2 Type II** - Security, availability, confidentiality
+- ✅ **GDPR compliant** - European data protection
+- ✅ **CCPA ready** - California consumer privacy
+- ✅ **PCI DSS** - Payment card industry standards
+- ✅ **HIPAA** - Healthcare information privacy
+
+[View our trust center →](https://trust.treblle.com/)
+
+---
+
+## Support & Resources
+
+Treblle provides comprehensive support at every stage:
+
+<CardGrid>
+  <Card title="Documentation" icon="document">
+    [Getting Started Guide](/guides/getting-started/), 
+    
+    [Integration Guides](/integrations/), 
+    
+    [Feature Documentation](/treblle/workspace-dashboard/), and 
+    
+    [FAQs](/faqs/).
+  </Card>
+  
+  <Card title="Live Support" icon="comment">
+    Chat support in the platform, email at support@treblle.com, with average 5-minute response time during business hours.
+  </Card>
+  
+  <Card title="Learning Resources" icon="open-book">
+    [API Knowledge Base](https://treblle.com/knowledgebase), 
+    
+    [YouTube Channel](https://youtube.com/@treblle), and 
+    
+    [Blog](https://blog.treblle.com/).
+  </Card>
+  
+  <Card title="Additional Tools" icon="star">
+    [Aspen](https://docs.treblle.com/aspen/) macOS app, 
+    
+    [Alfred AI](https://docs.treblle.com/treblle/alfred-ai/) assistant, 
+    
+    [API Insights](https://docs.treblle.com/treblle/api-insights/) analysis.
+  </Card>
+</CardGrid>
+
+---
+
+## Next Steps
+
+Now that you understand how Treblle works, you're ready to get started:
+
+<CardGrid>
+  <Card title="Create Your Account" icon="rocket">
+    [Sign up for free](https://treblle.com/) on Treblle to get started immediately.
+  </Card>
+  <Card title="Follow the Guide" icon="document">
+    [Read the getting started guide](/guides/getting-started/) to integrate your first API.
+  </Card>
+  <Card title="Explore Integrations" icon="puzzle">
+    [Browse integrations](/integrations/) to find your platform and framework.
+  </Card>
+</CardGrid>
+
+<Aside type="tip">
+  **Questions?** Our team is here to help at support@treblle.com or through live chat in the platform.
+</Aside>
+
+---
+
+*Treblle provides API Intelligence for developers and organizations of all sizes. Start monitoring, securing, and optimizing your APIs today.*

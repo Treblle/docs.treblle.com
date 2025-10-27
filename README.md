@@ -58,6 +58,5 @@ The documentation site is built with:
 
 If you need help or have questions:
 
-- [Join our Community](https://discord.gg/UqfrkqcN)
 - [Visit our Website](https://treblle.com)
 - [Read our Blog](https://blog.treblle.com/)
