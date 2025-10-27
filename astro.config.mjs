@@ -52,6 +52,9 @@ export default defineConfig({
       label: 'Introduction',
       link: '/'
     }, {
+      label: 'How Treblle Works',
+      link: '/guides/how-treblle-works/'
+    }, {
       label: 'Getting Started',
       link: '/guides/getting-started/'
     }, {
