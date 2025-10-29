@@ -114,6 +114,12 @@ export default defineConfig({
           label: 'Catalog',
           link: '/features/api-catalog/'
         }, {
+          label: 'Developer Portal',
+          link: '/treblle/dev-portal/'
+        }, {
+          label: 'Security Dashboard',
+          link: '/treblle/security-dashboard/'
+        }, {
           label: 'Alfred AI',
           link: '/treblle/alfred-ai/'
         }, ]
@@ -157,7 +163,14 @@ export default defineConfig({
         link: '/treblle/problems/'
       }, {
         label: 'API Governance',
-        link: '/treblle/api-governance/'
+        collapsed: true,
+        items: [{
+          label: 'Governance Dashboard',
+          link: '/treblle/governance-dashboard/'
+        }, {
+          label: 'Governance Ruleset',
+          link: '/treblle/governance-ruleset/'
+        }]
       }, {
         label: 'API Compliance',
         link: '/features/api-compliance/'
