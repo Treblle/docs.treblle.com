@@ -1,0 +1,159 @@
+---
+title: "Custom Governance Rules"
+metaTitle: "Custom Governance Rules with Spectral | Treblle Docs"
+description: "Upload custom Spectral rule sets to enforce your organization's security and quality standards. Apply different rule sets per API at the workspace level."
+image: "/og-images/custom-governance-rules.jpg"
+---
+
+Treblle's Custom Governance Rules feature allows you to bring your organization's security and quality playbooks directly into the platform using Spectral rule sets.
+
+:::note
+Custom Governance Rules are available exclusively for **Enterprise** plans.
+:::
+
+## What are Custom Governance Rules?
+
+Custom Governance Rules enable you to:
+
+- **Upload Custom Rule Sets**: Import Spectral-built rules at the workspace level
+- **Apply Rules Per API**: Assign different rule sets to different APIs based on team needs or standards
+- **Maintain Consistency**: API governance pages remain unchanged, with your custom rules integrated seamlessly
+
+## Accessing Governance Rules
+
+There are two ways to access the Governance Rules settings:
+
+### Option 1: From Workspace Settings
+
+1. **Open Workspace Settings**
+   
+   Click on **Settings** in the left navigation bar at the workspace level.
+
+2. **Select Governance Rules**
+   
+   Navigate to the **Governance Rules** section under the Settings menu.
+
+   <img    
+     src="/platform/api-governance/main-settings.jpg"
+     width="200"
+     style={{ borderRadius: "8px" }}
+   />
+
+### Option 2: From API Governance Page
+
+1. **Navigate to API Governance**
+   
+   Go to any API dashboard and click on **Governance** in the left navigation.
+
+2. **Click Settings**
+   
+   Click the **Settings** button in the top-right corner of the Governance page.
+
+   <img    
+     src="/platform/api-governance/settings.jpg"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+This will take you directly to the Governance Rules configuration page.
+
+## Managing Spectral Rule Sets
+
+### Upload a New Rule Set
+
+1. **Click New Ruleset**
+   
+   Click the **+ New Ruleset** button in the top-right corner of the Governance Rules page.
+
+   <img    
+     src="/platform/api-governance/ruleset.jpg"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+2. **Upload Dialog Opens**
+   
+   A dialog titled "Upload Spectral Ruleset" will appear with the following information:
+   
+   - Instructions: "When you upload a ruleset, you will need to assign it to one or more APIs. Only one ruleset can be applied per API."
+   - Upload area: Drag and drop or click to select a file
+   - File format: ".yaml and .json files only"
+
+3. **Select Your File**
+   
+   - Click the upload area or drag and drop your Spectral ruleset file
+   - Supported formats: YAML (.yaml) and JSON (.json)
+
+4. **Upload the Ruleset**
+   
+   Click the **Upload** button to add the ruleset to your workspace.
+
+### View Existing Rule Sets
+
+The Governance Rules page displays all uploaded rule sets in a table format:
+
+   <img    
+     src="/platform/api-governance/governance-ruleset.png"
+     width="800"
+     style={{ borderRadius: "8px" }}
+   />
+
+| Column | Description |
+|--------|-------------|
+| **Name** | Ruleset identifier (e.g., treblle-default.yaml, custom-file1.yaml) |
+| **Date Uploaded** | When the ruleset was added to Treblle |
+| **Applies To** | Scope of application (Workspace or specific APIs) |
+| **Enabled** | Toggle to activate or deactivate the ruleset |
+
+### Ruleset Application Rules
+
+Important guidelines for applying rule sets:
+
+- **One Ruleset Per API**: Only one ruleset can be applied per API at a time
+- **Multiple API Assignment**: A single ruleset can be assigned to multiple APIs
+- **Workspace-Level Management**: All rulesets are managed at the workspace level
+
+### Manage Rule Sets
+
+Each ruleset has an actions menu (three dots) with the following options:
+
+- **Open File**: View the Spectral ruleset contents
+- **Apply To**: Modify which APIs use this ruleset
+- **Replace**: Upload a new version of the ruleset
+- **Delete**: Remove the ruleset from your workspace
+
+## How Custom Rules Work
+
+### Integration with API Governance
+
+Custom Spectral rules integrate seamlessly with Treblle's existing governance framework:
+
+1. **Upload Once**: Add your Spectral ruleset at the workspace level
+2. **Apply Flexibly**: Choose which APIs should follow which rule sets
+3. **Automatic Evaluation**: APIs are automatically scored against your custom rules
+4. **Unified Reporting**: Custom and default governance checks appear together on the API Governance page
+
+### Rule Set Priority
+
+When applying rule sets to APIs:
+
+- Each API can have only one custom ruleset applied at a time
+- Custom rules supplement (not replace) Treblle's default governance checks
+- You can change which ruleset is applied to an API at any time
+
+## Spectral Rule Format
+
+### Rule Set Requirements
+
+Spectral rule sets must be:
+
+- **Valid Format**: Properly formatted YAML (.yaml) or JSON (.json) files
+- **OpenAPI Compatible**: Rules designed for OpenAPI specifications
+- **Self-Contained**: Include all necessary rule definitions
+
+### Supported File Types
+
+- **.yaml files**: YAML-formatted Spectral rulesets
+- **.json files**: JSON-formatted Spectral rulesets
+
+Custom Governance Rules with Spectral integration enable you to enforce your organization's specific standards while leveraging Treblle's comprehensive API governance framework. This ensures consistency, compliance, and quality across your entire API estate.

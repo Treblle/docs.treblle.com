@@ -1,0 +1,246 @@
+---
+title: "Developer Portal"
+metaTitle: "Public Developer Portal – Share APIs Externally | Treblle Docs"
+description: "Launch a public developer portal to showcase your APIs externally. Enable workspace-level settings, publish selected APIs, and provide AI-powered documentation with Alfred integration."
+image: "/og-images/developer-portal.jpg"
+---
+
+Treblle's Developer Portal allows you to create a public-facing hub for your APIs, making it easy for external developers to discover, understand, and integrate with your services.
+
+This feature provides a fully customizable portal that you can share with partners, customers, and the developer community.
+
+:::note
+The Developer Portal is available exclusively for **Team** and **Enterprise** plans.
+:::
+
+## What is the Developer Portal?
+
+The Developer Portal is a publicly accessible website that showcases your published APIs with:
+
+- **API Documentation**: Auto-generated documentation from your API Catalog
+- **Alfred AI Integration**: AI-powered assistance for developers
+- **Customizable Branding**: Your logo, colors, and theme preferences
+- **Selective Publishing**: Control which APIs are visible externally
+- **Status Page**: Optional API status and uptime monitoring
+
+## Accessing the Developer Portal
+
+The Developer Portal is managed at the workspace level through two main sections.
+
+### Navigate to Portal Options
+   
+1. Click on the left navigation bar at the workspace level.
+
+<img
+  src="/platform/dev-portal/portal-icon.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+2. **Access Portal Sections**
+   
+   You will see two portal-related options:
+   
+   - **Portal Settings**: Enable and configure your developer portal
+   - **Customize Portal**: Manage branding and appearance
+
+## Portal Settings
+
+The Portal Settings section allows you to enable your developer portal and manage which APIs are publicly accessible.
+
+<img
+  src="/platform/dev-portal/portal-setting.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### Enable the Developer Portal
+
+1. Toggle the **Developer Portal** switch to "Enabled".
+
+2. **Configure Portal Subdomain**
+   
+   Enter your desired subdomain in the provided field. This will be your portal's public URL.
+
+3. **Save Configuration**
+   
+   Click **Save** to activate your developer portal.
+
+### Enable Status Page
+
+The Status Page provides real-time operational status for your published APIs.
+
+1. **Toggle Status Page**
+   
+   Enable the **Status** switch in Portal Settings.
+
+2. **Access Status URL**
+   
+   Your status page URL is automatically generated and displayed.
+   
+   Example format: `https://platform.treblle.com/WG5JK/statuspage`
+
+3. **Copy or Open Status Page**
+   
+   Use the copy icon to share the URL or click the external link icon to view the status page.
+
+### Manage API Visibility
+
+Control which APIs appear in your public developer portal and status page.
+
+#### API Selection Table
+
+The Portal Settings page displays a table of all your workspace APIs with the following columns:
+
+- **API Name**: The name and URL of each API
+- **Dev Portal**: Toggle to show or hide the API in your developer portal
+- **Status**: Toggle to include the API in your status page
+
+<img
+  src="/platform/dev-portal/enable-apis.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/> 
+
+#### Enable APIs for Portal
+
+:::note
+**API Visibility Requirements**
+
+Before an API can appear in your Developer Portal:
+
+1. The API must be published to your internal **API Catalog**
+2. The **Dev Portal** toggle must be enabled for that API
+3. API documentation should be complete and accurate
+:::
+
+1. **Locate Your API**
+   
+   Use the search bar to find specific APIs in large catalogs.
+
+2. **Enable Portal Visibility**
+   
+   Toggle the **Dev Portal** switch to make an API visible in your public portal.
+
+3. **Enable Status Monitoring**
+   
+   Toggle the **Status** switch to include the API in your status page.
+
+## Customize Portal
+
+The Customize Portal section allows you to brand your developer portal with your company identity.
+
+<img
+  src="/platform/dev-portal/customise-portal.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+### Customization Options
+
+### Upload Your Logo
+
+1. **Click Upload Logo**
+   
+   Select the **Upload Logo** button to add your company logo.
+
+2. **Logo Requirements**
+   
+   - **Accepted formats**: SVG and PNG
+   - **Recommended height**: 68px
+   - **Best practices**: Use optimized files for faster loading
+
+3. **Logo Placement**
+   
+   Your logo will display in the header of your developer portal and status page.
+
+### Configure Header Color
+
+1. **Select Background Color**
+   
+   Click on the color picker under the **Header Color** section.
+
+2. **Choose Your Brand Color**
+   
+   Select a color that matches your brand identity. The selected color will be used as the background for your developer portal header.
+
+3. **Preview Changes**
+   
+   The color code displays next to the label (e.g., `#14182F`).
+
+### Select Portal Theme
+
+1. **Choose Theme**
+   
+   Select between **Dark** or **Light** theme from the dropdown menu.
+   
+   - **Dark**: Modern, developer-friendly appearance
+   - **Light**: Clean, traditional documentation style
+
+2. **Apply Theme**
+   
+   The selected theme will be applied across your entire developer portal.
+
+### Save Customization
+
+Click **Save** after making any changes to apply your branding to the live developer portal.
+
+## Developer Portal Experience
+
+### What External Developers See
+
+When developers visit your portal, they experience a branded interface showcasing your published APIs.
+
+<img    
+  src="/platform/dev-portal/dev-portal.jpg"
+  width="800"
+  style={{ borderRadius: "8px" }}
+/>
+
+#### Portal Page
+
+The page displays:
+
+- **Portal Header**: Your custom logo and branding
+- **API Showcase**: Grid view of all published APIs
+- **Search Functionality**: Find APIs by name or keyword
+- **Filter Options**: Browse by category (Category: All)
+- **Sort Options**: Organize by relevance or name (Sort By)
+
+#### API Cards
+
+Each API card includes:
+
+- **API Icon**: Visual identifier for the API
+- **API Name**: Clear title (e.g., "Tank01AFD Live In-Game Real Time Statistics")
+- **Category Badge**: Type classification (Entertainment, Technology, Business)
+- **Description**: Brief overview of API functionality
+- **API URL**: Direct link to the API endpoint
+
+#### API Count
+
+The portal displays the total number of available APIs (e.g., "All Results (254)").
+
+### API Documentation Access
+
+Clicking on any API card provides developers with:
+
+- **Complete API Documentation**: Auto-generated from your API specifications
+- **Authentication Details**: Required credentials and methods
+- **Endpoint Specifications**: Available endpoints and parameters
+- **Request Examples**: Sample API calls in multiple languages
+- **Response Formats**: Expected response structures
+- **Alfred AI Assistance**: Interactive help for integration questions
+
+### Alfred AI Integration
+
+Every published API includes Alfred AI, Treblle's AI assistant, providing:
+
+- **Interactive Documentation**: Answer questions about your APIs
+- **Code Generation**: Create code snippets in multiple programming languages
+- **Integration Guidance**: Step-by-step implementation instructions
+- **Troubleshooting Support**: Debug integration issues
+
+Learn more about Alfred AI in the [Alfred AI documentation](/treblle/alfred-ai/).
+
+The Developer Portal transforms your internal API Catalog into a powerful external platform, enabling developers to discover, understand, and integrate with your APIs while maintaining complete control over visibility and access.
