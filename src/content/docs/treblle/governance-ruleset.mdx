@@ -126,20 +126,22 @@ Each ruleset has an actions menu (three dots) with the following options:
 
 ### Integration with API Governance
 
-Custom Spectral rules integrate seamlessly with Treblle's existing governance framework:
+Custom Spectral rules integrate with Treblle's governance framework:
 
 1. **Upload Once**: Add your Spectral ruleset at the workspace level
 2. **Apply Flexibly**: Choose which APIs should follow which rule sets
 3. **Automatic Evaluation**: APIs are automatically scored against your custom rules
-4. **Unified Reporting**: Custom and default governance checks appear together on the API Governance page
+4. **Unified Reporting**: Custom rules appear on the API Governance page alongside standard categories
 
 ### Rule Set Priority
 
 When applying rule sets to APIs:
 
 - Each API can have only one custom ruleset applied at a time
-- Custom rules supplement (not replace) Treblle's default governance checks
-- You can change which ruleset is applied to an API at any time
+- Custom rules **replace** Treblle's default governance checks when applied
+- Treblle's default rules are used when no custom ruleset is assigned
+- Default rules cannot be deleted and remain available as the baseline
+- You can switch between custom and default rules at any time
 
 ## Spectral Rule Format
 
